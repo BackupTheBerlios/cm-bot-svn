@@ -1,0 +1,603 @@
+#LyX 1.6.7 created this file. For more info see http://www.lyx.org/
+\lyxformat 345
+\begin_document
+\begin_header
+\textclass scrreprt
+\begin_preamble
+% Font für PDF-Problem
+\usepackage{ae} %<-- keine korrekte Silbentrennung!
+%cm-super installieren
+% Seitenränder
+\usepackage{geometry}
+\geometry{top=2.5cm,bottom=2cm}
+% Kopfzeile
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{} 
+\fancyhead[ER]{\leftmark}
+\fancyhead[OL]{\rightmark}
+\fancyhead[OR,EL]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancypagestyle{plain}{}
+% Umbenennung
+%\addto\captionsngerman{
+%\renewcommand{\abstractname}{Abstract}
+%\renewcommand{\nomname}{Abkürzungsverzeichnis}
+%}
+% Quellcode
+\usepackage{color}
+\usepackage{marvosym}
+\definecolor{light-gray}{gray}{0.85}
+%\lstset{frame=no, basicstyle=\ttfamily\small, tabsize=2, backgroundcolor=\color{light-gray}, breaklines=true, breakatwhitespace=true,prebreak={\Righttorque}}
+% Querverweise
+\usepackage{prettyref}
+\newrefformat{fig}{Abbildung~\vref{#1}}
+\newrefformat{cha}{Kapitel~\vref{#1}}
+\newrefformat{sec}{Abschnitt~\vref{#1}}
+\newrefformat{sub}{Unterabschnitt~\vref{#1}}
+\newrefformat{tab}{Tabelle~\vref{#1}}
+\end_preamble
+\options abstracton,liststotoc,bibtotoc,intoc
+\use_default_options true
+\language ngerman
+\inputencoding auto
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\float_placement tbh
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered true
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder true
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language polish
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Titlehead
+Hochschule für Technik, Wirtschaft und Kultur Leipzig
+\begin_inset Newline newline
+\end_inset
+
+Fakultät Informatik, Mathematik und Naturwissenschaften
+\end_layout
+
+\begin_layout Subject
+
+\lang german
+\begin_inset VSpace 2cm
+\end_inset
+
+
+\begin_inset Graphics
+	filename Bilder/HTWK-Logo_Schwarz.eps
+	scale 35
+
+\end_inset
+
+
+\lang ngerman
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset VSpace 2cm
+\end_inset
+
+Prüfungsprojekt für das Wahlpflicht-Modul Robotik
+\end_layout
+
+\begin_layout Title
+\begin_inset VSpace bigskip
+\end_inset
+
+Dokumentation des CM-BOT
+\begin_inset VSpace 6cm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Author
+B.Sc.
+ Matthias Rick
+\begin_inset Newline newline
+\end_inset
+
+B.Sc.
+ Christof Pieloth
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset VSpace medskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Date
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+today
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Einleitung
+\end_layout
+
+\begin_layout Section
+Motivation & Zielsetzung
+\end_layout
+
+\begin_layout Chapter
+Vorbetrachtung
+\end_layout
+
+\begin_layout Itemize
+Was ist alles zu machen! 
+\end_layout
+
+\begin_layout Chapter
+Hardware
+\end_layout
+
+\begin_layout Itemize
+Servoanbindung
+\end_layout
+
+\begin_layout Itemize
+Netzteil
+\end_layout
+
+\begin_layout Itemize
+...
+\end_layout
+
+\begin_layout Chapter
+Kinematik
+\end_layout
+
+\begin_layout Section
+
+\lang english
+Direkte Kinematik
+\end_layout
+
+\begin_layout Subsection
+
+\lang english
+Denavit-Hartenberg-Parameter
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="4">
+<features>
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Formula $G_{1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Formula $G_{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Formula $G_{3}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Formula $l$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Formula $-14$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Formula $a$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Formula $50$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Formula $85$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Formula $55$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Formula $\alpha$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Formula $-90$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Formula $0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Formula $\vartheta$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Formula $v$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Formula $v$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Formula $v$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+
+\lang english
+Denavit-Hartenberg-Matrix
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+\begin_inset Formula $D_{01}=\left(\begin{array}{cccc}
+\cos\!\left(\vartheta_{1}\right) & 0 & -\sin\!\left(\vartheta_{1}\right) & 50\,\cos\!\left(\vartheta_{1}\right)\\
+\sin\!\left(\vartheta_{1}\right) & 0 & \cos\!\left(\vartheta_{1}\right) & 50\,\sin\!\left(\vartheta_{1}\right)\\
+0 & -1 & 0 & -14\\
+0 & 0 & 0 & 1\end{array}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+\begin_inset Formula $D_{12}=\left(\begin{array}{cccc}
+\cos\!\left(\vartheta_{2}\right) & -\sin\!\left(\vartheta_{2}\right) & 0 & 85\,\cos\!\left(\vartheta_{2}\right)\\
+\sin\!\left(\vartheta_{2}\right) & \cos\!\left(\vartheta_{2}\right) & 0 & 85\,\sin\!\left(\vartheta_{2}\right)\\
+0 & 0 & 1 & 0\\
+0 & 0 & 0 & 1\end{array}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\size tiny
+\lang english
+\begin_inset Formula $D_{03}=\left(\begin{array}{cccc}
+\cos\!\left(\vartheta_{1}\right)\,\cos\!\left(\vartheta_{2}\right)\,\cos\!\left(\vartheta_{3}\right)-\cos\!\left(\vartheta_{1}\right)\,\sin\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right) & -\cos\!\left(\vartheta_{1}\right)\,\cos\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right)-\cos\!\left(\vartheta_{1}\right)\,\cos\!\left(\vartheta_{3}\right)\,\sin\!\left(\vartheta_{2}\right) & -\sin\!\left(\vartheta_{1}\right) & 50\,\cos\!\left(\vartheta_{1}\right)+85\,\cos\!\left(\vartheta_{1}\right)\,\cos\!\left(\vartheta_{2}\right)-55\,\cos\!\left(\vartheta_{1}\right)\,\sin\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right)+55\,\cos\!\left(\vartheta_{1}\right)\,\cos\!\left(\vartheta_{2}\right)\,\cos\!\left(\vartheta_{3}\right)\\
+\cos\!\left(\vartheta_{2}\right)\,\cos\!\left(\vartheta_{3}\right)\,\sin\!\left(\vartheta_{1}\right)-\sin\!\left(\vartheta_{1}\right)\,\sin\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right) & -\cos\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{1}\right)\,\sin\!\left(\vartheta_{3}\right)-\cos\!\left(\vartheta_{3}\right)\,\sin\!\left(\vartheta_{1}\right)\,\sin\!\left(\vartheta_{2}\right) & \cos\!\left(\vartheta_{1}\right) & 50\,\sin\!\left(\vartheta_{1}\right)+85\,\cos\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{1}\right)-55\,\sin\!\left(\vartheta_{1}\right)\,\sin\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right)+55\,\cos\!\left(\vartheta_{2}\right)\,\cos\!\left(\vartheta_{3}\right)\,\sin\!\left(\vartheta_{1}\right)\\
+-\cos\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right)-\cos\!\left(\vartheta_{3}\right)\,\sin\!\left(\vartheta_{2}\right) & \sin\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right)-\cos\!\left(\vartheta_{2}\right)\,\cos\!\left(\vartheta_{3}\right) & 0 & -85\,\sin\!\left(\vartheta_{2}\right)-55\,\cos\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right)-55\,\cos\!\left(\vartheta_{3}\right)\,\sin\!\left(\vartheta_{2}\right)-14\\
+0 & 0 & 0 & 1\end{array}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+
+\lang english
+Inverse Kinematik
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+geometrisches Lösungsverfahren
+\end_layout
+
+\end_body
+\end_document
