@@ -72,18 +72,19 @@ void DNX_sendTest() {
 	DNX_send(packet, 8);
 }
 
-void DNX_setAngle(byte id, byte value) {
+void DNX_setAngle(byte id, int value) {
 	byte packet[9];
-	byte angle=	value; // = calculate value
+	int tmp = value * 1023 / 300;
+	byte angle_h = tmp / 256;
+	byte angle_l = tmp & 0xFF;
 	packet[0] = START_BYTE;
 	packet[1] = START_BYTE;
 	packet[2] = id;
 	packet[3] = 0x05; // length
 	packet[4] = WR_DATA;
 	packet[5] = GL_POS;
-	// TODO high low
-	packet[6] = angle; 	// Low
-	packet[7] = 0x00;	// High
+	packet[6] = angle_l; // Low
+	packet[7] = angle_h; // High
 	// packet[7] = checksum will set in send
 	DNX_send(packet, 9);
 }

@@ -97,6 +97,10 @@ void XM_init_cpu() {
 	// Init LED
 	XM_PORT_LED.DIRSET = XM_LED_MASK;
 	XM_LED_ON
+
+	// Init Taster
+	SWITCHPORT.DIRCLR = SWITCHMASK;
+	SWITCHPORT.PIN2CTRL |= ( 0b011 << 3 ); // Pullup PQ2 aktivieren
 }
 
 void XM_init_dnx() {
@@ -106,9 +110,12 @@ void XM_init_dnx() {
 	// Init buffer
 	XM_RX_buffer_L.getIndex = 0;
 	XM_RX_buffer_L.putIndex = 0;
+	XM_RX_buffer_L.overflow_flag = 0x00;
+
 
 	XM_RX_buffer_R.getIndex = 0;
 	XM_RX_buffer_R.putIndex = 0;
+	XM_RX_buffer_R.overflow_flag = 0x00;
 
 	// Set pins for TX and RX
 	XM_PORT_SERVO_R.DIRSET = PIN3_bm; // Pin3 of PortC (TXD0) is output
@@ -204,45 +211,52 @@ void XM_USART_send(USART_data_t* usart_data, byte* txData, byte bytes) {
 	// Enable TXC interrupt to set OE to 1
 	USART_TxdInterruptLevel_Set(usart_data->usart, USART_TXCINTLVL_LO_gc);
 
-	/*
-	 while(XM_RX_buffer_L.putIndex < XM_RX_buffer_L.getIndex)
-	 ;
-	 */
-
 }
 
 byte XM_USART_receive(RXBuffer* rxBuffer, byte* dest) {
-	// no new data
+	// Error
 	if ((rxBuffer->putIndex <= rxBuffer->getIndex) && (rxBuffer->overflow_flag
-			== 0))
-		return -1;
+			== 0x00))
+		return 0;
 	else if ((rxBuffer->putIndex >= rxBuffer->getIndex)
-			&& (rxBuffer->overflow_flag == 1))
-		return -1;
+			&& (rxBuffer->overflow_flag == 0x01))
+		return 0;
 	else if ((rxBuffer->buffer[rxBuffer->getIndex] != 0xFF)
 			&& (rxBuffer->buffer[rxBuffer->getIndex + 1] != 0xFF))
-		return -1;
+		return 0;
+	// Some data received. All data received if checksum is correct!
 	else {
+		// Calculate predicted length
 		byte length;
 		if ((rxBuffer->getIndex + 3) < XM_RX_BUFFER_SIZE)
 			length = rxBuffer->buffer[rxBuffer->getIndex + 3];
-		else
-			length = rxBuffer->buffer[2 + rxBuffer->getIndex
-					- XM_RX_BUFFER_SIZE]; // 3 - 1, array 0 ... n-1;
+		else {
+			length = rxBuffer->buffer[3 + rxBuffer->getIndex
+					- XM_RX_BUFFER_SIZE];
+		}
+		// Complete length = (FF + FF + ID + LENGTH) + length
+		length += 4;
+		// Copy packet from buffer in destination array
 		byte i;
-		for (i = 0; i < length + 2; i++) {
+		for (i = 0; i < length; i++) {
 			if ((rxBuffer->getIndex + i) < XM_RX_BUFFER_SIZE)
 				dest[i] = rxBuffer->buffer[rxBuffer->getIndex + i];
 			else
-				dest[i] = rxBuffer->buffer[i - 1 + rxBuffer->getIndex
+				dest[i] = rxBuffer->buffer[i + rxBuffer->getIndex
 						- XM_RX_BUFFER_SIZE];
 		}
-		if (dest[length + 1] == DNX_getChecksum(dest, length + 1)) {
-
-			return length + 2;
-		}
-		else //ToDo Nachricht komplett aber Checksum falsch (evtl. Timeout)
-			return -1;
+		// If packet is complete, set new getIndex
+		if (dest[length - 1] == DNX_getChecksum(dest, length)) {
+			if ((rxBuffer->getIndex + length) < XM_RX_BUFFER_SIZE)
+				rxBuffer->getIndex = rxBuffer->getIndex + length;
+			else {
+				rxBuffer->getIndex = length + rxBuffer->getIndex
+						- XM_RX_BUFFER_SIZE;
+				rxBuffer->overflow_flag = 0x00;
+			}
+			return length;
+		} else
+			return 0;
 	}
 }
 
@@ -276,8 +290,10 @@ ISR(USARTC0_RXC_vect)
 {
 	// TODO
 	USART_RXComplete(&XM_servo_data_L);
-	if (XM_RX_buffer_L.putIndex >= XM_RX_BUFFER_SIZE)
+	if (XM_RX_buffer_L.putIndex >= XM_RX_BUFFER_SIZE){
 		XM_RX_buffer_L.putIndex = 0;
+		XM_RX_buffer_L.overflow_flag = 0x01;
+	}
 	if (USART_RXBufferData_Available(&XM_servo_data_L)) {
 		XM_RX_buffer_L.buffer[XM_RX_buffer_L.putIndex++]
 				= USART_RXBuffer_GetByte(&XM_servo_data_L);

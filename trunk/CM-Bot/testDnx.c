@@ -16,29 +16,37 @@ int main() {
 	XM_init_cpu();
 	XM_init_dnx();
 
-	DNX_setLed(0x04,0x01);
-	/*
-	UTL_wait(20);
-	DNX_setAngle(0x01, 0x00);
-	UTL_wait(20);
-	DNX_setAngle(0x01, 0xFF);
-	UTL_wait(20);
+	DNX_setLed(0x06, 0x01);
 
-	DNX_setSpeed(0x01, 0xFF);
-	UTL_wait(20);
-	DNX_setAngle(0x01, 0x00);
-	UTL_wait(20);
-	DNX_setAngle(0x01, 0xFF);
-	*/
 	XM_LED_OFF
+	byte received_Data[256];
+	byte len = 0;
+	int i = 0;
+	int value;
 
-	while(XM_RX_buffer_L.putIndex < 5)
-		;
-	XM_LED_ON
-	DEBUG_BYTE((XM_RX_buffer_L.buffer, XM_RX_buffer_L.putIndex))
-
-	while (1)
-		;
+	while (1) {
+		//if(XM_USART_receive(&XM_RX_buffer_L, received_Data) != 0){
+		//DEBUG_BYTE((XM_RX_buffer_L.buffer, XM_RX_buffer_L.putIndex))
+		//XM_LED_ON
+		//}
+		if (SWITCH_PRESSED) {
+			value = 50 + i;
+			DNX_setAngle(0x06, value);
+			i++;
+			if (i >= 200)
+				i = 0;
+			//while(XM_USART_receive(&XM_RX_buffer_L, received_Data) == 0);
+			//DEBUG_BYTE((XM_RX_buffer_L.buffer, XM_RX_buffer_L.putIndex))
+			while (SWITCH_PRESSED)
+				XM_LED_ON;
+			XM_LED_OFF
+			len = 0;
+			while (len==0) {
+				len = XM_USART_receive(&XM_RX_buffer_L, received_Data);
+			}
+			DEBUG_BYTE((received_Data, len))
+		}
+	}
 
 	return 0;
 }
