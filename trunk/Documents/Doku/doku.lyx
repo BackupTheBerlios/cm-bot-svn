@@ -1,4 +1,4 @@
-#LyX 1.6.7 created this file. For more info see http://www.lyx.org/
+#LyX 1.6.5 created this file. For more info see http://www.lyx.org/
 \lyxformat 345
 \begin_document
 \begin_header
@@ -579,6 +579,19 @@ Denavit-Hartenberg-Matrix
 \begin_layout Standard
 
 \lang english
+\begin_inset Formula $D_{12}=\left(\begin{array}{cccc}
+\cos\!\left(\vartheta_{3}\right) & -\sin\!\left(\vartheta_{3}\right) & 0 & 55\,\cos\!\left(\vartheta_{3}\right)\\
+\sin\!\left(\vartheta_{3}\right) & \cos\!\left(\vartheta_{3}\right) & 0 & 55\,\sin\!\left(\vartheta_{3}\right)\\
+0 & 0 & 1 & 0\\
+0 & 0 & 0 & 1\end{array}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang english
 \begin_inset ERT
 status open
 
@@ -612,12 +625,107 @@ thispagestyle{empty}
 
 \begin_layout Standard
 
-\size tiny
+\size small
 \lang english
 \begin_inset Formula $D_{03}=\left(\begin{array}{cccc}
-\cos\!\left(\vartheta_{1}\right)\,\cos\!\left(\vartheta_{2}\right)\,\cos\!\left(\vartheta_{3}\right)-\cos\!\left(\vartheta_{1}\right)\,\sin\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right) & -\cos\!\left(\vartheta_{1}\right)\,\cos\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right)-\cos\!\left(\vartheta_{1}\right)\,\cos\!\left(\vartheta_{3}\right)\,\sin\!\left(\vartheta_{2}\right) & -\sin\!\left(\vartheta_{1}\right) & 50\,\cos\!\left(\vartheta_{1}\right)+85\,\cos\!\left(\vartheta_{1}\right)\,\cos\!\left(\vartheta_{2}\right)-55\,\cos\!\left(\vartheta_{1}\right)\,\sin\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right)+55\,\cos\!\left(\vartheta_{1}\right)\,\cos\!\left(\vartheta_{2}\right)\,\cos\!\left(\vartheta_{3}\right)\\
-\cos\!\left(\vartheta_{2}\right)\,\cos\!\left(\vartheta_{3}\right)\,\sin\!\left(\vartheta_{1}\right)-\sin\!\left(\vartheta_{1}\right)\,\sin\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right) & -\cos\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{1}\right)\,\sin\!\left(\vartheta_{3}\right)-\cos\!\left(\vartheta_{3}\right)\,\sin\!\left(\vartheta_{1}\right)\,\sin\!\left(\vartheta_{2}\right) & \cos\!\left(\vartheta_{1}\right) & 50\,\sin\!\left(\vartheta_{1}\right)+85\,\cos\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{1}\right)-55\,\sin\!\left(\vartheta_{1}\right)\,\sin\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right)+55\,\cos\!\left(\vartheta_{2}\right)\,\cos\!\left(\vartheta_{3}\right)\,\sin\!\left(\vartheta_{1}\right)\\
--\cos\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right)-\cos\!\left(\vartheta_{3}\right)\,\sin\!\left(\vartheta_{2}\right) & \sin\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right)-\cos\!\left(\vartheta_{2}\right)\,\cos\!\left(\vartheta_{3}\right) & 0 & -85\,\sin\!\left(\vartheta_{2}\right)-55\,\cos\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right)-55\,\cos\!\left(\vartheta_{3}\right)\,\sin\!\left(\vartheta_{2}\right)-14\\
+c\!\left(\vartheta_{1}\right)\, c\!\left(\vartheta_{2}\right)\, c\!\left(\vartheta_{3}\right)-c\!\left(\vartheta_{1}\right)\, s\!\left(\vartheta_{2}\right)\, s\!\left(\vartheta_{3}\right) & -c\!\left(\vartheta_{1}\right)\, c\!\left(\vartheta_{2}\right)\, s\!\left(\vartheta_{3}\right)-c\!\left(\vartheta_{1}\right)\, c\!\left(\vartheta_{3}\right)\, s\!\left(\vartheta_{2}\right) & -s\!\left(\vartheta_{1}\right) & 50\, c\!\left(\vartheta_{1}\right)+85\, c\!\left(\vartheta_{1}\right)\, c\!\left(\vartheta_{2}\right)-55\, c\!\left(\vartheta_{1}\right)\, s\!\left(\vartheta_{2}\right)\, s\!\left(\vartheta_{3}\right)+55\, c\!\left(\vartheta_{1}\right)\, c\!\left(\vartheta_{2}\right)\, c\!\left(\vartheta_{3}\right)\\
+c\!\left(\vartheta_{2}\right)\, c\!\left(\vartheta_{3}\right)\, s\!\left(\vartheta_{1}\right)-s\!\left(\vartheta_{1}\right)\, s\!\left(\vartheta_{2}\right)\, s\!\left(\vartheta_{3}\right) & -c\!\left(\vartheta_{2}\right)\, s\!\left(\vartheta_{1}\right)\, s\!\left(\vartheta_{3}\right)-c\!\left(\vartheta_{3}\right)\, s\!\left(\vartheta_{1}\right)\, s\!\left(\vartheta_{2}\right) & c\!\left(\vartheta_{1}\right) & 50\, s\!\left(\vartheta_{1}\right)+85\, c\!\left(\vartheta_{2}\right)\, s\!\left(\vartheta_{1}\right)-55\, s\!\left(\vartheta_{1}\right)\, s\!\left(\vartheta_{2}\right)\, s\!\left(\vartheta_{3}\right)+55\, c\!\left(\vartheta_{2}\right)\, c\!\left(\vartheta_{3}\right)\, s\!\left(\vartheta_{1}\right)\\
+-c\!\left(\vartheta_{2}\right)\, s\!\left(\vartheta_{3}\right)-c\!\left(\vartheta_{3}\right)\, s\!\left(\vartheta_{2}\right) & s\!\left(\vartheta_{2}\right)\, s\!\left(\vartheta_{3}\right)-c\!\left(\vartheta_{2}\right)\, c\!\left(\vartheta_{3}\right) & 0 & -85\, s\!\left(\vartheta_{2}\right)-55\, c\!\left(\vartheta_{2}\right)\, s\!\left(\vartheta_{3}\right)-55\, c\!\left(\vartheta_{3}\right)\, s\!\left(\vartheta_{2}\right)-14\\
+0 & 0 & 0 & 1\end{array}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $x_{ex}=f_{11}=\cos\!\left(\vartheta_{1}\right)\,\cos\!\left(\vartheta_{2}\right)\,\cos\!\left(\vartheta_{3}\right)-\cos\!\left(\vartheta_{1}\right)\,\sin\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $y_{ex}=f_{12}=\cos\!\left(\vartheta_{1}\right)\,\cos\!\left(\vartheta_{2}\right)\,\cos\!\left(\vartheta_{3}\right)-\cos\!\left(\vartheta_{1}\right)\,\sin\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $z_{ex}=f_{13}=\cos\!\left(\vartheta_{1}\right)\,\cos\!\left(\vartheta_{2}\right)\,\cos\!\left(\vartheta_{3}\right)-\cos\!\left(\vartheta_{1}\right)\,\sin\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $p_{ex}=f_{13}=\cos\!\left(\vartheta_{1}\right)\,\cos\!\left(\vartheta_{2}\right)\,\cos\!\left(\vartheta_{3}\right)-\cos\!\left(\vartheta_{1}\right)\,\sin\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $x_{ey}=f_{21}=\cos\!\left(\vartheta_{2}\right)\,\cos\!\left(\vartheta_{3}\right)\,\sin\!\left(\vartheta_{1}\right)-\sin\!\left(\vartheta_{1}\right)\,\sin\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $y_{ey}=f_{22}=\cos\!\left(\vartheta_{1}\right)\,\cos\!\left(\vartheta_{2}\right)\,\cos\!\left(\vartheta_{3}\right)-\cos\!\left(\vartheta_{1}\right)\,\sin\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $z_{ey}=f_{23}=\cos\!\left(\vartheta_{1}\right)\,\cos\!\left(\vartheta_{2}\right)\,\cos\!\left(\vartheta_{3}\right)-\cos\!\left(\vartheta_{1}\right)\,\sin\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $p_{ey}=f_{23}=\cos\!\left(\vartheta_{1}\right)\,\cos\!\left(\vartheta_{2}\right)\,\cos\!\left(\vartheta_{3}\right)-\cos\!\left(\vartheta_{1}\right)\,\sin\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $x_{ez}=f_{31}=-\cos\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right)-\cos\!\left(\vartheta_{3}\right)\,\sin\!\left(\vartheta_{2}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $y_{ez}=f_{32}=\cos\!\left(\vartheta_{1}\right)\,\cos\!\left(\vartheta_{2}\right)\,\cos\!\left(\vartheta_{3}\right)-\cos\!\left(\vartheta_{1}\right)\,\sin\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $z_{ez}=f_{33}=\cos\!\left(\vartheta_{1}\right)\,\cos\!\left(\vartheta_{2}\right)\,\cos\!\left(\vartheta_{3}\right)-\cos\!\left(\vartheta_{1}\right)\,\sin\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $p_{ez}=f_{33}=\cos\!\left(\vartheta_{1}\right)\,\cos\!\left(\vartheta_{2}\right)\,\cos\!\left(\vartheta_{3}\right)-\cos\!\left(\vartheta_{1}\right)\,\sin\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $D_{03}=\left(\begin{array}{cccc}
+ & -\cos\!\left(\vartheta_{1}\right)\,\cos\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right)-\cos\!\left(\vartheta_{1}\right)\,\cos\!\left(\vartheta_{3}\right)\,\sin\!\left(\vartheta_{2}\right) & -\sin\!\left(\vartheta_{1}\right) & 50\,\cos\!\left(\vartheta_{1}\right)+85\,\cos\!\left(\vartheta_{1}\right)\,\cos\!\left(\vartheta_{2}\right)-55\,\cos\!\left(\vartheta_{1}\right)\,\sin\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right)+55\,\cos\!\left(\vartheta_{1}\right)\,\cos\!\left(\vartheta_{2}\right)\,\cos\!\left(\vartheta_{3}\right)\\
+ & -\cos\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{1}\right)\,\sin\!\left(\vartheta_{3}\right)-\cos\!\left(\vartheta_{3}\right)\,\sin\!\left(\vartheta_{1}\right)\,\sin\!\left(\vartheta_{2}\right) & \cos\!\left(\vartheta_{1}\right) & 50\,\sin\!\left(\vartheta_{1}\right)+85\,\cos\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{1}\right)-55\,\sin\!\left(\vartheta_{1}\right)\,\sin\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right)+55\,\cos\!\left(\vartheta_{2}\right)\,\cos\!\left(\vartheta_{3}\right)\,\sin\!\left(\vartheta_{1}\right)\\
+ & \sin\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right)-\cos\!\left(\vartheta_{2}\right)\,\cos\!\left(\vartheta_{3}\right) & 0 & -85\,\sin\!\left(\vartheta_{2}\right)-55\,\cos\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right)-55\,\cos\!\left(\vartheta_{3}\right)\,\sin\!\left(\vartheta_{2}\right)-14\\
 0 & 0 & 0 & 1\end{array}\right)$
 \end_inset
 
