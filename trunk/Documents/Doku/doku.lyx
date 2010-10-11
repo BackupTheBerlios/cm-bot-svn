@@ -36,6 +36,9 @@
 \newrefformat{sec}{Abschnitt~\vref{#1}}
 \newrefformat{sub}{Unterabschnitt~\vref{#1}}
 \newrefformat{tab}{Tabelle~\vref{#1}}
+
+%\usepackage{lscape}
+\usepackage{pdflscape}
 \end_preamble
 \options abstracton,liststotoc,bibtotoc,intoc
 \use_default_options true
@@ -575,6 +578,40 @@ Denavit-Hartenberg-Matrix
 
 \begin_layout Standard
 
+\lang english
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{landscape}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
 \size tiny
 \lang english
 \begin_inset Formula $D_{03}=\left(\begin{array}{cccc}
@@ -582,6 +619,24 @@ Denavit-Hartenberg-Matrix
 \cos\!\left(\vartheta_{2}\right)\,\cos\!\left(\vartheta_{3}\right)\,\sin\!\left(\vartheta_{1}\right)-\sin\!\left(\vartheta_{1}\right)\,\sin\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right) & -\cos\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{1}\right)\,\sin\!\left(\vartheta_{3}\right)-\cos\!\left(\vartheta_{3}\right)\,\sin\!\left(\vartheta_{1}\right)\,\sin\!\left(\vartheta_{2}\right) & \cos\!\left(\vartheta_{1}\right) & 50\,\sin\!\left(\vartheta_{1}\right)+85\,\cos\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{1}\right)-55\,\sin\!\left(\vartheta_{1}\right)\,\sin\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right)+55\,\cos\!\left(\vartheta_{2}\right)\,\cos\!\left(\vartheta_{3}\right)\,\sin\!\left(\vartheta_{1}\right)\\
 -\cos\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right)-\cos\!\left(\vartheta_{3}\right)\,\sin\!\left(\vartheta_{2}\right) & \sin\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right)-\cos\!\left(\vartheta_{2}\right)\,\cos\!\left(\vartheta_{3}\right) & 0 & -85\,\sin\!\left(\vartheta_{2}\right)-55\,\cos\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right)-55\,\cos\!\left(\vartheta_{3}\right)\,\sin\!\left(\vartheta_{2}\right)-14\\
 0 & 0 & 0 & 1\end{array}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{landscape}
+\end_layout
+
 \end_inset
 
 
