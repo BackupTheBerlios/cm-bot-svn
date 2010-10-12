@@ -9,7 +9,7 @@
 #include "include/utils.h"
 #include "include/dynamixel.h"
 
-#define TEST_ON
+#define TEST_OFF
 #ifdef TEST_ON
 
 int main() {
