@@ -5,7 +5,7 @@
  * Author: christof
  */
 
-#define TEST_ON
+#define TEST_OFF
 #ifdef TEST_ON
 
 // #include <stdio.h>

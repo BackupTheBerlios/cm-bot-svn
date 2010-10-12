@@ -9,45 +9,58 @@
 #include "include/utils.h"
 #include "include/dynamixel.h"
 
-#define TEST_OFF
+#define TEST_ON
 #ifdef TEST_ON
 
 int main() {
 	XM_init_cpu();
 	XM_init_dnx();
 
-	DNX_setLed(0x06, 0x01);
-
-	XM_LED_OFF
-	byte received_Data[256];
+	byte received_Data[XM_RX_BUFFER_SIZE];
 	byte len = 0;
-	int i = 0;
-	int value;
+	uint16_t value = 50;
+	byte led = 0x00;
 
+	while (1) {
+		UTL_wait(10);
+		DNX_setLed(0x06, led);
+
+		while (len == 0) {
+			len = XM_USART_receive(&XM_RX_buffer_L, received_Data);
+		}
+
+		led = led == 0x00 ? 0x01 : 0x00;
+	}
+#ifdef asf
 	while (1) {
 		//if(XM_USART_receive(&XM_RX_buffer_L, received_Data) != 0){
 		//DEBUG_BYTE((XM_RX_buffer_L.buffer, XM_RX_buffer_L.putIndex))
 		//XM_LED_ON
 		//}
-		if (SWITCH_PRESSED) {
-			value = 50 + i;
-			DNX_setAngle(0x06, value);
-			i++;
-			if (i >= 200)
-				i = 0;
-			//while(XM_USART_receive(&XM_RX_buffer_L, received_Data) == 0);
-			//DEBUG_BYTE((XM_RX_buffer_L.buffer, XM_RX_buffer_L.putIndex))
-			while (SWITCH_PRESSED)
-				XM_LED_ON;
-			XM_LED_OFF
-			len = 0;
-			while (len==0) {
-				len = XM_USART_receive(&XM_RX_buffer_L, received_Data);
-			}
-			DEBUG_BYTE((received_Data, len))
+		//if (SWITCH_PRESSED) {
+		UTL_wait(50);
+		DNX_setAngle(0x06, value);
+		//value += 50;
+		if (value == 50)
+		value = 250;
+		else
+		value = 50;
+		//while(XM_USART_receive(&XM_RX_buffer_L, received_Data) == 0);
+		//DEBUG_BYTE((XM_RX_buffer_L.buffer, XM_RX_buffer_L.putIndex))
+		/*while (SWITCH_PRESSED)
+		 XM_LED_ON;
+		 XM_LED_OFF*/
+		len = 0;
+		XM_LED_OFF
+		UTL_wait(50);
+		while (len == 0) {
+			len = XM_USART_receive(&XM_RX_buffer_L, received_Data);
 		}
+		XM_LED_ON
+		DEBUG_BYTE((received_Data, len))
+		//}
 	}
-
+#endif
 	return 0;
 }
 

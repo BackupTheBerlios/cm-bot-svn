@@ -7,6 +7,7 @@
 
 #include "include/dynamixel.h"
 #include "include/xmega.h"
+#include <math.h>
 
 #define START_BYTE 0xFF
 
@@ -72,11 +73,13 @@ void DNX_sendTest() {
 	DNX_send(packet, 8);
 }
 
-void DNX_setAngle(byte id, int value) {
+void DNX_setAngle(byte id, uint16_t value) {
+	//ToDO
 	byte packet[9];
-	int tmp = value * 1023 / 300;
-	byte angle_h = tmp / 256;
+	double tmp2 = ((double)value) * 3.41;
+	int tmp = floor(tmp2);
 	byte angle_l = tmp & 0xFF;
+	byte angle_h = tmp >> 8;
 	packet[0] = START_BYTE;
 	packet[1] = START_BYTE;
 	packet[2] = id;
