@@ -20,18 +20,27 @@ int main() {
 	byte len = 0;
 	uint16_t value = 50;
 	byte led = 0x00;
-
+#define _fdf
+#ifdef _fdf
 	while (1) {
-		UTL_wait(10);
+		UTL_wait(2);
 		DNX_setLed(0x06, led);
 
 		while (len == 0) {
 			len = XM_USART_receive(&XM_RX_buffer_L, received_Data);
 		}
 
-		led = led == 0x00 ? 0x01 : 0x00;
+		if(led == 0x00) {
+			led = 0x01;
+			XM_LED_ON
+		} else {
+			led =  0x00;
+			XM_LED_OFF
+		}
 	}
-#ifdef asf
+#endif
+#define _asf_OFF
+#ifdef _asf
 	while (1) {
 		//if(XM_USART_receive(&XM_RX_buffer_L, received_Data) != 0){
 		//DEBUG_BYTE((XM_RX_buffer_L.buffer, XM_RX_buffer_L.putIndex))
@@ -42,9 +51,9 @@ int main() {
 		DNX_setAngle(0x06, value);
 		//value += 50;
 		if (value == 50)
-		value = 250;
+			value = 250;
 		else
-		value = 50;
+			value = 50;
 		//while(XM_USART_receive(&XM_RX_buffer_L, received_Data) == 0);
 		//DEBUG_BYTE((XM_RX_buffer_L.buffer, XM_RX_buffer_L.putIndex))
 		/*while (SWITCH_PRESSED)
@@ -53,9 +62,11 @@ int main() {
 		len = 0;
 		XM_LED_OFF
 		UTL_wait(50);
-		while (len == 0) {
-			len = XM_USART_receive(&XM_RX_buffer_L, received_Data);
-		}
+		/*
+		 while (len == 0) {
+		 len = XM_USART_receive(&XM_RX_buffer_L, received_Data);
+		 }
+		 */
 		XM_LED_ON
 		DEBUG_BYTE((received_Data, len))
 		//}

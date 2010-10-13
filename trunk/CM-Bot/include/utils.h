@@ -13,7 +13,7 @@
 #define UTL_DEG 1
 #define UTL_RAD 0
 
-#define DEBUG_ON
+#define DEBUG_OFF
 #ifdef DEBUG_ON
 	// #include <stdio.h>
 	#define DEBUG(output) UTL_printDebug output;
