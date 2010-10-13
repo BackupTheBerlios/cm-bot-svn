@@ -42,8 +42,6 @@ byte DNX_getChecksum(byte* packet, byte l) {
 
 void DNX_send(byte* packet, byte l) {
 	packet[l - 1] = DNX_getChecksum(packet, l);
-
-	DEBUG_BYTE((packet, l))
 	// FIXME
 	XM_USART_send(&XM_servo_data_L, packet, l);
 	/*

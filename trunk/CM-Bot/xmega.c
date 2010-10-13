@@ -182,6 +182,7 @@ void XM_init_com() {
 }
 
 void XM_USART_send(USART_data_t* usart_data, byte* txData, byte bytes) {
+	DEBUG_BYTE((txData, bytes))
 	byte i;
 
 	// FIXME
@@ -213,21 +214,30 @@ void XM_USART_send(USART_data_t* usart_data, byte* txData, byte bytes) {
 }
 
 byte XM_USART_receive(RXBuffer* rxBuffer, byte* dest) {
-	// Error
-	// ToDo rxBuffer-Size
-	rxBuffer->getIndex += rxBuffer->lastByteLength;
-	rxBuffer->lastByteLength = 0;
+	DEBUG_BYTE((rxBuffer->buffer, XM_RX_BUFFER_SIZE))
+	// Cut off output message
+	if (rxBuffer->lastByteLength > 0) {
+		if ((rxBuffer->getIndex + rxBuffer->lastByteLength) < XM_RX_BUFFER_SIZE)
+			rxBuffer->getIndex += rxBuffer->lastByteLength;
+		else {
+			rxBuffer->getIndex = rxBuffer->lastByteLength + rxBuffer->getIndex
+					- XM_RX_BUFFER_SIZE;
+			rxBuffer->overflow_flag = 0x00;
+		}
+		rxBuffer->lastByteLength = 0;
+	}
+	// Check errors
 	if ((rxBuffer->overflow_flag == 0x00) && (rxBuffer->putIndex
-			<= rxBuffer->getIndex)) {
-		DEBUG(("1",sizeof("1")))
+			< rxBuffer->getIndex)) {
+		DEBUG(("receive_of0_er",sizeof("receive_of0_er")))
 		return 0;
 	} else if ((rxBuffer->overflow_flag == 0x01) && (rxBuffer->putIndex
-			>= rxBuffer->getIndex)) {
-		DEBUG(("2",sizeof("1")))
+			> rxBuffer->getIndex)) {
+		DEBUG(("receive_of1_er",sizeof("receive_of1_er")))
 		return 0;
 	} else if ((rxBuffer->buffer[rxBuffer->getIndex] != 0xFF)
 			&& (rxBuffer->buffer[rxBuffer->getIndex + 1] != 0xFF)) {
-		DEBUG(("3",sizeof("1")))
+		DEBUG(("receive_startbyte",sizeof("receive_startbyte")))
 		return 0;
 	}
 	// Some data received. All data received if checksum is correct!
@@ -260,10 +270,9 @@ byte XM_USART_receive(RXBuffer* rxBuffer, byte* dest) {
 						- XM_RX_BUFFER_SIZE;
 				rxBuffer->overflow_flag = 0x00;
 			}
-			DEBUG(("4",sizeof("1")))
 			return length;
 		} else {
-			DEBUG(("5",sizeof("1")))
+			DEBUG(("receive_checksum",sizeof("receive_checksum")))
 			return 0;
 		}
 	}
@@ -282,12 +291,11 @@ byte XM_USART_receive(RXBuffer* rxBuffer, byte* dest) {
  }
  */
 
-ISR(USARTC0_TXC_vect)
-{
+ISR(USARTC0_TXC_vect) {
 	USART_TxdInterruptLevel_Set(&USARTC0, USART_TXCINTLVL_OFF_gc);
 
 	byte i = 0;
-	for (i = 0; i < 40; i++)
+	for (i = 0; i < 30; i++)
 		; // delay
 
 	XM_PORT_SERVO_L.OUTSET = XM_OE_MASK;
@@ -301,21 +309,15 @@ ISR(USARTC0_TXC_vect)
 	 */
 }
 
-ISR(USARTC0_RXC_vect)
-{
-	// TODO
+ISR(USARTC0_RXC_vect) {
 	USART_RXComplete(&XM_servo_data_L);
 	if (USART_RXBufferData_Available(&XM_servo_data_L)) {
 		XM_RX_buffer_L.buffer[XM_RX_buffer_L.putIndex++]
 				= USART_RXBuffer_GetByte(&XM_servo_data_L);
-		// DEBUG(("RX_ISR available", sizeof("RX_ISR available")))
-
 	}
 	if (XM_RX_buffer_L.putIndex >= XM_RX_BUFFER_SIZE) {
 		XM_RX_buffer_L.putIndex = 0;
 		XM_RX_buffer_L.overflow_flag = 0x01;
-		DEBUG(("RX_ISR overflow", sizeof("RX_ISR overflow")))
 	}
-	DEBUG_BYTE((&XM_RX_buffer_L.putIndex, 0x01))
 }
 
