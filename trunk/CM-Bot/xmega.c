@@ -151,12 +151,12 @@ void XM_init_dnx() {
 	// USART_TxdInterruptLevel_Set(XM_servo_data_L.usart, USART_TXCINTLVL_LO_gc);
 
 	// Enable RXC interrupt
-	// USART_RxdInterruptLevel_Set(XM_servo_data_R.usart, USART_RXCINTLVL_LO_gc);
+	USART_RxdInterruptLevel_Set(XM_servo_data_R.usart, USART_RXCINTLVL_LO_gc);
 	USART_RxdInterruptLevel_Set(XM_servo_data_L.usart, USART_RXCINTLVL_LO_gc);
 
 	// Set Baudrate
-	USART_Baudrate_Set(XM_servo_data_R.usart, 34, 0); // 57.600bps (BSEL = 34)
-	USART_Baudrate_Set(XM_servo_data_L.usart, 1, 0); // 57.600bps (BSEL = 34)
+	USART_Baudrate_Set(XM_servo_data_R.usart, 1, 0); // 1 Mbps (BSEL = 1)
+	USART_Baudrate_Set(XM_servo_data_L.usart, 1, 0); // 1 Mbps (BSEL = 1)
 
 	// Enable RX and TX
 	USART_Rx_Enable(XM_servo_data_R.usart);
@@ -171,7 +171,6 @@ void XM_init_dnx() {
 
 	// Enable PMIC interrupt level low
 	PMIC.CTRL |= PMIC_LOLVLEX_bm;
-
 	// Enable global interrupts
 	sei();
 
@@ -186,16 +185,17 @@ void XM_USART_send(USART_data_t* usart_data, byte* txData, byte bytes) {
 	byte i;
 
 	// FIXME
-	XM_RX_buffer_L.lastByteLength = bytes;
 
 	if (usart_data->usart == &XM_USART_DEBUG)
 		return;
 
 	// Set OE to 0
 	if (usart_data->usart == &XM_USART_SERVO_L) {
+		XM_RX_buffer_L.lastByteLength = bytes;
 		XM_PORT_SERVO_L.OUTCLR = XM_OE_MASK;
 	}
 	if (usart_data->usart == &XM_USART_SERVO_R) {
+		XM_RX_buffer_R.lastByteLength = bytes;
 		XM_PORT_SERVO_R.OUTCLR = XM_OE_MASK;
 	}
 
@@ -214,7 +214,7 @@ void XM_USART_send(USART_data_t* usart_data, byte* txData, byte bytes) {
 }
 
 byte XM_USART_receive(RXBuffer* rxBuffer, byte* dest) {
-	DEBUG_BYTE((rxBuffer->buffer, XM_RX_BUFFER_SIZE))
+	//DEBUG_BYTE((rxBuffer->buffer, XM_RX_BUFFER_SIZE))
 	// Cut off output message
 	if (rxBuffer->lastByteLength > 0) {
 		if ((rxBuffer->getIndex + rxBuffer->lastByteLength) < XM_RX_BUFFER_SIZE)
@@ -299,14 +299,6 @@ ISR(USARTC0_TXC_vect) {
 		; // delay
 
 	XM_PORT_SERVO_L.OUTSET = XM_OE_MASK;
-	/*
-	 if (XM_RX_buffer_L.putIndex < XM_RX_buffer_L.lastByteLength)
-	 XM_RX_buffer_L.putIndex = XM_RX_BUFFER_SIZE
-	 - (XM_RX_buffer_L.lastByteLength - XM_RX_buffer_L.putIndex);
-	 else
-	 XM_RX_buffer_L.putIndex = XM_RX_buffer_L.putIndex
-	 - XM_RX_buffer_L.lastByteLength;
-	 */
 }
 
 ISR(USARTC0_RXC_vect) {
@@ -318,6 +310,28 @@ ISR(USARTC0_RXC_vect) {
 	if (XM_RX_buffer_L.putIndex >= XM_RX_BUFFER_SIZE) {
 		XM_RX_buffer_L.putIndex = 0;
 		XM_RX_buffer_L.overflow_flag = 0x01;
+	}
+}
+
+ISR(USARTD0_TXC_vect) {
+	USART_TxdInterruptLevel_Set(&USARTD0, USART_TXCINTLVL_OFF_gc);
+
+	byte i = 0;
+	for (i = 0; i < 30; i++)
+		; // delay
+
+	XM_PORT_SERVO_R.OUTSET = XM_OE_MASK;
+}
+
+ISR(USARTD0_RXC_vect) {
+	USART_RXComplete(&XM_servo_data_R);
+	if (USART_RXBufferData_Available(&XM_servo_data_R)) {
+		XM_RX_buffer_R.buffer[XM_RX_buffer_R.putIndex++]
+				= USART_RXBuffer_GetByte(&XM_servo_data_R);
+	}
+	if (XM_RX_buffer_R.putIndex >= XM_RX_BUFFER_SIZE) {
+		XM_RX_buffer_R.putIndex = 0;
+		XM_RX_buffer_R.overflow_flag = 0x01;
 	}
 }
 
