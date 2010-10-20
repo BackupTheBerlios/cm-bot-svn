@@ -43,15 +43,18 @@ byte DNX_getChecksum(byte* packet, byte l) {
 void DNX_send(byte* packet, byte l) {
 	packet[l - 1] = DNX_getChecksum(packet, l);
 	// FIXME
-	XM_USART_send(&XM_servo_data_L, packet, l);
-	XM_USART_send(&XM_servo_data_R, packet, l);
-	/*
-	 if (packet[2] < 4) { // use right servo
-	 XM_USART_Send(XM_USART_SERVO_L, packet, l);
-	 } else { // use left servo
-	 XM_USART_Send(XM_USART_SERVO_R, packet, l);
-	 }
-	 */
+	if (0x01 >= packet[2] && packet[2] <= 0x03) // Right: 1 - 3
+		XM_USART_send(&XM_servo_data_R, packet, l);
+	else if (0x04 >= packet[2] && packet[2] <= 0x06) // Left: 4 - 6
+		XM_USART_send(&XM_servo_data_L, packet, l);
+	else if (0x07 >= packet[2] && packet[2] <= 0x09) // Right: 7 - 9
+		XM_USART_send(&XM_servo_data_R, packet, l);
+	else if (0x0A >= packet[2] && packet[2] <= 0x0C) // Left: 10 - 12
+		XM_USART_send(&XM_servo_data_L, packet, l);
+	else if (0x0D >= packet[2] && packet[2] <= 0x0F) // Right: 13 - 15
+		XM_USART_send(&XM_servo_data_R, packet, l);
+	else if (0x10 >= packet[2] && packet[2] <= 0x12) // Left: 16 - 18
+		XM_USART_send(&XM_servo_data_L, packet, l);
 }
 
 void DNX_receive(byte* packet) {
@@ -75,7 +78,7 @@ void DNX_sendTest() {
 void DNX_setAngle(byte id, uint16_t value) {
 	//ToDO
 	byte packet[9];
-	double tmp2 = ((double)value) * 3.41;
+	double tmp2 = ((double) value) * 3.41;
 	int tmp = floor(tmp2);
 	byte angle_l = tmp & 0xFF;
 	byte angle_h = tmp >> 8;
