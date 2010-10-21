@@ -42,18 +42,17 @@ byte DNX_getChecksum(byte* packet, byte l) {
 
 void DNX_send(byte* packet, byte l) {
 	packet[l - 1] = DNX_getChecksum(packet, l);
-	// FIXME
-	if (0x01 >= packet[2] && packet[2] <= 0x03) // Right: 1 - 3
+	if (packet[2] >= 0x01 && packet[2] <= 0x03) // Right: 1 - 3
 		XM_USART_send(&XM_servo_data_R, packet, l);
-	else if (0x04 >= packet[2] && packet[2] <= 0x06) // Left: 4 - 6
+	else if (packet[2] >= 0x04 && packet[2] <= 0x06) // Left: 4 - 6
 		XM_USART_send(&XM_servo_data_L, packet, l);
-	else if (0x07 >= packet[2] && packet[2] <= 0x09) // Right: 7 - 9
+	else if (packet[2] >= 0x07 && packet[2] <= 0x09) // Right: 7 - 9
 		XM_USART_send(&XM_servo_data_R, packet, l);
-	else if (0x0A >= packet[2] && packet[2] <= 0x0C) // Left: 10 - 12
+	else if (packet[2] >= 0x0A && packet[2] <= 0x0C) // Left: 10 - 12
 		XM_USART_send(&XM_servo_data_L, packet, l);
-	else if (0x0D >= packet[2] && packet[2] <= 0x0F) // Right: 13 - 15
+	else if (packet[2] >= 0x0D && packet[2] <= 0x0F) // Right: 13 - 15
 		XM_USART_send(&XM_servo_data_R, packet, l);
-	else if (0x10 >= packet[2] && packet[2] <= 0x12) // Left: 16 - 18
+	else if (packet[2] >= 0x10 && packet[2] <= 0x12) // Left: 16 - 18
 		XM_USART_send(&XM_servo_data_L, packet, l);
 }
 

@@ -5,7 +5,7 @@
  * Author: christof
  */
 
-#define TEST_OFF
+#define TEST_ON
 #ifdef TEST_ON
 
 // #include <stdio.h>
@@ -83,6 +83,16 @@ int main() {
 
 	KIN_calculateDH(s1, (double**) &dh03);
 	p1 = UTL_getPointOfDH((double**) &dh03);
+
+	byte testarray[3];
+
+	testarray[0]=floor(p1.x);
+	testarray[1]=floor(p1.y);
+	testarray[2]=floor(p1.z);
+
+	DEBUG(("P1:", sizeof("P1:")))
+	DEBUG_BYTE((testarray, 3))
+
 
 	if (!p1.x || !p1.y || !p1.z) {
 		DEBUG(("p1 falsch", sizeof("p1 falsch")))
