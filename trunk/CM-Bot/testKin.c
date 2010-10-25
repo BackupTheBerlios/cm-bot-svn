@@ -14,13 +14,14 @@
 #include "include/kinematics.h"
 #include "include/utils.h"
 #include "include/xmega.h"
+#include "include/dynamixel.h"
 
 int main() {
 
 #ifdef _x86
 	double v1 = 0, v2 = 0, v3 = 0;
 	int i;
-	servos s1, s2;
+	servos s1, s;
 	point p1; p2;
 	printf("< Denavid-Hardenberg - Roboterkoordinaten zu Weltkoordinaten>\n");
 	while (1) {
@@ -51,12 +52,12 @@ int main() {
 		UTL_printPoint(p1);
 
 		printf("--- Inverses kin. Problem - Berechnung und Vergleich---\n");
-		s2 = KIN_calculateServos(p1);
-		UTL_printServos(s2, UTL_DEG);
+		s = KIN_calculateServos(p1);
+		UTL_printServos(s, UTL_DEG);
 		UTL_printServos(s1, UTL_DEG);
 
 		printf("--- Denavid-Hardenberg - Berechnung und Vergleich ---\n");
-		KIN_calculateDH(s2, dh03);
+		KIN_calculateDH(s, dh03);
 		p2 = UTL_getPointOfDH(dh03);
 
 		UTL_printPoint(p2);
@@ -73,39 +74,52 @@ int main() {
 
 	XM_LED_OFF
 
+	byte id;
+
 	double dh03[KIN_ROWS][KIN_COLUMNS];
-	servos s1, s2;
-	point p1;
+	servos s;
+	point p1, p2;
 
-	s1.v1 = UTL_getRadiant(45);
-	s1.v2 = UTL_getRadiant(45);
-	s1.v3 = UTL_getRadiant(45);
+	p1.x = 77.8553;
+	p1.y = 77.8553;
+	p1.z = -129.1041;
 
-	KIN_calculateDH(s1, (double**) &dh03);
-	p1 = UTL_getPointOfDH((double**) &dh03);
+	p2.x = 95.9985;
+	p2.y = -95.9985;
+	p2.z = -116.2699;
 
-	byte testarray[3];
+	char flag = 0;
+	while (1) {
+		UTL_wait(40);
+		if (flag == 0) {
+			s = KIN_calculateServos(p1);
+			flag = 1;
+		} else {
+			s = KIN_calculateServos(p2);
+			flag = 0;
+		}
+		s.v1 = UTL_getDegree(s.v1);
+		s.v2 = UTL_getDegree(s.v2);
+		s.v3 = UTL_getDegree(s.v3);
 
-	testarray[0]=floor(p1.x);
-	testarray[1]=floor(p1.y);
-	testarray[2]=floor(p1.z);
-
-	DEBUG(("P1:", sizeof("P1:")))
-	DEBUG_BYTE((testarray, 3))
-
-
-	if (!p1.x || !p1.y || !p1.z) {
-		DEBUG(("p1 falsch", sizeof("p1 falsch")))
-		return 0;
+		id = 10;
+		DNX_setAngle(id, s.v1);
+		id = 11;
+		DNX_setAngle(id, s.v2);
+		id = 12;
+		DNX_setAngle(id, s.v3);
+		id = 7;
+		DNX_setAngle(id, s.v1);
+		id = 8;
+		DNX_setAngle(id, s.v2);
+		id = 9;
+		DNX_setAngle(id, s.v3);
+		/*	if (!s.v1 || !s.v2 || !s.v3) {
+		 DEBUG(("s falsch", sizeof("s falsch")))
+		 return 0;
+		 }
+		 */
 	}
-
-	s2 = KIN_calculateServos(p1);
-
-	if (!s2.v1 || !s2.v2 || !s2.v3) {
-		DEBUG(("s2 falsch", sizeof("s2 falsch")))
-		return 0;
-	}
-
 	XM_LED_ON
 
 	return 0;

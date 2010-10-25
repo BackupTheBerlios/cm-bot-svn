@@ -214,7 +214,7 @@ void XM_USART_send(USART_data_t* usart_data, byte* txData, byte bytes) {
 }
 
 byte XM_USART_receive(RXBuffer* rxBuffer, byte* dest) {
-	//DEBUG_BYTE((rxBuffer->buffer, XM_RX_BUFFER_SIZE))
+	DEBUG_BYTE((rxBuffer->buffer, XM_RX_BUFFER_SIZE))
 	// Cut off output message
 	if (rxBuffer->lastByteLength > 0) {
 		if ((rxBuffer->getIndex + rxBuffer->lastByteLength) < XM_RX_BUFFER_SIZE)

@@ -37,6 +37,7 @@
 #define XM_OE_MASK (1<<PIN0)
 
 #define XM_RX_BUFFER_SIZE 255
+#define XM_RESULT_BUFFER_SIZE 255
 
 USART_data_t XM_servo_data_L;
 USART_data_t XM_servo_data_R;

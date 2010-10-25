@@ -40,28 +40,37 @@ byte DNX_getChecksum(byte* packet, byte l) {
 	return ~chksm;
 }
 
-void DNX_send(byte* packet, byte l) {
-	packet[l - 1] = DNX_getChecksum(packet, l);
-	if (packet[2] >= 0x01 && packet[2] <= 0x03) // Right: 1 - 3
-		XM_USART_send(&XM_servo_data_R, packet, l);
-	else if (packet[2] >= 0x04 && packet[2] <= 0x06) // Left: 4 - 6
-		XM_USART_send(&XM_servo_data_L, packet, l);
-	else if (packet[2] >= 0x07 && packet[2] <= 0x09) // Right: 7 - 9
-		XM_USART_send(&XM_servo_data_R, packet, l);
-	else if (packet[2] >= 0x0A && packet[2] <= 0x0C) // Left: 10 - 12
-		XM_USART_send(&XM_servo_data_L, packet, l);
-	else if (packet[2] >= 0x0D && packet[2] <= 0x0F) // Right: 13 - 15
-		XM_USART_send(&XM_servo_data_R, packet, l);
-	else if (packet[2] >= 0x10 && packet[2] <= 0x12) // Left: 16 - 18
-		XM_USART_send(&XM_servo_data_L, packet, l);
+int DNX_receive(byte id, byte* result) {
+	int len = 0;
+	RXBuffer* rxBuffer;
+
+	if ((id - 1) % 6 < 3) { // Right: 1 - 3, 7 - 9, ...
+		rxBuffer = &XM_RX_buffer_R;
+	} else {
+		// Left:  4 - 6, ...
+		rxBuffer = &XM_RX_buffer_L;
+	}
+
+	while (len == 0) {
+		len = XM_USART_receive(rxBuffer, result);
+	}
+
+	return len;
 }
 
-void DNX_receive(byte* packet) {
-	// TODO
-	;
+int DNX_send(byte* packet, byte l, byte* result) {
+	packet[l - 1] = DNX_getChecksum(packet, l);
+	// packet[2] -> ID
+	if ((packet[2] - 1) % 6 < 3) // Right: 1 - 3, 7 - 9, ...
+		XM_USART_send(&XM_servo_data_R, packet, l);
+	else
+		// Left:  4 - 6, ...
+		XM_USART_send(&XM_servo_data_L, packet, l);
+	return DNX_receive(packet[2], result);
 }
 
 void DNX_sendTest() {
+	byte result[XM_RESULT_BUFFER_SIZE];
 	byte packet[8];
 	packet[0] = 0xA1;
 	packet[1] = 0xA2;
@@ -71,12 +80,46 @@ void DNX_sendTest() {
 	packet[5] = 0xA6;
 	packet[6] = 0xA7;
 	// packet[7] = checksum will set in send
-	DNX_send(packet, 8);
+	DNX_send(packet, 8, result);
 }
 
-void DNX_setAngle(byte id, uint16_t value) {
+double DNX_convertAngle(double value) {
+	value += 150;
+	if (value >= 360)
+		value -= 360;
+	return value;
+}
+
+double correctAngles(byte id, double value){
+	switch((id-1) % 6){
+	case 0:
+		value = 360-value;
+		break;
+	case 1:
+		// value = value;
+		break;
+	case 2:
+		value = 360-value;
+		break;
+	case 3:
+		value = 360-value;
+		break;
+	case 4:
+		value = 360-value;
+		break;
+	case 5:
+		// value = value;
+		break;
+	}
+	return value;
+}
+
+void DNX_setAngle(byte id, double value) {
 	//ToDO
+	byte result[XM_RESULT_BUFFER_SIZE];
 	byte packet[9];
+	value = correctAngles(id, value);
+	value = DNX_convertAngle(value);
 	double tmp2 = ((double) value) * 3.41;
 	int tmp = floor(tmp2);
 	byte angle_l = tmp & 0xFF;
@@ -90,11 +133,12 @@ void DNX_setAngle(byte id, uint16_t value) {
 	packet[6] = angle_l; // Low
 	packet[7] = angle_h; // High
 	// packet[7] = checksum will set in send
-	DNX_send(packet, 9);
+	DNX_send(packet, 9, result);
 }
 
 void DNX_setId(byte idOld, byte idNew) {
 	byte packet[8];
+	byte result[XM_RESULT_BUFFER_SIZE];
 	packet[0] = START_BYTE;
 	packet[1] = START_BYTE;
 	packet[2] = idOld;
@@ -103,12 +147,13 @@ void DNX_setId(byte idOld, byte idNew) {
 	packet[5] = ID;
 	packet[6] = idNew;
 	// packet[7] = checksum will set in send
-	DNX_send(packet, 8);
+	DNX_send(packet, 8, result);
 
 }
 
 void DNX_setSpeed(byte id, byte speed) {
 	byte packet[9];
+	byte result[XM_RESULT_BUFFER_SIZE];
 	packet[0] = START_BYTE;
 	packet[1] = START_BYTE;
 	packet[2] = id;
@@ -118,11 +163,12 @@ void DNX_setSpeed(byte id, byte speed) {
 	packet[6] = speed;
 	packet[7] = 0x00;
 	// packet[7] = checksum will set in send
-	DNX_send(packet, 9);
+	DNX_send(packet, 9, result);
 }
 
 void DNX_setLed(byte id, byte value) {
 	byte packet[8];
+	byte result[XM_RESULT_BUFFER_SIZE];
 	packet[0] = START_BYTE;
 	packet[1] = START_BYTE;
 	packet[2] = id;
@@ -131,12 +177,13 @@ void DNX_setLed(byte id, byte value) {
 	packet[5] = LED;
 	packet[6] = value;
 	// packet[7] = checksum will set in send
-	DNX_send(packet, 8);
+	DNX_send(packet, 8, result);
 }
 
 double DNX_getAngle(byte id) {
 	// TODO
 	byte packet[7];
+	byte result[XM_RESULT_BUFFER_SIZE];
 	packet[0] = START_BYTE;
 	packet[1] = START_BYTE;
 	packet[2] = id;
@@ -144,13 +191,14 @@ double DNX_getAngle(byte id) {
 	packet[4] = RD_DATA;
 	packet[5] = PRT_POS;
 	// packet[6] = checksum will set in send
-	DNX_send(packet, 7);
+	DNX_send(packet, 7, result);
 	// TODO DNX_receive();
 	return -1;
 }
 
 byte DNX_getSpeed(byte id) {
 	byte packet[7];
+	byte result[XM_RESULT_BUFFER_SIZE];
 	packet[0] = START_BYTE;
 	packet[1] = START_BYTE;
 	packet[2] = id;
@@ -158,13 +206,14 @@ byte DNX_getSpeed(byte id) {
 	packet[4] = RD_DATA;
 	packet[5] = PRT_SPEED;
 	// packet[6] = checksum will set in send
-	DNX_send(packet, 7);
+	DNX_send(packet, 7, result);
 	// TODO DNX_receive();
 	return 0x00;
 }
 
 byte DNX_getLed(byte id) {
 	byte packet[7];
+	byte result[XM_RESULT_BUFFER_SIZE];
 	packet[0] = START_BYTE;
 	packet[1] = START_BYTE;
 	packet[2] = id;
@@ -172,7 +221,7 @@ byte DNX_getLed(byte id) {
 	packet[4] = RD_DATA;
 	packet[5] = LED;
 	// packet[6] = checksum will set in send
-	DNX_send(packet, 7);
+	DNX_send(packet, 7, result);
 	// TODO DNX_receive();
 	return 0x00;
 }
