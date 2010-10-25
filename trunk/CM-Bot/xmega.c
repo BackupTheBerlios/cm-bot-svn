@@ -5,6 +5,10 @@
 
 #include "include/xmega.h"
 #include "include/dynamixel.h"
+#include "include/utils.h"
+#include "include/clksys_driver.h"
+#include "include/avr_compiler.h"
+#include <avr/io.h>
 #include <stdlib.h>
 
 /**
@@ -198,8 +202,8 @@ void XM_init_com() {
  * \param	txData		Byte-Array mit zu sendendem Paket
  * \param	bytes 		Länge des zu sendenden Pakets
  */
-void XM_USART_send(USART_data_t* usart_data, byte* txData, byte bytes) {
-	byte i;
+void XM_USART_send(USART_data_t* usart_data, DT_byte* txData, DT_size bytes) {
+	DT_size i;
 
 	DEBUG_BYTE((txData, bytes))
 
@@ -241,15 +245,15 @@ void XM_USART_send(USART_data_t* usart_data, byte* txData, byte bytes) {
  *
  * \return	Länge des Antwortpakets
  */
-byte XM_USART_receive(RXBuffer* rxBuffer, byte* dest) {
-	DEBUG_BYTE((rxBuffer->buffer, XM_RX_BUFFER_SIZE))
+DT_size XM_USART_receive(DT_rxBuffer* rxBuffer, DT_byte* dest) {
+	DEBUG_BYTE((rxBuffer->buffer, DT_RX_BUFFER_SIZE))
 	// Cut off output message
 	if (rxBuffer->lastByteLength > 0) {
-		if ((rxBuffer->getIndex + rxBuffer->lastByteLength) < XM_RX_BUFFER_SIZE)
+		if ((rxBuffer->getIndex + rxBuffer->lastByteLength) < DT_RX_BUFFER_SIZE)
 			rxBuffer->getIndex += rxBuffer->lastByteLength;
 		else {
 			rxBuffer->getIndex = rxBuffer->lastByteLength + rxBuffer->getIndex
-					- XM_RX_BUFFER_SIZE;
+					- DT_RX_BUFFER_SIZE;
 			rxBuffer->overflow_flag = 0x00;
 		}
 		rxBuffer->lastByteLength = 0;
@@ -268,31 +272,31 @@ byte XM_USART_receive(RXBuffer* rxBuffer, byte* dest) {
 	// Some data received. All data received if checksum is correct!
 	else {
 		// Calculate predicted length
-		byte length;
-		if ((rxBuffer->getIndex + 3) < XM_RX_BUFFER_SIZE)
+		DT_size length;
+		if ((rxBuffer->getIndex + 3) < DT_RX_BUFFER_SIZE)
 			length = rxBuffer->buffer[rxBuffer->getIndex + 3];
 		else {
 			length = rxBuffer->buffer[3 + rxBuffer->getIndex
-					- XM_RX_BUFFER_SIZE];
+					- DT_RX_BUFFER_SIZE];
 		}
 		// Complete length = (FF + FF + ID + LENGTH) + length
 		length += 4;
 		// Copy packet from buffer in destination array
-		byte i;
+		DT_byte i;
 		for (i = 0; i < length; i++) {
-			if ((rxBuffer->getIndex + i) < XM_RX_BUFFER_SIZE)
+			if ((rxBuffer->getIndex + i) < DT_RX_BUFFER_SIZE)
 				dest[i] = rxBuffer->buffer[rxBuffer->getIndex + i];
 			else
 				dest[i] = rxBuffer->buffer[i + rxBuffer->getIndex
-						- XM_RX_BUFFER_SIZE];
+						- DT_RX_BUFFER_SIZE];
 		}
 		// If packet is complete, set new getIndex
 		if (dest[length - 1] == DNX_getChecksum(dest, length)) {
-			if ((rxBuffer->getIndex + length) < XM_RX_BUFFER_SIZE)
+			if ((rxBuffer->getIndex + length) < DT_RX_BUFFER_SIZE)
 				rxBuffer->getIndex = rxBuffer->getIndex + length;
 			else {
 				rxBuffer->getIndex = length + rxBuffer->getIndex
-						- XM_RX_BUFFER_SIZE;
+						- DT_RX_BUFFER_SIZE;
 				rxBuffer->overflow_flag = 0x00;
 			}
 			return length;
@@ -308,7 +312,7 @@ byte XM_USART_receive(RXBuffer* rxBuffer, byte* dest) {
 ISR( USARTC0_TXC_vect) {
 	USART_TxdInterruptLevel_Set(&USARTC0, USART_TXCINTLVL_OFF_gc);
 
-	byte i = 0;
+	DT_size i = 0;
 	for (i = 0; i < 30; i++)
 		; // delay
 
@@ -324,7 +328,7 @@ ISR( USARTC0_RXC_vect) {
 		XM_RX_buffer_L.buffer[XM_RX_buffer_L.putIndex++]
 				= USART_RXBuffer_GetByte(&XM_servo_data_L);
 	}
-	if (XM_RX_buffer_L.putIndex >= XM_RX_BUFFER_SIZE) {
+	if (XM_RX_buffer_L.putIndex >= DT_RX_BUFFER_SIZE) {
 		XM_RX_buffer_L.putIndex = 0;
 		XM_RX_buffer_L.overflow_flag = 0x01;
 	}
@@ -336,7 +340,7 @@ ISR( USARTC0_RXC_vect) {
 ISR( USARTD0_TXC_vect) {
 	USART_TxdInterruptLevel_Set(&USARTD0, USART_TXCINTLVL_OFF_gc);
 
-	byte i = 0;
+	DT_size i = 0;
 	for (i = 0; i < 30; i++)
 		; // delay
 
@@ -352,9 +356,8 @@ ISR( USARTD0_RXC_vect) {
 		XM_RX_buffer_R.buffer[XM_RX_buffer_R.putIndex++]
 				= USART_RXBuffer_GetByte(&XM_servo_data_R);
 	}
-	if (XM_RX_buffer_R.putIndex >= XM_RX_BUFFER_SIZE) {
+	if (XM_RX_buffer_R.putIndex >= DT_RX_BUFFER_SIZE) {
 		XM_RX_buffer_R.putIndex = 0;
 		XM_RX_buffer_R.overflow_flag = 0x01;
 	}
 }
-

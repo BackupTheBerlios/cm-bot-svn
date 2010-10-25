@@ -1,8 +1,7 @@
-/*
- * Methods for the communication between the CPUs.
+/**
+ * \file	communication.h
  *
- * Created on: 29.09.2010
- * Author: christof
+ * \brief	TODO
  */
 
 #ifndef COMMUNICATION_H_

@@ -56,6 +56,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#_details">More...</a></p>
 <code>#include &quot;<a class="el" href="xmega_8h_source.html">include/xmega.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="dynamixel_8h_source.html">include/dynamixel.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="utils_8h_source.html">include/utils.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="clksys__driver_8h_source.html">include/clksys_driver.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="avr__compiler_8h_source.html">include/avr_compiler.h</a>&quot;</code><br/>
+<code>#include &lt;avr/io.h&gt;</code><br/>
 <code>#include &lt;stdlib.h&gt;</code><br/>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="func-members"></a>
@@ -66,10 +70,10 @@ Functions</h2></td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Initialisiert die Servo-USARTs.  <a href="#a1fe0df275acdbec5eec5b8db8d79f8c8"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="xmega_8c.html#a45603b6093d8ae41a9ced9714ba6bbd0">XM_init_com</a> ()</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Initialisiert USARTs für die CPU-Kommunikation.  <a href="#a45603b6093d8ae41a9ced9714ba6bbd0"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="xmega_8c.html#afaba2b3ff0b7db6fa7695186451d9160">XM_USART_send</a> (<a class="el" href="struct_usart__and__buffer.html">USART_data_t</a> *usart_data, <a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> *txData, <a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> bytes)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">USART-Sendemethode.  <a href="#afaba2b3ff0b7db6fa7695186451d9160"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="xmega_8c.html#af9fac23da95ab0d8abcf53f537d9f37d">XM_USART_receive</a> (<a class="el" href="struct_r_x_buffer.html">RXBuffer</a> *rxBuffer, <a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> *dest)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">USART-Empfangsmethode.  <a href="#af9fac23da95ab0d8abcf53f537d9f37d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="xmega_8c.html#aa8198bac951fd93ca725ee54b1208ae3">XM_USART_send</a> (<a class="el" href="struct_usart__and__buffer.html">USART_data_t</a> *usart_data, <a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> *txData, <a class="el" href="datatypes_8h.html#a690ffbb6ad43eab1176f91d2097fc967">DT_size</a> bytes)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">USART-Sendemethode.  <a href="#aa8198bac951fd93ca725ee54b1208ae3"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="datatypes_8h.html#a690ffbb6ad43eab1176f91d2097fc967">DT_size</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="xmega_8c.html#a649ecc480d9a5098489be51332029152">XM_USART_receive</a> (<a class="el" href="struct_d_t__rx_buffer.html">DT_rxBuffer</a> *rxBuffer, <a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> *dest)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">USART-Empfangsmethode.  <a href="#a649ecc480d9a5098489be51332029152"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="xmega_8c.html#ab78da53f3a29e182d4b93755adc8d195">ISR</a> (USARTC0_TXC_vect)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">ISR für abgeschlossenen Sendevorgang der USARTC0 (SERVO L).  <a href="#ab78da53f3a29e182d4b93755adc8d195"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="xmega_8c.html#aace195abde7bc36b7b50772ff2277dd4">ISR</a> (USARTC0_RXC_vect)</td></tr>
@@ -219,20 +223,20 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="af9fac23da95ab0d8abcf53f537d9f37d"></a><!-- doxytag: member="xmega.c::XM_USART_receive" ref="af9fac23da95ab0d8abcf53f537d9f37d" args="(RXBuffer *rxBuffer, byte *dest)" -->
+<a class="anchor" id="a649ecc480d9a5098489be51332029152"></a><!-- doxytag: member="xmega.c::XM_USART_receive" ref="a649ecc480d9a5098489be51332029152" args="(DT_rxBuffer *rxBuffer, DT_byte *dest)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> XM_USART_receive </td>
+          <td class="memname"><a class="el" href="datatypes_8h.html#a690ffbb6ad43eab1176f91d2097fc967">DT_size</a> XM_USART_receive </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_r_x_buffer.html">RXBuffer</a> *&nbsp;</td>
+          <td class="paramtype"><a class="el" href="struct_d_t__rx_buffer.html">DT_rxBuffer</a> *&nbsp;</td>
           <td class="paramname"> <em>rxBuffer</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> *&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> *&nbsp;</td>
           <td class="paramname"> <em>dest</em></td><td>&nbsp;</td>
         </tr>
         <tr>
@@ -257,7 +261,7 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="afaba2b3ff0b7db6fa7695186451d9160"></a><!-- doxytag: member="xmega.c::XM_USART_send" ref="afaba2b3ff0b7db6fa7695186451d9160" args="(USART_data_t *usart_data, byte *txData, byte bytes)" -->
+<a class="anchor" id="aa8198bac951fd93ca725ee54b1208ae3"></a><!-- doxytag: member="xmega.c::XM_USART_send" ref="aa8198bac951fd93ca725ee54b1208ae3" args="(USART_data_t *usart_data, DT_byte *txData, DT_size bytes)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -270,13 +274,13 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> *&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> *&nbsp;</td>
           <td class="paramname"> <em>txData</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a>&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#a690ffbb6ad43eab1176f91d2097fc967">DT_size</a>&nbsp;</td>
           <td class="paramname"> <em>bytes</em></td><td>&nbsp;</td>
         </tr>
         <tr>
@@ -316,7 +320,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Mon Oct 25 2010 17:22:38 for CM-Bot_API by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Oct 26 2010 00:59:49 for CM-Bot_API by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

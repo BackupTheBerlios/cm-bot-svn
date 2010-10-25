@@ -40,14 +40,14 @@
  *
  * \return	Checksum
  */
-byte DNX_getChecksum(byte* packet, byte l) {
-	byte i, chksm = 0;
+DT_byte DNX_getChecksum(DT_byte* packet, DT_size l) {
+	DT_size i;
+	DT_byte chksm = 0;
 	for (i = 2; i < l - 1; i++)
 		chksm += packet[i];
 	return ~chksm;
 }
 
-// TODO Datentypen ... return byte!?
 /**
  * \brief	Blockierendes Empfangen.
  *
@@ -56,9 +56,9 @@ byte DNX_getChecksum(byte* packet, byte l) {
  *
  * \return	Größe der empfangenen Daten
  */
-int DNX_receive(byte id, byte* result) {
-	int len = 0;
-	RXBuffer* rxBuffer;
+DT_size DNX_receive(DT_byte id, DT_byte* result) {
+	DT_size len = 0;
+	DT_rxBuffer* rxBuffer;
 
 	// TODO Berechnung Auslagern ...
 	if ((id - 1) % 6 < 3) { // Right: 1 - 3, 7 - 9, ...
@@ -86,7 +86,7 @@ int DNX_receive(byte id, byte* result) {
  *
  * \return Größe der empfangenen Antwort
  */
-int DNX_send(byte* packet, byte l, byte* result) {
+DT_size DNX_send(DT_byte* packet, DT_size l, DT_byte* result) {
 	packet[l - 1] = DNX_getChecksum(packet, l);
 	// TODO Berechnung Auslagern ...
 	// packet[2] -> ID
@@ -105,7 +105,7 @@ int DNX_send(byte* packet, byte l, byte* result) {
  *
  * \return	Konvertierter Winkel in Grad
  */
-double DNX_convertAngle(double value) {
+DT_double DNX_convertAngle(DT_double value) {
 	value += 150;
 	if (value >= 360)
 		value -= 360;
@@ -123,7 +123,7 @@ double DNX_convertAngle(double value) {
  *
  * \return	Korrigierter Winkel in Grad
  */
-double DNX_correctAngles(byte id, double value){
+DT_double DNX_correctAngles(DT_byte id, DT_double value){
 	switch((id-1) % 6){
 	case 0:
 		value = 360-value;
@@ -153,16 +153,18 @@ double DNX_correctAngles(byte id, double value){
  * \param	id	ID des Servos
  * \param	value	Winkel in Grad
  */
-void DNX_setAngle(byte id, double value) {
-	byte result[XM_RESULT_BUFFER_SIZE];
-	byte packet[9];
+void DNX_setAngle(DT_byte id, DT_double value) {
+	DT_byte result[DT_RESULT_BUFFER_SIZE];
+	DT_byte packet[9];
 	value = DNX_correctAngles(id, value);
 	value = DNX_convertAngle(value);
+
 	// TODO Rechnung überarbeiten
 	double tmp2 = ((double) value) * 3.41;
 	int tmp = floor(tmp2);
-	byte angle_l = tmp & 0xFF;
-	byte angle_h = tmp >> 8;
+	DT_byte angle_l = tmp & 0xFF;
+	DT_byte angle_h = tmp >> 8;
+
 	packet[0] = START_BYTE;
 	packet[1] = START_BYTE;
 	packet[2] = id;
@@ -181,9 +183,9 @@ void DNX_setAngle(byte id, double value) {
  * \param	idOld	ID des zu verändernden Servos
  * \param	idNew	Zusetzende ID
  */
-void DNX_setId(byte idOld, byte idNew) {
-	byte packet[8];
-	byte result[XM_RESULT_BUFFER_SIZE];
+void DNX_setId(DT_byte idOld, DT_byte idNew) {
+	DT_byte packet[8];
+	DT_byte result[DT_RESULT_BUFFER_SIZE];
 	packet[0] = START_BYTE;
 	packet[1] = START_BYTE;
 	packet[2] = idOld;
@@ -202,10 +204,10 @@ void DNX_setId(byte idOld, byte idNew) {
  * \param	id	ID des Servos
  * \param	speed	Geschwindigkeit
  */
-void DNX_setSpeed(byte id, byte speed) {
+void DNX_setSpeed(DT_byte id, DT_byte speed) {
 	// TODO byte 7 richtige setzen
-	byte packet[9];
-	byte result[XM_RESULT_BUFFER_SIZE];
+	DT_byte packet[9];
+	DT_byte result[DT_RESULT_BUFFER_SIZE];
 	packet[0] = START_BYTE;
 	packet[1] = START_BYTE;
 	packet[2] = id;
@@ -224,9 +226,9 @@ void DNX_setSpeed(byte id, byte speed) {
  * \param	id	ID des Servos
  * \param	value	Wert für LED (0x00 / 0x01)
  */
-void DNX_setLed(byte id, byte value) {
-	byte packet[8];
-	byte result[XM_RESULT_BUFFER_SIZE];
+void DNX_setLed(DT_byte id, DT_byte value) {
+	DT_byte packet[8];
+	DT_byte result[DT_RESULT_BUFFER_SIZE];
 	packet[0] = START_BYTE;
 	packet[1] = START_BYTE;
 	packet[2] = id;
@@ -245,10 +247,10 @@ void DNX_setLed(byte id, byte value) {
  *
  * \return Winkel in Grad
  */
-double DNX_getAngle(byte id) {
+DT_double DNX_getAngle(DT_byte id) {
 	// TODO
-	byte packet[7];
-	byte result[XM_RESULT_BUFFER_SIZE];
+	DT_byte packet[7];
+	DT_byte result[DT_RESULT_BUFFER_SIZE];
 	packet[0] = START_BYTE;
 	packet[1] = START_BYTE;
 	packet[2] = id;
@@ -268,9 +270,9 @@ double DNX_getAngle(byte id) {
  *
  * \return	Geschwindigkeit
  */
-byte DNX_getSpeed(byte id) {
-	byte packet[7];
-	byte result[XM_RESULT_BUFFER_SIZE];
+DT_byte DNX_getSpeed(DT_byte id) {
+	DT_byte packet[7];
+	DT_byte result[DT_RESULT_BUFFER_SIZE];
 	packet[0] = START_BYTE;
 	packet[1] = START_BYTE;
 	packet[2] = id;
@@ -290,9 +292,9 @@ byte DNX_getSpeed(byte id) {
  *
  * \return	Wert der LED
  */
-byte DNX_getLed(byte id) {
-	byte packet[7];
-	byte result[XM_RESULT_BUFFER_SIZE];
+DT_byte DNX_getLed(DT_byte id) {
+	DT_byte packet[7];
+	DT_byte result[DT_RESULT_BUFFER_SIZE];
 	packet[0] = START_BYTE;
 	packet[1] = START_BYTE;
 	packet[2] = id;

@@ -7,9 +7,6 @@
 #define TEST_ON
 #ifdef TEST_ON
 
-// #include <stdio.h>
-// #include <stdlib.h>
-
 #include "include/kinematics.h"
 #include "include/utils.h"
 #include "include/xmega.h"
@@ -73,11 +70,9 @@ int main() {
 
 	XM_LED_OFF
 
-	byte id;
-
-	// double dh03[KIN_ROWS][KIN_COLUMNS];
-	servos s;
-	point p1, p2;
+	DT_byte id;
+	DT_servos s;
+	DT_point p1, p2;
 
 	p1.x = 77.8553;
 	p1.y = 77.8553;
@@ -87,7 +82,7 @@ int main() {
 	p2.y = -95.9985;
 	p2.z = -116.2699;
 
-	char flag = 0;
+	DT_char flag = 0;
 	while (1) {
 		UTL_wait(40);
 		if (flag == 0) {
@@ -113,11 +108,6 @@ int main() {
 		DNX_setAngle(id, s.v2);
 		id = 9;
 		DNX_setAngle(id, s.v3);
-		/*	if (!s.v1 || !s.v2 || !s.v3) {
-		 DEBUG(("s falsch", sizeof("s falsch")))
-		 return 0;
-		 }
-		 */
 	}
 	XM_LED_ON
 

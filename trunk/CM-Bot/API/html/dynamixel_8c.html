@@ -82,30 +82,30 @@ Defines</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamixel_8c.html#a1062be6f28ea91885f6f92610c42f53f">PRT_TMP</a>&nbsp;&nbsp;&nbsp;0x2B</td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamixel_8c.html#a95e4687a30a2b1fec6101ab46e92abda">DNX_getChecksum</a> (<a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> *packet, <a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> l)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Berechnet die Checksum.  <a href="#a95e4687a30a2b1fec6101ab46e92abda"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamixel_8c.html#af74f3edfd4dee2d2f746f1f49ebf451c">DNX_receive</a> (<a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> id, <a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> *result)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Blockierendes Empfangen.  <a href="#af74f3edfd4dee2d2f746f1f49ebf451c"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamixel_8c.html#a9aea4f00d76505fd66f47ec0f96b91e2">DNX_send</a> (<a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> *packet, <a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> l, <a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> *result)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Versenden von Daten an Dynamixel.  <a href="#a9aea4f00d76505fd66f47ec0f96b91e2"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamixel_8c.html#ae23c003fa523d8a6b5d0e7f88af03413">DNX_convertAngle</a> (double value)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Konvertiert Winkel in Bezug auf einen neuen Nullpunkt.  <a href="#ae23c003fa523d8a6b5d0e7f88af03413"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamixel_8c.html#a687bb1403a36f97180625ca957663805">DNX_correctAngles</a> (<a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> id, double value)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Korrigiert Winkel für Dynamixel.  <a href="#a687bb1403a36f97180625ca957663805"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamixel_8c.html#a434c0416a1eb4e1ba24bdae9a6899b47">DNX_setAngle</a> (<a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> id, double value)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Sendet einen sofort anzufahrenden Winkel an Servo.  <a href="#a434c0416a1eb4e1ba24bdae9a6899b47"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamixel_8c.html#acd17a1cf5224351302fc33b42ba02213">DNX_setId</a> (<a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> idOld, <a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> idNew)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Vergibt einem <a class="el" href="struct_servos.html">Servos</a> eine neue ID (ungetestet).  <a href="#acd17a1cf5224351302fc33b42ba02213"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamixel_8c.html#afe200bacc1357694d844367a29fdca9e">DNX_setSpeed</a> (<a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> id, <a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> speed)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Setzt die Anfahrgeschwindigkeit eines <a class="el" href="struct_servos.html">Servos</a> (unvollendet).  <a href="#afe200bacc1357694d844367a29fdca9e"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamixel_8c.html#a57747b43f5b817b77901c3058e51262b">DNX_setLed</a> (<a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> id, <a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> value)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Schaltet die LED eines <a class="el" href="struct_servos.html">Servos</a> an/aus.  <a href="#a57747b43f5b817b77901c3058e51262b"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamixel_8c.html#a60cab271237aaab85e6371748e6c231b">DNX_getAngle</a> (<a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> id)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Liest den aktuellen Winkel eines <a class="el" href="struct_servos.html">Servos</a> aus (unfertig).  <a href="#a60cab271237aaab85e6371748e6c231b"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamixel_8c.html#a156d97ae5f3c9008e401ddb857ec9b24">DNX_getSpeed</a> (<a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> id)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Liest die Anfahrgeschwindigkeit eines <a class="el" href="struct_servos.html">Servos</a> aus (unfertig).  <a href="#a156d97ae5f3c9008e401ddb857ec9b24"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamixel_8c.html#ab8bef3e0c385d06890beba49aeae4181">DNX_getLed</a> (<a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> id)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Liest den Status der LED aus (unfertig).  <a href="#ab8bef3e0c385d06890beba49aeae4181"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamixel_8c.html#a57f823407b0fb13b9d9a6733c981c22a">DNX_getChecksum</a> (<a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> *packet, <a class="el" href="datatypes_8h.html#a690ffbb6ad43eab1176f91d2097fc967">DT_size</a> l)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Berechnet die Checksum.  <a href="#a57f823407b0fb13b9d9a6733c981c22a"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="datatypes_8h.html#a690ffbb6ad43eab1176f91d2097fc967">DT_size</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamixel_8c.html#ab4682d02bfe17287a1806917d4f7786c">DNX_receive</a> (<a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> id, <a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> *result)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Blockierendes Empfangen.  <a href="#ab4682d02bfe17287a1806917d4f7786c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="datatypes_8h.html#a690ffbb6ad43eab1176f91d2097fc967">DT_size</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamixel_8c.html#ac3b624aed13e73fa621109387ced4d6d">DNX_send</a> (<a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> *packet, <a class="el" href="datatypes_8h.html#a690ffbb6ad43eab1176f91d2097fc967">DT_size</a> l, <a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> *result)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Versenden von Daten an Dynamixel.  <a href="#ac3b624aed13e73fa621109387ced4d6d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamixel_8c.html#a6e81b62cd12aa5a3428ad1ec3a864151">DNX_convertAngle</a> (<a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a> value)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Konvertiert Winkel in Bezug auf einen neuen Nullpunkt.  <a href="#a6e81b62cd12aa5a3428ad1ec3a864151"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamixel_8c.html#a1021110d4063508a39fad322ce8bc68c">DNX_correctAngles</a> (<a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> id, <a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a> value)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Korrigiert Winkel für Dynamixel.  <a href="#a1021110d4063508a39fad322ce8bc68c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamixel_8c.html#aa92104804c4b9ba6da1cdf705558efb9">DNX_setAngle</a> (<a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> id, <a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a> value)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Sendet einen sofort anzufahrenden Winkel an Servo.  <a href="#aa92104804c4b9ba6da1cdf705558efb9"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamixel_8c.html#a98d0fef9ad119fcca590f6c406803566">DNX_setId</a> (<a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> idOld, <a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> idNew)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Vergibt einem Servos eine neue ID (ungetestet).  <a href="#a98d0fef9ad119fcca590f6c406803566"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamixel_8c.html#ab40e5e20f2f8e66efcf5d5a49ad2c58b">DNX_setSpeed</a> (<a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> id, <a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> speed)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Setzt die Anfahrgeschwindigkeit eines Servos (unvollendet).  <a href="#ab40e5e20f2f8e66efcf5d5a49ad2c58b"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamixel_8c.html#a9f584e34dd266e35d7dfbc94b699a7e2">DNX_setLed</a> (<a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> id, <a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> value)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Schaltet die LED eines Servos an/aus.  <a href="#a9f584e34dd266e35d7dfbc94b699a7e2"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamixel_8c.html#aa63ddf148332538a6f452c8db95ee279">DNX_getAngle</a> (<a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> id)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Liest den aktuellen Winkel eines Servos aus (unfertig).  <a href="#aa63ddf148332538a6f452c8db95ee279"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamixel_8c.html#a6f1b484d8b138b06d468e557abf49e47">DNX_getSpeed</a> (<a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> id)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Liest die Anfahrgeschwindigkeit eines Servos aus (unfertig).  <a href="#a6f1b484d8b138b06d468e557abf49e47"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="dynamixel_8c.html#a6d996245db89165f8497bdcffa982118">DNX_getLed</a> (<a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> id)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Liest den Status der LED aus (unfertig).  <a href="#a6d996245db89165f8497bdcffa982118"></a><br/></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>Methoden zur Steuerung der Dynamixal AX-12. </p>
@@ -358,14 +358,14 @@ Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Function Documentation</h2>
-<a class="anchor" id="ae23c003fa523d8a6b5d0e7f88af03413"></a><!-- doxytag: member="dynamixel.c::DNX_convertAngle" ref="ae23c003fa523d8a6b5d0e7f88af03413" args="(double value)" -->
+<a class="anchor" id="a6e81b62cd12aa5a3428ad1ec3a864151"></a><!-- doxytag: member="dynamixel.c::DNX_convertAngle" ref="a6e81b62cd12aa5a3428ad1ec3a864151" args="(DT_double value)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double DNX_convertAngle </td>
+          <td class="memname"><a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a> DNX_convertAngle </td>
           <td>(</td>
-          <td class="paramtype">double&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a>&nbsp;</td>
           <td class="paramname"> <em>value</em></td>
           <td>&nbsp;)&nbsp;</td>
           <td></td>
@@ -385,20 +385,20 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a687bb1403a36f97180625ca957663805"></a><!-- doxytag: member="dynamixel.c::DNX_correctAngles" ref="a687bb1403a36f97180625ca957663805" args="(byte id, double value)" -->
+<a class="anchor" id="a1021110d4063508a39fad322ce8bc68c"></a><!-- doxytag: member="dynamixel.c::DNX_correctAngles" ref="a1021110d4063508a39fad322ce8bc68c" args="(DT_byte id, DT_double value)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double DNX_correctAngles </td>
+          <td class="memname"><a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a> DNX_correctAngles </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a>&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a>&nbsp;</td>
           <td class="paramname"> <em>id</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a>&nbsp;</td>
           <td class="paramname"> <em>value</em></td><td>&nbsp;</td>
         </tr>
         <tr>
@@ -414,7 +414,7 @@ Functions</h2></td></tr>
 <p>Korrigiert Winkel für Dynamixel um hardwareseitige Veränderungen auszuschließen.</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>id</em>&nbsp;</td><td>ID des <a class="el" href="struct_servos.html">Servos</a> </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>id</em>&nbsp;</td><td>ID des Servos </td></tr>
     <tr><td valign="top"></td><td valign="top"><em>value</em>&nbsp;</td><td>Winkel in Grad</td></tr>
   </table>
   </dd>
@@ -423,14 +423,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a60cab271237aaab85e6371748e6c231b"></a><!-- doxytag: member="dynamixel.c::DNX_getAngle" ref="a60cab271237aaab85e6371748e6c231b" args="(byte id)" -->
+<a class="anchor" id="aa63ddf148332538a6f452c8db95ee279"></a><!-- doxytag: member="dynamixel.c::DNX_getAngle" ref="aa63ddf148332538a6f452c8db95ee279" args="(DT_byte id)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double DNX_getAngle </td>
+          <td class="memname"><a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a> DNX_getAngle </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a>&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a>&nbsp;</td>
           <td class="paramname"> <em>id</em></td>
           <td>&nbsp;)&nbsp;</td>
           <td></td>
@@ -439,10 +439,10 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Liest den aktuellen Winkel eines <a class="el" href="struct_servos.html">Servos</a> aus (unfertig). </p>
+<p>Liest den aktuellen Winkel eines Servos aus (unfertig). </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>id</em>&nbsp;</td><td>ID des <a class="el" href="struct_servos.html">Servos</a></td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>id</em>&nbsp;</td><td>ID des Servos</td></tr>
   </table>
   </dd>
 </dl>
@@ -450,20 +450,20 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a95e4687a30a2b1fec6101ab46e92abda"></a><!-- doxytag: member="dynamixel.c::DNX_getChecksum" ref="a95e4687a30a2b1fec6101ab46e92abda" args="(byte *packet, byte l)" -->
+<a class="anchor" id="a57f823407b0fb13b9d9a6733c981c22a"></a><!-- doxytag: member="dynamixel.c::DNX_getChecksum" ref="a57f823407b0fb13b9d9a6733c981c22a" args="(DT_byte *packet, DT_size l)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> DNX_getChecksum </td>
+          <td class="memname"><a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> DNX_getChecksum </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> *&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> *&nbsp;</td>
           <td class="paramname"> <em>packet</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a>&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#a690ffbb6ad43eab1176f91d2097fc967">DT_size</a>&nbsp;</td>
           <td class="paramname"> <em>l</em></td><td>&nbsp;</td>
         </tr>
         <tr>
@@ -487,14 +487,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ab8bef3e0c385d06890beba49aeae4181"></a><!-- doxytag: member="dynamixel.c::DNX_getLed" ref="ab8bef3e0c385d06890beba49aeae4181" args="(byte id)" -->
+<a class="anchor" id="a6d996245db89165f8497bdcffa982118"></a><!-- doxytag: member="dynamixel.c::DNX_getLed" ref="a6d996245db89165f8497bdcffa982118" args="(DT_byte id)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> DNX_getLed </td>
+          <td class="memname"><a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> DNX_getLed </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a>&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a>&nbsp;</td>
           <td class="paramname"> <em>id</em></td>
           <td>&nbsp;)&nbsp;</td>
           <td></td>
@@ -506,7 +506,7 @@ Functions</h2></td></tr>
 <p>Liest den Status der LED aus (unfertig). </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>id</em>&nbsp;</td><td>ID des <a class="el" href="struct_servos.html">Servos</a></td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>id</em>&nbsp;</td><td>ID des Servos</td></tr>
   </table>
   </dd>
 </dl>
@@ -514,14 +514,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a156d97ae5f3c9008e401ddb857ec9b24"></a><!-- doxytag: member="dynamixel.c::DNX_getSpeed" ref="a156d97ae5f3c9008e401ddb857ec9b24" args="(byte id)" -->
+<a class="anchor" id="a6f1b484d8b138b06d468e557abf49e47"></a><!-- doxytag: member="dynamixel.c::DNX_getSpeed" ref="a6f1b484d8b138b06d468e557abf49e47" args="(DT_byte id)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> DNX_getSpeed </td>
+          <td class="memname"><a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> DNX_getSpeed </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a>&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a>&nbsp;</td>
           <td class="paramname"> <em>id</em></td>
           <td>&nbsp;)&nbsp;</td>
           <td></td>
@@ -530,10 +530,10 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Liest die Anfahrgeschwindigkeit eines <a class="el" href="struct_servos.html">Servos</a> aus (unfertig). </p>
+<p>Liest die Anfahrgeschwindigkeit eines Servos aus (unfertig). </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>id</em>&nbsp;</td><td>ID des <a class="el" href="struct_servos.html">Servos</a></td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>id</em>&nbsp;</td><td>ID des Servos</td></tr>
   </table>
   </dd>
 </dl>
@@ -541,20 +541,20 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="af74f3edfd4dee2d2f746f1f49ebf451c"></a><!-- doxytag: member="dynamixel.c::DNX_receive" ref="af74f3edfd4dee2d2f746f1f49ebf451c" args="(byte id, byte *result)" -->
+<a class="anchor" id="ab4682d02bfe17287a1806917d4f7786c"></a><!-- doxytag: member="dynamixel.c::DNX_receive" ref="ab4682d02bfe17287a1806917d4f7786c" args="(DT_byte id, DT_byte *result)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int DNX_receive </td>
+          <td class="memname"><a class="el" href="datatypes_8h.html#a690ffbb6ad43eab1176f91d2097fc967">DT_size</a> DNX_receive </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a>&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a>&nbsp;</td>
           <td class="paramname"> <em>id</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> *&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> *&nbsp;</td>
           <td class="paramname"> <em>result</em></td><td>&nbsp;</td>
         </tr>
         <tr>
@@ -569,7 +569,7 @@ Functions</h2></td></tr>
 <p>Blockierendes Empfangen. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>id</em>&nbsp;</td><td>ID des <a class="el" href="struct_servos.html">Servos</a> um linke/rechte Seite feststellen zu können </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>id</em>&nbsp;</td><td>ID des Servos um linke/rechte Seite feststellen zu können </td></tr>
     <tr><td valign="top"></td><td valign="top"><em>result</em>&nbsp;</td><td>Zielfeld für Daten</td></tr>
   </table>
   </dd>
@@ -578,26 +578,26 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a9aea4f00d76505fd66f47ec0f96b91e2"></a><!-- doxytag: member="dynamixel.c::DNX_send" ref="a9aea4f00d76505fd66f47ec0f96b91e2" args="(byte *packet, byte l, byte *result)" -->
+<a class="anchor" id="ac3b624aed13e73fa621109387ced4d6d"></a><!-- doxytag: member="dynamixel.c::DNX_send" ref="ac3b624aed13e73fa621109387ced4d6d" args="(DT_byte *packet, DT_size l, DT_byte *result)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int DNX_send </td>
+          <td class="memname"><a class="el" href="datatypes_8h.html#a690ffbb6ad43eab1176f91d2097fc967">DT_size</a> DNX_send </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> *&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> *&nbsp;</td>
           <td class="paramname"> <em>packet</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a>&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#a690ffbb6ad43eab1176f91d2097fc967">DT_size</a>&nbsp;</td>
           <td class="paramname"> <em>l</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> *&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> *&nbsp;</td>
           <td class="paramname"> <em>result</em></td><td>&nbsp;</td>
         </tr>
         <tr>
@@ -623,20 +623,20 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a434c0416a1eb4e1ba24bdae9a6899b47"></a><!-- doxytag: member="dynamixel.c::DNX_setAngle" ref="a434c0416a1eb4e1ba24bdae9a6899b47" args="(byte id, double value)" -->
+<a class="anchor" id="aa92104804c4b9ba6da1cdf705558efb9"></a><!-- doxytag: member="dynamixel.c::DNX_setAngle" ref="aa92104804c4b9ba6da1cdf705558efb9" args="(DT_byte id, DT_double value)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void DNX_setAngle </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a>&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a>&nbsp;</td>
           <td class="paramname"> <em>id</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a>&nbsp;</td>
           <td class="paramname"> <em>value</em></td><td>&nbsp;</td>
         </tr>
         <tr>
@@ -651,7 +651,7 @@ Functions</h2></td></tr>
 <p>Sendet einen sofort anzufahrenden Winkel an Servo. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>id</em>&nbsp;</td><td>ID des <a class="el" href="struct_servos.html">Servos</a> </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>id</em>&nbsp;</td><td>ID des Servos </td></tr>
     <tr><td valign="top"></td><td valign="top"><em>value</em>&nbsp;</td><td>Winkel in Grad </td></tr>
   </table>
   </dd>
@@ -659,20 +659,20 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="acd17a1cf5224351302fc33b42ba02213"></a><!-- doxytag: member="dynamixel.c::DNX_setId" ref="acd17a1cf5224351302fc33b42ba02213" args="(byte idOld, byte idNew)" -->
+<a class="anchor" id="a98d0fef9ad119fcca590f6c406803566"></a><!-- doxytag: member="dynamixel.c::DNX_setId" ref="a98d0fef9ad119fcca590f6c406803566" args="(DT_byte idOld, DT_byte idNew)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void DNX_setId </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a>&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a>&nbsp;</td>
           <td class="paramname"> <em>idOld</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a>&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a>&nbsp;</td>
           <td class="paramname"> <em>idNew</em></td><td>&nbsp;</td>
         </tr>
         <tr>
@@ -684,10 +684,10 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Vergibt einem <a class="el" href="struct_servos.html">Servos</a> eine neue ID (ungetestet). </p>
+<p>Vergibt einem Servos eine neue ID (ungetestet). </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>idOld</em>&nbsp;</td><td>ID des zu verändernden <a class="el" href="struct_servos.html">Servos</a> </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>idOld</em>&nbsp;</td><td>ID des zu verändernden Servos </td></tr>
     <tr><td valign="top"></td><td valign="top"><em>idNew</em>&nbsp;</td><td>Zusetzende ID </td></tr>
   </table>
   </dd>
@@ -695,20 +695,20 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a57747b43f5b817b77901c3058e51262b"></a><!-- doxytag: member="dynamixel.c::DNX_setLed" ref="a57747b43f5b817b77901c3058e51262b" args="(byte id, byte value)" -->
+<a class="anchor" id="a9f584e34dd266e35d7dfbc94b699a7e2"></a><!-- doxytag: member="dynamixel.c::DNX_setLed" ref="a9f584e34dd266e35d7dfbc94b699a7e2" args="(DT_byte id, DT_byte value)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void DNX_setLed </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a>&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a>&nbsp;</td>
           <td class="paramname"> <em>id</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a>&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a>&nbsp;</td>
           <td class="paramname"> <em>value</em></td><td>&nbsp;</td>
         </tr>
         <tr>
@@ -720,10 +720,10 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Schaltet die LED eines <a class="el" href="struct_servos.html">Servos</a> an/aus. </p>
+<p>Schaltet die LED eines Servos an/aus. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>id</em>&nbsp;</td><td>ID des <a class="el" href="struct_servos.html">Servos</a> </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>id</em>&nbsp;</td><td>ID des Servos </td></tr>
     <tr><td valign="top"></td><td valign="top"><em>value</em>&nbsp;</td><td>Wert für LED (0x00 / 0x01) </td></tr>
   </table>
   </dd>
@@ -731,20 +731,20 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="afe200bacc1357694d844367a29fdca9e"></a><!-- doxytag: member="dynamixel.c::DNX_setSpeed" ref="afe200bacc1357694d844367a29fdca9e" args="(byte id, byte speed)" -->
+<a class="anchor" id="ab40e5e20f2f8e66efcf5d5a49ad2c58b"></a><!-- doxytag: member="dynamixel.c::DNX_setSpeed" ref="ab40e5e20f2f8e66efcf5d5a49ad2c58b" args="(DT_byte id, DT_byte speed)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void DNX_setSpeed </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a>&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a>&nbsp;</td>
           <td class="paramname"> <em>id</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a>&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a>&nbsp;</td>
           <td class="paramname"> <em>speed</em></td><td>&nbsp;</td>
         </tr>
         <tr>
@@ -756,10 +756,10 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Setzt die Anfahrgeschwindigkeit eines <a class="el" href="struct_servos.html">Servos</a> (unvollendet). </p>
+<p>Setzt die Anfahrgeschwindigkeit eines Servos (unvollendet). </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>id</em>&nbsp;</td><td>ID des <a class="el" href="struct_servos.html">Servos</a> </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>id</em>&nbsp;</td><td>ID des Servos </td></tr>
     <tr><td valign="top"></td><td valign="top"><em>speed</em>&nbsp;</td><td>Geschwindigkeit </td></tr>
   </table>
   </dd>
@@ -782,7 +782,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Mon Oct 25 2010 17:22:38 for CM-Bot_API by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Oct 26 2010 00:59:49 for CM-Bot_API by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

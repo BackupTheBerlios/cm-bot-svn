@@ -39,7 +39,7 @@
  * \param	s	Winkel in Grad der Gelenke
  * \param	dh03	Zielmatrix für die Lösung
  */
-void KIN_calculateDH(const servos s, double** dh03) {
+void KIN_calculateDH(const DT_servos s, DT_double** dh03) {
 	dh03[0][0] = cos(s.v1) * cos(s.v2) * cos(s.v3) - cos(s.v1) * sin(s.v2)
 			* sin(s.v3);
 	dh03[0][1] = -cos(s.v1) * cos(s.v2) * sin(s.v3) - cos(s.v1) * cos(s.v3)
@@ -77,12 +77,12 @@ void KIN_calculateDH(const servos s, double** dh03) {
  *
  * \return	struct servos mit den Winkeln 1-3 (Bogenmaß)
  */
-servos KIN_calculateServos(const point p) {
-	servos servos;
-	double z = p.z - DIST_DZ;
-	double h, h2, h3;
-	double v1, v2, v3;
-	double alpha, beta, gamma;
+DT_servos KIN_calculateServos(const DT_point p) {
+	DT_servos servos;
+	DT_double z = p.z - DIST_DZ;
+	DT_double h, h2, h3;
+	DT_double v1, v2, v3;
+	DT_double alpha, beta, gamma;
 
 	// STEP 1 (without dummy-axis)
 	// angle for hip axis in x-y-plane

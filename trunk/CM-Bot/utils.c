@@ -8,7 +8,6 @@
 
 #include <stdio.h>
 #include <math.h>
-
 #include "include/utils.h"
 
 /**
@@ -26,9 +25,9 @@
  * \param	rows	Zeilenanzahl
  * \param	columns	Spaltenanzahl
  */
-void UTL_printMatrix(double** mat, int rows, int columns) {
-	int r, c;
-	char sep;
+void UTL_printMatrix(DT_double** mat, DT_size rows, DT_size columns) {
+	DT_size r, c;
+	DT_char sep;
 	printf("> DH04:\n");
 	for (r = 0; r < rows; r++) {
 		sep = ' ';
@@ -47,7 +46,7 @@ void UTL_printMatrix(double** mat, int rows, int columns) {
  * \param	s	struct servos
  * \param	type	Typ der Ausgabe in Bogenmaß oder Grad
  */
-void UTL_printServos(servos s, char type) {
+void UTL_printServos(DT_servos s, DT_type type) {
 	printf("> Servos: ");
 	if (type == UTL_RAD)
 		printf("v1 = %10.5lf; v2 = %10.5lf; v2 = %10.5lf; (Bogenmaß)\n", s.v1,
@@ -64,7 +63,7 @@ void UTL_printServos(servos s, char type) {
  *
  * \param p	Punkt zur Ausgabe
  */
-void UTL_printPoint(point p) {
+void UTL_printPoint(DT_point p) {
 	printf("> Punkt: x = %10.5lf; y = %10.5lf; z = %10.5lf;\n", p.x, p.y, p.z);
 }
 
@@ -77,7 +76,7 @@ void UTL_printPoint(point p) {
  *
  * \return	In das Bogenmaß umgerechneter Winkel
  */
-double UTL_getRadiant(double angle) {
+DT_double UTL_getRadiant(DT_double angle) {
 	return angle * (M_PI / 180);
 }
 
@@ -90,7 +89,7 @@ double UTL_getRadiant(double angle) {
  *
  * \return	In das Gradmaß umgerechneter Winkel
  */
-double UTL_getDegree(double radiant) {
+DT_double UTL_getDegree(DT_double radiant) {
 	return (radiant * 180) / M_PI;
 }
 
@@ -103,8 +102,8 @@ double UTL_getDegree(double radiant) {
  *
  * \return	Extrahierter Punkt
  */
-point UTL_getPointOfDH(double** dh) {
-	point p;
+DT_point UTL_getPointOfDH(DT_double** dh) {
+	DT_point p;
 	p.x = dh[0][3];
 	p.y = dh[1][3];
 	p.z = dh[2][3];
@@ -119,8 +118,8 @@ point UTL_getPointOfDH(double** dh) {
  * \param	msg	Text für die Ausgabe
  * \param	size	Länge des Textes
  */
-void UTL_printDebug(char* msg, byte size) {
-	byte i;
+void UTL_printDebug(DT_char* msg, DT_size size) {
+	DT_size i;
 #ifdef USART_ON
 	while (!USART_IsTXDataRegisterEmpty(XM_debug_data.usart))
 		;
@@ -146,8 +145,8 @@ void UTL_printDebug(char* msg, byte size) {
  * \param	packet	Paket für die Ausgabe
  * \param	size	Größe des Pakets
  */
-void UTL_printDebugByte(byte* packet, byte size) {
-	char hex[2 * size];
+void UTL_printDebugByte(DT_byte* packet, DT_size size) {
+	DT_char hex[2 * size];
 	size = UTL_byteToHexChar(hex, packet, size);
 	UTL_printDebug(hex, size);
 }
@@ -159,8 +158,9 @@ void UTL_printDebugByte(byte* packet, byte size) {
  * \param	src	Pointer auf das Quellfeld
  * \param	size	Größe des Quellfelds
  */
-byte UTL_byteToHexChar(char* dest, byte* src, byte size) {
-	int temp = 0, i;
+DT_byte UTL_byteToHexChar(DT_char* dest, DT_byte* src, DT_size size) {
+	DT_size i;
+	DT_byte temp;
 	for (i = 0; i < size; i++) {
 		temp = src[i] & 0x0F;
 		if (temp < 10) {
@@ -181,13 +181,12 @@ byte UTL_byteToHexChar(char* dest, byte* src, byte size) {
 /**
  * \brief	Abstraktion von einer Pause/Delay.
  *
- * 			Implementierung durch Schleifen.
+ * 			Implementierung durch Schleifen (rounds * 64k).
  *
  * \param	rounds	Länge der Pause
  */
-void UTL_wait(byte rounds) {
-	byte r;
-	unsigned int i;
+void UTL_wait(DT_size rounds) {
+	DT_size r, i;
 	for (r = 0; r < rounds; r++) {
 		for (i = 0; i < 64000; i++)
 			;

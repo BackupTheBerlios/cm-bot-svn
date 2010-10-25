@@ -46,7 +46,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Data Structures</a> &#124;
 <a href="#define-members">Defines</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
@@ -57,18 +56,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>Spezifische Funktionen für den Mikrocontroller ATXmega128A1.  
 <a href="#_details">More...</a></p>
-<code>#include &quot;avr/io.h&quot;</code><br/>
-<code>#include &quot;<a class="el" href="avr__compiler_8h_source.html">avr_compiler.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="usart__driver_8h_source.html">usart_driver.h</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="clksys__driver_8h_source.html">clksys_driver.h</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="utils_8h_source.html">utils.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="datatypes_8h_source.html">datatypes.h</a>&quot;</code><br/>
 
 <p><a href="xmega_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="nested-classes"></a>
-Data Structures</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_r_x_buffer.html">RXBuffer</a></td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Ring-Buffer zum Empfangen von Daten einer USART.  <a href="struct_r_x_buffer.html#_details">More...</a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="define-members"></a>
 Defines</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="xmega_8h.html#ad362da595b299d341b4cabb7af8b9987">XM_PORT_SERVO_L</a>&nbsp;&nbsp;&nbsp;PORTC</td></tr>
@@ -86,8 +78,6 @@ Defines</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="xmega_8h.html#aee0a92534030b96677d5c5f9740dd5d8">SWITCH_PRESSED</a>&nbsp;&nbsp;&nbsp;(SWITCHPORT.IN&amp;SWITCHMASK)!=SWITCHMASK</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="xmega_8h.html#a504feaf326beca68d69242b30efb5da6">SWITCH_RELEASED</a>&nbsp;&nbsp;&nbsp;(SWITCHPORT.IN&amp;SWITCHMASK)==SWITCHMASK</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="xmega_8h.html#aeb5ecea146221a9a107c71f3bba7c118">XM_OE_MASK</a>&nbsp;&nbsp;&nbsp;(1&lt;&lt;PIN0)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="xmega_8h.html#a37d2140d01bedd074b20236a4bf27b85">XM_RX_BUFFER_SIZE</a>&nbsp;&nbsp;&nbsp;255</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="xmega_8h.html#acfb98aa1c940f100a10a0356c529a13f">XM_RESULT_BUFFER_SIZE</a>&nbsp;&nbsp;&nbsp;255</td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="xmega_8h.html#a98a15c8d66c596f3a8b68a4a51993303">XM_init_cpu</a> ()</td></tr>
@@ -96,17 +86,17 @@ Functions</h2></td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Initialisiert die Servo-USARTs.  <a href="#a1fe0df275acdbec5eec5b8db8d79f8c8"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="xmega_8h.html#a45603b6093d8ae41a9ced9714ba6bbd0">XM_init_com</a> ()</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Initialisiert USARTs für die CPU-Kommunikation.  <a href="#a45603b6093d8ae41a9ced9714ba6bbd0"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="xmega_8h.html#ab559c98eb7302c88c9f9cc5b96e3eb87">XM_USART_send</a> (<a class="el" href="struct_usart__and__buffer.html">USART_data_t</a> *, <a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> *, <a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a>)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">USART-Sendemethode.  <a href="#ab559c98eb7302c88c9f9cc5b96e3eb87"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="xmega_8h.html#a942bbc66096ab87e7ee543d965207c9e">XM_USART_receive</a> (<a class="el" href="struct_r_x_buffer.html">RXBuffer</a> *, <a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> *)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">USART-Empfangsmethode.  <a href="#a942bbc66096ab87e7ee543d965207c9e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="xmega_8h.html#a311597ed511c36b6025e1098bb3471cc">XM_USART_send</a> (<a class="el" href="struct_usart__and__buffer.html">USART_data_t</a> *, <a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> *, <a class="el" href="datatypes_8h.html#a690ffbb6ad43eab1176f91d2097fc967">DT_size</a>)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">USART-Sendemethode.  <a href="#a311597ed511c36b6025e1098bb3471cc"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="datatypes_8h.html#a690ffbb6ad43eab1176f91d2097fc967">DT_size</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="xmega_8h.html#abb4507a5d35d8236ac7e04cf1ef2b804">XM_USART_receive</a> (<a class="el" href="struct_d_t__rx_buffer.html">DT_rxBuffer</a> *, <a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> *)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">USART-Empfangsmethode.  <a href="#abb4507a5d35d8236ac7e04cf1ef2b804"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_usart__and__buffer.html">USART_data_t</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="xmega_8h.html#a448f43e4abff317a9da514b54be01296">XM_servo_data_L</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_usart__and__buffer.html">USART_data_t</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="xmega_8h.html#ac1fe899fc4d2597e76c41c8def9ba066">XM_servo_data_R</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_usart__and__buffer.html">USART_data_t</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="xmega_8h.html#a9c7eb4b6e67fb70bbd979a051bed0dbf">XM_debug_data</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_r_x_buffer.html">RXBuffer</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="xmega_8h.html#adb921ab4060ac55f198e6d132b24b9d5">XM_RX_buffer_L</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_r_x_buffer.html">RXBuffer</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="xmega_8h.html#a1dfb03c69ecfd1d1b1fc3d57866b4036">XM_RX_buffer_R</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_d_t__rx_buffer.html">DT_rxBuffer</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="xmega_8h.html#a7d4c1cb190cdf1f5a4077a8db82582fd">XM_RX_buffer_L</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_d_t__rx_buffer.html">DT_rxBuffer</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="xmega_8h.html#a24bc21014602d73db3cba75b33043423">XM_RX_buffer_R</a></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>Spezifische Funktionen für den Mikrocontroller ATXmega128A1. </p>
@@ -267,34 +257,6 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="acfb98aa1c940f100a10a0356c529a13f"></a><!-- doxytag: member="xmega.h::XM_RESULT_BUFFER_SIZE" ref="acfb98aa1c940f100a10a0356c529a13f" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define XM_RESULT_BUFFER_SIZE&nbsp;&nbsp;&nbsp;255</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>Größe des Buffers für ein empfangenes Paket. </p>
-
-</div>
-</div>
-<a class="anchor" id="a37d2140d01bedd074b20236a4bf27b85"></a><!-- doxytag: member="xmega.h::XM_RX_BUFFER_SIZE" ref="a37d2140d01bedd074b20236a4bf27b85" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define XM_RX_BUFFER_SIZE&nbsp;&nbsp;&nbsp;255</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>Größe des Ring-Buffers. </p>
-
-</div>
-</div>
 <a class="anchor" id="a5180a5d09cf4f92933b85c3f2c3b9617"></a><!-- doxytag: member="xmega.h::XM_USART_DEBUG" ref="a5180a5d09cf4f92933b85c3f2c3b9617" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -392,20 +354,20 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a942bbc66096ab87e7ee543d965207c9e"></a><!-- doxytag: member="xmega.h::XM_USART_receive" ref="a942bbc66096ab87e7ee543d965207c9e" args="(RXBuffer *, byte *)" -->
+<a class="anchor" id="abb4507a5d35d8236ac7e04cf1ef2b804"></a><!-- doxytag: member="xmega.h::XM_USART_receive" ref="abb4507a5d35d8236ac7e04cf1ef2b804" args="(DT_rxBuffer *, DT_byte *)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> XM_USART_receive </td>
+          <td class="memname"><a class="el" href="datatypes_8h.html#a690ffbb6ad43eab1176f91d2097fc967">DT_size</a> XM_USART_receive </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_r_x_buffer.html">RXBuffer</a> *&nbsp;</td>
+          <td class="paramtype"><a class="el" href="struct_d_t__rx_buffer.html">DT_rxBuffer</a> *&nbsp;</td>
           <td class="paramname"> <em>rxBuffer</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> *&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> *&nbsp;</td>
           <td class="paramname"> <em>dest</em></td><td>&nbsp;</td>
         </tr>
         <tr>
@@ -430,7 +392,7 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ab559c98eb7302c88c9f9cc5b96e3eb87"></a><!-- doxytag: member="xmega.h::XM_USART_send" ref="ab559c98eb7302c88c9f9cc5b96e3eb87" args="(USART_data_t *, byte *, byte)" -->
+<a class="anchor" id="a311597ed511c36b6025e1098bb3471cc"></a><!-- doxytag: member="xmega.h::XM_USART_send" ref="a311597ed511c36b6025e1098bb3471cc" args="(USART_data_t *, DT_byte *, DT_size)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -443,13 +405,13 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> *&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> *&nbsp;</td>
           <td class="paramname"> <em>txData</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a>&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#a690ffbb6ad43eab1176f91d2097fc967">DT_size</a>&nbsp;</td>
           <td class="paramname"> <em>bytes</em></td><td>&nbsp;</td>
         </tr>
         <tr>
@@ -489,12 +451,12 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="adb921ab4060ac55f198e6d132b24b9d5"></a><!-- doxytag: member="xmega.h::XM_RX_buffer_L" ref="adb921ab4060ac55f198e6d132b24b9d5" args="" -->
+<a class="anchor" id="a7d4c1cb190cdf1f5a4077a8db82582fd"></a><!-- doxytag: member="xmega.h::XM_RX_buffer_L" ref="a7d4c1cb190cdf1f5a4077a8db82582fd" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_r_x_buffer.html">RXBuffer</a> <a class="el" href="xmega_8h.html#adb921ab4060ac55f198e6d132b24b9d5">XM_RX_buffer_L</a></td>
+          <td class="memname"><a class="el" href="struct_d_t__rx_buffer.html">DT_rxBuffer</a> <a class="el" href="xmega_8h.html#a7d4c1cb190cdf1f5a4077a8db82582fd">XM_RX_buffer_L</a></td>
         </tr>
       </table>
 </div>
@@ -503,12 +465,12 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a1dfb03c69ecfd1d1b1fc3d57866b4036"></a><!-- doxytag: member="xmega.h::XM_RX_buffer_R" ref="a1dfb03c69ecfd1d1b1fc3d57866b4036" args="" -->
+<a class="anchor" id="a24bc21014602d73db3cba75b33043423"></a><!-- doxytag: member="xmega.h::XM_RX_buffer_R" ref="a24bc21014602d73db3cba75b33043423" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_r_x_buffer.html">RXBuffer</a> <a class="el" href="xmega_8h.html#a1dfb03c69ecfd1d1b1fc3d57866b4036">XM_RX_buffer_R</a></td>
+          <td class="memname"><a class="el" href="struct_d_t__rx_buffer.html">DT_rxBuffer</a> <a class="el" href="xmega_8h.html#a24bc21014602d73db3cba75b33043423">XM_RX_buffer_R</a></td>
         </tr>
       </table>
 </div>
@@ -560,7 +522,7 @@ Variables</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Mon Oct 25 2010 17:22:38 for CM-Bot_API by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Oct 26 2010 00:59:49 for CM-Bot_API by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

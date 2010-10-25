@@ -46,22 +46,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Data Structures</a> &#124;
 <a href="#define-members">Defines</a> &#124;
-<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <h1>include/utils.h File Reference</h1>  </div>
 </div>
 <div class="contents">
-<code>#include &lt;stdint.h&gt;</code><br/>
+
+<p>TODO.  
+<a href="#_details">More...</a></p>
+<code>#include &quot;<a class="el" href="datatypes_8h_source.html">datatypes.h</a>&quot;</code><br/>
 
 <p><a href="utils_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="nested-classes"></a>
-Data Structures</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_servos.html">Servos</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">struct &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_point.html">Point</a></td></tr>
 <tr><td colspan="2"><h2><a name="define-members"></a>
 Defines</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a2dd8a8ec2e39b1082e25273322c6bc55">UTL_DEG</a>&nbsp;&nbsp;&nbsp;1</td></tr>
@@ -69,34 +66,31 @@ Defines</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a911d91f7898a9a0c4e35bb71e01d39a0">DEBUG_ON</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#aa307af9bac7bc9ec0a14bb4941fdab07">DEBUG</a>(output)&nbsp;&nbsp;&nbsp;UTL_printDebug output;</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a4fa190630904ef04df67b6174e862830">DEBUG_BYTE</a>(output)&nbsp;&nbsp;&nbsp;UTL_printDebugByte output;</td></tr>
-<tr><td colspan="2"><h2><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="struct_point.html">Point</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a8daf0f5a63c61c9425f715d1b1c3c63d">point</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="struct_servos.html">Servos</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a156f05e40b9a06e082e7a6e9be49c74a">servos</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a></td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#aaf8157d9e2bff17c8799dd9f2d8fde09">UTL_printMatrix</a> (double **, int, int)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Gibt eine Matrix auf stdo aus.  <a href="#aaf8157d9e2bff17c8799dd9f2d8fde09"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#ac1bda3244eac292d84e8cfaf069a4cba">UTL_printServos</a> (<a class="el" href="struct_servos.html">servos</a>, char)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Gibt struct servos auf stdo aus.  <a href="#ac1bda3244eac292d84e8cfaf069a4cba"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#aceb801f40e4a2bfd249d784842db1f2b">UTL_printPoint</a> (<a class="el" href="struct_point.html">point</a>)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Gibt einen Punkt auf stdo aus.  <a href="#aceb801f40e4a2bfd249d784842db1f2b"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#abe15191bf29373d4eb4cad68d6b12b3a">UTL_getRadiant</a> (double)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Umrechnung in das Bogenmaß.  <a href="#abe15191bf29373d4eb4cad68d6b12b3a"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#aa1d3cdd88ce589e25e9c804bc306e814">UTL_getDegree</a> (double)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Umrechnung in das Gradmaß.  <a href="#aa1d3cdd88ce589e25e9c804bc306e814"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_point.html">point</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a7a799b0e29b4f963d2882224b9360ba5">UTL_getPointOfDH</a> (double **)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Extrahiert den Punkt aus der DH-Matrix.  <a href="#a7a799b0e29b4f963d2882224b9360ba5"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#aec6d959ca4148a6f0f03ccc5696110be">UTL_printDebug</a> (char *, <a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a>)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Debug-Ausgabe.  <a href="#aec6d959ca4148a6f0f03ccc5696110be"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a3824028ae8d5be2dc92f6c0c3562c67b">UTL_printDebugByte</a> (<a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> *, <a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a>)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Debug-Ausgabe von Bytes.  <a href="#a3824028ae8d5be2dc92f6c0c3562c67b"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a965af82a8f57f796bfbbc05918eaeb6f">UTL_byteToHexChar</a> (char *, <a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> *, <a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a>)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Konvertierung eines Bytes in das Hexadezimal-Format.  <a href="#a965af82a8f57f796bfbbc05918eaeb6f"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a4e251f5d08b22819ea7cf0d3f22a8a7c">UTL_wait</a> (<a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a>)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Abstraktion von einer Pause/Delay.  <a href="#a4e251f5d08b22819ea7cf0d3f22a8a7c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#ae3fca8ff2f6861b321326dafc901f36d">UTL_printMatrix</a> (<a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a> **, <a class="el" href="datatypes_8h.html#a690ffbb6ad43eab1176f91d2097fc967">DT_size</a>, <a class="el" href="datatypes_8h.html#a690ffbb6ad43eab1176f91d2097fc967">DT_size</a>)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Gibt eine Matrix auf stdo aus.  <a href="#ae3fca8ff2f6861b321326dafc901f36d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#aa6467df91c7581b21b615761902defc0">UTL_printServos</a> (<a class="el" href="struct_d_t__servos.html">DT_servos</a>, <a class="el" href="datatypes_8h.html#a3f264c95c6daf779bd706d321c7f0791">DT_type</a>)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Gibt struct servos auf stdo aus.  <a href="#aa6467df91c7581b21b615761902defc0"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a03284a1654e8bacf0b60f6582236b93e">UTL_printPoint</a> (<a class="el" href="struct_d_t__point.html">DT_point</a>)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Gibt einen Punkt auf stdo aus.  <a href="#a03284a1654e8bacf0b60f6582236b93e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a5def0a52b0b7a2979ab4d4a556b25ce3">UTL_getRadiant</a> (<a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a>)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Umrechnung in das Bogenmaß.  <a href="#a5def0a52b0b7a2979ab4d4a556b25ce3"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a8fbe4e1caa76e6e0bbaa7fa161477c9a">UTL_getDegree</a> (<a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a>)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Umrechnung in das Gradmaß.  <a href="#a8fbe4e1caa76e6e0bbaa7fa161477c9a"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_d_t__point.html">DT_point</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a39786c3c4557029db2186185f39f4e3a">UTL_getPointOfDH</a> (<a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a> **)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Extrahiert den Punkt aus der DH-Matrix.  <a href="#a39786c3c4557029db2186185f39f4e3a"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a2f77216cc2fde8737503fff3f5f4bc5f">UTL_printDebug</a> (<a class="el" href="datatypes_8h.html#a5a830cc34c2cc21426088ccdb4d3c27c">DT_char</a> *, <a class="el" href="datatypes_8h.html#a690ffbb6ad43eab1176f91d2097fc967">DT_size</a>)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Debug-Ausgabe.  <a href="#a2f77216cc2fde8737503fff3f5f4bc5f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#ac34f4328543cd8fd5f4507bb491f95f5">UTL_printDebugByte</a> (<a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> *, <a class="el" href="datatypes_8h.html#a690ffbb6ad43eab1176f91d2097fc967">DT_size</a>)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Debug-Ausgabe von Bytes.  <a href="#ac34f4328543cd8fd5f4507bb491f95f5"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a2c725e7fd1cf5e463e53b043c16fc094">UTL_byteToHexChar</a> (<a class="el" href="datatypes_8h.html#a5a830cc34c2cc21426088ccdb4d3c27c">DT_char</a> *, <a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> *, <a class="el" href="datatypes_8h.html#a690ffbb6ad43eab1176f91d2097fc967">DT_size</a>)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Konvertierung eines Bytes in das Hexadezimal-Format.  <a href="#a2c725e7fd1cf5e463e53b043c16fc094"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a9ff4508c46bb86cd31073c4e1a5d20b4">UTL_wait</a> (<a class="el" href="datatypes_8h.html#a690ffbb6ad43eab1176f91d2097fc967">DT_size</a>)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Abstraktion von einer Pause/Delay.  <a href="#a9ff4508c46bb86cd31073c4e1a5d20b4"></a><br/></td></tr>
 </table>
+<hr/><a name="_details"></a><h2>Detailed Description</h2>
+<p>TODO. </p>
 <hr/><h2>Define Documentation</h2>
 <a class="anchor" id="aa307af9bac7bc9ec0a14bb4941fdab07"></a><!-- doxytag: member="utils.h::DEBUG" ref="aa307af9bac7bc9ec0a14bb4941fdab07" args="(output)" -->
 <div class="memitem">
@@ -173,67 +167,27 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<hr/><h2>Typedef Documentation</h2>
-<a class="anchor" id="ab8ef12fab634c171394422d0ee8baf94"></a><!-- doxytag: member="utils.h::byte" ref="ab8ef12fab634c171394422d0ee8baf94" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef uint8_t <a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a8daf0f5a63c61c9425f715d1b1c3c63d"></a><!-- doxytag: member="utils.h::point" ref="a8daf0f5a63c61c9425f715d1b1c3c63d" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef struct <a class="el" href="struct_point.html">Point</a> <a class="el" href="struct_point.html">point</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a156f05e40b9a06e082e7a6e9be49c74a"></a><!-- doxytag: member="utils.h::servos" ref="a156f05e40b9a06e082e7a6e9be49c74a" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef struct <a class="el" href="struct_servos.html">Servos</a> <a class="el" href="struct_servos.html">servos</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <hr/><h2>Function Documentation</h2>
-<a class="anchor" id="a965af82a8f57f796bfbbc05918eaeb6f"></a><!-- doxytag: member="utils.h::UTL_byteToHexChar" ref="a965af82a8f57f796bfbbc05918eaeb6f" args="(char *, byte *, byte)" -->
+<a class="anchor" id="a2c725e7fd1cf5e463e53b043c16fc094"></a><!-- doxytag: member="utils.h::UTL_byteToHexChar" ref="a2c725e7fd1cf5e463e53b043c16fc094" args="(DT_char *, DT_byte *, DT_size)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> UTL_byteToHexChar </td>
+          <td class="memname"><a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> UTL_byteToHexChar </td>
           <td>(</td>
-          <td class="paramtype">char *&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#a5a830cc34c2cc21426088ccdb4d3c27c">DT_char</a> *&nbsp;</td>
           <td class="paramname"> <em>dest</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> *&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> *&nbsp;</td>
           <td class="paramname"> <em>src</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a>&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#a690ffbb6ad43eab1176f91d2097fc967">DT_size</a>&nbsp;</td>
           <td class="paramname"> <em>size</em></td><td>&nbsp;</td>
         </tr>
         <tr>
@@ -257,14 +211,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aa1d3cdd88ce589e25e9c804bc306e814"></a><!-- doxytag: member="utils.h::UTL_getDegree" ref="aa1d3cdd88ce589e25e9c804bc306e814" args="(double)" -->
+<a class="anchor" id="a8fbe4e1caa76e6e0bbaa7fa161477c9a"></a><!-- doxytag: member="utils.h::UTL_getDegree" ref="a8fbe4e1caa76e6e0bbaa7fa161477c9a" args="(DT_double)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double UTL_getDegree </td>
+          <td class="memname"><a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a> UTL_getDegree </td>
           <td>(</td>
-          <td class="paramtype">double&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a>&nbsp;</td>
           <td class="paramname"> <em>radiant</em></td>
           <td>&nbsp;)&nbsp;</td>
           <td></td>
@@ -285,14 +239,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a7a799b0e29b4f963d2882224b9360ba5"></a><!-- doxytag: member="utils.h::UTL_getPointOfDH" ref="a7a799b0e29b4f963d2882224b9360ba5" args="(double **)" -->
+<a class="anchor" id="a39786c3c4557029db2186185f39f4e3a"></a><!-- doxytag: member="utils.h::UTL_getPointOfDH" ref="a39786c3c4557029db2186185f39f4e3a" args="(DT_double **)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_point.html">point</a> UTL_getPointOfDH </td>
+          <td class="memname"><a class="el" href="struct_d_t__point.html">DT_point</a> UTL_getPointOfDH </td>
           <td>(</td>
-          <td class="paramtype">double **&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a> **&nbsp;</td>
           <td class="paramname"> <em>dh</em></td>
           <td>&nbsp;)&nbsp;</td>
           <td></td>
@@ -313,14 +267,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="abe15191bf29373d4eb4cad68d6b12b3a"></a><!-- doxytag: member="utils.h::UTL_getRadiant" ref="abe15191bf29373d4eb4cad68d6b12b3a" args="(double)" -->
+<a class="anchor" id="a5def0a52b0b7a2979ab4d4a556b25ce3"></a><!-- doxytag: member="utils.h::UTL_getRadiant" ref="a5def0a52b0b7a2979ab4d4a556b25ce3" args="(DT_double)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double UTL_getRadiant </td>
+          <td class="memname"><a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a> UTL_getRadiant </td>
           <td>(</td>
-          <td class="paramtype">double&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a>&nbsp;</td>
           <td class="paramname"> <em>angle</em></td>
           <td>&nbsp;)&nbsp;</td>
           <td></td>
@@ -341,20 +295,20 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aec6d959ca4148a6f0f03ccc5696110be"></a><!-- doxytag: member="utils.h::UTL_printDebug" ref="aec6d959ca4148a6f0f03ccc5696110be" args="(char *, byte)" -->
+<a class="anchor" id="a2f77216cc2fde8737503fff3f5f4bc5f"></a><!-- doxytag: member="utils.h::UTL_printDebug" ref="a2f77216cc2fde8737503fff3f5f4bc5f" args="(DT_char *, DT_size)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void UTL_printDebug </td>
           <td>(</td>
-          <td class="paramtype">char *&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#a5a830cc34c2cc21426088ccdb4d3c27c">DT_char</a> *&nbsp;</td>
           <td class="paramname"> <em>msg</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a>&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#a690ffbb6ad43eab1176f91d2097fc967">DT_size</a>&nbsp;</td>
           <td class="paramname"> <em>size</em></td><td>&nbsp;</td>
         </tr>
         <tr>
@@ -378,20 +332,20 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a3824028ae8d5be2dc92f6c0c3562c67b"></a><!-- doxytag: member="utils.h::UTL_printDebugByte" ref="a3824028ae8d5be2dc92f6c0c3562c67b" args="(byte *, byte)" -->
+<a class="anchor" id="ac34f4328543cd8fd5f4507bb491f95f5"></a><!-- doxytag: member="utils.h::UTL_printDebugByte" ref="ac34f4328543cd8fd5f4507bb491f95f5" args="(DT_byte *, DT_size)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void UTL_printDebugByte </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> *&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> *&nbsp;</td>
           <td class="paramname"> <em>packet</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a>&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#a690ffbb6ad43eab1176f91d2097fc967">DT_size</a>&nbsp;</td>
           <td class="paramname"> <em>size</em></td><td>&nbsp;</td>
         </tr>
         <tr>
@@ -415,26 +369,26 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aaf8157d9e2bff17c8799dd9f2d8fde09"></a><!-- doxytag: member="utils.h::UTL_printMatrix" ref="aaf8157d9e2bff17c8799dd9f2d8fde09" args="(double **, int, int)" -->
+<a class="anchor" id="ae3fca8ff2f6861b321326dafc901f36d"></a><!-- doxytag: member="utils.h::UTL_printMatrix" ref="ae3fca8ff2f6861b321326dafc901f36d" args="(DT_double **, DT_size, DT_size)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void UTL_printMatrix </td>
           <td>(</td>
-          <td class="paramtype">double **&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a> **&nbsp;</td>
           <td class="paramname"> <em>mat</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#a690ffbb6ad43eab1176f91d2097fc967">DT_size</a>&nbsp;</td>
           <td class="paramname"> <em>rows</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#a690ffbb6ad43eab1176f91d2097fc967">DT_size</a>&nbsp;</td>
           <td class="paramname"> <em>columns</em></td><td>&nbsp;</td>
         </tr>
         <tr>
@@ -449,7 +403,7 @@ Functions</h2></td></tr>
 <p>Gibt eine Matrix auf stdo aus. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>mat</em>&nbsp;</td><td><a class="el" href="struct_point.html">Point</a> auf Matrix </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>mat</em>&nbsp;</td><td>Point auf Matrix </td></tr>
     <tr><td valign="top"></td><td valign="top"><em>rows</em>&nbsp;</td><td>Zeilenanzahl </td></tr>
     <tr><td valign="top"></td><td valign="top"><em>columns</em>&nbsp;</td><td>Spaltenanzahl </td></tr>
   </table>
@@ -458,14 +412,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aceb801f40e4a2bfd249d784842db1f2b"></a><!-- doxytag: member="utils.h::UTL_printPoint" ref="aceb801f40e4a2bfd249d784842db1f2b" args="(point)" -->
+<a class="anchor" id="a03284a1654e8bacf0b60f6582236b93e"></a><!-- doxytag: member="utils.h::UTL_printPoint" ref="a03284a1654e8bacf0b60f6582236b93e" args="(DT_point)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void UTL_printPoint </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_point.html">point</a>&nbsp;</td>
+          <td class="paramtype"><a class="el" href="struct_d_t__point.html">DT_point</a>&nbsp;</td>
           <td class="paramname"> <em>p</em></td>
           <td>&nbsp;)&nbsp;</td>
           <td></td>
@@ -484,20 +438,20 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ac1bda3244eac292d84e8cfaf069a4cba"></a><!-- doxytag: member="utils.h::UTL_printServos" ref="ac1bda3244eac292d84e8cfaf069a4cba" args="(servos, char)" -->
+<a class="anchor" id="aa6467df91c7581b21b615761902defc0"></a><!-- doxytag: member="utils.h::UTL_printServos" ref="aa6467df91c7581b21b615761902defc0" args="(DT_servos, DT_type)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void UTL_printServos </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_servos.html">servos</a>&nbsp;</td>
+          <td class="paramtype"><a class="el" href="struct_d_t__servos.html">DT_servos</a>&nbsp;</td>
           <td class="paramname"> <em>s</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">char&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#a3f264c95c6daf779bd706d321c7f0791">DT_type</a>&nbsp;</td>
           <td class="paramname"> <em>type</em></td><td>&nbsp;</td>
         </tr>
         <tr>
@@ -520,14 +474,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a4e251f5d08b22819ea7cf0d3f22a8a7c"></a><!-- doxytag: member="utils.h::UTL_wait" ref="a4e251f5d08b22819ea7cf0d3f22a8a7c" args="(byte)" -->
+<a class="anchor" id="a9ff4508c46bb86cd31073c4e1a5d20b4"></a><!-- doxytag: member="utils.h::UTL_wait" ref="a9ff4508c46bb86cd31073c4e1a5d20b4" args="(DT_size)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void UTL_wait </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="utils_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a>&nbsp;</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#a690ffbb6ad43eab1176f91d2097fc967">DT_size</a>&nbsp;</td>
           <td class="paramname"> <em>rounds</em></td>
           <td>&nbsp;)&nbsp;</td>
           <td></td>
@@ -537,7 +491,7 @@ Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Abstraktion von einer Pause/Delay. </p>
-<p>Implementierung durch Schleifen.</p>
+<p>Implementierung durch Schleifen (rounds * 64k).</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
     <tr><td valign="top"></td><td valign="top"><em>rounds</em>&nbsp;</td><td>Länge der Pause </td></tr>
@@ -562,7 +516,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Mon Oct 25 2010 17:22:38 for CM-Bot_API by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Oct 26 2010 00:59:49 for CM-Bot_API by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

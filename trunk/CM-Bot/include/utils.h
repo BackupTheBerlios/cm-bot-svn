@@ -1,21 +1,19 @@
-/*
- * Methods to convert or print data.
+/**
+ * \file	utils.h
  *
- * Created on: 27.09.2010
- * Author: christof
+ * \brief	TODO
  */
-
-#include <stdint.h>
 
 #ifndef UTILS_H_
 #define UTILS_H_
+
+#include "datatypes.h"
 
 #define UTL_DEG 1
 #define UTL_RAD 0
 
 #define DEBUG_ON
 #ifdef DEBUG_ON
-	// #include <stdio.h>
 	#define DEBUG(output) UTL_printDebug output;
 	#define DEBUG_BYTE(output) UTL_printDebugByte output;
 #else
@@ -23,30 +21,18 @@
 	#define DEBUG_BYTE(output) /* no debug */
 #endif
 
-struct Servos {
-	double v1, v2, v3;
-};
+void UTL_printMatrix(DT_double**, DT_size, DT_size);
+void UTL_printServos(DT_servos, DT_type);
+void UTL_printPoint(DT_point);
 
-struct Point {
-	double x, y, z;
-};
+DT_double UTL_getRadiant(DT_double);
+DT_double UTL_getDegree(DT_double);
+DT_point UTL_getPointOfDH(DT_double**);
 
-typedef struct Point point;
-typedef struct Servos servos;
-typedef uint8_t byte;
+void UTL_printDebug(DT_char*, DT_size);
+void UTL_printDebugByte(DT_byte*, DT_size);
+DT_byte UTL_byteToHexChar(DT_char*, DT_byte*, DT_size);
 
-void UTL_printMatrix(double**, int, int);
-void UTL_printServos(servos, char);
-void UTL_printPoint(point);
-
-double UTL_getRadiant(double);
-double UTL_getDegree(double );
-point UTL_getPointOfDH(double**);
-
-void UTL_printDebug(char*, byte);
-void UTL_printDebugByte(byte*, byte);
-byte UTL_byteToHexChar(char*, byte*, byte);
-
-void UTL_wait(byte);
+void UTL_wait(DT_size);
 
 #endif /* UTILS_H_ */

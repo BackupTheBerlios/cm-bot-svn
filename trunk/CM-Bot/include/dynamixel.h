@@ -1,26 +1,24 @@
-/*
- * Methods to control the dynamixel.
+/**
+ * \file	dynamixel.h
  *
- * Created on: 27.09.2010
- * Author: christof
+ * \brief	TODO
  */
-
-#include "utils.h"
 
 #ifndef DYNAMIXEL_H_
 #define DYNAMIXEL_H_
 
+#include "datatypes.h"
+
 #define DNX_BRDCAST_ID 0xFE
 
-byte DNX_getChecksum(byte*, byte);
-void DNX_setAngle(byte, double);
-void DNX_setId(byte, byte);
-void DNX_setSpeed(byte, byte);
-void DNX_setLed(byte, byte);
-void DNX_sendTest();
+DT_byte DNX_getChecksum(DT_byte*, DT_size);
+void DNX_setAngle(DT_byte, DT_double);
+void DNX_setId(DT_byte, DT_byte);
+void DNX_setSpeed(DT_byte, DT_byte);
+void DNX_setLed(DT_byte, DT_byte);
 
-double DNX_getAngle(byte);
-byte DNX_getSpeed(byte);
-byte DNX_getLed(byte);
+DT_double DNX_getAngle(DT_byte);
+DT_byte DNX_getSpeed(DT_byte);
+DT_byte DNX_getLed(DT_byte);
 
 #endif /* DYNAMIXEL_H_ */
