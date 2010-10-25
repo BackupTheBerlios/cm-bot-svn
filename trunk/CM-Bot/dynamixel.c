@@ -1,8 +1,7 @@
-/*
- * dynamixel.c
+/**
+ * \file	dynamixel.c
  *
- * Created on: 27.09.2010
- * Author: christof
+ * \brief	Methoden zur Steuerung der Dynamixal AX-12.
  */
 
 #include "include/dynamixel.h"
@@ -33,6 +32,14 @@
 #define PRT_SPEED 0x26
 #define PRT_TMP 0x2B
 
+/**
+ * \brief	Berechnet die Checksum.
+ *
+ * \param	packet	Paket
+ * \param	l	Größe des pakets
+ *
+ * \return	Checksum
+ */
 byte DNX_getChecksum(byte* packet, byte l) {
 	byte i, chksm = 0;
 	for (i = 2; i < l - 1; i++)
@@ -40,10 +47,20 @@ byte DNX_getChecksum(byte* packet, byte l) {
 	return ~chksm;
 }
 
+// TODO Datentypen ... return byte!?
+/**
+ * \brief	Blockierendes Empfangen.
+ *
+ * \param	id	ID des Servos um linke/rechte Seite feststellen zu können
+ * \param	result	Zielfeld für Daten
+ *
+ * \return	Größe der empfangenen Daten
+ */
 int DNX_receive(byte id, byte* result) {
 	int len = 0;
 	RXBuffer* rxBuffer;
 
+	// TODO Berechnung Auslagern ...
 	if ((id - 1) % 6 < 3) { // Right: 1 - 3, 7 - 9, ...
 		rxBuffer = &XM_RX_buffer_R;
 	} else {
@@ -58,8 +75,20 @@ int DNX_receive(byte id, byte* result) {
 	return len;
 }
 
+/**
+ * \brief	Versenden von Daten an Dynamixel.
+ *
+ * 			Blockierendes Senden mit gleichzeitigem Empfangen der Antwort.
+ *
+ * \param	packet	Zuversendendes Paket
+ * \param	l	Größe des Pakets
+ * \param	result	Zielfeld für Antowort
+ *
+ * \return Größe der empfangenen Antwort
+ */
 int DNX_send(byte* packet, byte l, byte* result) {
 	packet[l - 1] = DNX_getChecksum(packet, l);
+	// TODO Berechnung Auslagern ...
 	// packet[2] -> ID
 	if ((packet[2] - 1) % 6 < 3) // Right: 1 - 3, 7 - 9, ...
 		XM_USART_send(&XM_servo_data_R, packet, l);
@@ -69,20 +98,13 @@ int DNX_send(byte* packet, byte l, byte* result) {
 	return DNX_receive(packet[2], result);
 }
 
-void DNX_sendTest() {
-	byte result[XM_RESULT_BUFFER_SIZE];
-	byte packet[8];
-	packet[0] = 0xA1;
-	packet[1] = 0xA2;
-	packet[2] = 0xA3;
-	packet[3] = 0xA4; // length
-	packet[4] = 0xA5;
-	packet[5] = 0xA6;
-	packet[6] = 0xA7;
-	// packet[7] = checksum will set in send
-	DNX_send(packet, 8, result);
-}
-
+/**
+ * \brief	Konvertiert Winkel in Bezug auf einen neuen Nullpunkt.
+ *
+ * \param	value	Winkel in Grad
+ *
+ * \return	Konvertierter Winkel in Grad
+ */
 double DNX_convertAngle(double value) {
 	value += 150;
 	if (value >= 360)
@@ -90,7 +112,18 @@ double DNX_convertAngle(double value) {
 	return value;
 }
 
-double correctAngles(byte id, double value){
+
+/**
+ * \brief	Korrigiert Winkel für Dynamixel.
+ *
+ * 			Korrigiert Winkel für Dynamixel um hardwareseitige Veränderungen auszuschließen.
+ *
+ * \param	id	ID des Servos
+ * \param	value	Winkel in Grad
+ *
+ * \return	Korrigierter Winkel in Grad
+ */
+double DNX_correctAngles(byte id, double value){
 	switch((id-1) % 6){
 	case 0:
 		value = 360-value;
@@ -114,12 +147,18 @@ double correctAngles(byte id, double value){
 	return value;
 }
 
+/**
+ * \brief	Sendet einen sofort anzufahrenden Winkel an Servo.
+ *
+ * \param	id	ID des Servos
+ * \param	value	Winkel in Grad
+ */
 void DNX_setAngle(byte id, double value) {
-	//ToDO
 	byte result[XM_RESULT_BUFFER_SIZE];
 	byte packet[9];
-	value = correctAngles(id, value);
+	value = DNX_correctAngles(id, value);
 	value = DNX_convertAngle(value);
+	// TODO Rechnung überarbeiten
 	double tmp2 = ((double) value) * 3.41;
 	int tmp = floor(tmp2);
 	byte angle_l = tmp & 0xFF;
@@ -136,6 +175,12 @@ void DNX_setAngle(byte id, double value) {
 	DNX_send(packet, 9, result);
 }
 
+/**
+ * \brief	Vergibt einem Servos eine neue ID (ungetestet).
+ *
+ * \param	idOld	ID des zu verändernden Servos
+ * \param	idNew	Zusetzende ID
+ */
 void DNX_setId(byte idOld, byte idNew) {
 	byte packet[8];
 	byte result[XM_RESULT_BUFFER_SIZE];
@@ -151,7 +196,14 @@ void DNX_setId(byte idOld, byte idNew) {
 
 }
 
+/**
+ * \brief	Setzt die Anfahrgeschwindigkeit eines Servos (unvollendet).
+ *
+ * \param	id	ID des Servos
+ * \param	speed	Geschwindigkeit
+ */
 void DNX_setSpeed(byte id, byte speed) {
+	// TODO byte 7 richtige setzen
 	byte packet[9];
 	byte result[XM_RESULT_BUFFER_SIZE];
 	packet[0] = START_BYTE;
@@ -166,6 +218,12 @@ void DNX_setSpeed(byte id, byte speed) {
 	DNX_send(packet, 9, result);
 }
 
+/**
+ * \brief	Schaltet die LED eines Servos an/aus.
+ *
+ * \param	id	ID des Servos
+ * \param	value	Wert für LED (0x00 / 0x01)
+ */
 void DNX_setLed(byte id, byte value) {
 	byte packet[8];
 	byte result[XM_RESULT_BUFFER_SIZE];
@@ -180,6 +238,13 @@ void DNX_setLed(byte id, byte value) {
 	DNX_send(packet, 8, result);
 }
 
+/**
+ * \brief	Liest den aktuellen Winkel eines Servos aus (unfertig).
+ *
+ * \param	id	ID des Servos
+ *
+ * \return Winkel in Grad
+ */
 double DNX_getAngle(byte id) {
 	// TODO
 	byte packet[7];
@@ -196,6 +261,13 @@ double DNX_getAngle(byte id) {
 	return -1;
 }
 
+/**
+ * \brief	Liest die Anfahrgeschwindigkeit eines Servos aus (unfertig).
+ *
+ * \param	id	ID des Servos
+ *
+ * \return	Geschwindigkeit
+ */
 byte DNX_getSpeed(byte id) {
 	byte packet[7];
 	byte result[XM_RESULT_BUFFER_SIZE];
@@ -211,6 +283,13 @@ byte DNX_getSpeed(byte id) {
 	return 0x00;
 }
 
+/**
+ * \brief	Liest den Status der LED aus (unfertig).
+ *
+ * \param	id	ID des Servos
+ *
+ * \return	Wert der LED
+ */
 byte DNX_getLed(byte id) {
 	byte packet[7];
 	byte result[XM_RESULT_BUFFER_SIZE];

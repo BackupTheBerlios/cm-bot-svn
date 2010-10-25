@@ -1,8 +1,7 @@
-/*
- * testDnx.c
+/**
+ * \file	testDnx.c
  *
- * Created on: 29.09.2010
- * Author: christof
+ * \brief	Testprogramm für Ansteuerung der Servos.
  */
 
 #include "include/xmega.h"

@@ -1,8 +1,7 @@
-/*
- * testCom.c
+/**
+ * \file	testCom.c
  *
- * Created on: 29.09.2010
- * Author: christof
+ * \brief	Testprogramm für Kommunikation der CPUs.
  */
 
 #define TEST_OFF

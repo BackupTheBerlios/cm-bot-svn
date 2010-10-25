@@ -1,8 +1,9 @@
-/*
- * kinematics.c
+/**
+ * \file	kinematics.c
  *
- * Created on: 27.09.2010
- * Author: christof
+ * \brief	Lösungsmethoden der Kinematik.
+ *
+ * 			Lösungsmethoden der Kinematik speziell für den CM-Bot.
  */
 
 #include <math.h>
@@ -11,11 +12,33 @@
 #include "include/kinematics.h"
 #include "include/utils.h"
 
+/**
+ * \def	DIST_HK
+ * \brief	Abstand von Hüfte zu Knie.
+ *
+ * \def	DIST_KF
+ * \brief	Abstand von Knie zu Fuß.
+ *
+ * \def	DIST_FE
+ * \brief	Abstand von Fuß zu Fußende.
+ *
+ * \def	DIST_DZ
+ * \brief	Versatz in z-Richtung von Knie in Bezug auf Hüfte.
+ */
 #define DIST_HK 50
 #define DIST_KF 85
 #define DIST_FE 55
 #define DIST_DZ -14
 
+
+/**
+ * \brief	Lösung des kinematischen Problems.
+ *
+ * 			Lösung der Denavit-Hartenberg-Transformation.
+ *
+ * \param	s	Winkel in Grad der Gelenke
+ * \param	dh03	Zielmatrix für die Lösung
+ */
 void KIN_calculateDH(const servos s, double** dh03) {
 	dh03[0][0] = cos(s.v1) * cos(s.v2) * cos(s.v3) - cos(s.v1) * sin(s.v2)
 			* sin(s.v3);
@@ -45,6 +68,15 @@ void KIN_calculateDH(const servos s, double** dh03) {
 	dh03[3][3] = 1;
 }
 
+/**
+ * \brief	Lösung des inversen kinematischen Problems.
+ *
+ * 			Lösung des inversen kinematischen Problems mit Hilfe eines geometrischen Verfahrens mit leichten Einschränkungen.
+ *
+ * \param	p	Punkt (Roboterkoorinate)
+ *
+ * \return	struct servos mit den Winkeln 1-3 (Bogenmaß)
+ */
 servos KIN_calculateServos(const point p) {
 	servos servos;
 	double z = p.z - DIST_DZ;
@@ -63,24 +95,11 @@ servos KIN_calculateServos(const point p) {
 	h2 = h - DIST_HK;
 	h3 = sqrt(h2 * h2 + z * z);
 
-	/* FIXME DEBUG(printf...
-	DEBUG(printf("calculateServos(): v1 = %lf\n", v1);)
-	DEBUG(printf("calculateServos(): h = %lf\n", h);)
-	DEBUG(printf("calculateServos(): h2 = %lf\n", h2);)
-	DEBUG(printf("calculateServos(): h3 = %lf\n", h3);)
-	*/
-
 	alpha = h2 != h3 ? acos(
 			(-(h3 * h3) + DIST_FE * DIST_FE + DIST_KF * DIST_KF) / (2 * DIST_FE
 					* DIST_KF)) : M_PI; // law of cosine
 	beta = asin((DIST_FE / h3) * sin(alpha)); // law of sines
 	gamma = asin(abs(z) / h3); // rules of right angle triangle, abs(z) 'cause length of trianglearm!
-
-	/* FIXME DEBUG(printf...
-	DEBUG(printf("calculateServos(): alpha = %lf\n", alpha);)
-	DEBUG(printf("calculateServos(): beta = %lf\n", beta);)
-	DEBUG(printf("calculateServos(): gamma = %lf\n", gamma);)
-	*/
 
 	// CASES
 	if (z < 0) { // defined for z < 0: foot-axis is between h3 and h-axis
@@ -89,11 +108,6 @@ servos KIN_calculateServos(const point p) {
 		v2 = -gamma - beta;
 	}
 	v3 = M_PI - alpha;
-
-	/*
-	DEBUG(printf("calculateServos(): v2 = %lf\n", v2);)
-	DEBUG(printf("calculateServos(): v3 = %lf\n", v3);)
-	*/
 
 	servos.v1 = v1;
 	servos.v2 = v2;

@@ -1,8 +1,7 @@
-/*
- * communication.c
+/**
+ * \file	communication.c
  *
- *  Created on: 29.09.2010
- *      Author: christof
+ * \brief	Methoden zur Kommunikation der CPUs.
  */
 
 #include "include/communication.h"

@@ -1,8 +1,7 @@
-/*
- * testKin.c
+/**
+ * \file	testKin.c
  *
- * Created on: 24.09.2010
- * Author: christof
+ * \brief	Testprogramm für die Kinematik.
  */
 
 #define TEST_ON
@@ -76,7 +75,7 @@ int main() {
 
 	byte id;
 
-	double dh03[KIN_ROWS][KIN_COLUMNS];
+	// double dh03[KIN_ROWS][KIN_COLUMNS];
 	servos s;
 	point p1, p2;
 

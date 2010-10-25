@@ -1,17 +1,15 @@
 /**
  * \file 	xmega.c
- * \brief 	Spezifische Funktionen für den Mikrocontroller ATXmega128A1
- *
+ * \brief 	Spezifische Funktionen für den Mikrocontroller ATXmega128A1.
  */
 
 #include "include/xmega.h"
 #include "include/dynamixel.h"
 #include <stdlib.h>
 
-
 /**
  * \brief 	Initialisierung der CPU.
-*/
+ */
 void XM_init_cpu() {
 	/******************************************************************
 	 * System Clock 32MHz (XOSC Quarz 16MHz, PLL Faktor 2)
@@ -107,7 +105,7 @@ void XM_init_cpu() {
 
 /**
  * \brief 	Initialisiert die Servo-USARTs.
-*/
+ */
 void XM_init_dnx() {
 	//Disable Interrupts
 	cli();
@@ -183,7 +181,7 @@ void XM_init_dnx() {
 
 /**
  * \brief 	Initialisiert USARTs für die CPU-Kommunikation.
-*/
+ */
 void XM_init_com() {
 	// TODO
 }
@@ -199,7 +197,7 @@ void XM_init_com() {
  * \param	usart_data	USART-Datenstruktur der zu benutzenden USART
  * \param	txData		Byte-Array mit zu sendendem Paket
  * \param	bytes 		Länge des zu sendenden Pakets
-*/
+ */
 void XM_USART_send(USART_data_t* usart_data, byte* txData, byte bytes) {
 	byte i;
 
@@ -233,15 +231,16 @@ void XM_USART_send(USART_data_t* usart_data, byte* txData, byte bytes) {
 }
 
 /**
- * \brief 	USART-Empfangsmethode
+ * \brief 	USART-Empfangsmethode.
  *
  * 			Diese Methode liest den jeweiligen USART-Buffer aus und prüft,
  * 			ob ein vollständiges Paket gemäß des Dynamixel-Protokoll empfangen wurde.
  *
  * \param	rxBuffer	Empfangs-Buffer der jeweiligen USART
  * \param	dest		Byte-Array für Antwort-Paket
+ *
  * \return	Länge des Antwortpakets
-*/
+ */
 byte XM_USART_receive(RXBuffer* rxBuffer, byte* dest) {
 	DEBUG_BYTE((rxBuffer->buffer, XM_RX_BUFFER_SIZE))
 	// Cut off output message
@@ -305,9 +304,8 @@ byte XM_USART_receive(RXBuffer* rxBuffer, byte* dest) {
 
 /**
  * \brief 	ISR für abgeschlossenen Sendevorgang der USARTC0 (SERVO L).
-*/
-ISR(USARTC0_TXC_vect)
-{
+ */
+ISR( USARTC0_TXC_vect) {
 	USART_TxdInterruptLevel_Set(&USARTC0, USART_TXCINTLVL_OFF_gc);
 
 	byte i = 0;
@@ -319,9 +317,8 @@ ISR(USARTC0_TXC_vect)
 
 /**
  * \brief 	ISR für Empfangsvorgang der USARTC0 (SERVO L).
-*/
-ISR(USARTC0_RXC_vect)
-{
+ */
+ISR( USARTC0_RXC_vect) {
 	USART_RXComplete(&XM_servo_data_L);
 	if (USART_RXBufferData_Available(&XM_servo_data_L)) {
 		XM_RX_buffer_L.buffer[XM_RX_buffer_L.putIndex++]
@@ -335,9 +332,8 @@ ISR(USARTC0_RXC_vect)
 
 /**
  * \brief 	ISR für abgeschlossenen Sendevorgang der USARTD0 (SERVO R).
-*/
-ISR(USARTD0_TXC_vect)
-{
+ */
+ISR( USARTD0_TXC_vect) {
 	USART_TxdInterruptLevel_Set(&USARTD0, USART_TXCINTLVL_OFF_gc);
 
 	byte i = 0;
@@ -349,9 +345,8 @@ ISR(USARTD0_TXC_vect)
 
 /**
  * \brief 	ISR für Empfangsvorgang der USARTD0 (SERVO R).
-*/
-ISR(USARTD0_RXC_vect)
-{
+ */
+ISR( USARTD0_RXC_vect) {
 	USART_RXComplete(&XM_servo_data_R);
 	if (USART_RXBufferData_Available(&XM_servo_data_R)) {
 		XM_RX_buffer_R.buffer[XM_RX_buffer_R.putIndex++]

@@ -1,6 +1,7 @@
-/*
- * Test program for ring buffer.
- * Must be tested on XMEGA, how receive is working for uncompleted packets.
+/**
+ * \file	testRingBuffer.c
+ *
+ * \brief	Testprogramm für einen Ringbuffer.
  */
 
 #define TEST_OFF

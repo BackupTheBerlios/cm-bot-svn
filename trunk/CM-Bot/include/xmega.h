@@ -1,8 +1,6 @@
-/*
- * xmega.h
- *
- *  Created on: 30.09.2010
- *      Author: christof
+/**
+ * \file 	xmega.h
+ * \brief 	Spezifische Funktionen für den Mikrocontroller ATXmega128A1.
  */
 
 #ifndef XMEGA_H_
@@ -36,29 +34,31 @@
 
 #define XM_OE_MASK (1<<PIN0)
 
-#define XM_RX_BUFFER_SIZE 255
-#define XM_RESULT_BUFFER_SIZE 255
+#define XM_RX_BUFFER_SIZE 255	/**< Größe des Ring-Buffers. */
+#define XM_RESULT_BUFFER_SIZE 255	/**< Größe des Buffers für ein empfangenes Paket. */
 
-USART_data_t XM_servo_data_L;
-USART_data_t XM_servo_data_R;
-USART_data_t XM_debug_data;
+USART_data_t XM_servo_data_L;	/**< USART-Struktur für linke Dynamixel. */
+USART_data_t XM_servo_data_R;	/**< USART-Struktur für rechte Dynamixel. */
+USART_data_t XM_debug_data;	/**< USART-Struktur für Debug-Ausgaben. */
 
+/**
+ * \brief	Ring-Buffer zum Empfangen von Daten einer USART.
+ */
+typedef struct {
+	byte putIndex;	/**< Index, ab dem neue Daten eingefügt werden. */
+	byte getIndex;	/**< Index, ab dem Daten gelesen werden. */
+	byte lastByteLength;	/**< Größe des zuletzt gesendeten Pakets. */
+	byte overflow_flag;	/**< Zeigt an, ob neue Daten am Anfang geschrieben und alte Daten am Ende gelesen werden. */
+	byte buffer[XM_RX_BUFFER_SIZE]; /**< Feld für gespeicherte Daten. */
+} RXBuffer;
 
-typedef struct{
-	byte putIndex;
-	byte getIndex;
-	byte lastByteLength;
-	byte overflow_flag;
-	byte buffer[XM_RX_BUFFER_SIZE];
-}RXBuffer;
-
-RXBuffer XM_RX_buffer_L;
-RXBuffer XM_RX_buffer_R;
+RXBuffer XM_RX_buffer_L;	/**< Ring-Buffer für linke USART. */
+RXBuffer XM_RX_buffer_R;	/**< Ring-Buffer für rechte USART. */
 
 void XM_init_cpu();
 void XM_init_dnx();
 void XM_init_com();
-void XM_USART_send(USART_data_t *usart_data, uint8_t* txdata, uint8_t bytes);
+void XM_USART_send(USART_data_t*, byte*, byte);
 byte XM_USART_receive(RXBuffer*, byte*);
 
 #endif /* XMEGA_H_ */
