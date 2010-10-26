@@ -35,7 +35,7 @@
  *
  * 			Lösung der Denavit-Hartenberg-Transformation.
  *
- * \param	s	Winkel in Grad der Gelenke
+ * \param	leg		Bein mit den Soll-Winkel der Gelenke
  * \param	dh03	Zielmatrix für die Lösung
  */
 void KIN_calculateDH(const DT_leg leg, DT_double** dh03) {
@@ -80,7 +80,7 @@ void KIN_calculateDH(const DT_leg leg, DT_double** dh03) {
  *
  * \param	p	Punkt (Roboterkoorinate)
  *
- * \return	struct servos mit den Winkeln 1-3 (Bogenmaß)
+ * \return	Bein mit den errechneten Soll-Winkel für hip, knee und foot
  */
 DT_leg KIN_calculateServos(const DT_point p) {
 	DT_leg leg;

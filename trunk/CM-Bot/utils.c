@@ -41,24 +41,21 @@ void UTL_printMatrix(DT_double** mat, DT_size rows, DT_size columns) {
 }
 
 /**
- * \brief	Gibt struct servos auf stdo aus.
+ * \brief	Gibt die Soll-Winkel eines Beines auf stdo aus.
  *
- * \param	s	struct servos
+ * \param	leg	Bein für das die Daten ausgegeben werden sollen
  * \param	type	Typ der Ausgabe in Bogenmaß oder Grad
  */
-void UTL_printLeg(DT_leg s, DT_type type) {
-	// TODO
-	/*
-	 printf("> Servos: ");
-	 if (type == UTL_RAD)
-	 printf("v1 = %10.5lf; v2 = %10.5lf; v2 = %10.5lf; (Bogenmaß)\n", s.v1,
-	 s.v2, s.v3);
-	 else if (type == UTL_DEG)
-	 printf("v1 = %10.5lf; v2 = %10.5lf; v3 = %10.5lf; (Winkel in Grad)\n",
-	 UTL_getDegree(s.v1), UTL_getDegree(s.v2), UTL_getDegree(s.v3));
-	 else
-	 printf("type not supported!\n");
-	 */
+void UTL_printLeg(DT_leg leg, DT_type type) {
+	printf("> Bein: ");
+	if (type == UTL_RAD)
+		printf("Hüfte = %10.5lf; Knie = %10.5lf; Fuß = %10.5lf; (Bogenmaß)\n", leg.hip.set_value,
+				leg.knee.set_value, leg.foot.set_value);
+	else if (type == UTL_DEG)
+		printf("Hüfte = %10.5lf; Knie = %10.5lf; Fuß = %10.5lf; (Winkel in Grad)\n",
+				UTL_getDegree(leg.hip.set_value), UTL_getDegree(leg.knee.set_value), UTL_getDegree(leg.foot.set_value));
+	else
+		printf("type not supported!\n");
 }
 
 /**
