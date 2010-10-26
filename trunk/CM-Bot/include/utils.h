@@ -22,7 +22,7 @@
 #endif
 
 void UTL_printMatrix(DT_double**, DT_size, DT_size);
-void UTL_printServos(DT_servos, DT_type);
+void UTL_printLeg(DT_leg, DT_type);
 void UTL_printPoint(DT_point);
 
 DT_double UTL_getRadiant(DT_double);

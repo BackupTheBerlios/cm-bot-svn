@@ -21,8 +21,16 @@ typedef uint8_t DT_type;
 typedef char DT_char;
 
 typedef struct {
-	DT_double v1, v2, v3;
-} DT_servos;
+	DT_byte id;
+	DT_double set_value;
+	DT_double act_value;
+} DT_servo;
+
+typedef struct {
+	DT_servo hip;
+	DT_servo knee;
+	DT_servo foot;
+} DT_leg;
 
 typedef struct {
 	DT_double x, y, z;

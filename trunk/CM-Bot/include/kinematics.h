@@ -12,8 +12,8 @@
 #define KIN_ROWS 4
 #define KIN_COLUMNS 4
 
-void KIN_calculateDH(const DT_servos, DT_double**);
+void KIN_calculateDH(const DT_leg, DT_double**);
 
-DT_servos KIN_calculateServos(const DT_point);
+DT_leg KIN_calculateServos(const DT_point);
 
 #endif /* KINEMATICS_H_ */
