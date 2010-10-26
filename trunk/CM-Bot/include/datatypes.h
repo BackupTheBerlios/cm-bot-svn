@@ -21,20 +21,20 @@ typedef uint8_t DT_type;
 typedef char DT_char;
 
 typedef struct {
-	DT_byte id;
-	DT_double set_value;
-	DT_double act_value;
-} DT_servo;
+	DT_byte id;				/**< Servo-ID. */
+	DT_double set_value;    /**< Soll-Wert. */
+	DT_double act_value;	/**< Ist-Wert. */
+} DT_servo;					/**< Datenstruktur zur Speicherung von ID, Soll- und Ist-Wert eines Servos. */
 
 typedef struct {
-	DT_servo hip;
-	DT_servo knee;
-	DT_servo foot;
-} DT_leg;
+	DT_servo hip;			/**< Hüftgelenk. */
+	DT_servo knee;			/**< Kniegelenk. */
+	DT_servo foot;			/**< Fußgelenk. */
+} DT_leg;					/**< Datenstruktur zur Speicherung von Servodaten bezüglich eines kompletten Beines. */
 
 typedef struct {
 	DT_double x, y, z;
-} DT_point;
+} DT_point;                /**< Datenstruktur zur Speicherung karthesischer Koordinaten. */
 
 /**
  * \brief	Ring-Buffer zum Empfangen von Daten einer USART.

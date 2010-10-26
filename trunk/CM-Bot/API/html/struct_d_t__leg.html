@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>CM-Bot_API: testKin.c File Reference</title>
+<title>CM-Bot_API: DT_leg Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javaScript" src="search/search.js"></script>
@@ -17,8 +17,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
-      <li class="current"><a href="files.html"><span>Files</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
+      <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -39,67 +39,74 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
   <div class="tabs2">
     <ul class="tablist">
-      <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>Globals</span></a></li>
+      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
+      <li><a href="classes.html"><span>Data&#160;Structure&#160;Index</span></a></li>
+      <li><a href="functions.html"><span>Data&#160;Fields</span></a></li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="summary">
-<a href="#define-members">Defines</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#pub-attribs">Data Fields</a>  </div>
   <div class="headertitle">
-<h1>testKin.c File Reference</h1>  </div>
+<h1>DT_leg Struct Reference</h1>  </div>
 </div>
 <div class="contents">
-
-<p>Testprogramm für die Kinematik.  
-<a href="#_details">More...</a></p>
-<code>#include &quot;<a class="el" href="kinematics_8h_source.html">include/kinematics.h</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="utils_8h_source.html">include/utils.h</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="xmega_8h_source.html">include/xmega.h</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="dynamixel_8h_source.html">include/dynamixel.h</a>&quot;</code><br/>
+<!-- doxytag: class="DT_leg" -->
+<p><code>#include &lt;<a class="el" href="datatypes_8h_source.html">datatypes.h</a>&gt;</code></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="define-members"></a>
-Defines</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test_kin_8c.html#afcf1a6e3b093e419da9f3f1d52fe170e">TEST_ON</a></td></tr>
-<tr><td colspan="2"><h2><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test_kin_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> ()</td></tr>
+<tr><td colspan="2"><h2><a name="pub-attribs"></a>
+Data Fields</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_d_t__servo.html">DT_servo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_d_t__leg.html#a4a243dbf8f28a55e64dd703710313722">hip</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_d_t__servo.html">DT_servo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_d_t__leg.html#a1a8b39303b9f2c818a89ad38d1d5af4c">knee</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_d_t__servo.html">DT_servo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_d_t__leg.html#a743e80e253be434a49d23d17fbe2381d">foot</a></td></tr>
 </table>
-<hr/><a name="_details"></a><h2>Detailed Description</h2>
-<p>Testprogramm für die Kinematik. </p>
-<hr/><h2>Define Documentation</h2>
-<a class="anchor" id="afcf1a6e3b093e419da9f3f1d52fe170e"></a><!-- doxytag: member="testKin.c::TEST_ON" ref="afcf1a6e3b093e419da9f3f1d52fe170e" args="" -->
+<hr/><h2>Field Documentation</h2>
+<a class="anchor" id="a743e80e253be434a49d23d17fbe2381d"></a><!-- doxytag: member="DT_leg::foot" ref="a743e80e253be434a49d23d17fbe2381d" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define TEST_ON</td>
+          <td class="memname"><a class="el" href="struct_d_t__servo.html">DT_servo</a> <a class="el" href="struct_d_t__leg.html#a743e80e253be434a49d23d17fbe2381d">DT_leg::foot</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+<p>Fußgelenk. </p>
 
 </div>
 </div>
-<hr/><h2>Function Documentation</h2>
-<a class="anchor" id="ae66f6b31b5ad750f1fe042a706a4e3d4"></a><!-- doxytag: member="testKin.c::main" ref="ae66f6b31b5ad750f1fe042a706a4e3d4" args="()" -->
+<a class="anchor" id="a4a243dbf8f28a55e64dd703710313722"></a><!-- doxytag: member="DT_leg::hip" ref="a4a243dbf8f28a55e64dd703710313722" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int main </td>
-          <td>(</td>
-          <td class="paramname">&#160;)</td>
-          <td></td>
+          <td class="memname"><a class="el" href="struct_d_t__servo.html">DT_servo</a> <a class="el" href="struct_d_t__leg.html#a4a243dbf8f28a55e64dd703710313722">DT_leg::hip</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+<p>Hüftgelenk. </p>
 
 </div>
 </div>
+<a class="anchor" id="a1a8b39303b9f2c818a89ad38d1d5af4c"></a><!-- doxytag: member="DT_leg::knee" ref="a1a8b39303b9f2c818a89ad38d1d5af4c" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_d_t__servo.html">DT_servo</a> <a class="el" href="struct_d_t__leg.html#a1a8b39303b9f2c818a89ad38d1d5af4c">DT_leg::knee</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Kniegelenk. </p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>include/<a class="el" href="datatypes_8h_source.html">datatypes.h</a></li>
+</ul>
 </div>
 <!--- window showing the filter options -->
 <div id="MSearchSelectWindow"

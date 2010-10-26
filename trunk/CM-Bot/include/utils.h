@@ -1,7 +1,6 @@
 /**
  * \file	utils.h
- *
- * \brief	TODO
+ * \brief	Verschiedene Hilfsmethoden.
  */
 
 #ifndef UTILS_H_
