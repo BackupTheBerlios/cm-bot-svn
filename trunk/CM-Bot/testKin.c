@@ -17,7 +17,7 @@ int main() {
 #ifdef _x86
 	double v1 = 0, v2 = 0, v3 = 0;
 	int i;
-	servos s1, s;
+	servos s1, leg;
 	point p1; p2;
 	printf("< Denavid-Hardenberg - Roboterkoordinaten zu Weltkoordinaten>\n");
 	while (1) {
@@ -48,12 +48,12 @@ int main() {
 		UTL_printPoint(p1);
 
 		printf("--- Inverses kin. Problem - Berechnung und Vergleich---\n");
-		s = KIN_calculateServos(p1);
-		UTL_printServos(s, UTL_DEG);
+		leg = KIN_calculateServos(p1);
+		UTL_printServos(leg, UTL_DEG);
 		UTL_printServos(s1, UTL_DEG);
 
 		printf("--- Denavid-Hardenberg - Berechnung und Vergleich ---\n");
-		KIN_calculateDH(s, dh03);
+		KIN_calculateDH(leg, dh03);
 		p2 = UTL_getPointOfDH(dh03);
 
 		UTL_printPoint(p2);
@@ -71,7 +71,7 @@ int main() {
 	XM_LED_OFF
 
 	DT_byte id;
-	DT_servos s;
+	DT_leg leg;
 	DT_point p1, p2;
 
 	p1.x = 77.8553;
@@ -84,37 +84,30 @@ int main() {
 
 	DT_char flag = 0;
 	while (1) {
-		DEBUG(("start", sizeof("start")))
 		UTL_wait(40);
 		if (flag == 0) {
-			s = KIN_calculateServos(p1);
+			leg = KIN_calculateServos(p1);
 			flag = 1;
 		} else {
-			s = KIN_calculateServos(p2);
+			leg = KIN_calculateServos(p2);
 			flag = 0;
 		}
-		s.v1 = UTL_getDegree(s.v1);
-		s.v2 = UTL_getDegree(s.v2);
-		s.v3 = UTL_getDegree(s.v3);
+		leg.hip.set_value = UTL_getDegree(leg.hip.set_value);
+		leg.knee.set_value = UTL_getDegree(leg.knee.set_value);
+		leg.foot.set_value = UTL_getDegree(leg.foot.set_value);
 
 		id = 10;
-		DNX_setAngle(id, s.v1);
-		DEBUG(("finshed 1", sizeof("finshed 1")))
+		DNX_setAngle(id, leg.hip.set_value);
 		id = 11;
-		DNX_setAngle(id, s.v2);
-		DEBUG(("finshed 2", sizeof("finshed 1")))
+		DNX_setAngle(id, leg.knee.set_value);
 		id = 12;
-		DNX_setAngle(id, s.v3);
-		DEBUG(("finshed 3", sizeof("finshed 1")))
+		DNX_setAngle(id, leg.foot.set_value);
 		id = 7;
-		DNX_setAngle(id, s.v1);
-		DEBUG(("finshed 4", sizeof("finshed 1")))
+		DNX_setAngle(id, leg.hip.set_value);
 		id = 8;
-		DNX_setAngle(id, s.v2);
-		DEBUG(("finshed 5", sizeof("finshed 1")))
+		DNX_setAngle(id, leg.knee.set_value);
 		id = 9;
-		DNX_setAngle(id, s.v3);
-		DEBUG(("finshed 6", sizeof("finshed 1")))
+		DNX_setAngle(id, leg.foot.set_value);
 	}
 	XM_LED_ON
 

@@ -30,7 +30,6 @@
 #define DIST_FE 55
 #define DIST_DZ -14
 
-
 /**
  * \brief	Lösung des kinematischen Problems.
  *
@@ -39,28 +38,34 @@
  * \param	s	Winkel in Grad der Gelenke
  * \param	dh03	Zielmatrix für die Lösung
  */
-void KIN_calculateDH(const DT_servos s, DT_double** dh03) {
-	dh03[0][0] = cos(s.v1) * cos(s.v2) * cos(s.v3) - cos(s.v1) * sin(s.v2)
-			* sin(s.v3);
-	dh03[0][1] = -cos(s.v1) * cos(s.v2) * sin(s.v3) - cos(s.v1) * cos(s.v3)
-			* sin(s.v2);
-	dh03[0][2] = -sin(s.v1);
-	dh03[0][3] = 50 * cos(s.v1) + 85 * cos(s.v1) * cos(s.v2) - 55 * cos(s.v1)
-			* sin(s.v2) * sin(s.v3) + 55 * cos(s.v1) * cos(s.v2) * cos(s.v3);
+void KIN_calculateDH(const DT_leg leg, DT_double** dh03) {
+	dh03[0][0] = cos(leg.hip.set_value) * cos(leg.knee.set_value) * cos(leg.foot.set_value)
+			- cos(leg.hip.set_value) * sin(leg.knee.set_value) * sin(leg.foot.set_value);
+	dh03[0][1] = -cos(leg.hip.set_value) * cos(leg.knee.set_value) * sin(leg.foot.set_value)
+			- cos(leg.hip.set_value) * cos(leg.foot.set_value) * sin(leg.knee.set_value);
+	dh03[0][2] = -sin(leg.hip.set_value);
+	dh03[0][3] = 50 * cos(leg.hip.set_value) + 85 * cos(leg.hip.set_value) * cos(
+			leg.knee.set_value) - 55 * cos(leg.hip.set_value) * sin(leg.knee.set_value) * sin(
+			leg.foot.set_value) + 55 * cos(leg.hip.set_value) * cos(leg.knee.set_value) * cos(
+			leg.foot.set_value);
 
-	dh03[1][0] = cos(s.v2) * cos(s.v3) * sin(s.v1) - sin(s.v1) * sin(s.v2)
-			* sin(s.v3);
-	dh03[1][1] = -cos(s.v2) * sin(s.v1) * sin(s.v3) - cos(s.v3) * sin(s.v1)
-			* sin(s.v2);
-	dh03[1][2] = cos(s.v1);
-	dh03[1][3] = 50 * sin(s.v1) + 85 * cos(s.v2) * sin(s.v1) - 55 * sin(s.v1)
-			* sin(s.v2) * sin(s.v3) + 55 * cos(s.v2) * cos(s.v3) * sin(s.v1);
+	dh03[1][0] = cos(leg.knee.set_value) * cos(leg.foot.set_value) * sin(leg.hip.set_value)
+			- sin(leg.hip.set_value) * sin(leg.knee.set_value) * sin(leg.foot.set_value);
+	dh03[1][1] = -cos(leg.knee.set_value) * sin(leg.hip.set_value) * sin(leg.foot.set_value)
+			- cos(leg.foot.set_value) * sin(leg.hip.set_value) * sin(leg.knee.set_value);
+	dh03[1][2] = cos(leg.hip.set_value);
+	dh03[1][3] = 50 * sin(leg.hip.set_value) + 85 * cos(leg.knee.set_value) * sin(
+			leg.hip.set_value) - 55 * sin(leg.hip.set_value) * sin(leg.knee.set_value) * sin(
+			leg.foot.set_value) + 55 * cos(leg.knee.set_value) * cos(leg.foot.set_value) * sin(
+			leg.hip.set_value);
 
-	dh03[2][0] = -cos(s.v2) * sin(s.v3) - cos(s.v3) * sin(s.v2);
-	dh03[2][1] = sin(s.v2) * sin(s.v3) - cos(s.v2) * cos(s.v3);
+	dh03[2][0] = -cos(leg.knee.set_value) * sin(leg.foot.set_value) - cos(leg.foot.set_value)
+			* sin(leg.knee.set_value);
+	dh03[2][1] = sin(leg.knee.set_value) * sin(leg.foot.set_value) - cos(leg.knee.set_value)
+			* cos(leg.foot.set_value);
 	dh03[2][2] = 0;
-	dh03[2][3] = -85 * sin(s.v2) - 55 * cos(s.v2) * sin(s.v3) - 55 * cos(s.v3)
-			* sin(s.v2) - 14;
+	dh03[2][3] = -85 * sin(leg.knee.set_value) - 55 * cos(leg.knee.set_value) * sin(
+			leg.foot.set_value) - 55 * cos(leg.foot.set_value) * sin(leg.knee.set_value) - 14;
 
 	dh03[3][0] = 0;
 	dh03[3][1] = 0;
@@ -77,18 +82,18 @@ void KIN_calculateDH(const DT_servos s, DT_double** dh03) {
  *
  * \return	struct servos mit den Winkeln 1-3 (Bogenmaß)
  */
-DT_servos KIN_calculateServos(const DT_point p) {
-	DT_servos servos;
+DT_leg KIN_calculateServos(const DT_point p) {
+	DT_leg leg;
 	DT_double z = p.z - DIST_DZ;
 	DT_double h, h2, h3;
-	DT_double v1, v2, v3;
+	DT_double hip, knee, foot;
 	DT_double alpha, beta, gamma;
 
 	// STEP 1 (without dummy-axis)
 	// angle for hip axis in x-y-plane
 	h = sqrt(p.x * p.x + p.y * p.y);
 	// v1 = asin(p.y / h);
-	v1 = atan(p.y / p.x); // should have better precision
+	hip = atan(p.y / p.x); // should have better precision
 
 	// STEP 2
 	// angle for hip & foot axis in z-h' plane
@@ -103,15 +108,15 @@ DT_servos KIN_calculateServos(const DT_point p) {
 
 	// CASES
 	if (z < 0) { // defined for z < 0: foot-axis is between h3 and h-axis
-		v2 = gamma - beta;
+		knee = gamma - beta;
 	} else { // defined for z >= 0: foot-axis is not between h3 and h-axis
-		v2 = -gamma - beta;
+		knee = -gamma - beta;
 	}
-	v3 = M_PI - alpha;
+	foot = M_PI - alpha;
 
-	servos.v1 = v1;
-	servos.v2 = v2;
-	servos.v3 = v3;
+	leg.hip.set_value = hip;
+	leg.knee.set_value = knee;
+	leg.foot.set_value = foot;
 
-	return servos;
+	return leg;
 }

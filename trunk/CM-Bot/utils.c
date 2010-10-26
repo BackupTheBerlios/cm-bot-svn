@@ -46,16 +46,19 @@ void UTL_printMatrix(DT_double** mat, DT_size rows, DT_size columns) {
  * \param	s	struct servos
  * \param	type	Typ der Ausgabe in Bogenmaß oder Grad
  */
-void UTL_printServos(DT_servos s, DT_type type) {
-	printf("> Servos: ");
-	if (type == UTL_RAD)
-		printf("v1 = %10.5lf; v2 = %10.5lf; v2 = %10.5lf; (Bogenmaß)\n", s.v1,
-				s.v2, s.v3);
-	else if (type == UTL_DEG)
-		printf("v1 = %10.5lf; v2 = %10.5lf; v3 = %10.5lf; (Winkel in Grad)\n",
-				UTL_getDegree(s.v1), UTL_getDegree(s.v2), UTL_getDegree(s.v3));
-	else
-		printf("type not supported!\n");
+void UTL_printLeg(DT_leg s, DT_type type) {
+	// TODO
+	/*
+	 printf("> Servos: ");
+	 if (type == UTL_RAD)
+	 printf("v1 = %10.5lf; v2 = %10.5lf; v2 = %10.5lf; (Bogenmaß)\n", s.v1,
+	 s.v2, s.v3);
+	 else if (type == UTL_DEG)
+	 printf("v1 = %10.5lf; v2 = %10.5lf; v3 = %10.5lf; (Winkel in Grad)\n",
+	 UTL_getDegree(s.v1), UTL_getDegree(s.v2), UTL_getDegree(s.v3));
+	 else
+	 printf("type not supported!\n");
+	 */
 }
 
 /**
