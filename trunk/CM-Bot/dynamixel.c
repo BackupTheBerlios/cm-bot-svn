@@ -5,6 +5,7 @@
  */
 
 #include "include/dynamixel.h"
+#include "include/utils.h"
 #include "include/xmega.h"
 #include <math.h>
 
@@ -56,8 +57,8 @@ DT_byte DNX_getChecksum(DT_byte* packet, DT_size l) {
  *
  * \return	Größe der empfangenen Daten
  */
-DT_size DNX_receive(DT_byte id, DT_byte* result) {
-	DT_size len = 0;
+DT_byte DNX_receive(DT_byte id, DT_byte* result) {
+	DT_byte len = 0;
 	DT_rxBuffer* rxBuffer;
 
 	// TODO Berechnung Auslagern ...
@@ -86,7 +87,7 @@ DT_size DNX_receive(DT_byte id, DT_byte* result) {
  *
  * \return Größe der empfangenen Antwort
  */
-DT_size DNX_send(DT_byte* packet, DT_size l, DT_byte* result) {
+DT_byte DNX_send(DT_byte* packet, DT_size l, DT_byte* result) {
 	packet[l - 1] = DNX_getChecksum(packet, l);
 	// TODO Berechnung Auslagern ...
 	// packet[2] -> ID

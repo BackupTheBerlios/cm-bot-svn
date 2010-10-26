@@ -84,6 +84,7 @@ int main() {
 
 	DT_char flag = 0;
 	while (1) {
+		DEBUG(("start", sizeof("start")))
 		UTL_wait(40);
 		if (flag == 0) {
 			s = KIN_calculateServos(p1);
@@ -98,16 +99,22 @@ int main() {
 
 		id = 10;
 		DNX_setAngle(id, s.v1);
+		DEBUG(("finshed 1", sizeof("finshed 1")))
 		id = 11;
 		DNX_setAngle(id, s.v2);
+		DEBUG(("finshed 2", sizeof("finshed 1")))
 		id = 12;
 		DNX_setAngle(id, s.v3);
+		DEBUG(("finshed 3", sizeof("finshed 1")))
 		id = 7;
 		DNX_setAngle(id, s.v1);
+		DEBUG(("finshed 4", sizeof("finshed 1")))
 		id = 8;
 		DNX_setAngle(id, s.v2);
+		DEBUG(("finshed 5", sizeof("finshed 1")))
 		id = 9;
 		DNX_setAngle(id, s.v3);
+		DEBUG(("finshed 6", sizeof("finshed 1")))
 	}
 	XM_LED_ON
 

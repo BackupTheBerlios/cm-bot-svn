@@ -245,7 +245,7 @@ void XM_USART_send(USART_data_t* usart_data, DT_byte* txData, DT_size bytes) {
  *
  * \return	Länge des Antwortpakets
  */
-DT_size XM_USART_receive(DT_rxBuffer* rxBuffer, DT_byte* dest) {
+DT_byte XM_USART_receive(DT_rxBuffer* rxBuffer, DT_byte* dest) {
 	DEBUG_BYTE((rxBuffer->buffer, DT_RX_BUFFER_SIZE))
 	// Cut off output message
 	if (rxBuffer->lastByteLength > 0) {
@@ -272,7 +272,7 @@ DT_size XM_USART_receive(DT_rxBuffer* rxBuffer, DT_byte* dest) {
 	// Some data received. All data received if checksum is correct!
 	else {
 		// Calculate predicted length
-		DT_size length;
+		DT_byte length;
 		if ((rxBuffer->getIndex + 3) < DT_RX_BUFFER_SIZE)
 			length = rxBuffer->buffer[rxBuffer->getIndex + 3];
 		else {
@@ -312,7 +312,7 @@ DT_size XM_USART_receive(DT_rxBuffer* rxBuffer, DT_byte* dest) {
 ISR( USARTC0_TXC_vect) {
 	USART_TxdInterruptLevel_Set(&USARTC0, USART_TXCINTLVL_OFF_gc);
 
-	DT_size i = 0;
+	DT_byte i = 0;
 	for (i = 0; i < 30; i++)
 		; // delay
 
@@ -340,7 +340,7 @@ ISR( USARTC0_RXC_vect) {
 ISR( USARTD0_TXC_vect) {
 	USART_TxdInterruptLevel_Set(&USARTD0, USART_TXCINTLVL_OFF_gc);
 
-	DT_size i = 0;
+	DT_byte i = 0;
 	for (i = 0; i < 30; i++)
 		; // delay
 
