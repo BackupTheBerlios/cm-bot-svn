@@ -42,6 +42,8 @@ USART_data_t XM_remote_data;	/**< USART-Struktur für Remote-Controller. */
 DT_rxBuffer XM_RX_buffer_L;	/**< Ring-Buffer für linke USART. */
 DT_rxBuffer XM_RX_buffer_R;	/**< Ring-Buffer für rechte USART. */
 
+DT_rxBuffer XM_RX_remote; 	/**< Ring-Buffer für den Remote-Controller */
+
 void XM_init_cpu();
 void XM_init_remote();
 void XM_init_dnx();
