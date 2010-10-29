@@ -108,6 +108,39 @@ void XM_init_cpu() {
 }
 
 /**
+ * \brief 	Initialisiert den Zigbee-Fernsteuerung.
+ */
+void XM_init_remote() {
+	cli();
+	// Set pins for TX and RX
+	XM_PORT_REMOTE.DIRSET = PIN7_bm; // Pin6 of PortC (TXD0) is output
+	XM_PORT_REMOTE.DIRCLR = PIN6_bm; // Pin7 of PortC (RXD0) is input
+
+	// Use USARTC0 / USARTD0 and initialize buffers
+	USART_InterruptDriver_Initialize(&XM_remote_data, &XM_USART_REMOTE,
+			USART_DREINTLVL_OFF_gc);
+
+	// 8 Data bits, No Parity, 1 Stop bit
+	USART_Format_Set(XM_remote_data.usart, USART_CHSIZE_8BIT_gc,
+			USART_PMODE_DISABLED_gc, false);
+
+	// Enable RXC interrupt
+	//USART_RxdInterruptLevel_Set(XM_remote_data.usart, USART_RXCINTLVL_LO_gc);
+
+
+	// Set Baudrate
+	USART_Baudrate_Set(XM_remote_data.usart, 34, 0); // 57.600 bps (BSEL = 34)
+
+	// Enable RX and TX
+	USART_Rx_Enable(XM_remote_data.usart);
+	USART_Tx_Enable(XM_remote_data.usart);
+
+	// Flush Receive Buffer
+	USART_GetChar(XM_remote_data.usart); // Flush Receive Buffer
+	sei();
+}
+
+/**
  * \brief 	Initialisiert die Servo-USARTs.
  */
 void XM_init_dnx() {
@@ -309,7 +342,8 @@ DT_byte XM_USART_receive(DT_rxBuffer* rxBuffer, DT_byte* dest) {
 /**
  * \brief 	ISR für abgeschlossenen Sendevorgang der USARTC0 (SERVO L).
  */
-ISR( USARTC0_TXC_vect) {
+ISR( USARTC0_TXC_vect)
+{
 	USART_TxdInterruptLevel_Set(&USARTC0, USART_TXCINTLVL_OFF_gc);
 
 	DT_byte i = 0;
@@ -322,7 +356,8 @@ ISR( USARTC0_TXC_vect) {
 /**
  * \brief 	ISR für Empfangsvorgang der USARTC0 (SERVO L).
  */
-ISR( USARTC0_RXC_vect) {
+ISR( USARTC0_RXC_vect)
+{
 	USART_RXComplete(&XM_servo_data_L);
 	if (USART_RXBufferData_Available(&XM_servo_data_L)) {
 		XM_RX_buffer_L.buffer[XM_RX_buffer_L.putIndex++]
@@ -337,7 +372,8 @@ ISR( USARTC0_RXC_vect) {
 /**
  * \brief 	ISR für abgeschlossenen Sendevorgang der USARTD0 (SERVO R).
  */
-ISR( USARTD0_TXC_vect) {
+ISR( USARTD0_TXC_vect)
+{
 	USART_TxdInterruptLevel_Set(&USARTD0, USART_TXCINTLVL_OFF_gc);
 
 	DT_byte i = 0;
@@ -350,7 +386,8 @@ ISR( USARTD0_TXC_vect) {
 /**
  * \brief 	ISR für Empfangsvorgang der USARTD0 (SERVO R).
  */
-ISR( USARTD0_RXC_vect) {
+ISR( USARTD0_RXC_vect)
+{
 	USART_RXComplete(&XM_servo_data_R);
 	if (USART_RXBufferData_Available(&XM_servo_data_R)) {
 		XM_RX_buffer_R.buffer[XM_RX_buffer_R.putIndex++]
@@ -360,4 +397,17 @@ ISR( USARTD0_RXC_vect) {
 		XM_RX_buffer_R.putIndex = 0;
 		XM_RX_buffer_R.overflow_flag = 0x01;
 	}
+}
+
+/**
+ * \brief 	ISR für Empfangsvorgang der USARTE1 (REMOTE).
+ */
+ISR( USARTE1_RXC_vect)
+{
+	DT_byte tmp;
+	USART_RXComplete(&XM_remote_data);
+	if (USART_RXBufferData_Available(&XM_remote_data)) {
+		tmp	= USART_RXBuffer_GetByte(&XM_remote_data);
+	}
+	DEBUG_BYTE((&tmp,sizeof(tmp)))
 }

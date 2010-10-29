@@ -12,10 +12,12 @@
 
 #define XM_PORT_SERVO_L PORTC
 #define XM_PORT_SERVO_R PORTD
+#define XM_PORT_REMOTE PORTE
 #define XM_PORT_DEBUG PORTF
 
 #define XM_USART_SERVO_L USARTC0
 #define XM_USART_SERVO_R USARTD0
+#define XM_USART_REMOTE USARTE1
 #define XM_USART_DEBUG USARTF0
 
 /* LED */
@@ -34,12 +36,14 @@
 
 USART_data_t XM_servo_data_L;	/**< USART-Struktur für linke Dynamixel. */
 USART_data_t XM_servo_data_R;	/**< USART-Struktur für rechte Dynamixel. */
-USART_data_t XM_debug_data;	/**< USART-Struktur für Debug-Ausgaben. */
+USART_data_t XM_debug_data;		/**< USART-Struktur für Debug-Ausgaben. */
+USART_data_t XM_remote_data;	/**< USART-Struktur für Remote-Controller. */
 
 DT_rxBuffer XM_RX_buffer_L;	/**< Ring-Buffer für linke USART. */
 DT_rxBuffer XM_RX_buffer_R;	/**< Ring-Buffer für rechte USART. */
 
 void XM_init_cpu();
+void XM_init_remote();
 void XM_init_dnx();
 void XM_init_com();
 void XM_USART_send(USART_data_t*, DT_byte*, DT_size);
