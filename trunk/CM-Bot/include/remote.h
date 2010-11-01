@@ -11,6 +11,8 @@
 #include "datatypes.h"
 
 // Commands
+#define B_NON_PRESSED 0x0000
+
 #define B_U 0x0001
 #define B_D 0x0002
 #define B_L 0x0004
@@ -24,7 +26,7 @@
 #define B_6 0x0200
 
 
-DT_byte getInstruction();
+DT_cmd getInstruction();
 DT_byte remoteReceive(DT_byte*);
 
 #endif /* REMOTE_H_ */

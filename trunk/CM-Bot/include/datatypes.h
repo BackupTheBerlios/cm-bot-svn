@@ -19,6 +19,7 @@ typedef uint8_t DT_byte;
 typedef uint16_t DT_size;
 typedef uint8_t DT_type;
 typedef char DT_char;
+typedef uint16_t DT_cmd;
 
 typedef struct {
 	DT_byte id;				/**< Servo-ID. */

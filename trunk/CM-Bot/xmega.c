@@ -111,6 +111,11 @@ void XM_init_cpu() {
  * \brief 	Initialisiert den Zigbee-Fernsteuerung.
  */
 void XM_init_remote() {
+	// Init buffer
+	XM_RX_remote.getIndex = 0;
+	XM_RX_remote.putIndex = 0;
+	XM_RX_remote.overflow_flag = 0x00;
+
 	cli();
 	// Set pins for TX and RX
 	XM_PORT_REMOTE.DIRSET = PIN7_bm; // Pin6 of PortC (TXD0) is output
@@ -125,8 +130,7 @@ void XM_init_remote() {
 			USART_PMODE_DISABLED_gc, false);
 
 	// Enable RXC interrupt
-	//USART_RxdInterruptLevel_Set(XM_remote_data.usart, USART_RXCINTLVL_LO_gc);
-
+	//USART_RxdInterruptLevel_Set(XM_remote_data.usart, USART_RXCINTLVL_MED_gc);
 
 	// Set Baudrate
 	USART_Baudrate_Set(XM_remote_data.usart, 34, 0); // 57.600 bps (BSEL = 34)
@@ -137,6 +141,10 @@ void XM_init_remote() {
 
 	// Flush Receive Buffer
 	USART_GetChar(XM_remote_data.usart); // Flush Receive Buffer
+
+	// aktiviere Medium Level Interrupts
+	PMIC.CTRL |= PMIC_MEDLVLEX_bm;
+
 	sei();
 }
 
@@ -211,6 +219,8 @@ void XM_init_dnx() {
 
 	// Enable PMIC interrupt level low
 	PMIC.CTRL |= PMIC_LOLVLEX_bm;
+	// Enable Round-Robin-Scheduling
+	//PMIC.CTRL |= PMIC_RREN_bm;
 	// Enable global interrupts
 	sei();
 
@@ -279,7 +289,7 @@ void XM_USART_send(USART_data_t* usart_data, DT_byte* txData, DT_size bytes) {
  * \return	Länge des Antwortpakets
  */
 DT_byte XM_USART_receive(DT_rxBuffer* rxBuffer, DT_byte* dest) {
-	DEBUG_BYTE((rxBuffer->buffer, DT_RX_BUFFER_SIZE))
+	//DEBUG_BYTE((rxBuffer->buffer, DT_RX_BUFFER_SIZE))
 	// Cut off output message
 	if (rxBuffer->lastByteLength > 0) {
 		if ((rxBuffer->getIndex + rxBuffer->lastByteLength) < DT_RX_BUFFER_SIZE)
@@ -339,6 +349,69 @@ DT_byte XM_USART_receive(DT_rxBuffer* rxBuffer, DT_byte* dest) {
 	}
 }
 
+/**
+ * \brief 	USART-Empfangsmethode für Remote-Controller.
+ *
+ * 			Diese Methode liest den Remote-USART-Buffer aus und prüft,
+ * 			ob ein vollständiges Paket empfangen wurde.
+ *
+ * \param	rxBuffer	Empfangs-Buffer der jeweiligen USART
+ * \param	dest		Byte-Array für Antwort-Paket
+ *
+ * \return	Länge des Antwortpakets
+ */
+DT_byte XM_REMOTE_USART_receive(DT_rxBuffer* rxBuffer, DT_byte* dest) {
+	//DEBUG_BYTE((rxBuffer->buffer, DT_RX_BUFFER_SIZE))
+	// Cut off output message
+	if (rxBuffer->lastByteLength > 0) {
+		if ((rxBuffer->getIndex + rxBuffer->lastByteLength) < DT_RX_BUFFER_SIZE)
+			rxBuffer->getIndex += rxBuffer->lastByteLength;
+		else {
+			rxBuffer->getIndex = rxBuffer->lastByteLength + rxBuffer->getIndex
+					- DT_RX_BUFFER_SIZE;
+			rxBuffer->overflow_flag = 0x00;
+		}
+		rxBuffer->lastByteLength = 0;
+	}
+	// Check errors
+	if ((rxBuffer->overflow_flag == 0x00) && (rxBuffer->putIndex
+			< rxBuffer->getIndex)) {
+		return 0;
+	} else if ((rxBuffer->overflow_flag == 0x01) && (rxBuffer->putIndex
+			> rxBuffer->getIndex)) {
+		return 0;
+	} else if ((rxBuffer->buffer[rxBuffer->getIndex] != 0xFF)
+			&& rxBuffer->buffer[rxBuffer->getIndex + 1] != 0x55) {
+		return 0;
+	}
+	// Some data received.
+	else {
+		DT_byte length;
+		// length = (FF + 55 + LL + !LL + HH + !HH)
+		length = 6;
+		// Copy packet from buffer in destination array
+		DT_byte i;
+		if (rxBuffer->getIndex + length <= rxBuffer->putIndex) {
+			for (i = 0; i < length; i++) {
+				if ((rxBuffer->getIndex + i) < DT_RX_BUFFER_SIZE)
+					dest[i] = rxBuffer->buffer[rxBuffer->getIndex + i];
+				else
+					dest[i] = rxBuffer->buffer[i + rxBuffer->getIndex
+							- DT_RX_BUFFER_SIZE];
+			}
+			// If packet is complete, set new getIndex
+			if ((rxBuffer->getIndex + length) < DT_RX_BUFFER_SIZE)
+				rxBuffer->getIndex = rxBuffer->getIndex + length;
+			else {
+				rxBuffer->getIndex = length + rxBuffer->getIndex
+						- DT_RX_BUFFER_SIZE;
+				rxBuffer->overflow_flag = 0x00;
+			}
+			return length;
+		}else
+			return 0;
+	}
+}
 /**
  * \brief 	ISR für abgeschlossenen Sendevorgang der USARTC0 (SERVO L).
  */
@@ -404,10 +477,14 @@ ISR( USARTD0_RXC_vect)
  */
 ISR( USARTE1_RXC_vect)
 {
-	DT_byte tmp;
+	//DEBUG(("RX_ISR",sizeof("RX_ISR")))
 	USART_RXComplete(&XM_remote_data);
 	if (USART_RXBufferData_Available(&XM_remote_data)) {
-		tmp	= USART_RXBuffer_GetByte(&XM_remote_data);
+		XM_RX_remote.buffer[XM_RX_remote.putIndex++] = USART_RXBuffer_GetByte(
+				&XM_remote_data);
 	}
-	DEBUG_BYTE((&tmp,sizeof(tmp)))
+	if (XM_RX_remote.putIndex >= DT_RX_BUFFER_SIZE) {
+		XM_RX_remote.putIndex = 0;
+		XM_RX_remote.overflow_flag = 0x01;
+	}
 }

@@ -50,5 +50,6 @@ void XM_init_dnx();
 void XM_init_com();
 void XM_USART_send(USART_data_t*, DT_byte*, DT_size);
 DT_byte XM_USART_receive(DT_rxBuffer*, DT_byte*);
+DT_byte XM_REMOTE_USART_receive(DT_rxBuffer*, DT_byte*);
 
 #endif /* XMEGA_H_ */
