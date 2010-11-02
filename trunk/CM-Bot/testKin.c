@@ -39,7 +39,6 @@ int main() {
 
 	DT_char flag = 0;
 	while (1) {
-		UTL_wait(50);
 		if (flag == 0) {
 			KIN_calculateServos(&p1, &leg_l);
 			KIN_calculateServos(&p1, &leg_r);
@@ -60,9 +59,13 @@ int main() {
 		leg_l.knee.set_value = UTL_getDegree(leg_l.knee.set_value);
 		leg_l.foot.set_value = UTL_getDegree(leg_l.foot.set_value);
 
+		UTL_wait(20);
+
 		DNX_setAngle(leg_r.hip.id, leg_r.hip.set_value);
 		DNX_setAngle(leg_r.knee.id, leg_r.knee.set_value);
 		DNX_setAngle(leg_r.foot.id, leg_r.foot.set_value);
+
+		UTL_wait(20);
 
 		DNX_setAngle(leg_l.hip.id, leg_l.hip.set_value);
 		DNX_setAngle(leg_l.knee.id, leg_l.knee.set_value);

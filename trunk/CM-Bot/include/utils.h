@@ -11,7 +11,7 @@
 #define UTL_DEG 1
 #define UTL_RAD 0
 
-#define DEBUG_OFF
+#define DEBUG_OFF debug
 #ifdef DEBUG_ON
 	#define DEBUG(output) UTL_printDebug output;
 	#define DEBUG_BYTE(output) UTL_printDebugByte output;

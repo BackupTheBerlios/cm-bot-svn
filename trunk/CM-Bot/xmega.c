@@ -220,7 +220,7 @@ void XM_init_dnx() {
 	// Enable PMIC interrupt level low
 	PMIC.CTRL |= PMIC_LOLVLEX_bm;
 	// Enable Round-Robin-Scheduling
-	//PMIC.CTRL |= PMIC_RREN_bm;
+	PMIC.CTRL |= PMIC_RREN_bm;
 	// Enable global interrupts
 	sei();
 
