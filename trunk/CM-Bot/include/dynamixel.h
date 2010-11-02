@@ -11,7 +11,7 @@
 
 #define DNX_BRDCAST_ID 0xFE
 
-DT_byte DNX_getChecksum(DT_byte*, DT_size);
+DT_byte DNX_getChecksum(const DT_byte* const, DT_size);
 void DNX_setAngle(DT_byte, DT_double);
 void DNX_setId(DT_byte, DT_byte);
 void DNX_setSpeed(DT_byte, DT_byte);

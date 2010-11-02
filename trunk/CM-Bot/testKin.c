@@ -4,7 +4,7 @@
  * \brief	Testprogramm für die Kinematik.
  */
 
-#define TEST_OFF
+#define TEST_ON
 #ifdef TEST_ON
 
 #include "include/kinematics.h"
@@ -13,66 +13,21 @@
 #include "include/dynamixel.h"
 
 int main() {
-
-#ifdef _x86
-	double v1 = 0, v2 = 0, v3 = 0;
-	int i;
-	servos s1, leg;
-	point p1; p2;
-	printf("< Denavid-Hardenberg - Roboterkoordinaten zu Weltkoordinaten>\n");
-	while (1) {
-		printf("> Hueftgelenk (in Grad): ");
-		scanf("%lf", &v1);
-		v1 = UTL_getRadiant(v1);
-		printf("> Kniegelenk (in Grad): ");
-		scanf("%lf", &v2);
-		v2 = UTL_getRadiant(v2);
-		printf("> Fuszgelenk (in Grad): ");
-		scanf("%lf", &v3);
-		v3 = UTL_getRadiant(v3);
-
-		s1.v1 = v1;
-		s1.v2 = v2;
-		s1.v3 = v3;
-
-		printf("--- Denavid-Hardenberg - Eingabe ---\n");
-		UTL_printServos(s1, UTL_DEG);
-
-		double** dh03 = malloc(KIN_ROWS * sizeof(double*));
-		for (i = 0; i < KIN_ROWS; i++)
-		dh03[i] = malloc(KIN_COLUMNS * sizeof(double));
-
-		KIN_calculateDH(s1, dh03);
-		UTL_printMatrix(dh03, KIN_ROWS, KIN_COLUMNS);
-		p1 = UTL_getPointOfDH(dh03);
-		UTL_printPoint(p1);
-
-		printf("--- Inverses kin. Problem - Berechnung und Vergleich---\n");
-		leg = KIN_calculateServos(p1);
-		UTL_printServos(leg, UTL_DEG);
-		UTL_printServos(s1, UTL_DEG);
-
-		printf("--- Denavid-Hardenberg - Berechnung und Vergleich ---\n");
-		KIN_calculateDH(leg, dh03);
-		p2 = UTL_getPointOfDH(dh03);
-
-		UTL_printPoint(p2);
-		UTL_printPoint(p1);
-
-		for (i = 0; i < KIN_ROWS; i++)
-		free(dh03[i]);
-		free(dh03);
-		printf("------------------------------------------------------\n");
-	}
-#endif
 	XM_init_cpu();
 	XM_init_dnx();
 
-	XM_LED_OFF
+	XM_LED_ON
 
-	DT_byte id;
-	DT_leg leg;
+	DT_leg leg_r, leg_l;
 	DT_point p1, p2;
+
+	leg_r.hip.id = 0x07;
+	leg_r.knee.id = 0x08;
+	leg_r.foot.id = 0x09;
+
+	leg_l.hip.id = 0x0A;
+	leg_l.knee.id = 0x0B;
+	leg_l.foot.id = 0x0C;
 
 	p1.x = 77.8553;
 	p1.y = 77.8553;
@@ -84,32 +39,36 @@ int main() {
 
 	DT_char flag = 0;
 	while (1) {
-		UTL_wait(40);
+		UTL_wait(50);
 		if (flag == 0) {
-			leg = KIN_calculateServos(p1);
+			KIN_calculateServos(&p1, &leg_l);
+			KIN_calculateServos(&p1, &leg_r);
 			flag = 1;
+			XM_LED_ON
 		} else {
-			leg = KIN_calculateServos(p2);
+			KIN_calculateServos(&p2, &leg_l);
+			KIN_calculateServos(&p2, &leg_r);
 			flag = 0;
+			XM_LED_OFF
 		}
-		leg.hip.set_value = UTL_getDegree(leg.hip.set_value);
-		leg.knee.set_value = UTL_getDegree(leg.knee.set_value);
-		leg.foot.set_value = UTL_getDegree(leg.foot.set_value);
 
-		id = 10;
-		DNX_setAngle(id, leg.hip.set_value);
-		id = 11;
-		DNX_setAngle(id, leg.knee.set_value);
-		id = 12;
-		DNX_setAngle(id, leg.foot.set_value);
-		id = 7;
-		DNX_setAngle(id, leg.hip.set_value);
-		id = 8;
-		DNX_setAngle(id, leg.knee.set_value);
-		id = 9;
-		DNX_setAngle(id, leg.foot.set_value);
+		leg_r.hip.set_value = UTL_getDegree(leg_r.hip.set_value);
+		leg_r.knee.set_value = UTL_getDegree(leg_r.knee.set_value);
+		leg_r.foot.set_value = UTL_getDegree(leg_r.foot.set_value);
+
+		leg_l.hip.set_value = UTL_getDegree(leg_l.hip.set_value);
+		leg_l.knee.set_value = UTL_getDegree(leg_l.knee.set_value);
+		leg_l.foot.set_value = UTL_getDegree(leg_l.foot.set_value);
+
+		DNX_setAngle(leg_r.hip.id, leg_r.hip.set_value);
+		DNX_setAngle(leg_r.knee.id, leg_r.knee.set_value);
+		DNX_setAngle(leg_r.foot.id, leg_r.foot.set_value);
+
+		DNX_setAngle(leg_l.hip.id, leg_l.hip.set_value);
+		DNX_setAngle(leg_l.knee.id, leg_l.knee.set_value);
+		DNX_setAngle(leg_l.foot.id, leg_l.foot.set_value);
 	}
-	XM_LED_ON
+	XM_LED_OFF
 
 	return 0;
 }

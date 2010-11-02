@@ -25,7 +25,7 @@
  * \param	rows	Zeilenanzahl
  * \param	columns	Spaltenanzahl
  */
-void UTL_printMatrix(DT_double** mat, DT_size rows, DT_size columns) {
+void UTL_printMatrix(const DT_double** const mat, DT_size rows, DT_size columns) {
 	DT_size r, c;
 	DT_char sep;
 	printf("> DH04:\n");
@@ -46,14 +46,14 @@ void UTL_printMatrix(DT_double** mat, DT_size rows, DT_size columns) {
  * \param	leg	Bein für das die Daten ausgegeben werden sollen
  * \param	type	Typ der Ausgabe in Bogenmaß oder Grad
  */
-void UTL_printLeg(DT_leg leg, DT_type type) {
+void UTL_printLeg(const DT_leg* const leg, DT_type type) {
 	printf("> Bein: ");
 	if (type == UTL_RAD)
-		printf("Hüfte = %10.5lf; Knie = %10.5lf; Fuß = %10.5lf; (Bogenmaß)\n", leg.hip.set_value,
-				leg.knee.set_value, leg.foot.set_value);
+		printf("Hüfte = %10.5lf; Knie = %10.5lf; Fuß = %10.5lf; (Bogenmaß)\n", leg->hip.set_value,
+				leg->knee.set_value, leg->foot.set_value);
 	else if (type == UTL_DEG)
 		printf("Hüfte = %10.5lf; Knie = %10.5lf; Fuß = %10.5lf; (Winkel in Grad)\n",
-				UTL_getDegree(leg.hip.set_value), UTL_getDegree(leg.knee.set_value), UTL_getDegree(leg.foot.set_value));
+				UTL_getDegree(leg->hip.set_value), UTL_getDegree(leg->knee.set_value), UTL_getDegree(leg->foot.set_value));
 	else
 		printf("type not supported!\n");
 }
@@ -63,8 +63,8 @@ void UTL_printLeg(DT_leg leg, DT_type type) {
  *
  * \param p	Punkt zur Ausgabe
  */
-void UTL_printPoint(DT_point p) {
-	printf("> Punkt: x = %10.5lf; y = %10.5lf; z = %10.5lf;\n", p.x, p.y, p.z);
+void UTL_printPoint(const DT_point* const p) {
+	printf("> Punkt: x = %10.5lf; y = %10.5lf; z = %10.5lf;\n", p->x, p->y, p->z);
 }
 
 /**
@@ -102,7 +102,7 @@ DT_double UTL_getDegree(DT_double radiant) {
  *
  * \return	Extrahierter Punkt
  */
-DT_point UTL_getPointOfDH(DT_double** dh) {
+DT_point UTL_getPointOfDH(const DT_double** const dh) {
 	DT_point p;
 	p.x = dh[0][3];
 	p.y = dh[1][3];
@@ -118,7 +118,7 @@ DT_point UTL_getPointOfDH(DT_double** dh) {
  * \param	msg	Text für die Ausgabe
  * \param	size	Länge des Textes
  */
-void UTL_printDebug(DT_char* msg, DT_size size) {
+void UTL_printDebug(const DT_char* const msg, DT_size size) {
 	DT_size i;
 #ifdef USART_ON
 	while (!USART_IsTXDataRegisterEmpty(XM_debug_data.usart))
@@ -145,7 +145,7 @@ void UTL_printDebug(DT_char* msg, DT_size size) {
  * \param	packet	Paket für die Ausgabe
  * \param	size	Größe des Pakets
  */
-void UTL_printDebugByte(DT_byte* packet, DT_size size) {
+void UTL_printDebugByte(const DT_byte* const packet, DT_size size) {
 	DT_char hex[2 * size];
 	size = UTL_byteToHexChar(hex, packet, size);
 	UTL_printDebug(hex, size);
@@ -158,7 +158,7 @@ void UTL_printDebugByte(DT_byte* packet, DT_size size) {
  * \param	src	Pointer auf das Quellfeld
  * \param	size	Größe des Quellfelds
  */
-DT_byte UTL_byteToHexChar(DT_char* dest, DT_byte* src, DT_size size) {
+DT_byte UTL_byteToHexChar(DT_char* const dest, const DT_byte* const src, DT_size size) {
 	DT_size i;
 	DT_byte temp;
 	for (i = 0; i < size; i++) {

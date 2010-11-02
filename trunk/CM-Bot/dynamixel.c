@@ -41,7 +41,7 @@
  *
  * \return	Checksum
  */
-DT_byte DNX_getChecksum(DT_byte* packet, DT_size l) {
+DT_byte DNX_getChecksum(const DT_byte* const packet, DT_size l) {
 	DT_size i;
 	DT_byte chksm = 0;
 	for (i = 2; i < l - 1; i++)
@@ -57,7 +57,7 @@ DT_byte DNX_getChecksum(DT_byte* packet, DT_size l) {
  *
  * \return	Größe der empfangenen Daten
  */
-DT_byte DNX_receive(DT_byte id, DT_byte* result) {
+DT_byte DNX_receive(DT_byte id, DT_byte* const result) {
 	DT_byte len = 0;
 	DT_rxBuffer* rxBuffer;
 
@@ -87,7 +87,7 @@ DT_byte DNX_receive(DT_byte id, DT_byte* result) {
  *
  * \return Größe der empfangenen Antwort
  */
-DT_byte DNX_send(DT_byte* packet, DT_size l, DT_byte* result) {
+DT_byte DNX_send(DT_byte* const packet, DT_size l, DT_byte* const result) {
 	packet[l - 1] = DNX_getChecksum(packet, l);
 	// TODO Berechnung Auslagern ...
 	// packet[2] -> ID

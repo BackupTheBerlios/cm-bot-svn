@@ -245,7 +245,7 @@ void XM_init_com() {
  * \param	txData		Byte-Array mit zu sendendem Paket
  * \param	bytes 		Länge des zu sendenden Pakets
  */
-void XM_USART_send(USART_data_t* usart_data, DT_byte* txData, DT_size bytes) {
+void XM_USART_send(const USART_data_t* const usart_data, const DT_byte* const txData, DT_size bytes) {
 	DT_size i;
 
 	DEBUG_BYTE((txData, bytes))
@@ -288,8 +288,8 @@ void XM_USART_send(USART_data_t* usart_data, DT_byte* txData, DT_size bytes) {
  *
  * \return	Länge des Antwortpakets
  */
-DT_byte XM_USART_receive(DT_rxBuffer* rxBuffer, DT_byte* dest) {
-	//DEBUG_BYTE((rxBuffer->buffer, DT_RX_BUFFER_SIZE))
+DT_byte XM_USART_receive(DT_rxBuffer* const rxBuffer, DT_byte* const dest) {
+	DEBUG_BYTE((rxBuffer->buffer, DT_RX_BUFFER_SIZE))
 	// Cut off output message
 	if (rxBuffer->lastByteLength > 0) {
 		if ((rxBuffer->getIndex + rxBuffer->lastByteLength) < DT_RX_BUFFER_SIZE)
@@ -360,7 +360,7 @@ DT_byte XM_USART_receive(DT_rxBuffer* rxBuffer, DT_byte* dest) {
  *
  * \return	Länge des Antwortpakets
  */
-DT_byte XM_REMOTE_USART_receive(DT_rxBuffer* rxBuffer, DT_byte* dest) {
+DT_byte XM_REMOTE_USART_receive(DT_rxBuffer* const rxBuffer, DT_byte* const dest) {
 	//DEBUG_BYTE((rxBuffer->buffer, DT_RX_BUFFER_SIZE))
 	// Cut off output message
 	if (rxBuffer->lastByteLength > 0) {

@@ -48,8 +48,8 @@ void XM_init_cpu();
 void XM_init_remote();
 void XM_init_dnx();
 void XM_init_com();
-void XM_USART_send(USART_data_t*, DT_byte*, DT_size);
-DT_byte XM_USART_receive(DT_rxBuffer*, DT_byte*);
-DT_byte XM_REMOTE_USART_receive(DT_rxBuffer*, DT_byte*);
+void XM_USART_send(const USART_data_t* const, const DT_byte* const, DT_size);
+DT_byte XM_USART_receive(DT_rxBuffer* const, DT_byte* const);
+DT_byte XM_REMOTE_USART_receive(DT_rxBuffer* const, DT_byte* const);
 
 #endif /* XMEGA_H_ */
