@@ -60,13 +60,14 @@
 #define USART_DRIVER_H
 
 #include "avr_compiler.h"
+#include "datatypes.h"
 
 /* USART buffer defines. */
 
 /* \brief  Receive buffer size: 2,4,8,16,32,64,128 or 256 bytes. */
-#define USART_RX_BUFFER_SIZE 4
+#define USART_RX_BUFFER_SIZE 128
 /* \brief Transmit buffer size: 2,4,8,16,32,64,128 or 256 bytes */
-#define USART_TX_BUFFER_SIZE 4
+#define USART_TX_BUFFER_SIZE 128
 /* \brief Receive buffer mask. */
 #define USART_RX_BUFFER_MASK ( USART_RX_BUFFER_SIZE - 1 )
 /* \brief Transmit buffer mask. */
@@ -112,6 +113,8 @@ typedef struct Usart_and_buffer
 	USART_DREINTLVL_t dreIntLevel;
 	/* \brief Data buffer. */
 	USART_Buffer_t buffer;
+	/* \brief Größe des zuletzt gesendeten Pakets */
+	DT_byte lastPacketLength;
 } USART_data_t;
 
 

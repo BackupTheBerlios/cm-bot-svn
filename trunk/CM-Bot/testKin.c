@@ -21,13 +21,7 @@ int main() {
 	DT_leg leg_r, leg_l;
 	DT_point p1, p2;
 
-	leg_r.hip.id = 0x07;
-	leg_r.knee.id = 0x08;
-	leg_r.foot.id = 0x09;
-
-	leg_l.hip.id = 0x0A;
-	leg_l.knee.id = 0x0B;
-	leg_l.foot.id = 0x0C;
+	DNX_getConnectedIDs(&leg_r, &leg_l);
 
 	p1.x = 77.8553;
 	p1.y = 77.8553;
@@ -59,17 +53,15 @@ int main() {
 		leg_l.knee.set_value = UTL_getDegree(leg_l.knee.set_value);
 		leg_l.foot.set_value = UTL_getDegree(leg_l.foot.set_value);
 
-		UTL_wait(20);
-
 		DNX_setAngle(leg_r.hip.id, leg_r.hip.set_value);
 		DNX_setAngle(leg_r.knee.id, leg_r.knee.set_value);
 		DNX_setAngle(leg_r.foot.id, leg_r.foot.set_value);
 
-		UTL_wait(20);
-
 		DNX_setAngle(leg_l.hip.id, leg_l.hip.set_value);
 		DNX_setAngle(leg_l.knee.id, leg_l.knee.set_value);
 		DNX_setAngle(leg_l.foot.id, leg_l.foot.set_value);
+
+		UTL_wait(40);
 	}
 	XM_LED_OFF
 

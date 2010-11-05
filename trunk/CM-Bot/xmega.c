@@ -112,10 +112,6 @@ void XM_init_cpu() {
  */
 void XM_init_remote() {
 	// Init buffer
-	XM_RX_remote.getIndex = 0;
-	XM_RX_remote.putIndex = 0;
-	XM_RX_remote.overflow_flag = 0x00;
-
 	cli();
 	// Set pins for TX and RX
 	XM_PORT_REMOTE.DIRSET = PIN7_bm; // Pin6 of PortC (TXD0) is output
@@ -155,15 +151,6 @@ void XM_init_dnx() {
 	//Disable Interrupts
 	cli();
 
-	// Init buffer
-	XM_RX_buffer_L.getIndex = 0;
-	XM_RX_buffer_L.putIndex = 0;
-	XM_RX_buffer_L.overflow_flag = 0x00;
-
-	XM_RX_buffer_R.getIndex = 0;
-	XM_RX_buffer_R.putIndex = 0;
-	XM_RX_buffer_R.overflow_flag = 0x00;
-
 	// Set pins for TX and RX
 	XM_PORT_SERVO_R.DIRSET = PIN3_bm; // Pin3 of PortC (TXD0) is output
 	XM_PORT_SERVO_R.DIRCLR = PIN2_bm; // Pin2 of PortC (RXD0) is input
@@ -180,23 +167,15 @@ void XM_init_dnx() {
 
 	// Use USARTC0 / USARTD0 and initialize buffers
 	USART_InterruptDriver_Initialize(&XM_servo_data_R, &XM_USART_SERVO_R,
-			USART_DREINTLVL_OFF_gc);
+			USART_DREINTLVL_LO_gc);
 	USART_InterruptDriver_Initialize(&XM_servo_data_L, &XM_USART_SERVO_L,
-			USART_DREINTLVL_OFF_gc);
+			USART_DREINTLVL_LO_gc);
 
 	// 8 Data bits, No Parity, 1 Stop bit
 	USART_Format_Set(XM_servo_data_R.usart, USART_CHSIZE_8BIT_gc,
 			USART_PMODE_DISABLED_gc, false);
 	USART_Format_Set(XM_servo_data_L.usart, USART_CHSIZE_8BIT_gc,
 			USART_PMODE_DISABLED_gc, false);
-
-	// Enable DRE interrupt
-	// USART_DreInterruptLevel_Set(XM_servo_data_R.usart, USART_DREINTLVL_LO_gc);
-	// USART_DreInterruptLevel_Set(XM_servo_data_L.usart, USART_DREINTLVL_LO_gc);
-
-	// Enable TXC interrupt
-	// USART_TxdInterruptLevel_Set(XM_servo_data_R.usart, USART_TXCINTLVL_LO_gc);
-	// USART_TxdInterruptLevel_Set(XM_servo_data_L.usart, USART_TXCINTLVL_LO_gc);
 
 	// Enable RXC interrupt
 	USART_RxdInterruptLevel_Set(XM_servo_data_R.usart, USART_RXCINTLVL_LO_gc);
@@ -217,8 +196,6 @@ void XM_init_dnx() {
 	USART_GetChar(XM_servo_data_R.usart); // Flush Receive Buffer
 	USART_GetChar(XM_servo_data_L.usart); // Flush Receive Buffer
 
-	// Enable PMIC interrupt level high
-	PMIC.CTRL |= PMIC_HILVLEX_bm;
 	// Enable PMIC interrupt level low
 	PMIC.CTRL |= PMIC_LOLVLEX_bm;
 	// Enable Round-Robin-Scheduling
@@ -247,219 +224,56 @@ void XM_init_com() {
  * \param	txData		Byte-Array mit zu sendendem Paket
  * \param	bytes 		Länge des zu sendenden Pakets
  */
-void XM_USART_send(const USART_data_t* const usart_data,
+void XM_USART_send(USART_data_t* const usart_data,
 		const DT_byte* const txData, DT_size bytes) {
-	DT_size i;
+	DT_size i=0;
 
 	DEBUG_BYTE((txData, bytes))
 
 	if (usart_data->usart == &XM_USART_DEBUG)
 		return;
 
+	// Paketgröße, die später beim Empfangen abgezogen werden muss
+	usart_data->lastPacketLength = bytes;
 	// Set OE to 0 -> Enable Send
 	if (usart_data->usart == &XM_USART_SERVO_L) {
-		XM_RX_buffer_L.lastByteLength = bytes;
 		XM_PORT_SERVO_L.OUTCLR = XM_OE_MASK;
 	}
 	if (usart_data->usart == &XM_USART_SERVO_R) {
-		XM_RX_buffer_R.lastByteLength = bytes;
 		XM_PORT_SERVO_R.OUTCLR = XM_OE_MASK;
 	}
 
 	// Send data
-	while (!USART_IsTXDataRegisterEmpty(usart_data->usart))
-		;
-	for (i = 0; i < bytes; i++) {
-		USART_PutChar(usart_data->usart, txData[i]);
-		while (!USART_IsTXDataRegisterEmpty(usart_data->usart))
-			;
+	while (i < bytes) {
+		bool byteToBuffer;
+		byteToBuffer = USART_TXBuffer_PutByte(usart_data, txData[i]);
+		if(byteToBuffer){
+			i++;
+		}
 	}
 
-	usart_data->usart->STATUS |= USART_TXCIF_bm;
 	// Enable TXC interrupt to set OE to 1
-	USART_TxdInterruptLevel_Set(usart_data->usart, USART_TXCINTLVL_HI_gc);
+	USART_TxdInterruptLevel_Set(usart_data->usart, USART_TXCINTLVL_LO_gc);
 
 }
-/**
- * \brief 	Reset-Buffer.
- *
- * 			Im Falle eines Fehlers bei der Übertragung kann mit
- * 			dieser Methode der jeweilige Buffer zurückgesetzt werden.
- *
- * \param	rxBuffer	Empfangs-Buffer der jeweiligen USART
- */
-void XM_resetBuffer(DT_rxBuffer* rxBuffer) {
-	rxBuffer->getIndex = 0;
-	rxBuffer->putIndex = 0;
-	rxBuffer->lastByteLength = 0;
-	rxBuffer->overflow_flag = 0;
-}
 
-/**
- * \brief 	USART-Empfangsmethode.
- *
- * 			Diese Methode liest den jeweiligen USART-Buffer aus und prüft,
- * 			ob ein vollständiges Paket gemäß des Dynamixel-Protokoll empfangen wurde.
- *
- * \param	rxBuffer	Empfangs-Buffer der jeweiligen USART
- * \param	dest		Byte-Array für Antwort-Paket
- *
- * \return	Länge des Antwortpakets
- */
-DT_byte XM_USART_receive(DT_rxBuffer* const rxBuffer, DT_byte* const dest) {
-	//DEBUG_BYTE((rxBuffer->buffer, DT_RX_BUFFER_SIZE))
-	// Cut off output message
-	if (rxBuffer->lastByteLength > 0) {
-		if ((rxBuffer->getIndex + rxBuffer->lastByteLength) < DT_RX_BUFFER_SIZE)
-			rxBuffer->getIndex += rxBuffer->lastByteLength;
-		else {
-			rxBuffer->getIndex = rxBuffer->lastByteLength + rxBuffer->getIndex
-					- DT_RX_BUFFER_SIZE;
-			rxBuffer->overflow_flag = 0x00;
-		}
-		rxBuffer->lastByteLength = 0;
-	}
-	// Check errors
-	if ((rxBuffer->overflow_flag == 0x00) && (rxBuffer->putIndex
-			< rxBuffer->getIndex)) {
-		//DEBUG(("1",sizeof("1")))
-		return 0;
-	} else if ((rxBuffer->overflow_flag == 0x01) && (rxBuffer->putIndex
-			> rxBuffer->getIndex)) {
-		//DEBUG(("2",sizeof("1")))
-		return 0;
-	} else if ((rxBuffer->buffer[rxBuffer->getIndex] != 0xFF)
-			&& (rxBuffer->buffer[rxBuffer->getIndex + 1] != 0xFF)) {
-		//DEBUG(("3",sizeof("1")))
-
-		return 0;
-	}
-	// Some data received. All data received if checksum is correct!
-	else {
-		// Calculate predicted length
-		DT_byte length;
-		if ((rxBuffer->getIndex + 3) < DT_RX_BUFFER_SIZE)
-			length = rxBuffer->buffer[rxBuffer->getIndex + 3];
-		else {
-			length = rxBuffer->buffer[3 + rxBuffer->getIndex
-					- DT_RX_BUFFER_SIZE];
-		}
-		// Complete length = (FF + FF + ID + LENGTH) + length
-		length += 4;
-		// Prüfen ob Paket bereits komplett im Buffer
-		if ((((rxBuffer->getIndex + length) <= DT_RX_BUFFER_SIZE)
-				&& (rxBuffer->getIndex + length <= rxBuffer->putIndex))
-				|| (((rxBuffer->getIndex + length) > DT_RX_BUFFER_SIZE)
-						&& (rxBuffer->getIndex + length >= rxBuffer->putIndex))) {
-
-			// Copy packet from buffer in destination array
-			DT_byte i;
-			for (i = 0; i < length; i++) {
-				if ((rxBuffer->getIndex + i) < DT_RX_BUFFER_SIZE)
-					dest[i] = rxBuffer->buffer[rxBuffer->getIndex + i];
-				else
-					dest[i] = rxBuffer->buffer[i + rxBuffer->getIndex
-							- DT_RX_BUFFER_SIZE];
-			}
-			// If packet is complete, set new getIndex
-			if (dest[length - 1] == DNX_getChecksum(dest, length)) {
-				if ((rxBuffer->getIndex + length) < DT_RX_BUFFER_SIZE)
-					rxBuffer->getIndex = rxBuffer->getIndex + length;
-				else {
-					rxBuffer->getIndex = length + rxBuffer->getIndex
-							- DT_RX_BUFFER_SIZE;
-					rxBuffer->overflow_flag = 0x00;
-				}
-				//DEBUG(("4",sizeof("1")))
-				return length;
-			} else {
-				//DEBUG(("5",sizeof("1")))
-				return 0;
-			}
-		} else {
-			//DEBUG(("6",sizeof("1")))
-			return 0;
-		}
-	}
-}
-
-/**
- * \brief 	USART-Empfangsmethode für Remote-Controller.
- *
- * 			Diese Methode liest den Remote-USART-Buffer aus und prüft,
- * 			ob ein vollständiges Paket empfangen wurde.
- *
- * \param	rxBuffer	Empfangs-Buffer der jeweiligen USART
- * \param	dest		Byte-Array für Antwort-Paket
- *
- * \return	Länge des Antwortpakets
- */
-DT_byte XM_REMOTE_USART_receive(DT_rxBuffer* const rxBuffer,
-		DT_byte* const dest) {
-	//DEBUG_BYTE((rxBuffer->buffer, DT_RX_BUFFER_SIZE))
-	// Cut off output message
-	if (rxBuffer->lastByteLength > 0) {
-		if ((rxBuffer->getIndex + rxBuffer->lastByteLength) < DT_RX_BUFFER_SIZE)
-			rxBuffer->getIndex += rxBuffer->lastByteLength;
-		else {
-			rxBuffer->getIndex = rxBuffer->lastByteLength + rxBuffer->getIndex
-					- DT_RX_BUFFER_SIZE;
-			rxBuffer->overflow_flag = 0x00;
-		}
-		rxBuffer->lastByteLength = 0;
-	}
-	// Check errors
-	if ((rxBuffer->overflow_flag == 0x00) && (rxBuffer->putIndex
-			< rxBuffer->getIndex)) {
-		return 0;
-	} else if ((rxBuffer->overflow_flag == 0x01) && (rxBuffer->putIndex
-			> rxBuffer->getIndex)) {
-		return 0;
-	} else if ((rxBuffer->buffer[rxBuffer->getIndex] != 0xFF)
-			&& rxBuffer->buffer[rxBuffer->getIndex + 1] != 0x55) {
-		return 0;
-	}
-	// Some data received.
-	else {
-		DT_byte length;
-		// length = (FF + 55 + LL + !LL + HH + !HH)
-		length = 6;
-		// Copy packet from buffer in destination array
-		DT_byte i;
-		if (rxBuffer->getIndex + length <= rxBuffer->putIndex) {
-			for (i = 0; i < length; i++) {
-				if ((rxBuffer->getIndex + i) < DT_RX_BUFFER_SIZE)
-					dest[i] = rxBuffer->buffer[rxBuffer->getIndex + i];
-				else
-					dest[i] = rxBuffer->buffer[i + rxBuffer->getIndex
-							- DT_RX_BUFFER_SIZE];
-			}
-			// If packet is complete, set new getIndex
-			if ((rxBuffer->getIndex + length) < DT_RX_BUFFER_SIZE)
-				rxBuffer->getIndex = rxBuffer->getIndex + length;
-			else {
-				rxBuffer->getIndex = length + rxBuffer->getIndex
-						- DT_RX_BUFFER_SIZE;
-				rxBuffer->overflow_flag = 0x00;
-			}
-			return length;
-		} else
-			return 0;
-	}
-}
 /**
  * \brief 	ISR für abgeschlossenen Sendevorgang der USARTC0 (SERVO L).
  */
 ISR( USARTC0_TXC_vect)
 {
 	USART_TxdInterruptLevel_Set(&USARTC0, USART_TXCINTLVL_OFF_gc);
-
-	DT_byte i = 0;
-	for (i = 0; i < 30; i++)
-		; // delay
-
 	XM_PORT_SERVO_L.OUTSET = XM_OE_MASK;
 }
+
+/**
+ * \brief 	ISR für Sendebereitschaft der USARTC0 (SERVO L).
+ */
+ISR(USARTC0_DRE_vect)
+{
+	USART_DataRegEmpty(&XM_servo_data_L);
+}
+
 
 /**
  * \brief 	ISR für Empfangsvorgang der USARTC0 (SERVO L).
@@ -467,14 +281,6 @@ ISR( USARTC0_TXC_vect)
 ISR( USARTC0_RXC_vect)
 {
 	USART_RXComplete(&XM_servo_data_L);
-	if (USART_RXBufferData_Available(&XM_servo_data_L)) {
-		XM_RX_buffer_L.buffer[XM_RX_buffer_L.putIndex++]
-				= USART_RXBuffer_GetByte(&XM_servo_data_L);
-	}
-	if (XM_RX_buffer_L.putIndex >= DT_RX_BUFFER_SIZE) {
-		XM_RX_buffer_L.putIndex = 0;
-		XM_RX_buffer_L.overflow_flag = 0x01;
-	}
 }
 
 /**
@@ -483,12 +289,15 @@ ISR( USARTC0_RXC_vect)
 ISR( USARTD0_TXC_vect)
 {
 	USART_TxdInterruptLevel_Set(&USARTD0, USART_TXCINTLVL_OFF_gc);
-
-	DT_byte i = 0;
-	for (i = 0; i < 30; i++)
-		; // delay
-
 	XM_PORT_SERVO_R.OUTSET = XM_OE_MASK;
+}
+
+/**
+ * \brief 	ISR für Sendebereitschaft der USARTD0 (SERVO R).
+ */
+ISR(USARTD0_DRE_vect)
+{
+	USART_DataRegEmpty(&XM_servo_data_R);
 }
 
 /**
@@ -497,14 +306,6 @@ ISR( USARTD0_TXC_vect)
 ISR( USARTD0_RXC_vect)
 {
 	USART_RXComplete(&XM_servo_data_R);
-	if (USART_RXBufferData_Available(&XM_servo_data_R)) {
-		XM_RX_buffer_R.buffer[XM_RX_buffer_R.putIndex++]
-				= USART_RXBuffer_GetByte(&XM_servo_data_R);
-	}
-	if (XM_RX_buffer_R.putIndex >= DT_RX_BUFFER_SIZE) {
-		XM_RX_buffer_R.putIndex = 0;
-		XM_RX_buffer_R.overflow_flag = 0x01;
-	}
 }
 
 /**
@@ -512,14 +313,5 @@ ISR( USARTD0_RXC_vect)
  */
 ISR( USARTE1_RXC_vect)
 {
-	//DEBUG(("RX_ISR",sizeof("RX_ISR")))
 	USART_RXComplete(&XM_remote_data);
-	if (USART_RXBufferData_Available(&XM_remote_data)) {
-		XM_RX_remote.buffer[XM_RX_remote.putIndex++] = USART_RXBuffer_GetByte(
-				&XM_remote_data);
-	}
-	if (XM_RX_remote.putIndex >= DT_RX_BUFFER_SIZE) {
-		XM_RX_remote.putIndex = 0;
-		XM_RX_remote.overflow_flag = 0x01;
-	}
 }

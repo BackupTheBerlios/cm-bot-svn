@@ -9,10 +9,11 @@
 
 #include <stdint.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
-#define DT_RX_BUFFER_SIZE 255	/**< Größe des Ring-Buffers. */
-#define DT_RESULT_BUFFER_SIZE 255	/**< Größe des Buffers für ein empfangenes Paket. */
+#define DT_RESULT_BUFFER_SIZE 128	/**< Größe des Buffers für ein empfangenes Paket. */
 
+typedef bool DT_bool;
 typedef int DT_int;
 typedef double DT_double;
 typedef uint8_t DT_byte;
@@ -36,16 +37,5 @@ typedef struct {
 typedef struct {
 	DT_double x, y, z;
 } DT_point;                /**< Datenstruktur zur Speicherung karthesischer Koordinaten. */
-
-/**
- * \brief	Ring-Buffer zum Empfangen von Daten einer USART.
- */
-typedef struct {
-	DT_size putIndex; /**< Index, ab dem neue Daten eingefügt werden. */
-	DT_size getIndex; /**< Index, ab dem Daten gelesen werden. */
-	DT_size lastByteLength; /**< Größe des zuletzt gesendeten Pakets. */
-	DT_byte overflow_flag; /**< Zeigt an, ob neue Daten am Anfang geschrieben und alte Daten am Ende gelesen werden. */
-	DT_byte buffer[DT_RX_BUFFER_SIZE]; /**< Feld für gespeicherte Daten. */
-} DT_rxBuffer;
 
 #endif /* DATATYPES_H_ */

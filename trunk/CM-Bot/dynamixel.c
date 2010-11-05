@@ -50,40 +50,79 @@ DT_byte DNX_getChecksum(const DT_byte* const packet, DT_size l) {
 }
 
 /**
- * \brief	Blockierendes Empfangen.
+ * \brief 	USART-Empfangsmethode.
  *
- * \param	id	ID des Servos um linke/rechte Seite feststellen zu können
- * \param	result	Zielfeld für Daten
+ * 			Diese Methode liest den jeweiligen USART-Buffer aus und prüft,
+ * 			ob ein vollständiges Paket gemäß des Dynamixel-Protokoll empfangen wurde.
  *
- * \return	Größe der empfangenen Daten
+ * \param	rxBuffer	Empfangs-Buffer der jeweiligen USART
+ * \param	dest		Byte-Array für Antwort-Paket
+ *
+ * \return	Länge des Antwortpakets
  */
-DT_byte DNX_receive(DT_byte id, DT_byte* const result) {
-	DT_byte len = 0;
-	DT_rxBuffer* rxBuffer;
-	DT_size timeout = 40000, timeout2 = 1;
+DT_byte DNX_receive(USART_data_t* const usart_data, DT_byte* const dest) {
+	USART_Buffer_t* buffer = &usart_data->buffer;
 
-	// TODO Berechnung Auslagern ...
-	if ((id - 1) % 6 < 3) { // Right: 1 - 3, 7 - 9, ...
-		rxBuffer = &XM_RX_buffer_R;
-	} else {
-		// Left:  4 - 6, ...
-		rxBuffer = &XM_RX_buffer_L;
+	while (USART_RXBufferData_Available(usart_data)
+			&& usart_data->lastPacketLength > 0) {
+		usart_data->lastPacketLength--;
+		USART_RXBuffer_GetByte(usart_data);
+	}
+	if (usart_data->lastPacketLength > 0) {
+		DEBUG(("se",sizeof("se")))
+		return 0;
 	}
 
-	while (len == 0 && timeout != 0) {
-		len = XM_USART_receive(rxBuffer, result);
-		if(timeout2 == 0){
-			timeout2 = 2;
-			timeout--;
+	// Sind Daten vorhanden
+	if (!USART_RXBufferData_Available(usart_data)) {
+		DEBUG(("nd",sizeof("nd")))
+		return 0;
+	}
+	// Byte #1 und Byte #2 muessen laut Protokoll 0xFF sein
+	else if ((buffer->RX[buffer->RX_Tail] != 0xFF)
+			&& (buffer->RX[(buffer->RX_Tail + 1) & USART_RX_BUFFER_MASK]
+					!= 0xFF)) {
+		DEBUG(("ff",sizeof("ff")))
+		return 0;
+	}
+	// Pruefen ob min. 4 Bytes im Buffer sind, um Laenge zu lesen
+	else if ((buffer->RX_Head > buffer->RX_Tail) && (buffer->RX_Head
+			- buffer->RX_Tail) < 4) {
+		DEBUG(("le",sizeof("le")))
+		return 0;
+	} else if ((buffer->RX_Head < buffer->RX_Tail) && (USART_RX_BUFFER_SIZE
+			- buffer->RX_Tail + buffer->RX_Head) < 4) {
+		DEBUG(("le",sizeof("le")))
+		return 0;
+	}
+	// Some data received. All data received if checksum is correct!
+	else {
+		// Calculate predicted length
+		DT_byte length;
+		length = buffer->RX[(buffer->RX_Tail + 3) & USART_RX_BUFFER_MASK];
+		// Complete length = (FF + FF + ID + LENGTH) + length
+		length += 4;
+		// Prüfen ob Paket bereits komplett im Buffer
+		if (((buffer->RX_Tail + length) & USART_RX_BUFFER_MASK)
+				> buffer->RX_Head) {
+			DEBUG(("uc",sizeof("uc")))
+			return 0;
 		}
-		timeout2--;
+		// Copy packet from buffer in destination array
+		DT_byte i;
+		for (i = 0; i < length; i++) {
+			dest[i] = USART_RXBuffer_GetByte(usart_data);
+		}
+
+		// Pruefen ob Checksumme korrekt ist
+		if (dest[length - 1] != DNX_getChecksum(dest, length)) {
+			DEBUG(("cks",sizeof("cks")))
+			DEBUG_BYTE((dest, length))
+			return 0;
+		}
+		DEBUG(("ok",sizeof("ok")))
+		return length;
 	}
-	if (timeout == 0) {
-		XM_resetBuffer(rxBuffer);
-		len = 0;
-		XM_LED_OFF
-	}
-	return len;
 }
 
 /**
@@ -99,14 +138,24 @@ DT_byte DNX_receive(DT_byte id, DT_byte* const result) {
  */
 DT_byte DNX_send(DT_byte* const packet, DT_size l, DT_byte* const result) {
 	packet[l - 1] = DNX_getChecksum(packet, l);
-	// TODO Berechnung Auslagern ...
+	USART_data_t* usart_data;
 	// packet[2] -> ID
 	if ((packet[2] - 1) % 6 < 3) // Right: 1 - 3, 7 - 9, ...
-		XM_USART_send(&XM_servo_data_R, packet, l);
+		usart_data = &XM_servo_data_R;
 	else
 		// Left:  4 - 6, ...
-		XM_USART_send(&XM_servo_data_L, packet, l);
-	return DNX_receive(packet[2], result);
+		usart_data = &XM_servo_data_L;
+
+	XM_USART_send(usart_data, packet, l);
+
+	DT_byte len = 0;
+	DT_size timeout = 100;
+	while (len == 0 && timeout > 0) {
+		len = DNX_receive(usart_data, result);
+		timeout--;
+	}
+
+	return len;
 }
 
 /**
@@ -236,8 +285,8 @@ void DNX_setSpeed(DT_byte id, DT_byte speed) {
  * \param	id	ID des Servos
  * \param	value	Wert für LED (0x00 / 0x01)
  */
-void DNX_setLed(DT_byte id, DT_byte value) {
-	DT_byte packet[8];
+DT_bool DNX_setLed(DT_byte id, DT_byte value) {
+	DT_byte packet[8], len;
 	DT_byte result[DT_RESULT_BUFFER_SIZE];
 	packet[0] = START_BYTE;
 	packet[1] = START_BYTE;
@@ -247,7 +296,12 @@ void DNX_setLed(DT_byte id, DT_byte value) {
 	packet[5] = LED;
 	packet[6] = value;
 	// packet[7] = checksum will set in send
-	DNX_send(packet, 8, result);
+	len = DNX_send(packet, 8, result);
+	// ToDo
+	if (len > 0) {
+		return true;
+	} else
+		return false;
 }
 
 /**
@@ -318,52 +372,40 @@ DT_byte DNX_getLed(DT_byte id) {
 }
 
 /**
+ * \brief	Ermittlung der angeschlossenen Dynamixel.
  *
+ * \param	leg_r	Bein rechts
+ * \param	leg_l	Bein links
  */
-DT_byte DNX_getConnectedIDs() {
-	DT_byte id, i;
-	DT_byte packet[6];
-	DT_byte result[DT_RESULT_BUFFER_SIZE];
-
-	packet[0] = START_BYTE;
-	packet[1] = START_BYTE;
-	packet[3] = 0x02; // length
-	packet[4] = WR_DATA;
-	packet[5] = LED;
-	packet[6] = 0x01;
+void DNX_getConnectedIDs(DT_leg* const leg_r, DT_leg* const leg_l) {
+	DT_byte id;
+	DT_bool ans;
 
 	for (id = 1; id <= 18; id++) {
-		for (i = 0; i < DT_RESULT_BUFFER_SIZE; i++)
-			result[i] = 0;
-		packet[2] = id;
-
-		// packet[5] = checksum will set in send
-		DNX_send(packet, 8, result);
-		DEBUG_BYTE((result,sizeof(result)))
-		if (result[2] == id) {
+		ans = DNX_setLed(id, 0x01);
+		if (ans) {
 			if ((id - 1) % 6 < 3) { // Right: 1 - 3, 7 - 9, ...
 				if ((id - 1) % 3 == 0) {
-					leg_r.hip.id = id;
+					leg_r->hip.id = id;
 				}
 				if ((id - 1) % 3 == 1) {
-					leg_r.knee.id = id;
+					leg_r->knee.id = id;
 				}
 				if ((id - 1) % 3 == 2) {
-					leg_r.foot.id = id;
+					leg_r->foot.id = id;
 				}
 			} else {
 				// Left:  4 - 6, ...
 				if ((id - 1) % 3 == 0) {
-					leg_l.hip.id = id;
+					leg_l->hip.id = id;
 				}
 				if ((id - 1) % 3 == 1) {
-					leg_l.knee.id = id;
+					leg_l->knee.id = id;
 				}
 				if ((id - 1) % 3 == 2) {
-					leg_l.foot.id = id;
+					leg_l->foot.id = id;
 				}
 			}
 		}
 	}
-	return 0x00;
 }

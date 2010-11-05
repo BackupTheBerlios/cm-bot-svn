@@ -19,7 +19,7 @@ typedef unsigned char byte;
 typedef struct {
 	byte putIndex;
 	byte getIndex;
-	byte lastByteLength;
+	byte lastPacketLength;
 	byte overflow_flag;
 	byte buffer[XM_RX_BUFFER_SIZE];
 } RXBuffer;

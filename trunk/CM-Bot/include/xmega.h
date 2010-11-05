@@ -39,20 +39,12 @@ USART_data_t XM_servo_data_R;	/**< USART-Struktur für rechte Dynamixel. */
 USART_data_t XM_debug_data;		/**< USART-Struktur für Debug-Ausgaben. */
 USART_data_t XM_remote_data;	/**< USART-Struktur für Remote-Controller. */
 
-DT_rxBuffer XM_RX_buffer_L;	/**< Ring-Buffer für linke USART. */
-DT_rxBuffer XM_RX_buffer_R;	/**< Ring-Buffer für rechte USART. */
-
-DT_rxBuffer XM_RX_remote; 	/**< Ring-Buffer für den Remote-Controller */
-
 #define XM_USART_FAILURE  0xFF /**< signalisiert Fehler beim Empfangen */
 
 void XM_init_cpu();
 void XM_init_remote();
 void XM_init_dnx();
 void XM_init_com();
-void XM_USART_send(const USART_data_t* const, const DT_byte* const, DT_size);
-DT_byte XM_USART_receive(DT_rxBuffer* const, DT_byte* const);
-DT_byte XM_REMOTE_USART_receive(DT_rxBuffer* const, DT_byte* const);
-void XM_resetBuffer(DT_rxBuffer*);
+void XM_USART_send(USART_data_t* const, const DT_byte* const, DT_size);
 
 #endif /* XMEGA_H_ */
