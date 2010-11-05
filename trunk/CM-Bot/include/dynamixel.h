@@ -20,5 +20,7 @@ void DNX_setLed(DT_byte, DT_byte);
 DT_double DNX_getAngle(DT_byte);
 DT_byte DNX_getSpeed(DT_byte);
 DT_byte DNX_getLed(DT_byte);
+DT_byte DNX_getConnectedIDs();
+DT_leg leg_r, leg_l;
 
 #endif /* DYNAMIXEL_H_ */

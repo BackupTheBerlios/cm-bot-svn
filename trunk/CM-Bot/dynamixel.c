@@ -60,6 +60,7 @@ DT_byte DNX_getChecksum(const DT_byte* const packet, DT_size l) {
 DT_byte DNX_receive(DT_byte id, DT_byte* const result) {
 	DT_byte len = 0;
 	DT_rxBuffer* rxBuffer;
+	DT_size timeout = 40000, timeout2 = 1;
 
 	// TODO Berechnung Auslagern ...
 	if ((id - 1) % 6 < 3) { // Right: 1 - 3, 7 - 9, ...
@@ -69,10 +70,19 @@ DT_byte DNX_receive(DT_byte id, DT_byte* const result) {
 		rxBuffer = &XM_RX_buffer_L;
 	}
 
-	while (len == 0) {
+	while (len == 0 && timeout != 0) {
 		len = XM_USART_receive(rxBuffer, result);
+		if(timeout2 == 0){
+			timeout2 = 2;
+			timeout--;
+		}
+		timeout2--;
 	}
-
+	if (timeout == 0) {
+		XM_resetBuffer(rxBuffer);
+		len = 0;
+		XM_LED_OFF
+	}
 	return len;
 }
 
@@ -113,7 +123,6 @@ DT_double DNX_convertAngle(DT_double value) {
 	return value;
 }
 
-
 /**
  * \brief	Korrigiert Winkel für Dynamixel.
  *
@@ -124,22 +133,22 @@ DT_double DNX_convertAngle(DT_double value) {
  *
  * \return	Korrigierter Winkel in Grad
  */
-DT_double DNX_correctAngles(DT_byte id, DT_double value){
-	switch((id-1) % 6){
+DT_double DNX_correctAngles(DT_byte id, DT_double value) {
+	switch ((id - 1) % 6) {
 	case 0:
-		value = 360-value;
+		value = 360 - value;
 		break;
 	case 1:
 		// value = value;
 		break;
 	case 2:
-		value = 360-value;
+		value = 360 - value;
 		break;
 	case 3:
-		value = 360-value;
+		value = 360 - value;
 		break;
 	case 4:
-		value = 360-value;
+		value = 360 - value;
 		break;
 	case 5:
 		// value = value;
@@ -305,5 +314,56 @@ DT_byte DNX_getLed(DT_byte id) {
 	// packet[6] = checksum will set in send
 	DNX_send(packet, 7, result);
 	// TODO DNX_receive();
+	return 0x00;
+}
+
+/**
+ *
+ */
+DT_byte DNX_getConnectedIDs() {
+	DT_byte id, i;
+	DT_byte packet[6];
+	DT_byte result[DT_RESULT_BUFFER_SIZE];
+
+	packet[0] = START_BYTE;
+	packet[1] = START_BYTE;
+	packet[3] = 0x02; // length
+	packet[4] = WR_DATA;
+	packet[5] = LED;
+	packet[6] = 0x01;
+
+	for (id = 1; id <= 18; id++) {
+		for (i = 0; i < DT_RESULT_BUFFER_SIZE; i++)
+			result[i] = 0;
+		packet[2] = id;
+
+		// packet[5] = checksum will set in send
+		DNX_send(packet, 8, result);
+		DEBUG_BYTE((result,sizeof(result)))
+		if (result[2] == id) {
+			if ((id - 1) % 6 < 3) { // Right: 1 - 3, 7 - 9, ...
+				if ((id - 1) % 3 == 0) {
+					leg_r.hip.id = id;
+				}
+				if ((id - 1) % 3 == 1) {
+					leg_r.knee.id = id;
+				}
+				if ((id - 1) % 3 == 2) {
+					leg_r.foot.id = id;
+				}
+			} else {
+				// Left:  4 - 6, ...
+				if ((id - 1) % 3 == 0) {
+					leg_l.hip.id = id;
+				}
+				if ((id - 1) % 3 == 1) {
+					leg_l.knee.id = id;
+				}
+				if ((id - 1) % 3 == 2) {
+					leg_l.foot.id = id;
+				}
+			}
+		}
+	}
 	return 0x00;
 }
