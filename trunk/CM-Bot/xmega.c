@@ -217,6 +217,8 @@ void XM_init_dnx() {
 	USART_GetChar(XM_servo_data_R.usart); // Flush Receive Buffer
 	USART_GetChar(XM_servo_data_L.usart); // Flush Receive Buffer
 
+	// Enable PMIC interrupt level high
+	PMIC.CTRL |= PMIC_HILVLEX_bm;
 	// Enable PMIC interrupt level low
 	PMIC.CTRL |= PMIC_LOLVLEX_bm;
 	// Enable Round-Robin-Scheduling
@@ -245,7 +247,8 @@ void XM_init_com() {
  * \param	txData		Byte-Array mit zu sendendem Paket
  * \param	bytes 		Länge des zu sendenden Pakets
  */
-void XM_USART_send(const USART_data_t* const usart_data, const DT_byte* const txData, DT_size bytes) {
+void XM_USART_send(const USART_data_t* const usart_data,
+		const DT_byte* const txData, DT_size bytes) {
 	DT_size i;
 
 	DEBUG_BYTE((txData, bytes))
@@ -272,9 +275,24 @@ void XM_USART_send(const USART_data_t* const usart_data, const DT_byte* const tx
 			;
 	}
 
+	usart_data->usart->STATUS |= USART_TXCIF_bm;
 	// Enable TXC interrupt to set OE to 1
-	USART_TxdInterruptLevel_Set(usart_data->usart, USART_TXCINTLVL_LO_gc);
+	USART_TxdInterruptLevel_Set(usart_data->usart, USART_TXCINTLVL_HI_gc);
 
+}
+/**
+ * \brief 	Reset-Buffer.
+ *
+ * 			Im Falle eines Fehlers bei der Übertragung kann mit
+ * 			dieser Methode der jeweilige Buffer zurückgesetzt werden.
+ *
+ * \param	rxBuffer	Empfangs-Buffer der jeweiligen USART
+ */
+void XM_resetBuffer(DT_rxBuffer* rxBuffer) {
+	rxBuffer->getIndex = 0;
+	rxBuffer->putIndex = 0;
+	rxBuffer->lastByteLength = 0;
+	rxBuffer->overflow_flag = 0;
 }
 
 /**
@@ -289,7 +307,7 @@ void XM_USART_send(const USART_data_t* const usart_data, const DT_byte* const tx
  * \return	Länge des Antwortpakets
  */
 DT_byte XM_USART_receive(DT_rxBuffer* const rxBuffer, DT_byte* const dest) {
-	DEBUG_BYTE((rxBuffer->buffer, DT_RX_BUFFER_SIZE))
+	//DEBUG_BYTE((rxBuffer->buffer, DT_RX_BUFFER_SIZE))
 	// Cut off output message
 	if (rxBuffer->lastByteLength > 0) {
 		if ((rxBuffer->getIndex + rxBuffer->lastByteLength) < DT_RX_BUFFER_SIZE)
@@ -304,12 +322,16 @@ DT_byte XM_USART_receive(DT_rxBuffer* const rxBuffer, DT_byte* const dest) {
 	// Check errors
 	if ((rxBuffer->overflow_flag == 0x00) && (rxBuffer->putIndex
 			< rxBuffer->getIndex)) {
+		//DEBUG(("1",sizeof("1")))
 		return 0;
 	} else if ((rxBuffer->overflow_flag == 0x01) && (rxBuffer->putIndex
 			> rxBuffer->getIndex)) {
+		//DEBUG(("2",sizeof("1")))
 		return 0;
 	} else if ((rxBuffer->buffer[rxBuffer->getIndex] != 0xFF)
 			&& (rxBuffer->buffer[rxBuffer->getIndex + 1] != 0xFF)) {
+		//DEBUG(("3",sizeof("1")))
+
 		return 0;
 	}
 	// Some data received. All data received if checksum is correct!
@@ -324,26 +346,38 @@ DT_byte XM_USART_receive(DT_rxBuffer* const rxBuffer, DT_byte* const dest) {
 		}
 		// Complete length = (FF + FF + ID + LENGTH) + length
 		length += 4;
-		// Copy packet from buffer in destination array
-		DT_byte i;
-		for (i = 0; i < length; i++) {
-			if ((rxBuffer->getIndex + i) < DT_RX_BUFFER_SIZE)
-				dest[i] = rxBuffer->buffer[rxBuffer->getIndex + i];
-			else
-				dest[i] = rxBuffer->buffer[i + rxBuffer->getIndex
-						- DT_RX_BUFFER_SIZE];
-		}
-		// If packet is complete, set new getIndex
-		if (dest[length - 1] == DNX_getChecksum(dest, length)) {
-			if ((rxBuffer->getIndex + length) < DT_RX_BUFFER_SIZE)
-				rxBuffer->getIndex = rxBuffer->getIndex + length;
-			else {
-				rxBuffer->getIndex = length + rxBuffer->getIndex
-						- DT_RX_BUFFER_SIZE;
-				rxBuffer->overflow_flag = 0x00;
+		// Prüfen ob Paket bereits komplett im Buffer
+		if ((((rxBuffer->getIndex + length) <= DT_RX_BUFFER_SIZE)
+				&& (rxBuffer->getIndex + length <= rxBuffer->putIndex))
+				|| (((rxBuffer->getIndex + length) > DT_RX_BUFFER_SIZE)
+						&& (rxBuffer->getIndex + length >= rxBuffer->putIndex))) {
+
+			// Copy packet from buffer in destination array
+			DT_byte i;
+			for (i = 0; i < length; i++) {
+				if ((rxBuffer->getIndex + i) < DT_RX_BUFFER_SIZE)
+					dest[i] = rxBuffer->buffer[rxBuffer->getIndex + i];
+				else
+					dest[i] = rxBuffer->buffer[i + rxBuffer->getIndex
+							- DT_RX_BUFFER_SIZE];
 			}
-			return length;
+			// If packet is complete, set new getIndex
+			if (dest[length - 1] == DNX_getChecksum(dest, length)) {
+				if ((rxBuffer->getIndex + length) < DT_RX_BUFFER_SIZE)
+					rxBuffer->getIndex = rxBuffer->getIndex + length;
+				else {
+					rxBuffer->getIndex = length + rxBuffer->getIndex
+							- DT_RX_BUFFER_SIZE;
+					rxBuffer->overflow_flag = 0x00;
+				}
+				//DEBUG(("4",sizeof("1")))
+				return length;
+			} else {
+				//DEBUG(("5",sizeof("1")))
+				return 0;
+			}
 		} else {
+			//DEBUG(("6",sizeof("1")))
 			return 0;
 		}
 	}
@@ -360,7 +394,8 @@ DT_byte XM_USART_receive(DT_rxBuffer* const rxBuffer, DT_byte* const dest) {
  *
  * \return	Länge des Antwortpakets
  */
-DT_byte XM_REMOTE_USART_receive(DT_rxBuffer* const rxBuffer, DT_byte* const dest) {
+DT_byte XM_REMOTE_USART_receive(DT_rxBuffer* const rxBuffer,
+		DT_byte* const dest) {
 	//DEBUG_BYTE((rxBuffer->buffer, DT_RX_BUFFER_SIZE))
 	// Cut off output message
 	if (rxBuffer->lastByteLength > 0) {
@@ -408,7 +443,7 @@ DT_byte XM_REMOTE_USART_receive(DT_rxBuffer* const rxBuffer, DT_byte* const dest
 				rxBuffer->overflow_flag = 0x00;
 			}
 			return length;
-		}else
+		} else
 			return 0;
 	}
 }

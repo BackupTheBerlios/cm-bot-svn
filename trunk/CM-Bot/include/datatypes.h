@@ -41,9 +41,9 @@ typedef struct {
  * \brief	Ring-Buffer zum Empfangen von Daten einer USART.
  */
 typedef struct {
-	DT_byte putIndex; /**< Index, ab dem neue Daten eingefügt werden. */
-	DT_byte getIndex; /**< Index, ab dem Daten gelesen werden. */
-	DT_byte lastByteLength; /**< Größe des zuletzt gesendeten Pakets. */
+	DT_size putIndex; /**< Index, ab dem neue Daten eingefügt werden. */
+	DT_size getIndex; /**< Index, ab dem Daten gelesen werden. */
+	DT_size lastByteLength; /**< Größe des zuletzt gesendeten Pakets. */
 	DT_byte overflow_flag; /**< Zeigt an, ob neue Daten am Anfang geschrieben und alte Daten am Ende gelesen werden. */
 	DT_byte buffer[DT_RX_BUFFER_SIZE]; /**< Feld für gespeicherte Daten. */
 } DT_rxBuffer;
