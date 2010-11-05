@@ -49,7 +49,7 @@ DT_byte DNX_getChecksum(const DT_byte* const packet, DT_size l) {
 	return ~chksm;
 }
 
-/**
+/**ToDo
  * \brief 	USART-Empfangsmethode.
  *
  * 			Diese Methode liest den jeweiligen USART-Buffer aus und prüft,
@@ -115,6 +115,7 @@ DT_byte DNX_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 		}
 
 		// Pruefen ob Checksumme korrekt ist
+		// ToDo: im Fehlerfall Buffer zurücksetzen
 		if (dest[length - 1] != DNX_getChecksum(dest, length)) {
 			DEBUG(("cks",sizeof("cks")))
 			DEBUG_BYTE((dest, length))

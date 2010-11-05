@@ -9,6 +9,7 @@
 #define REMOTE_H_
 
 #include "datatypes.h"
+#include "usart_driver.h"
 
 // Commands
 #define B_NON_PRESSED 0x0000
@@ -26,7 +27,7 @@
 #define B_6 0x0200
 
 
-DT_cmd getInstruction();
-DT_byte remoteReceive(DT_byte*);
+DT_cmd RMT_getInstruction();
+DT_byte RMT_receive(USART_data_t* const, DT_byte* const);
 
 #endif /* REMOTE_H_ */
