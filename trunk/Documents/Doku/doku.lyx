@@ -756,9 +756,379 @@ Inverse Kinematik
 \end_layout
 
 \begin_layout Standard
+Die Lösung des inversen kinematischen Problems wird durch ein geometrisches
+ Verfahren berechnet.
+ Durch Abbildung des 3-dimensionalen Koordinatensystems auf zwei 2-dimensionale
+ Koordinatensyteme können die Gelenkwinkel mit Hilfe der Trigonometrie berechnet
+ werden.
+\end_layout
 
-\lang english
-geometrisches Lösungsverfahren
+\begin_layout Standard
+In den folgenden Formeln und Erläuterungen werden diese Bezeichnungen verwendet:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $H\triangleq$
+\end_inset
+
+ Hüftgelenk, 
+\begin_inset Formula $\Theta_{1}\triangleq$
+\end_inset
+
+ Winkel des Hüftgelenks
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $K\triangleq$
+\end_inset
+
+ Kniegelenk, 
+\begin_inset Formula $\Theta_{2}\triangleq$
+\end_inset
+
+ Winkel des Kniegelenks
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $F\triangleq$
+\end_inset
+
+ Fußgelenk, 
+\begin_inset Formula $\Theta_{3}\triangleq$
+\end_inset
+
+ Winkel des Fußgelenks
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $T\triangleq$
+\end_inset
+
+ Endpunkt
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $HK\triangleq$
+\end_inset
+
+ Abstand bzw.
+ Strecke Hüft- zu Kniegelenk
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $KF\triangleq$
+\end_inset
+
+ Abstand bzw.
+ Strecke Knie- zu Fußgelenk
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $FT\triangleq$
+\end_inset
+
+ Abstand bzw.
+ Strecke Fußgelenk zu Endpunkt
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $P_{1}\left(\begin{array}{c}
+x_{1}\\
+y_{1}\\
+z_{1}\end{array}\right)\triangleq$
+\end_inset
+
+ anzufahrender Punkt
+\end_layout
+
+\begin_layout Subsection*
+Schritt 1
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Bilder/Inverse_Kinematik_01.png
+	lyxscale 20
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Schritt 1: x-y-Ebene
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Schritt-1:-x-y-Ebene"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Schritt-1:-x-y-Ebene"
+
+\end_inset
+
+ ist der erste Schritt der Berechnung dargestellt.
+ Hierbei wird das Bein in der x-y-Ebene ausgerichet, sodass eine gedachte
+ Gerade, welche durch alle Achsen eines Beines verläuft, den anzufahrenden
+ Punkt in dieser Ebene schneidet.
+ Dafür muss der Winkel für das Hüftgelenk berechnet werden.
+\end_layout
+
+\begin_layout Standard
+Die Strecken 
+\begin_inset Formula $x_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $y_{1}$
+\end_inset
+
+ und 
+\begin_inset Formula $HK$
+\end_inset
+
+ sind bekannt.
+ Somit können der Winkel für das Hüftgelenk 
+\begin_inset Formula $\Theta_{1}$
+\end_inset
+
+ und die Strecke 
+\begin_inset Formula $HT$
+\end_inset
+
+ oder kurz 
+\begin_inset Formula $h$
+\end_inset
+
+ berechnet werden:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\Theta_{1}=\arctan\left(\frac{y_{1}}{x_{1}}\right)$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $h=\sqrt{x_{1}\text{²}+y_{1}\text{²}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Schritt 2
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Bilder/Inverse_Kinematik_02.png
+	lyxscale 20
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Schritt 2: h-z-Ebene
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Schritt-2:-h-z-Ebene"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Schritt-2:-h-z-Ebene"
+
+\end_inset
+
+ ist der zweite Schritt der Berechnung dargestellt.
+ Hierbei bildet die gedachte Gerade, aus dem Schritt 1, eine neue Koordinatenach
+se 
+\begin_inset Formula $h'$
+\end_inset
+
+.
+ Das Kniegelenk ist der Nullpunkt auf dieser Achse.
+ Die zweite Achse in dem gedachten Koordinatensystem bildet die z-Achse.
+ Um den Punkt 
+\begin_inset Formula $P_{1}$
+\end_inset
+
+ anfahren zu können, muss mit Hilfe des Knie- und des Fußgelenks noch die
+ 
+\begin_inset Quotes pld
+\end_inset
+
+Entfernung
+\begin_inset Quotes prd
+\end_inset
+
+ auf der h'-Achse, sowie die 
+\begin_inset Quotes pld
+\end_inset
+
+Höhe
+\begin_inset Quotes prd
+\end_inset
+
+ auf der z-Achse eingestellt werden.
+ Da in dieser Ebene zwei Freiheitsgrade vorhanden sind, kann der Punkt 
+\begin_inset Formula $P_{1}$
+\end_inset
+
+ auf zwei Wegen angefahren werden.
+ In dieser Berechnung wird ein Weg fest vorgegeben.
+\end_layout
+
+\begin_layout Standard
+Im zweiten Schritt sind die Strecken 
+\begin_inset Formula $KF$
+\end_inset
+
+, 
+\begin_inset Formula $FT$
+\end_inset
+
+ und 
+\begin_inset Formula $z_{1}$
+\end_inset
+
+ bekannt.
+ Um die 
+\begin_inset Quotes pld
+\end_inset
+
+Entfernung
+\begin_inset Quotes prd
+\end_inset
+
+ auf der h'-Achse anfahren zu können, muss zunächst 
+\begin_inset Formula $h_{2}$
+\end_inset
+
+ berechnet werden.
+ Anschließend können die Winkel 
+\begin_inset Formula $\Theta_{2}$
+\end_inset
+
+ für das Kniegelenk und 
+\begin_inset Formula $\Theta_{3}$
+\end_inset
+
+ für das Fußgelenk berechnet werden.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $h_{2}=h-HK$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $h_{3}=\sqrt{h_{2}\text{²}+z_{1}\text{²}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\alpha=\arccos\left(\frac{-\left(h_{3}\text{²}\right)+FT\text{²}+KF\text{²}}{2*FT*KF}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\beta=\arcsin\left(\frac{FT/h_{3}}{\sin\alpha}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\gamma=\arcsin\left(\frac{|z_{1}|}{h_{3}}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\Theta_{2}=\gamma-\beta$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\Theta_{3}=\pi-\alpha$
+\end_inset
+
+
 \end_layout
 
 \end_body
