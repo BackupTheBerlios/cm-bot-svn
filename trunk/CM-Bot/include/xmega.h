@@ -38,6 +38,7 @@ USART_data_t XM_servo_data_L;	/**< USART-Struktur für linke Dynamixel. */
 USART_data_t XM_servo_data_R;	/**< USART-Struktur für rechte Dynamixel. */
 USART_data_t XM_debug_data;		/**< USART-Struktur für Debug-Ausgaben. */
 USART_data_t XM_remote_data;	/**< USART-Struktur für Remote-Controller. */
+USART_data_t XM_com_data;		/**< USART-Struktur für Communication. */
 
 #define XM_USART_FAILURE  0xFF /**< signalisiert Fehler beim Empfangen */
 

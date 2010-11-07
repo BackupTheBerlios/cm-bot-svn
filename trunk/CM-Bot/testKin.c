@@ -4,13 +4,14 @@
  * \brief	Testprogramm für die Kinematik.
  */
 
-#define TEST_ON
+#define TEST_OFF
 #ifdef TEST_ON
 
 #include "include/kinematics.h"
 #include "include/utils.h"
 #include "include/xmega.h"
 #include "include/dynamixel.h"
+#include "include/communication.h"
 
 int main() {
 	XM_init_cpu();
@@ -22,6 +23,7 @@ int main() {
 	DT_point p1, p2;
 
 	DNX_getConnectedIDs(&leg_r, &leg_l);
+	COM_getCpuID(&leg_r);
 
 	p1.x = 77.8553;
 	p1.y = 77.8553;
