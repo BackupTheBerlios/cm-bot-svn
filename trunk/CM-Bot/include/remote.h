@@ -13,15 +13,15 @@
 
 DT_cmd RMT_getCommand();
 DT_byte RMT_receive(USART_data_t* const, DT_byte* const);
-DT_bool isUpPressed(DT_cmd);
-DT_bool isDownPressed(DT_cmd);
-DT_bool isLeftPressed(DT_cmd);
-DT_bool isRightPressed(DT_cmd);
-DT_bool isButton1Pressed(DT_cmd);
-DT_bool isButton2Pressed(DT_cmd);
-DT_bool isButton3Pressed(DT_cmd);
-DT_bool isButton4Pressed(DT_cmd);
-DT_bool isButton5Pressed(DT_cmd);
-DT_bool isButton6Pressed(DT_cmd);
+DT_bool RMT_isUpPressed(DT_cmd);
+DT_bool RMT_isDownPressed(DT_cmd);
+DT_bool RMT_isLeftPressed(DT_cmd);
+DT_bool RMT_isRightPressed(DT_cmd);
+DT_bool RMT_isButton1Pressed(DT_cmd);
+DT_bool RMT_isButton2Pressed(DT_cmd);
+DT_bool RMT_isButton3Pressed(DT_cmd);
+DT_bool RMT_isButton4Pressed(DT_cmd);
+DT_bool RMT_isButton5Pressed(DT_cmd);
+DT_bool RMT_isButton6Pressed(DT_cmd);
 
 #endif /* REMOTE_H_ */

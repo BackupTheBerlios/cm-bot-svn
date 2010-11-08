@@ -128,20 +128,20 @@ void XM_init_remote() {
 			USART_PMODE_DISABLED_gc, false);
 
 	// Enable RXC interrupt
-	//USART_RxdInterruptLevel_Set(XM_remote_data.usart, USART_RXCINTLVL_MED_gc);
+	USART_RxdInterruptLevel_Set(XM_remote_data.usart, USART_RXCINTLVL_LO_gc);
 
 	// Set Baudrate
 	USART_Baudrate_Set(XM_remote_data.usart, 34, 0); // 57.600 bps (BSEL = 34)
 
 	// Enable RX and TX
 	USART_Rx_Enable(XM_remote_data.usart);
-	USART_Tx_Enable(XM_remote_data.usart);
+	//USART_Tx_Enable(XM_remote_data.usart);
 
 	// Flush Receive Buffer
 	USART_GetChar(XM_remote_data.usart); // Flush Receive Buffer
 
 	// aktiviere Medium Level Interrupts
-	PMIC.CTRL |= PMIC_MEDLVLEX_bm;
+	PMIC.CTRL |= PMIC_LOLVLEX_bm;
 
 	sei();
 }
@@ -198,6 +198,8 @@ void XM_init_dnx() {
 	USART_GetChar(XM_servo_data_R.usart); // Flush Receive Buffer
 	USART_GetChar(XM_servo_data_L.usart); // Flush Receive Buffer
 
+	// Enable PMIC interrupt level high (für TX-Complete-Interrupt)
+	//PMIC.CTRL |= PMIC_HILVLEX_bm;
 	// Enable PMIC interrupt level low
 	PMIC.CTRL |= PMIC_LOLVLEX_bm;
 	// Enable Round-Robin-Scheduling
@@ -256,7 +258,7 @@ void XM_USART_send(USART_data_t* const usart_data, const DT_byte* const txData,
 		DT_size bytes) {
 	DT_size i = 0;
 
-	DEBUG_BYTE((txData, bytes))
+	//DEBUG_BYTE((txData, bytes))
 
 	if (usart_data->usart == &XM_USART_DEBUG)
 		return;
@@ -270,9 +272,9 @@ void XM_USART_send(USART_data_t* const usart_data, const DT_byte* const txData,
 	if (usart_data->usart == &XM_USART_SERVO_R) {
 		XM_PORT_SERVO_R.OUTCLR = XM_OE_MASK;
 	}
-	if(usart_data->usart == &XM_USART_COM){
+	/*if(usart_data->usart == &XM_USART_COM){
 		XM_PORT_COM.OUTCLR = XM_OE_MASK;
-	}
+	}*/
 	// Send data
 	while (i < bytes) {
 		bool byteToBuffer;

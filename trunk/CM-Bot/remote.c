@@ -8,7 +8,6 @@
 #include "include/xmega.h"
 #include "include/utils.h"
 
-
 // Commands
 #define B_NON_PRESSED 0x0000
 
@@ -24,7 +23,6 @@
 #define B_5 0x0100
 #define B_6 0x0200
 
-
 /* Instruction aus dem High- und Low-Teil zusammensetzen
  * Bsp:
  * 	Paket für B_2:
@@ -38,17 +36,24 @@
  *      L = Paket[2]
  */
 DT_cmd RMT_getCommand() {
-	DT_byte result[DT_RESULT_BUFFER_SIZE];
-	DT_cmd cmd = 0x0000, tmp_cmd = 0xFFFF;
+	DT_byte result[DT_RESULT_BUFFER_SIZE], i;
+	DT_cmd cmd = 0x0000;
+	DT_cmd tmp_cmd = 0xFFFF;
 	DT_bool button_release = false;
+	DT_size timeout = 65000;
+	for(i=0; i<DT_RESULT_BUFFER_SIZE; i++)
+		result[i] = 0x00;
 	RMT_receive(&XM_remote_data, result);
 	cmd = (result[4] << 8) | result[2];
-	while (!button_release) {
-		//remoteReceive(result);
+
+	/*while (!button_release && timeout > 0) {
+		RMT_receive(&XM_remote_data, result);
 		tmp_cmd = (result[4] << 8) | result[2];
 		if (tmp_cmd == B_NON_PRESSED)
 			button_release = true;
-	}
+		timeout--;
+	}*/
+	if(cmd!=0)DEBUG_BYTE((&cmd,sizeof(&cmd)))
 	return cmd;
 }
 
@@ -68,7 +73,7 @@ DT_byte RMT_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 
 	// Sind Daten vorhanden
 	if (!USART_RXBufferData_Available(usart_data)) {
-		DEBUG(("RMT_nd",sizeof("RMT_nd")))
+		//DEBUG(("RMT_nd",sizeof("RMT_nd")))
 		return 0;
 	}
 	// Byte #1 und Byte #2 muessen laut Protokoll 0xFF und 0x55 sein
@@ -88,11 +93,13 @@ DT_byte RMT_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 			DEBUG(("RMT_uc",sizeof("RMT_uc")))
 			return 0;
 		}
+		DEBUG_BYTE((buffer->RX, 127))
 		// Copy packet from buffer in destination array
 		DT_byte i;
 		for (i = 0; i < length; i++) {
 			dest[i] = USART_RXBuffer_GetByte(usart_data);
 		}
+		DEBUG_BYTE((dest, 127))
 
 		DEBUG(("RMT_ok",sizeof("RMT_ok")))
 		return length;
@@ -105,10 +112,10 @@ DT_byte RMT_receive(USART_data_t* const usart_data, DT_byte* const dest) {
  * 			Achtung: cmd muss zunächst durch getCommand abgerufen werden.
  *
  * \param	cmd		16-Bit Command-Wert
-*
+ *
  * \return	Bool
  */
-DT_bool isUpPressed(DT_cmd cmd) {
+DT_bool RMT_isUpPressed(DT_cmd cmd) {
 	if ((cmd & B_U) == B_U)
 		return true;
 	else
@@ -121,10 +128,10 @@ DT_bool isUpPressed(DT_cmd cmd) {
  * 			Achtung: cmd muss zunächst durch getCommand abgerufen werden.
  *
  * \param	cmd		16-Bit Command-Wert
-*
+ *
  * \return	Bool
  */
-DT_bool isDownPressed(DT_cmd cmd) {
+DT_bool RMT_isDownPressed(DT_cmd cmd) {
 	if ((cmd & B_D) == B_D)
 		return true;
 	else
@@ -137,16 +144,15 @@ DT_bool isDownPressed(DT_cmd cmd) {
  * 			Achtung: cmd muss zunächst durch getCommand abgerufen werden.
  *
  * \param	cmd		16-Bit Command-Wert
-*
+ *
  * \return	Bool
  */
-DT_bool isLeftPressed(DT_cmd cmd) {
+DT_bool RMT_isLeftPressed(DT_cmd cmd) {
 	if ((cmd & B_L) == B_L)
 		return true;
 	else
 		return false;
 }
-
 
 /*
  * \brief 	Ist Taster Right gedrückt.
@@ -154,10 +160,10 @@ DT_bool isLeftPressed(DT_cmd cmd) {
  * 			Achtung: cmd muss zunächst durch getCommand abgerufen werden.
  *
  * \param	cmd		16-Bit Command-Wert
-*
+ *
  * \return	Bool
  */
-DT_bool isRightPressed(DT_cmd cmd) {
+DT_bool RMT_isRightPressed(DT_cmd cmd) {
 	if ((cmd & B_R) == B_R)
 		return true;
 	else
@@ -170,10 +176,10 @@ DT_bool isRightPressed(DT_cmd cmd) {
  * 			Achtung: cmd muss zunächst durch getCommand abgerufen werden.
  *
  * \param	cmd		16-Bit Command-Wert
-*
+ *
  * \return	Bool
  */
-DT_bool isButton1Pressed(DT_cmd cmd) {
+DT_bool RMT_isButton1Pressed(DT_cmd cmd) {
 	if ((cmd & B_1) == B_1)
 		return true;
 	else
@@ -186,10 +192,10 @@ DT_bool isButton1Pressed(DT_cmd cmd) {
  * 			Achtung: cmd muss zunächst durch getCommand abgerufen werden.
  *
  * \param	cmd		16-Bit Command-Wert
-*
+ *
  * \return	Bool
  */
-DT_bool isButton2Pressed(DT_cmd cmd) {
+DT_bool RMT_isButton2Pressed(DT_cmd cmd) {
 	if ((cmd & B_2) == B_2)
 		return true;
 	else
@@ -202,10 +208,10 @@ DT_bool isButton2Pressed(DT_cmd cmd) {
  * 			Achtung: cmd muss zunächst durch getCommand abgerufen werden.
  *
  * \param	cmd		16-Bit Command-Wert
-*
+ *
  * \return	Bool
  */
-DT_bool isButton3Pressed(DT_cmd cmd) {
+DT_bool RMT_isButton3Pressed(DT_cmd cmd) {
 	if ((cmd & B_3) == B_3)
 		return true;
 	else
@@ -218,10 +224,10 @@ DT_bool isButton3Pressed(DT_cmd cmd) {
  * 			Achtung: cmd muss zunächst durch getCommand abgerufen werden.
  *
  * \param	cmd		16-Bit Command-Wert
-*
+ *
  * \return	Bool
  */
-DT_bool isButton4Pressed(DT_cmd cmd) {
+DT_bool RMT_isButton4Pressed(DT_cmd cmd) {
 	if ((cmd & B_4) == B_4)
 		return true;
 	else
@@ -234,10 +240,10 @@ DT_bool isButton4Pressed(DT_cmd cmd) {
  * 			Achtung: cmd muss zunächst durch getCommand abgerufen werden.
  *
  * \param	cmd		16-Bit Command-Wert
-*
+ *
  * \return	Bool
  */
-DT_bool isButton5Pressed(DT_cmd cmd) {
+DT_bool RMT_isButton5Pressed(DT_cmd cmd) {
 	if ((cmd & B_5) == B_5)
 		return true;
 	else
@@ -250,10 +256,10 @@ DT_bool isButton5Pressed(DT_cmd cmd) {
  * 			Achtung: cmd muss zunächst durch getCommand abgerufen werden.
  *
  * \param	cmd		16-Bit Command-Wert
-*
+ *
  * \return	Bool
  */
-DT_bool isButton6Pressed(DT_cmd cmd) {
+DT_bool RMT_isButton6Pressed(DT_cmd cmd) {
 	if ((cmd & B_6) == B_6)
 		return true;
 	else
