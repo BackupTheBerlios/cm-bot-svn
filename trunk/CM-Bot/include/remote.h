@@ -11,23 +11,17 @@
 #include "datatypes.h"
 #include "usart_driver.h"
 
-// Commands
-#define B_NON_PRESSED 0x0000
-
-#define B_U 0x0001
-#define B_D 0x0002
-#define B_L 0x0004
-#define B_R 0x0008
-
-#define B_1 0x0010
-#define B_2 0x0020
-#define B_3 0x0040
-#define B_4 0x0080
-#define B_5 0x0100
-#define B_6 0x0200
-
-
-DT_cmd RMT_getInstruction();
+DT_cmd RMT_getCommand();
 DT_byte RMT_receive(USART_data_t* const, DT_byte* const);
+DT_bool isUpPressed(DT_cmd);
+DT_bool isDownPressed(DT_cmd);
+DT_bool isLeftPressed(DT_cmd);
+DT_bool isRightPressed(DT_cmd);
+DT_bool isButton1Pressed(DT_cmd);
+DT_bool isButton2Pressed(DT_cmd);
+DT_bool isButton3Pressed(DT_cmd);
+DT_bool isButton4Pressed(DT_cmd);
+DT_bool isButton5Pressed(DT_cmd);
+DT_bool isButton6Pressed(DT_cmd);
 
 #endif /* REMOTE_H_ */

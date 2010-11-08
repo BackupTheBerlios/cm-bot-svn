@@ -8,6 +8,23 @@
 #include "include/xmega.h"
 #include "include/utils.h"
 
+
+// Commands
+#define B_NON_PRESSED 0x0000
+
+#define B_U 0x0001
+#define B_D 0x0002
+#define B_L 0x0004
+#define B_R 0x0008
+
+#define B_1 0x0010
+#define B_2 0x0020
+#define B_3 0x0040
+#define B_4 0x0080
+#define B_5 0x0100
+#define B_6 0x0200
+
+
 /* Instruction aus dem High- und Low-Teil zusammensetzen
  * Bsp:
  * 	Paket für B_2:
@@ -20,7 +37,7 @@
  *      H = Paket[4]
  *      L = Paket[2]
  */
-DT_cmd RMT_getInstruction() {
+DT_cmd RMT_getCommand() {
 	DT_byte result[DT_RESULT_BUFFER_SIZE];
 	DT_cmd cmd = 0x0000, tmp_cmd = 0xFFFF;
 	DT_bool button_release = false;
@@ -82,72 +99,163 @@ DT_byte RMT_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 	}
 }
 
-#ifdef todo
 /*
- * /**
- * \brief 	USART-Empfangsmethode für Remote-Controller.
+ * \brief 	Ist Taster Up gedrückt.
  *
- * 			Diese Methode liest den Remote-USART-Buffer aus und prüft,
- * 			ob ein vollständiges Paket empfangen wurde.
+ * 			Achtung: cmd muss zunächst durch getCommand abgerufen werden.
  *
- * \param	rxBuffer	Empfangs-Buffer der jeweiligen USART
- * \param	dest		Byte-Array für Antwort-Paket
- *
- * \return	Länge des Antwortpakets
+ * \param	cmd		16-Bit Command-Wert
+*
+ * \return	Bool
  */
-DT_byte XM_REMOTE_USART_receive(DT_rxBuffer* const rxBuffer,
-		DT_byte* const dest) {
-	//DEBUG_BYTE((rxBuffer->buffer, DT_RX_BUFFER_SIZE))
-	// Cut off output message
-	if (rxBuffer->lastPacketLength > 0) {
-		if ((rxBuffer->getIndex + rxBuffer->lastPacketLength)
-				< DT_RX_BUFFER_SIZE)
-		rxBuffer->getIndex += rxBuffer->lastPacketLength;
-		else {
-			rxBuffer->getIndex = rxBuffer->lastPacketLength
-			+ rxBuffer->getIndex - DT_RX_BUFFER_SIZE;
-			rxBuffer->overflow_flag = 0x00;
-		}
-		rxBuffer->lastPacketLength = 0;
-	}
-	// Check errors
-	if ((rxBuffer->overflow_flag == 0x00) && (rxBuffer->putIndex
-					< rxBuffer->getIndex)) {
-		return 0;
-	} else if ((rxBuffer->overflow_flag == 0x01) && (rxBuffer->putIndex
-					> rxBuffer->getIndex)) {
-		return 0;
-	} else if ((rxBuffer->buffer[rxBuffer->getIndex] != 0xFF)
-			&& rxBuffer->buffer[rxBuffer->getIndex + 1] != 0x55) {
-		return 0;
-	}
-	// Some data received.
-	else {
-		DT_byte length;
-		// length = (FF + 55 + LL + !LL + HH + !HH)
-		length = 6;
-		// Copy packet from buffer in destination array
-		DT_byte i;
-		if (rxBuffer->getIndex + length <= rxBuffer->putIndex) {
-			for (i = 0; i < length; i++) {
-				if ((rxBuffer->getIndex + i) < DT_RX_BUFFER_SIZE)
-				dest[i] = rxBuffer->buffer[rxBuffer->getIndex + i];
-				else
-				dest[i] = rxBuffer->buffer[i + rxBuffer->getIndex
-				- DT_RX_BUFFER_SIZE];
-			}
-			// If packet is complete, set new getIndex
-			if ((rxBuffer->getIndex + length) < DT_RX_BUFFER_SIZE)
-			rxBuffer->getIndex = rxBuffer->getIndex + length;
-			else {
-				rxBuffer->getIndex = length + rxBuffer->getIndex
-				- DT_RX_BUFFER_SIZE;
-				rxBuffer->overflow_flag = 0x00;
-			}
-			return length;
-		} else
-		return 0;
-	}
+DT_bool isUpPressed(DT_cmd cmd) {
+	if ((cmd & B_U) == B_U)
+		return true;
+	else
+		return false;
 }
 
-#endif
+/*
+ * \brief 	Ist Taster Down gedrückt.
+ *
+ * 			Achtung: cmd muss zunächst durch getCommand abgerufen werden.
+ *
+ * \param	cmd		16-Bit Command-Wert
+*
+ * \return	Bool
+ */
+DT_bool isDownPressed(DT_cmd cmd) {
+	if ((cmd & B_D) == B_D)
+		return true;
+	else
+		return false;
+}
+
+/*
+ * \brief 	Ist Taster Left gedrückt.
+ *
+ * 			Achtung: cmd muss zunächst durch getCommand abgerufen werden.
+ *
+ * \param	cmd		16-Bit Command-Wert
+*
+ * \return	Bool
+ */
+DT_bool isLeftPressed(DT_cmd cmd) {
+	if ((cmd & B_L) == B_L)
+		return true;
+	else
+		return false;
+}
+
+
+/*
+ * \brief 	Ist Taster Right gedrückt.
+ *
+ * 			Achtung: cmd muss zunächst durch getCommand abgerufen werden.
+ *
+ * \param	cmd		16-Bit Command-Wert
+*
+ * \return	Bool
+ */
+DT_bool isRightPressed(DT_cmd cmd) {
+	if ((cmd & B_R) == B_R)
+		return true;
+	else
+		return false;
+}
+
+/*
+ * \brief 	Ist Taster 1 gedrückt.
+ *
+ * 			Achtung: cmd muss zunächst durch getCommand abgerufen werden.
+ *
+ * \param	cmd		16-Bit Command-Wert
+*
+ * \return	Bool
+ */
+DT_bool isButton1Pressed(DT_cmd cmd) {
+	if ((cmd & B_1) == B_1)
+		return true;
+	else
+		return false;
+}
+
+/*
+ * \brief 	Ist Taster 2 gedrückt.
+ *
+ * 			Achtung: cmd muss zunächst durch getCommand abgerufen werden.
+ *
+ * \param	cmd		16-Bit Command-Wert
+*
+ * \return	Bool
+ */
+DT_bool isButton2Pressed(DT_cmd cmd) {
+	if ((cmd & B_2) == B_2)
+		return true;
+	else
+		return false;
+}
+
+/*
+ * \brief 	Ist Taster 3 gedrückt.
+ *
+ * 			Achtung: cmd muss zunächst durch getCommand abgerufen werden.
+ *
+ * \param	cmd		16-Bit Command-Wert
+*
+ * \return	Bool
+ */
+DT_bool isButton3Pressed(DT_cmd cmd) {
+	if ((cmd & B_3) == B_3)
+		return true;
+	else
+		return false;
+}
+
+/*
+ * \brief 	Ist Taster 4 gedrückt.
+ *
+ * 			Achtung: cmd muss zunächst durch getCommand abgerufen werden.
+ *
+ * \param	cmd		16-Bit Command-Wert
+*
+ * \return	Bool
+ */
+DT_bool isButton4Pressed(DT_cmd cmd) {
+	if ((cmd & B_4) == B_4)
+		return true;
+	else
+		return false;
+}
+
+/*
+ * \brief 	Ist Taster 5 gedrückt.
+ *
+ * 			Achtung: cmd muss zunächst durch getCommand abgerufen werden.
+ *
+ * \param	cmd		16-Bit Command-Wert
+*
+ * \return	Bool
+ */
+DT_bool isButton5Pressed(DT_cmd cmd) {
+	if ((cmd & B_5) == B_5)
+		return true;
+	else
+		return false;
+}
+
+/*
+ * \brief 	Ist Taster 6 gedrückt.
+ *
+ * 			Achtung: cmd muss zunächst durch getCommand abgerufen werden.
+ *
+ * \param	cmd		16-Bit Command-Wert
+*
+ * \return	Bool
+ */
+DT_bool isButton6Pressed(DT_cmd cmd) {
+	if ((cmd & B_6) == B_6)
+		return true;
+	else
+		return false;
+}

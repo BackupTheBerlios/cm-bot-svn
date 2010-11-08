@@ -10,6 +10,11 @@
 #include "datatypes.h"
 #include "usart_driver.h"
 
+#define MASTER	1
+#define SLAVE1	2
+#define SLAVE2	3
+#define NOCPUID	4
+
 DT_byte COM_getCpuID(DT_leg*);
 DT_byte COM_receive(USART_data_t* const, DT_byte* const) ;
 DT_byte COM_send(DT_byte* const, DT_size, DT_byte* const);
