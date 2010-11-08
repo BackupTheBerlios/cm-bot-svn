@@ -270,7 +270,9 @@ void XM_USART_send(USART_data_t* const usart_data, const DT_byte* const txData,
 	if (usart_data->usart == &XM_USART_SERVO_R) {
 		XM_PORT_SERVO_R.OUTCLR = XM_OE_MASK;
 	}
-
+	if(usart_data->usart == &XM_USART_COM){
+		XM_PORT_COM.OUTCLR = XM_OE_MASK;
+	}
 	// Send data
 	while (i < bytes) {
 		bool byteToBuffer;
@@ -333,6 +335,31 @@ ISR(USARTD0_DRE_vect)
 ISR( USARTD0_RXC_vect)
 {
 	USART_RXComplete(&XM_servo_data_R);
+}
+
+/**
+ * \brief 	ISR für abgeschlossenen Sendevorgang der USARTD0 (SERVO R).
+ */
+ISR( USARTE0_TXC_vect)
+{
+	USART_TxdInterruptLevel_Set(&USARTE0, USART_TXCINTLVL_OFF_gc);
+	XM_PORT_COM.OUTSET = XM_OE_MASK;
+}
+
+/**
+ * \brief 	ISR für Sendebereitschaft der USARTD0 (SERVO R).
+ */
+ISR(USARTE0_DRE_vect)
+{
+	USART_DataRegEmpty(&XM_com_data);
+}
+
+/**
+ * \brief 	ISR für Empfangsvorgang der USARTD0 (SERVO R).
+ */
+ISR( USARTE0_RXC_vect)
+{
+	USART_RXComplete(&XM_com_data);
 }
 
 /**
