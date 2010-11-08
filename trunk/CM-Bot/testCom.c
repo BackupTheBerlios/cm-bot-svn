@@ -16,6 +16,8 @@
 int main() {
 	XM_init_cpu();
 	XM_init_dnx();
+	XM_init_com();
+	XM_init_remote();
 
 	XM_LED_ON
 

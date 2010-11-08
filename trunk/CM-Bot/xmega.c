@@ -15,6 +15,7 @@
  * \brief 	Initialisierung der CPU.
  */
 void XM_init_cpu() {
+	cli();
 	/******************************************************************
 	 * System Clock 32MHz (XOSC Quarz 16MHz, PLL Faktor 2)
 	 ******************************************************************/
@@ -105,13 +106,14 @@ void XM_init_cpu() {
 	// Init Taster
 	SWITCHPORT.DIRCLR = SWITCHMASK;
 	SWITCHPORT.PIN2CTRL |= (0b011 << 3); // Pullup PQ2 aktivieren
+
+	sei();
 }
 
 /**
  * \brief 	Initialisiert den Zigbee-Fernsteuerung.
  */
 void XM_init_remote() {
-	// Init buffer
 	cli();
 	// Set pins for TX and RX
 	XM_PORT_REMOTE.DIRSET = PIN7_bm; // Pin6 of PortC (TXD0) is output
@@ -209,7 +211,33 @@ void XM_init_dnx() {
  * \brief 	Initialisiert USARTs für die CPU-Kommunikation.
  */
 void XM_init_com() {
-	// TODO
+	cli();
+	// Set pins for TX and RX
+	XM_PORT_COM.DIRSET = PIN3_bm; // Pin6 of PortC (TXD0) is output
+	XM_PORT_COM.DIRCLR = PIN2_bm; // Pin7 of PortC (RXD0) is input
+
+	// Use USARTC0 / USARTD0 and initialize buffers
+	USART_InterruptDriver_Initialize(&XM_com_data, &XM_USART_COM,
+			USART_DREINTLVL_OFF_gc);
+
+	// 8 Data bits, No Parity, 1 Stop bit
+	USART_Format_Set(XM_com_data.usart, USART_CHSIZE_8BIT_gc,
+			USART_PMODE_DISABLED_gc, false);
+
+	// Enable RXC interrupt
+	//USART_RxdInterruptLevel_Set(XM_com_data.usart, USART_RXCINTLVL_MED_gc);
+
+	// Set Baudrate
+	USART_Baudrate_Set(XM_com_data.usart, 1, 0); // 57.600 bps (BSEL = 34)
+
+	// Enable RX and TX
+	USART_Rx_Enable(XM_com_data.usart);
+	USART_Tx_Enable(XM_com_data.usart);
+
+	// Flush Receive Buffer
+	USART_GetChar(XM_com_data.usart); // Flush Receive Buffer
+
+	sei();
 }
 
 /**
@@ -224,9 +252,9 @@ void XM_init_com() {
  * \param	txData		Byte-Array mit zu sendendem Paket
  * \param	bytes 		Länge des zu sendenden Pakets
  */
-void XM_USART_send(USART_data_t* const usart_data,
-		const DT_byte* const txData, DT_size bytes) {
-	DT_size i=0;
+void XM_USART_send(USART_data_t* const usart_data, const DT_byte* const txData,
+		DT_size bytes) {
+	DT_size i = 0;
 
 	DEBUG_BYTE((txData, bytes))
 
@@ -247,7 +275,7 @@ void XM_USART_send(USART_data_t* const usart_data,
 	while (i < bytes) {
 		bool byteToBuffer;
 		byteToBuffer = USART_TXBuffer_PutByte(usart_data, txData[i]);
-		if(byteToBuffer){
+		if (byteToBuffer) {
 			i++;
 		}
 	}
@@ -273,7 +301,6 @@ ISR(USARTC0_DRE_vect)
 {
 	USART_DataRegEmpty(&XM_servo_data_L);
 }
-
 
 /**
  * \brief 	ISR für Empfangsvorgang der USARTC0 (SERVO L).
