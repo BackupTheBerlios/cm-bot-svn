@@ -45,15 +45,15 @@ DT_cmd RMT_getCommand() {
 		result[i] = 0x00;
 	RMT_receive(&XM_remote_data, result);
 	cmd = (result[4] << 8) | result[2];
-
-	/*while (!button_release && timeout > 0) {
+	/*
+	while (!button_release && timeout > 0) {
 		RMT_receive(&XM_remote_data, result);
 		tmp_cmd = (result[4] << 8) | result[2];
 		if (tmp_cmd == B_NON_PRESSED)
 			button_release = true;
 		timeout--;
 	}*/
-	if(cmd!=0)DEBUG_BYTE((&cmd,sizeof(&cmd)))
+	//if(cmd!=0)DEBUG_BYTE((&cmd,sizeof(&cmd)))
 	return cmd;
 }
 
@@ -89,17 +89,17 @@ DT_byte RMT_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 		DT_byte length = 6;
 		// Prüfen ob Paket bereits komplett im Buffer
 		if (((buffer->RX_Tail + length) & USART_RX_BUFFER_MASK)
-				> buffer->RX_Head) {
-			DEBUG(("RMT_uc",sizeof("RMT_uc")))
+				>= buffer->RX_Head) {
+			//DEBUG(("RMT_uc",sizeof("RMT_uc")))
 			return 0;
 		}
-		DEBUG_BYTE((buffer->RX, 127))
+		//DEBUG_BYTE((buffer->RX, 127))
 		// Copy packet from buffer in destination array
 		DT_byte i;
 		for (i = 0; i < length; i++) {
 			dest[i] = USART_RXBuffer_GetByte(usart_data);
 		}
-		DEBUG_BYTE((dest, 127))
+		//DEBUG_BYTE((dest, 127))
 
 		DEBUG(("RMT_ok",sizeof("RMT_ok")))
 		return length;

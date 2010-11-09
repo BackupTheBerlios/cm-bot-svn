@@ -73,7 +73,6 @@
 /* \brief Transmit buffer mask. */
 #define USART_TX_BUFFER_MASK ( USART_TX_BUFFER_SIZE - 1 )
 
-
 #if ( USART_RX_BUFFER_SIZE & USART_RX_BUFFER_MASK )
 #error RX buffer size is not a power of 2
 #endif
@@ -81,10 +80,8 @@
 #error TX buffer size is not a power of 2
 #endif
 
-
 /* \brief USART transmit and receive ring buffer. */
-typedef struct USART_Buffer
-{
+typedef struct USART_Buffer {
 	/* \brief Receive buffer. */
 	volatile uint8_t RX[USART_RX_BUFFER_SIZE];
 	/* \brief Transmit buffer. */
@@ -99,14 +96,12 @@ typedef struct USART_Buffer
 	volatile uint8_t TX_Tail;
 } USART_Buffer_t;
 
-
 /*! \brief Struct used when interrupt driven driver is used.
-*
-*  Struct containing pointer to a usart, a buffer and a location to store Data
-*  register interrupt level temporary.
-*/
-typedef struct Usart_and_buffer
-{
+ *
+ *  Struct containing pointer to a usart, a buffer and a location to store Data
+ *  register interrupt level temporary.
+ */
+typedef struct Usart_and_buffer {
 	/* \brief Pointer to USART module to use. */
 	USART_t * usart;
 	/* \brief Data register empty interrupt level. */
@@ -115,8 +110,9 @@ typedef struct Usart_and_buffer
 	USART_Buffer_t buffer;
 	/* \brief Größe des zuletzt gesendeten Pakets */
 	DT_byte lastPacketLength;
+	/* \brief Größe des zuletzt gesendeten Pakets */
+	PORT_t* port;
 } USART_data_t;
-
 
 /* Macros. */
 
@@ -132,7 +128,6 @@ typedef struct Usart_and_buffer
 #define USART_Format_Set(_usart, _charSize, _parityMode, _twoStopBits)         \
 	(_usart)->CTRLC = (uint8_t) _charSize | _parityMode |                      \
 	                  (_twoStopBits ? USART_SBMODE_bm : 0)
-
 
 /*! \brief Set USART baud rate.
  *
@@ -160,13 +155,11 @@ typedef struct Usart_and_buffer
 	(_usart)->BAUDCTRLA =(uint8_t)_bselValue;                                           \
 	(_usart)->BAUDCTRLB =(_bScaleFactor << USART_BSCALE0_bp)|(_bselValue >> 8)
 
-
 /*! \brief Enable USART receiver.
  *
  *  \param _usart    Pointer to the USART module
  */
 #define USART_Rx_Enable(_usart) ((_usart)->CTRLB |= USART_RXEN_bm)
-
 
 /*! \brief Disable USART receiver.
  *
@@ -174,20 +167,17 @@ typedef struct Usart_and_buffer
  */
 #define USART_Rx_Disable(_usart) ((_usart)->CTRLB &= ~USART_RXEN_bm)
 
-
 /*! \brief Enable USART transmitter.
  *
  *  \param _usart Pointer to the USART module.
  */
 #define USART_Tx_Enable(_usart)	((_usart)->CTRLB |= USART_TXEN_bm)
 
-
 /*! \brief Disable USART transmitter.
  *
  *  \param _usart Pointer to the USART module.
  */
 #define USART_Tx_Disable(_usart) ((_usart)->CTRLB &= ~USART_TXEN_bm)
-
 
 /*! \brief Set USART RXD interrupt level.
  *
@@ -200,7 +190,6 @@ typedef struct Usart_and_buffer
 #define USART_RxdInterruptLevel_Set(_usart, _rxdIntLevel)                      \
 	((_usart)->CTRLA = ((_usart)->CTRLA & ~USART_RXCINTLVL_gm) | _rxdIntLevel)
 
-
 /*! \brief Set USART TXD interrupt level.
  *
  *  Sets the interrupt level on TX Complete interrupt.
@@ -212,8 +201,6 @@ typedef struct Usart_and_buffer
 #define USART_TxdInterruptLevel_Set(_usart, _txdIntLevel)                      \
 	(_usart)->CTRLA = ((_usart)->CTRLA & ~USART_TXCINTLVL_gm) | _txdIntLevel
 
-
-
 /*! \brief Set USART DRE interrupt level.
  *
  *  Sets the interrupt level on Data Register interrupt.
@@ -224,7 +211,6 @@ typedef struct Usart_and_buffer
  */
 #define USART_DreInterruptLevel_Set(_usart, _dreIntLevel)                      \
 	(_usart)->CTRLA = ((_usart)->CTRLA & ~USART_DREINTLVL_gm) | _dreIntLevel
-
 
 /*! \brief Set the mode the USART run in.
  *
@@ -242,15 +228,11 @@ typedef struct Usart_and_buffer
 #define USART_SetMode(_usart, _usartMode)                                      \
 	((_usart)->CTRLC = ((_usart)->CTRLC & (~USART_CMODE_gm)) | _usartMode)
 
-
-
 /*! \brief Check if data register empty flag is set.
  *
  *  \param _usart      The USART module.
  */
 #define USART_IsTXDataRegisterEmpty(_usart) (((_usart)->STATUS & USART_DREIF_bm) != 0)
-
-
 
 /*! \brief Put data (5-8 bit character).
  *
@@ -262,8 +244,6 @@ typedef struct Usart_and_buffer
  */
 #define USART_PutChar(_usart, _data) ((_usart)->DATA = _data)
 
-
-
 /*! \brief Checks if the RX complete interrupt flag is set.
  *
  *   Checks if the RX complete interrupt flag is set.
@@ -271,9 +251,6 @@ typedef struct Usart_and_buffer
  *  \param _usart     The USART module.
  */
 #define USART_IsRXComplete(_usart) (((_usart)->STATUS & USART_RXCIF_bm) != 0)
-
-
-
 
 /*! \brief Get received data (5-8 bit character).
  *
@@ -286,14 +263,12 @@ typedef struct Usart_and_buffer
  */
 #define USART_GetChar(_usart)  ((_usart)->DATA)
 
-
 /* Functions for interrupt driven driver. */
 void USART_InterruptDriver_Initialize(USART_data_t * usart_data,
-                                      USART_t * usart,
-                                      USART_DREINTLVL_t dreIntLevel );
+		USART_t * usart, USART_DREINTLVL_t dreIntLevel);
 
 void USART_InterruptDriver_DreInterruptLevel_Set(USART_data_t * usart_data,
-                                                 USART_DREINTLVL_t dreIntLevel);
+		USART_DREINTLVL_t dreIntLevel);
 
 bool USART_TXBuffer_FreeSpace(USART_data_t * usart_data);
 bool USART_TXBuffer_PutByte(USART_data_t * usart_data, uint8_t data);

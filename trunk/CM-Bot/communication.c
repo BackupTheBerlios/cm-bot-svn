@@ -8,6 +8,7 @@
 #include "include/utils.h"
 #include "include/xmega.h"
 
+#define COM_START_BYTE 	0xFF
 
 /**
  * \brief	Berechnet die Checksum.
@@ -25,7 +26,6 @@ DT_byte COM_getChecksum(const DT_byte* const packet, DT_size l) {
 	return ~chksm;
 }
 
-
 /*
  *  \brief 	Zuweisung der CpuID.
  *
@@ -36,15 +36,15 @@ DT_byte COM_getChecksum(const DT_byte* const packet, DT_size l) {
  *
  * \return	ID	1->Master; 2,3->Slave; 0 Error
  */
-DT_byte COM_getCpuID(DT_leg* leg_r) {
-	if (leg_r->hip.id == 7)
-		return 1; // Master
-	else if (leg_r->hip.id == 1)
-		return 2; // Slave
-	else if (leg_r->hip.id == 13)
-		return 3; // Slave
+DT_byte COM_getCpuID(DT_leg* leg_l) {
+	if (leg_l->hip.id == 10)
+		return COM_MASTER; // Master
+	else if (leg_l->hip.id == 4)
+		return COM_SLAVE3; // Slave
+	else if (leg_l->hip.id == 16)
+		return COM_SLAVE1; // Slave
 	else
-		return 0; // falsche ID
+		return COM_NOCPUID; // falsche ID
 }
 
 /**ToDo
@@ -60,20 +60,17 @@ DT_byte COM_getCpuID(DT_leg* leg_r) {
  */
 DT_byte COM_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 	USART_Buffer_t* buffer = &usart_data->buffer;
-
-	while (USART_RXBufferData_Available(usart_data)
-			&& usart_data->lastPacketLength > 0) {
-		usart_data->lastPacketLength--;
-		USART_RXBuffer_GetByte(usart_data);
-	}
-	if (usart_data->lastPacketLength > 0) {
-		DEBUG(("COMse",sizeof("COMse")))
-		return 0;
-	}
+	DEBUG_BYTE((buffer,127))
 
 	// Sind Daten vorhanden
 	if (!USART_RXBufferData_Available(usart_data)) {
 		DEBUG(("COMnd",sizeof("COMnd")))
+		return 0;
+	}
+	// Init-Fehlerbytes ausfiltern
+	else if (buffer->RX[buffer->RX_Tail] != 0xFF) {
+		DEBUG(("COM_i",sizeof("COM_i")))
+		USART_RXBuffer_GetByte(usart_data);
 		return 0;
 	}
 	// Byte #1 und Byte #2 muessen laut Protokoll 0xFF sein
@@ -135,19 +132,112 @@ DT_byte COM_receive(USART_data_t* const usart_data, DT_byte* const dest) {
  *
  * \return Größe der empfangenen Antwort
  */
-DT_byte COM_send(DT_byte* const packet, DT_size l, DT_byte* const result) {
+DT_byte COM_send(DT_byte* const packet, DT_size l, DT_byte* const result,
+		const DT_bool response) {
 	packet[l - 1] = COM_getChecksum(packet, l);
 	USART_data_t* usart_data = &XM_com_data;
 	// packet[2] -> ID
-
 	XM_USART_send(usart_data, packet, l);
 
 	DT_byte len = 0;
-	DT_size timeout = 100;
+	DT_size timeout = response ? 100 : 0;
+
 	while (len == 0 && timeout > 0) {
 		len = COM_receive(usart_data, result);
 		timeout--;
 	}
 
 	return len;
+}
+
+DT_size COM_requestStatus(DT_byte CpuID, DT_byte param, DT_byte* result) {
+	// Broadcast bei requestStatus nicht möglich
+	if (CpuID == COM_BRDCAST_ID)
+		return 0;
+	DT_size len = 7;
+	DT_byte packet[len];
+	packet[0] = COM_START_BYTE;
+	packet[1] = COM_START_BYTE;
+	packet[2] = CpuID;
+	packet[3] = len - 4; // length
+	packet[4] = COM_STATUS;
+	packet[5] = param;
+	// packet[6] = checksum will set in send
+	return COM_send(packet, len, result, true);
+
+}
+
+DT_bool COM_sendPoint(DT_byte CpuID, DT_point* point) {
+	// Broadcast bei requestStatus nicht möglich
+	DT_byte result[DT_RESULT_BUFFER_SIZE];
+	if (CpuID == COM_BRDCAST_ID)
+		return 0;
+	DT_size len = 7;
+	DT_byte packet[len];
+
+	//Todo: Point auf Byte casten
+
+	packet[0] = COM_START_BYTE;
+	packet[1] = COM_START_BYTE;
+	packet[2] = CpuID;
+	packet[3] = len - 4; // length
+	packet[4] = COM_POINT;
+	packet[5] = 0x00;
+	// packet[6] = checksum will set in send
+
+	len = COM_send(packet, len, result, true);
+	// Todo: Antwort nach ACK überprüfen
+
+	return true;
+
+}
+
+void COM_sendAction(DT_byte CpuID) {
+	DT_byte result[DT_RESULT_BUFFER_SIZE];
+	DT_size len = 6;
+	DT_byte packet[len];
+	packet[0] = COM_START_BYTE;
+	packet[1] = COM_START_BYTE;
+	packet[2] = CpuID;
+	packet[3] = len - 4; // length
+	packet[4] = COM_ACTION;
+	// packet[5] = checksum will set in send
+	COM_send(packet, len, result, false);
+}
+
+DT_bool COM_isAlive(DT_byte CpuID) {
+	DT_byte result[DT_RESULT_BUFFER_SIZE];
+	DT_size len;
+	len = COM_requestStatus(CpuID, COM_IS_ALIVE, result);
+	if (len > 0)
+		return true;
+	else
+		return false;
+}
+
+void COM_sendACK(DT_byte CpuID) {
+	DT_byte result[DT_RESULT_BUFFER_SIZE];
+	DT_size len = 6;
+	DT_byte packet[len];
+	packet[0] = COM_START_BYTE;
+	packet[1] = COM_START_BYTE;
+	packet[2] = CpuID;
+	packet[3] = len - 4; // length
+	packet[4] = COM_ACK;
+	// packet[5] = checksum will set in send
+	COM_send(packet, len, result, false);
+}
+
+void COM_sendNAK(DT_byte CpuID, DT_byte ErrCode) {
+	DT_byte result[DT_RESULT_BUFFER_SIZE];
+	DT_size len = 7;
+	DT_byte packet[len];
+	packet[0] = COM_START_BYTE;
+	packet[1] = COM_START_BYTE;
+	packet[2] = CpuID;
+	packet[3] = len - 4; // length
+	packet[4] = COM_NAK;
+	packet[5] = ErrCode;
+	// packet[6] = checksum will set in send
+	COM_send(packet, len, result, false);
 }

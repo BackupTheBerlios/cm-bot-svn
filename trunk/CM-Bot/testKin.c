@@ -23,7 +23,7 @@ int main() {
 	DT_point p1, p2;
 
 	DNX_getConnectedIDs(&leg_r, &leg_l);
-	COM_getCpuID(&leg_r);
+	//COM_getCpuID(&leg_r);
 
 	p1.x = 77.8553;
 	p1.y = 77.8553;

@@ -13,74 +13,97 @@
 #include "include/dynamixel.h"
 #include "include/communication.h"
 
+DT_leg leg_r, leg_l;
+DT_byte Own_CpuID;
+
+void master();
+void slave();
+
 int main() {
 	XM_init_cpu();
 	XM_init_dnx();
 	XM_init_com();
-	XM_init_remote();
+	//XM_init_remote();
 
-	XM_LED_ON
-
-	DT_leg leg_r, leg_l;
-	DT_byte CpuID;
+	XM_LED_OFF
 
 	DNX_getConnectedIDs(&leg_r, &leg_l);
-	CpuID = COM_getCpuID(&leg_r);
+	Own_CpuID = COM_getCpuID(&leg_l);
 
-	switch (CpuID) {
-	case MASTER:
+	switch (Own_CpuID) {
+	case COM_MASTER:
 		DEBUG(("Master",sizeof("Master")))
 		break;
-	case SLAVE1:
+	case COM_SLAVE1:
 		DEBUG(("Slave1",sizeof("Slave1")))
 		break;
-	case SLAVE2:
-		DEBUG(("Slave2",sizeof("Slave2")))
+	case COM_SLAVE3:
+		DEBUG(("Slave3",sizeof("Slave3")))
 		break;
 	default: //case NOCPUID:
 		DEBUG(("NoCpuID",sizeof("NoCpuID")))
 		break;
 	}
 
-	DT_size bufSize = 4;
-	DT_byte txDataBuf[bufSize];
-	txDataBuf[0] = 0xFF;
-	txDataBuf[1] = 0x55;
-	txDataBuf[2] = 0xAA;
-	txDataBuf[3] = 0x12;
-	DT_byte rxData[bufSize], l;
+	if (Own_CpuID == COM_MASTER) {
+		master();
+	} else {
+		slave();
+	}
+
+	return 0;
+}
+
+void master() {
+	DT_bool flag;
+	flag = COM_isAlive(COM_SLAVE1);
+	DEBUG(("ma_alive_sent",sizeof("ma_alive_sent")))
+	//COM_isAlive(COM_SLAVE2);
+
+	if (flag)
+		XM_LED_ON
 
 	while (1) {
-		l = 0;
-		switch (CpuID) {
-		case MASTER:
-			XM_USART_send(&XM_com_data, txDataBuf, bufSize);
-			break;
 
-		case SLAVE1:
-			while (USART_RXBufferData_Available(&XM_com_data)) {
-				rxData[l] = USART_RXBuffer_GetByte(&XM_com_data);
+	}
+}
+
+void slave() {
+	DT_size len;
+	DT_byte result[DT_RESULT_BUFFER_SIZE];
+	while (1) {
+		len = COM_receive(&XM_com_data, result);
+		if (len == 0)
+			continue;
+		DEBUG(("sl_pck_rec",sizeof("sl_pck_rec")))
+		if (result[2] != Own_CpuID && result[2] != COM_BRDCAST_ID)
+			continue;
+		DEBUG(("sl_for_me",sizeof("sl_for_me")))
+		switch (result[4]) {
+		case COM_STATUS:
+			switch (result[5]) {
+			case COM_IS_ALIVE:
+				DEBUG(("sl_alive",sizeof("sl_alive")))
+				XM_LED_ON
+				COM_sendACK(COM_MASTER);
+				break;
+			default:
+				break;
 			}
-			//COM_receive(&XM_com_data, rxData);
-			DEBUG_BYTE((rxData,bufSize))
+			break;
+		case COM_ACTION:
+
+			break;
+		case COM_POINT:
+
 			break;
 
-		case SLAVE2:
-			while (USART_RXBufferData_Available(&XM_com_data)) {
-				rxData[l] = USART_RXBuffer_GetByte(&XM_com_data);
-			}
-			//COM_receive(&XM_com_data, rxData);
-			DEBUG_BYTE((rxData,bufSize))
-			break;
-
-		default: //case NOCPUID:
-			DEBUG(("NoCpuID",sizeof("NoCpuID")))
+		default:
+			// ERROR
 			break;
 		}
 	}
-	XM_LED_OFF
 
-	return 0;
 }
 
 #endif /* TEST_ON */

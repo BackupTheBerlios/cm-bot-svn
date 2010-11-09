@@ -153,19 +153,22 @@ void XM_init_dnx() {
 	//Disable Interrupts
 	cli();
 
-	// Set pins for TX and RX
-	XM_PORT_SERVO_R.DIRSET = PIN3_bm; // Pin3 of PortC (TXD0) is output
-	XM_PORT_SERVO_R.DIRCLR = PIN2_bm; // Pin2 of PortC (RXD0) is input
+	XM_servo_data_R.port = &XM_PORT_SERVO_R;
+	XM_servo_data_L.port = &XM_PORT_SERVO_L;
 
-	XM_PORT_SERVO_L.DIRSET = PIN3_bm;
-	XM_PORT_SERVO_L.DIRCLR = PIN2_bm;
+	// Set pins for TX and RX
+	XM_servo_data_R.port->DIRSET = PIN3_bm; // Pin3 of PortC (TXD0) is output
+	XM_servo_data_R.port->DIRCLR = PIN2_bm; // Pin2 of PortC (RXD0) is input
+
+	XM_servo_data_L.port->DIRSET = PIN3_bm;
+	XM_servo_data_L.port->DIRCLR = PIN2_bm;
 
 	// Set pin, dir and out for OE
-	XM_PORT_SERVO_R.DIRSET = XM_OE_MASK;
-	XM_PORT_SERVO_R.OUTSET = XM_OE_MASK;
+	XM_servo_data_R.port->DIRSET = XM_OE_MASK;
+	XM_servo_data_R.port->OUTSET = XM_OE_MASK;
 
-	XM_PORT_SERVO_L.DIRSET = XM_OE_MASK;
-	XM_PORT_SERVO_L.OUTSET = XM_OE_MASK;
+	XM_servo_data_L.port->DIRSET = XM_OE_MASK;
+	XM_servo_data_L.port->OUTSET = XM_OE_MASK;
 
 	// Use USARTC0 / USARTD0 and initialize buffers
 	USART_InterruptDriver_Initialize(&XM_servo_data_R, &XM_USART_SERVO_R,
@@ -199,7 +202,7 @@ void XM_init_dnx() {
 	USART_GetChar(XM_servo_data_L.usart); // Flush Receive Buffer
 
 	// Enable PMIC interrupt level high (für TX-Complete-Interrupt)
-	//PMIC.CTRL |= PMIC_HILVLEX_bm;
+	PMIC.CTRL |= PMIC_HILVLEX_bm;
 	// Enable PMIC interrupt level low
 	PMIC.CTRL |= PMIC_LOLVLEX_bm;
 	// Enable Round-Robin-Scheduling
@@ -214,23 +217,28 @@ void XM_init_dnx() {
  */
 void XM_init_com() {
 	cli();
-	// Set pins for TX and RX
-	XM_PORT_COM.DIRSET = PIN3_bm; // Pin6 of PortC (TXD0) is output
-	XM_PORT_COM.DIRCLR = PIN2_bm; // Pin7 of PortC (RXD0) is input
 
-	// Use USARTC0 / USARTD0 and initialize buffers
+	XM_com_data.port = &XM_PORT_COM;
+	XM_com_data.port->DIRSET = XM_OE_MASK;
+	XM_com_data.port->OUTSET = XM_OE_MASK;
+
+	// Set pins for TX and RX
+	XM_com_data.port->DIRSET = PIN3_bm; // Pin3 of PortC (TXD0) is output
+	XM_com_data.port->DIRCLR = PIN2_bm; // Pin2 of PortC (RXD0) is input
+
+	// Use USARTE0 and initialize buffers
 	USART_InterruptDriver_Initialize(&XM_com_data, &XM_USART_COM,
-			USART_DREINTLVL_OFF_gc);
+			USART_DREINTLVL_MED_gc);
 
 	// 8 Data bits, No Parity, 1 Stop bit
 	USART_Format_Set(XM_com_data.usart, USART_CHSIZE_8BIT_gc,
 			USART_PMODE_DISABLED_gc, false);
 
 	// Enable RXC interrupt
-	//USART_RxdInterruptLevel_Set(XM_com_data.usart, USART_RXCINTLVL_MED_gc);
+	USART_RxdInterruptLevel_Set(XM_com_data.usart, USART_RXCINTLVL_MED_gc);
 
 	// Set Baudrate
-	USART_Baudrate_Set(XM_com_data.usart, 1, 0); // 57.600 bps (BSEL = 34)
+	USART_Baudrate_Set(XM_com_data.usart, 1, 0); // 1 Mbps (BSEL = 1)
 
 	// Enable RX and TX
 	USART_Rx_Enable(XM_com_data.usart);
@@ -239,6 +247,8 @@ void XM_init_com() {
 	// Flush Receive Buffer
 	USART_GetChar(XM_com_data.usart); // Flush Receive Buffer
 
+	// Enable Interrupt Level Medium
+	PMIC.CTRL |= PMIC_MEDLVLEX_bm;
 	sei();
 }
 
@@ -266,15 +276,8 @@ void XM_USART_send(USART_data_t* const usart_data, const DT_byte* const txData,
 	// Paketgröße, die später beim Empfangen abgezogen werden muss
 	usart_data->lastPacketLength = bytes;
 	// Set OE to 0 -> Enable Send
-	if (usart_data->usart == &XM_USART_SERVO_L) {
-		XM_PORT_SERVO_L.OUTCLR = XM_OE_MASK;
-	}
-	if (usart_data->usart == &XM_USART_SERVO_R) {
-		XM_PORT_SERVO_R.OUTCLR = XM_OE_MASK;
-	}
-	/*if(usart_data->usart == &XM_USART_COM){
-		XM_PORT_COM.OUTCLR = XM_OE_MASK;
-	}*/
+	usart_data->port->OUTCLR = XM_OE_MASK;
+
 	// Send data
 	while (i < bytes) {
 		bool byteToBuffer;
@@ -285,8 +288,7 @@ void XM_USART_send(USART_data_t* const usart_data, const DT_byte* const txData,
 	}
 
 	// Enable TXC interrupt to set OE to 1
-	USART_TxdInterruptLevel_Set(usart_data->usart, USART_TXCINTLVL_LO_gc);
-
+	USART_TxdInterruptLevel_Set(usart_data->usart, USART_TXCINTLVL_HI_gc);
 }
 
 /**
@@ -295,7 +297,7 @@ void XM_USART_send(USART_data_t* const usart_data, const DT_byte* const txData,
 ISR( USARTC0_TXC_vect)
 {
 	USART_TxdInterruptLevel_Set(&USARTC0, USART_TXCINTLVL_OFF_gc);
-	XM_PORT_SERVO_L.OUTSET = XM_OE_MASK;
+	XM_servo_data_L.port->OUTSET = XM_OE_MASK;
 }
 
 /**
@@ -320,7 +322,7 @@ ISR( USARTC0_RXC_vect)
 ISR( USARTD0_TXC_vect)
 {
 	USART_TxdInterruptLevel_Set(&USARTD0, USART_TXCINTLVL_OFF_gc);
-	XM_PORT_SERVO_R.OUTSET = XM_OE_MASK;
+	XM_servo_data_R.port->OUTSET = XM_OE_MASK;
 }
 
 /**
@@ -345,7 +347,7 @@ ISR( USARTD0_RXC_vect)
 ISR( USARTE0_TXC_vect)
 {
 	USART_TxdInterruptLevel_Set(&USARTE0, USART_TXCINTLVL_OFF_gc);
-	XM_PORT_COM.OUTSET = XM_OE_MASK;
+	XM_com_data.port->OUTSET = XM_OE_MASK;
 }
 
 /**
