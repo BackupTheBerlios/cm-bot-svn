@@ -100,7 +100,7 @@ DT_byte COM_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 		// Prüfen ob Paket bereits komplett im Buffer
 		if (((buffer->RX_Tail + length) & USART_RX_BUFFER_MASK)
 				> buffer->RX_Head) {
-			DEBUG(("uc",sizeof("uc")))
+			DEBUG(("COMuc",sizeof("COMuc")))
 			return 0;
 		}
 		// Copy packet from buffer in destination array

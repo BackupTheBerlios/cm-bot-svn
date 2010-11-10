@@ -203,10 +203,12 @@ void XM_init_dnx() {
 
 	// Enable PMIC interrupt level high (für TX-Complete-Interrupt)
 	PMIC.CTRL |= PMIC_HILVLEX_bm;
+	// Enable PMIC interrupt level medium
+	PMIC.CTRL |= PMIC_MEDLVLEX_bm;
 	// Enable PMIC interrupt level low
 	PMIC.CTRL |= PMIC_LOLVLEX_bm;
 	// Enable Round-Robin-Scheduling
-	PMIC.CTRL |= PMIC_RREN_bm;
+	//PMIC.CTRL |= PMIC_RREN_bm;
 	// Enable global interrupts
 	sei();
 
@@ -248,7 +250,7 @@ void XM_init_com() {
 	USART_GetChar(XM_com_data.usart); // Flush Receive Buffer
 
 	// Enable Interrupt Level Medium
-	PMIC.CTRL |= PMIC_MEDLVLEX_bm;
+	//PMIC.CTRL |= PMIC_LOLVLEX_bm;
 	sei();
 }
 
