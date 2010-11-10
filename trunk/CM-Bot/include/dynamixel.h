@@ -8,8 +8,12 @@
 #define DYNAMIXEL_H_
 
 #include "datatypes.h"
+#include "usart_driver.h"
 
 #define DNX_BRDCAST_ID 0xFE
+
+DT_byte DNX_send(DT_byte* const, DT_size, DT_byte* const, DT_bool);
+DT_byte DNX_receive(USART_data_t* const, DT_byte* const);
 
 DT_byte DNX_getChecksum(const DT_byte* const, DT_size);
 DT_bool DNX_setAngle(DT_byte, DT_double);
@@ -21,6 +25,5 @@ DT_double DNX_getAngle(DT_byte);
 DT_byte DNX_getSpeed(DT_byte);
 DT_byte DNX_getLed(DT_byte);
 void DNX_getConnectedIDs(DT_leg* const, DT_leg* const);
-DT_leg leg_r, leg_l;
 
 #endif /* DYNAMIXEL_H_ */

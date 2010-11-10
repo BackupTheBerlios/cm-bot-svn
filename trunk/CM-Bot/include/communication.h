@@ -33,19 +33,19 @@
 #define COM_ERR_POINT_OUT_OF_BOUNDS	0x02
 #define COM_ERR_DEFAULT_ERROR		0x03
 
-DT_byte COM_getCpuID(DT_leg*);
+DT_byte COM_send(DT_byte* const, DT_size, DT_byte* const, DT_bool);
 DT_byte COM_receive(USART_data_t* const, DT_byte* const);
-DT_byte COM_send(DT_byte* const, DT_size, DT_byte* const, const DT_bool);
 
-DT_size COM_requestStatus(DT_byte, DT_byte, DT_byte*);
-DT_bool COM_sendPoint(DT_byte, DT_point*);
+DT_size COM_requestStatus(DT_byte, DT_byte, DT_byte* const);
+DT_bool COM_sendPoint(DT_byte, const DT_point* const);
 void COM_sendAction(DT_byte);
 DT_bool COM_isAlive(DT_byte);
 void COM_sendACK(DT_byte);
 void COM_sendNAK(DT_byte, DT_byte);
 
+DT_byte COM_getCpuID(const DT_leg* const);
 DT_double COM_byteArrayToDouble(const DT_byte* const);
 void COM_doubleToByteArray(const DT_double, DT_byte* const);
-DT_point COM_getPointFromPaket(DT_byte*);
+DT_point COM_getPointFromPaket(const DT_byte* const);
 
 #endif /* COMMUNICATION_H_ */

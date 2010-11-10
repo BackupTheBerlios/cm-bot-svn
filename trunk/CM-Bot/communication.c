@@ -36,7 +36,7 @@ DT_byte COM_getChecksum(const DT_byte* const packet, DT_size l) {
  *
  * \return	ID	1->Master; 2,3->Slave; 0 Error
  */
-DT_byte COM_getCpuID(DT_leg* leg_l) {
+DT_byte COM_getCpuID(const DT_leg* const leg_l) {
 	if (leg_l->hip.id == 10)
 		return COM_MASTER; // Master
 	else if (leg_l->hip.id == 4)
@@ -47,7 +47,7 @@ DT_byte COM_getCpuID(DT_leg* leg_l) {
 		return COM_NOCPUID; // falsche ID
 }
 
-/**ToDo
+/**
  * \brief 	USART-Empfangsmethode für Prozessorkommunikation.
  *
  * 			Diese Methode liest den jeweiligen USART-Buffer aus und prüft,
@@ -64,7 +64,7 @@ DT_byte COM_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 
 	// Sind Daten vorhanden
 	if (!USART_RXBufferData_Available(usart_data)) {
-		DEBUG(("COMnd",sizeof("COMnd")))
+		DEBUG(("COM_nd",sizeof("COM_nd")))
 		return 0;
 	}
 	// Init-Fehlerbytes ausfiltern
@@ -77,17 +77,17 @@ DT_byte COM_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 	else if ((buffer->RX[buffer->RX_Tail] != 0xFF)
 			&& (buffer->RX[(buffer->RX_Tail + 1) & USART_RX_BUFFER_MASK]
 					!= 0xFF)) {
-		DEBUG(("COMff",sizeof("COMff")))
+		DEBUG(("COM_ff",sizeof("COM_ff")))
 		return 0;
 	}
 	// Pruefen ob min. 4 Bytes im Buffer sind, um Laenge zu lesen
 	else if ((buffer->RX_Head > buffer->RX_Tail) && (buffer->RX_Head
 			- buffer->RX_Tail) < 4) {
-		DEBUG(("COMle",sizeof("COMle")))
+		DEBUG(("COM_le",sizeof("COM_le")))
 		return 0;
 	} else if ((buffer->RX_Head < buffer->RX_Tail) && (USART_RX_BUFFER_SIZE
 			- buffer->RX_Tail + buffer->RX_Head) < 4) {
-		DEBUG(("COMle",sizeof("COMle")))
+		DEBUG(("COM_le",sizeof("COM_le")))
 		return 0;
 	}
 	// Some data received. All data received if checksum is correct!
@@ -100,7 +100,7 @@ DT_byte COM_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 		// Prüfen ob Paket bereits komplett im Buffer
 		if (((buffer->RX_Tail + length) & USART_RX_BUFFER_MASK)
 				> buffer->RX_Head) {
-			DEBUG(("COMuc",sizeof("COMuc")))
+			DEBUG(("COM_uc",sizeof("COM_uc")))
 			return 0;
 		}
 		// Copy packet from buffer in destination array
@@ -133,14 +133,14 @@ DT_byte COM_receive(USART_data_t* const usart_data, DT_byte* const dest) {
  * \return Größe der empfangenen Antwort
  */
 DT_byte COM_send(DT_byte* const packet, DT_size l, DT_byte* const result,
-		const DT_bool response) {
+		DT_bool hasResponse) {
 	packet[l - 1] = COM_getChecksum(packet, l);
 	USART_data_t* usart_data = &XM_com_data;
 	// packet[2] -> ID
 	XM_USART_send(usart_data, packet, l);
 
 	DT_byte len = 0;
-	DT_size timeout = response ? 100 : 0;
+	DT_size timeout = hasResponse ? 100 : 0;
 
 	while (len == 0 && timeout > 0) {
 		len = COM_receive(usart_data, result);
@@ -150,15 +150,15 @@ DT_byte COM_send(DT_byte* const packet, DT_size l, DT_byte* const result,
 	return len;
 }
 
-DT_size COM_requestStatus(DT_byte CpuID, DT_byte param, DT_byte* result) {
+DT_size COM_requestStatus(DT_byte cpuID, DT_byte param, DT_byte* const result) {
 	// Broadcast bei requestStatus nicht möglich
-	if (CpuID == COM_BRDCAST_ID)
+	if (cpuID == COM_BRDCAST_ID)
 		return 0;
-	DT_size len = 7;
+	const DT_size len = 7;
 	DT_byte packet[len];
 	packet[0] = COM_START_BYTE;
 	packet[1] = COM_START_BYTE;
-	packet[2] = CpuID;
+	packet[2] = cpuID;
 	packet[3] = len - 4; // length
 	packet[4] = COM_STATUS;
 	packet[5] = param;
@@ -181,12 +181,12 @@ DT_double COM_byteArrayToDouble(const DT_byte* const array) {
 	return value;
 }
 
-DT_bool COM_sendPoint(DT_byte CpuID, DT_point* point) {
+DT_bool COM_sendPoint(DT_byte cpuID, const DT_point* const point) {
 	// Broadcast bei requestStatus nicht möglich
-	if (CpuID == COM_BRDCAST_ID)
+	if (cpuID == COM_BRDCAST_ID)
 		return 0;
 	DT_byte result[DT_RESULT_BUFFER_SIZE];
-	DT_size len = 18;
+	DT_size len = 6 + 3 * sizeof(DT_double);
 	DT_byte packet[len];
 
 	// Point auf ByteArray casten
@@ -196,7 +196,7 @@ DT_bool COM_sendPoint(DT_byte CpuID, DT_point* point) {
 
 	packet[0] = COM_START_BYTE;
 	packet[1] = COM_START_BYTE;
-	packet[2] = CpuID;
+	packet[2] = cpuID;
 	packet[3] = len - 4; // length
 	packet[4] = COM_POINT;
 
@@ -209,7 +209,7 @@ DT_bool COM_sendPoint(DT_byte CpuID, DT_point* point) {
 		return false;
 }
 
-DT_point COM_getPointFromPaket(DT_byte* result) {
+DT_point COM_getPointFromPaket(const DT_byte* const result) {
 	DT_point p;
 
 	p.x = COM_byteArrayToDouble(&result[5 + 0 * sizeof(DT_double)]);
@@ -219,52 +219,52 @@ DT_point COM_getPointFromPaket(DT_byte* result) {
 	return p;
 }
 
-void COM_sendAction(DT_byte CpuID) {
+void COM_sendAction(DT_byte cpuID) {
 	DT_byte result[DT_RESULT_BUFFER_SIZE];
-	DT_size len = 6;
+	const DT_size len = 6;
 	DT_byte packet[len];
 	packet[0] = COM_START_BYTE;
 	packet[1] = COM_START_BYTE;
-	packet[2] = CpuID;
+	packet[2] = cpuID;
 	packet[3] = len - 4; // length
 	packet[4] = COM_ACTION;
 	// packet[5] = checksum will set in send
 	COM_send(packet, len, result, false);
 }
 
-DT_bool COM_isAlive(DT_byte CpuID) {
+DT_bool COM_isAlive(DT_byte cpuID) {
 	DT_byte result[DT_RESULT_BUFFER_SIZE];
 	DT_size len;
-	len = COM_requestStatus(CpuID, COM_IS_ALIVE, result);
+	len = COM_requestStatus(cpuID, COM_IS_ALIVE, result);
 	if ((len > 0) && (result[4] == COM_ACK))
 		return true;
 	else
 		return false;
 }
 
-void COM_sendACK(DT_byte CpuID) {
+void COM_sendACK(DT_byte cpuID) {
 	DT_byte result[DT_RESULT_BUFFER_SIZE];
-	DT_size len = 6;
+	const DT_size len = 6;
 	DT_byte packet[len];
 	packet[0] = COM_START_BYTE;
 	packet[1] = COM_START_BYTE;
-	packet[2] = CpuID;
+	packet[2] = cpuID;
 	packet[3] = len - 4; // length
 	packet[4] = COM_ACK;
 	// packet[5] = checksum will set in send
 	COM_send(packet, len, result, false);
 }
 
-void COM_sendNAK(DT_byte CpuID, DT_byte ErrCode) {
+void COM_sendNAK(DT_byte cpuID, DT_byte errCode) {
 	DT_byte result[DT_RESULT_BUFFER_SIZE];
-	DT_size len = 7;
+	const DT_size len = 7;
 	DT_byte packet[len];
 	packet[0] = COM_START_BYTE;
 	packet[1] = COM_START_BYTE;
-	packet[2] = CpuID;
+	packet[2] = cpuID;
 	packet[3] = len - 4; // length
 	packet[4] = COM_NAK;
-	packet[5] = ErrCode;
+	packet[5] = errCode;
 	// packet[6] = checksum will set in send
 	COM_send(packet, len, result, false);
 }

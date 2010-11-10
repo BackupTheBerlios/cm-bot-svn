@@ -20,7 +20,7 @@
 #define RESET 0x06
 #define SYC_WR 0x83
 
-// Control Table (Manuel page 12) L/H?
+// Control Table (Manuel page 12)
 #define ID 0x03
 #define BD 0x04
 #define MAX_TMP 0x0B
@@ -49,7 +49,7 @@ DT_byte DNX_getChecksum(const DT_byte* const packet, DT_size l) {
 	return ~chksm;
 }
 
-/**ToDo
+/**
  * \brief 	USART-Empfangsmethode.
  *
  * 			Diese Methode liest den jeweiligen USART-Buffer aus und prüft,
@@ -63,36 +63,37 @@ DT_byte DNX_getChecksum(const DT_byte* const packet, DT_size l) {
 DT_byte DNX_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 	USART_Buffer_t* buffer = &usart_data->buffer;
 
+	// Phantom-Paket verwerfen
 	while (USART_RXBufferData_Available(usart_data)
 			&& usart_data->lastPacketLength > 0) {
 		usart_data->lastPacketLength--;
 		USART_RXBuffer_GetByte(usart_data);
 	}
 	if (usart_data->lastPacketLength > 0) {
-		DEBUG(("se",sizeof("se")))
+		DEBUG(("DNX_se",sizeof("DNX_se")))
 		return 0;
 	}
 
 	// Sind Daten vorhanden
 	if (!USART_RXBufferData_Available(usart_data)) {
-		DEBUG(("nd",sizeof("nd")))
+		DEBUG(("DNX_nd",sizeof("DNX_nd")))
 		return 0;
 	}
 	// Byte #1 und Byte #2 muessen laut Protokoll 0xFF sein
 	else if ((buffer->RX[buffer->RX_Tail] != 0xFF)
 			&& (buffer->RX[(buffer->RX_Tail + 1) & USART_RX_BUFFER_MASK]
 					!= 0xFF)) {
-		DEBUG(("ff",sizeof("ff")))
+		DEBUG(("DNX_ff",sizeof("DNX_ff")))
 		return 0;
 	}
 	// Pruefen ob min. 4 Bytes im Buffer sind, um Laenge zu lesen
 	else if ((buffer->RX_Head > buffer->RX_Tail) && (buffer->RX_Head
 			- buffer->RX_Tail) < 4) {
-		DEBUG(("le",sizeof("le")))
+		DEBUG(("DNX_le",sizeof("DNX_le")))
 		return 0;
 	} else if ((buffer->RX_Head < buffer->RX_Tail) && (USART_RX_BUFFER_SIZE
 			- buffer->RX_Tail + buffer->RX_Head) < 4) {
-		DEBUG(("le",sizeof("le")))
+		DEBUG(("DNX_le",sizeof("DNX_le")))
 		return 0;
 	}
 	// Some data received. All data received if checksum is correct!
@@ -105,7 +106,7 @@ DT_byte DNX_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 		// Prüfen ob Paket bereits komplett im Buffer
 		if (((buffer->RX_Tail + length) & USART_RX_BUFFER_MASK)
 				> buffer->RX_Head) {
-			DEBUG(("uc",sizeof("uc")))
+			DEBUG(("DNX_uc",sizeof("DNX_uc")))
 			return 0;
 		}
 		// Copy packet from buffer in destination array
@@ -117,11 +118,11 @@ DT_byte DNX_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 		// Pruefen ob Checksumme korrekt ist
 		// ToDo: im Fehlerfall Buffer zurücksetzen
 		if (dest[length - 1] != DNX_getChecksum(dest, length)) {
-			DEBUG(("cks",sizeof("cks")))
+			DEBUG(("DNX_cks",sizeof("DNX_cks")))
 			DEBUG_BYTE((dest, length))
 			return 0;
 		}
-		DEBUG(("ok",sizeof("ok")))
+		DEBUG(("DNX_ok",sizeof("DNX_ok")))
 		return length;
 	}
 }
@@ -137,7 +138,8 @@ DT_byte DNX_receive(USART_data_t* const usart_data, DT_byte* const dest) {
  *
  * \return Größe der empfangenen Antwort
  */
-DT_byte DNX_send(DT_byte* const packet, DT_size l, DT_byte* const result) {
+DT_byte DNX_send(DT_byte* const packet, DT_size l, DT_byte* const result,
+		DT_bool hasResponse) {
 	packet[l - 1] = DNX_getChecksum(packet, l);
 	USART_data_t* usart_data;
 	// packet[2] -> ID
@@ -150,7 +152,7 @@ DT_byte DNX_send(DT_byte* const packet, DT_size l, DT_byte* const result) {
 	XM_USART_send(usart_data, packet, l);
 
 	DT_byte len = 0;
-	DT_size timeout = 100;
+	DT_size timeout = hasResponse ? 100 : 0;
 	while (len == 0 && timeout > 0) {
 		len = DNX_receive(usart_data, result);
 		timeout--;
@@ -215,28 +217,29 @@ DT_double DNX_correctAngles(DT_byte id, DT_double value) {
  */
 DT_bool DNX_setAngle(DT_byte id, DT_double value) {
 	DT_byte result[DT_RESULT_BUFFER_SIZE];
-	DT_byte packet[9];
-	DT_size len;
+	DT_size len = 9;
+	DT_byte packet[len];
+
 	value = DNX_correctAngles(id, value);
 	value = DNX_convertAngle(value);
 
-	// TODO Rechnung überarbeiten
-	double tmp2 = ((double) value) * 3.41;
-	int tmp = floor(tmp2);
+	// TODO Rechnung prüfen
+	DT_int tmp = floor(3.41 * ((double) value));
 	DT_byte angle_l = tmp & 0xFF;
 	DT_byte angle_h = tmp >> 8;
 
 	packet[0] = START_BYTE;
 	packet[1] = START_BYTE;
 	packet[2] = id;
-	packet[3] = 0x05; // length
+	packet[3] = len - 4; // length
 	packet[4] = WR_DATA;
 	packet[5] = GL_POS;
 	packet[6] = angle_l; // Low
 	packet[7] = angle_h; // High
 	// packet[8] = checksum will set in send
-	len = DNX_send(packet, 9, result);
-	if(len>0)
+	len = DNX_send(packet, len, result, true);
+	// TODO status pruefen
+	if (len > 0)
 		return true;
 	else
 		return false;
@@ -249,17 +252,18 @@ DT_bool DNX_setAngle(DT_byte id, DT_double value) {
  * \param	idNew	Zusetzende ID
  */
 void DNX_setId(DT_byte idOld, DT_byte idNew) {
+	const DT_size len = 8;
 	DT_byte packet[8];
 	DT_byte result[DT_RESULT_BUFFER_SIZE];
 	packet[0] = START_BYTE;
 	packet[1] = START_BYTE;
 	packet[2] = idOld;
-	packet[3] = 0x04; // length
+	packet[3] = len - 4; // length
 	packet[4] = WR_DATA;
 	packet[5] = ID;
 	packet[6] = idNew;
 	// packet[7] = checksum will set in send
-	DNX_send(packet, 8, result);
+	DNX_send(packet, len, result, true);
 
 }
 
@@ -271,18 +275,19 @@ void DNX_setId(DT_byte idOld, DT_byte idNew) {
  */
 void DNX_setSpeed(DT_byte id, DT_byte speed) {
 	// TODO byte 7 richtige setzen
-	DT_byte packet[9];
+	const DT_size len = 9;
+	DT_byte packet[len];
 	DT_byte result[DT_RESULT_BUFFER_SIZE];
 	packet[0] = START_BYTE;
 	packet[1] = START_BYTE;
 	packet[2] = id;
-	packet[3] = 0x05; // length
+	packet[3] = len - 4; // length
 	packet[4] = WR_DATA;
 	packet[5] = MV_SPEED;
 	packet[6] = speed;
 	packet[7] = 0x00;
-	// packet[7] = checksum will set in send
-	DNX_send(packet, 9, result);
+	// packet[8] = checksum will set in send
+	DNX_send(packet, len, result, true);
 }
 
 /**
@@ -292,18 +297,19 @@ void DNX_setSpeed(DT_byte id, DT_byte speed) {
  * \param	value	Wert für LED (0x00 / 0x01)
  */
 DT_bool DNX_setLed(DT_byte id, DT_byte value) {
-	DT_byte packet[8], len;
+	DT_size len = 8;
+	DT_byte packet[len];
 	DT_byte result[DT_RESULT_BUFFER_SIZE];
 	packet[0] = START_BYTE;
 	packet[1] = START_BYTE;
 	packet[2] = id;
-	packet[3] = 0x04; // length
+	packet[3] = len - 4; // length
 	packet[4] = WR_DATA;
 	packet[5] = LED;
 	packet[6] = value;
 	// packet[7] = checksum will set in send
-	len = DNX_send(packet, 8, result);
-	// ToDo
+	len = DNX_send(packet, len, result, true);
+	// TODO status pruefen
 	if (len > 0) {
 		return true;
 	} else
@@ -318,18 +324,18 @@ DT_bool DNX_setLed(DT_byte id, DT_byte value) {
  * \return Winkel in Grad
  */
 DT_double DNX_getAngle(DT_byte id) {
-	// TODO
-	DT_byte packet[7];
+	DT_size len = 7;
+	DT_byte packet[len];
 	DT_byte result[DT_RESULT_BUFFER_SIZE];
 	packet[0] = START_BYTE;
 	packet[1] = START_BYTE;
 	packet[2] = id;
-	packet[3] = 0x03; // length
+	packet[3] = len - 4; // length
 	packet[4] = RD_DATA;
 	packet[5] = PRT_POS;
 	// packet[6] = checksum will set in send
-	DNX_send(packet, 7, result);
-	// TODO DNX_receive();
+	// TODO
+	len = DNX_send(packet, len, result, true);
 	return -1;
 }
 
@@ -341,17 +347,18 @@ DT_double DNX_getAngle(DT_byte id) {
  * \return	Geschwindigkeit
  */
 DT_byte DNX_getSpeed(DT_byte id) {
-	DT_byte packet[7];
+	DT_size len = 7;
+	DT_byte packet[len];
 	DT_byte result[DT_RESULT_BUFFER_SIZE];
 	packet[0] = START_BYTE;
 	packet[1] = START_BYTE;
 	packet[2] = id;
-	packet[3] = 0x03; // length
+	packet[3] = len - 4; // length
 	packet[4] = RD_DATA;
 	packet[5] = PRT_SPEED;
 	// packet[6] = checksum will set in send
-	DNX_send(packet, 7, result);
-	// TODO DNX_receive();
+	// TODO
+	len = DNX_send(packet, len, result, true);
 	return 0x00;
 }
 
@@ -363,17 +370,18 @@ DT_byte DNX_getSpeed(DT_byte id) {
  * \return	Wert der LED
  */
 DT_byte DNX_getLed(DT_byte id) {
-	DT_byte packet[7];
+	DT_size len = 7;
+	DT_byte packet[len];
 	DT_byte result[DT_RESULT_BUFFER_SIZE];
 	packet[0] = START_BYTE;
 	packet[1] = START_BYTE;
 	packet[2] = id;
-	packet[3] = 0x03; // length
+	packet[3] = len - 4; // length
 	packet[4] = RD_DATA;
 	packet[5] = LED;
 	// packet[6] = checksum will set in send
-	DNX_send(packet, 7, result);
-	// TODO DNX_receive();
+	// TODO
+	len = DNX_send(packet, len, result, true);
 	return 0x00;
 }
 
