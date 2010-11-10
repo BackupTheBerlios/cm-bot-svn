@@ -128,8 +128,8 @@ void slave() {
 			// point aus Paket lesen
 			p1 = COM_getPointFromPaket(result);
 
-			KIN_calculateServos(&p1, &leg_l);
-			KIN_calculateServos(&p1, &leg_r);
+			KIN_calcServos(&p1, &leg_l);
+			KIN_calcServos(&p1, &leg_r);
 
 			COM_sendACK(COM_MASTER);
 			break;

@@ -37,13 +37,13 @@ int main() {
 	DT_char flag = 0;
 	while (1) {
 		if (flag == 0) {
-			KIN_calculateServos(&p1, &leg_l);
-			KIN_calculateServos(&p1, &leg_r);
+			KIN_calcServos(&p1, &leg_l);
+			KIN_calcServos(&p1, &leg_r);
 			flag = 1;
 			XM_LED_ON
 		} else {
-			KIN_calculateServos(&p2, &leg_l);
-			KIN_calculateServos(&p2, &leg_r);
+			KIN_calcServos(&p2, &leg_l);
+			KIN_calcServos(&p2, &leg_r);
 			flag = 0;
 			XM_LED_OFF
 		}

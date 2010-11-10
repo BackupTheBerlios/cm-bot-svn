@@ -32,6 +32,18 @@
 #define DIST_DZ -14
 
 /**
+ * \brief	Initialisiert die benötigten Variablen.
+ *
+ * 			Initialisiert die benötigten Variablen um
+ * 			z.B. Punkte im Weltkoordinatensystem in das Roboterkoordinatensystem (Bein) umrechnen zu können.
+ *
+ * \param	leg		Bein zur Erkennung der CPI-ID
+ */
+void KIN_init(const DT_leg* const leg) {
+	// TODO
+}
+
+/**
  * \brief	Lösung des kinematischen Problems.
  *
  * 			Lösung der Denavit-Hartenberg-Transformation.
@@ -39,34 +51,41 @@
  * \param	leg		Bein mit den Soll-Winkel der Gelenke
  * \param	dh03	Zielmatrix für die Lösung
  */
-void KIN_calculateDH(const DT_leg* const leg, DT_double** dh03) {
-	dh03[0][0] = cos(leg->hip.set_value) * cos(leg->knee.set_value) * cos(leg->foot.set_value)
-			- cos(leg->hip.set_value) * sin(leg->knee.set_value) * sin(leg->foot.set_value);
-	dh03[0][1] = -cos(leg->hip.set_value) * cos(leg->knee.set_value) * sin(leg->foot.set_value)
-			- cos(leg->hip.set_value) * cos(leg->foot.set_value) * sin(leg->knee.set_value);
+void KIN_calcDH(const DT_leg* const leg, DT_double** dh03) {
+	dh03[0][0] = cos(leg->hip.set_value) * cos(leg->knee.set_value) * cos(
+			leg->foot.set_value) - cos(leg->hip.set_value) * sin(
+			leg->knee.set_value) * sin(leg->foot.set_value);
+	dh03[0][1] = -cos(leg->hip.set_value) * cos(leg->knee.set_value) * sin(
+			leg->foot.set_value) - cos(leg->hip.set_value) * cos(
+			leg->foot.set_value) * sin(leg->knee.set_value);
 	dh03[0][2] = -sin(leg->hip.set_value);
-	dh03[0][3] = 50 * cos(leg->hip.set_value) + 85 * cos(leg->hip.set_value) * cos(
-			leg->knee.set_value) - 55 * cos(leg->hip.set_value) * sin(leg->knee.set_value) * sin(
-			leg->foot.set_value) + 55 * cos(leg->hip.set_value) * cos(leg->knee.set_value) * cos(
+	dh03[0][3] = 50 * cos(leg->hip.set_value) + 85 * cos(leg->hip.set_value)
+			* cos(leg->knee.set_value) - 55 * cos(leg->hip.set_value) * sin(
+			leg->knee.set_value) * sin(leg->foot.set_value) + 55 * cos(
+			leg->hip.set_value) * cos(leg->knee.set_value) * cos(
 			leg->foot.set_value);
 
-	dh03[1][0] = cos(leg->knee.set_value) * cos(leg->foot.set_value) * sin(leg->hip.set_value)
-			- sin(leg->hip.set_value) * sin(leg->knee.set_value) * sin(leg->foot.set_value);
-	dh03[1][1] = -cos(leg->knee.set_value) * sin(leg->hip.set_value) * sin(leg->foot.set_value)
-			- cos(leg->foot.set_value) * sin(leg->hip.set_value) * sin(leg->knee.set_value);
+	dh03[1][0] = cos(leg->knee.set_value) * cos(leg->foot.set_value) * sin(
+			leg->hip.set_value) - sin(leg->hip.set_value) * sin(
+			leg->knee.set_value) * sin(leg->foot.set_value);
+	dh03[1][1] = -cos(leg->knee.set_value) * sin(leg->hip.set_value) * sin(
+			leg->foot.set_value) - cos(leg->foot.set_value) * sin(
+			leg->hip.set_value) * sin(leg->knee.set_value);
 	dh03[1][2] = cos(leg->hip.set_value);
-	dh03[1][3] = 50 * sin(leg->hip.set_value) + 85 * cos(leg->knee.set_value) * sin(
-			leg->hip.set_value) - 55 * sin(leg->hip.set_value) * sin(leg->knee.set_value) * sin(
-			leg->foot.set_value) + 55 * cos(leg->knee.set_value) * cos(leg->foot.set_value) * sin(
+	dh03[1][3] = 50 * sin(leg->hip.set_value) + 85 * cos(leg->knee.set_value)
+			* sin(leg->hip.set_value) - 55 * sin(leg->hip.set_value) * sin(
+			leg->knee.set_value) * sin(leg->foot.set_value) + 55 * cos(
+			leg->knee.set_value) * cos(leg->foot.set_value) * sin(
 			leg->hip.set_value);
 
-	dh03[2][0] = -cos(leg->knee.set_value) * sin(leg->foot.set_value) - cos(leg->foot.set_value)
-			* sin(leg->knee.set_value);
-	dh03[2][1] = sin(leg->knee.set_value) * sin(leg->foot.set_value) - cos(leg->knee.set_value)
-			* cos(leg->foot.set_value);
+	dh03[2][0] = -cos(leg->knee.set_value) * sin(leg->foot.set_value) - cos(
+			leg->foot.set_value) * sin(leg->knee.set_value);
+	dh03[2][1] = sin(leg->knee.set_value) * sin(leg->foot.set_value) - cos(
+			leg->knee.set_value) * cos(leg->foot.set_value);
 	dh03[2][2] = 0;
-	dh03[2][3] = -85 * sin(leg->knee.set_value) - 55 * cos(leg->knee.set_value) * sin(
-			leg->foot.set_value) - 55 * cos(leg->foot.set_value) * sin(leg->knee.set_value) - 14;
+	dh03[2][3] = -85 * sin(leg->knee.set_value) - 55 * cos(leg->knee.set_value)
+			* sin(leg->foot.set_value) - 55 * cos(leg->foot.set_value) * sin(
+			leg->knee.set_value) - 14;
 
 	dh03[3][0] = 0;
 	dh03[3][1] = 0;
@@ -83,7 +102,7 @@ void KIN_calculateDH(const DT_leg* const leg, DT_double** dh03) {
  *
  * \return	Bein mit den errechneten Soll-Winkel für hip, knee und foot
  */
-void KIN_calculateServos(const DT_point* const p, DT_leg* const leg) {
+void KIN_calcServos(const DT_point* const p, DT_leg* const leg) {
 	DT_double z = p->z - DIST_DZ;
 	DT_double h, h2, h3;
 	DT_double hip, knee, foot;
@@ -119,7 +138,21 @@ void KIN_calculateServos(const DT_point* const p, DT_leg* const leg) {
 	leg->foot.set_value = foot;
 }
 
-DT_bool KIN_makeMovement(DT_leg* leg_l, DT_leg* leg_r){
+/**
+ * \brief	Transformiert einen Punkt in das Roboterkoordinatensystem.
+ *
+ * 			Transformiert einen Punkt des Weltkoordinatensystems in das Roboterkoordinatensystem des jeweiligen Beines. Zuvor muss min. einmal KIN_init() ausgeführt worden sein.
+ *
+ * \param	leg		Bein zur Erkennung der CPI-ID
+ */
+DT_point KIN_calcLocalPoint(const DT_point* const point,
+		const DT_leg* const leg) {
+	DT_point p;
+	// TODO
+	return p;
+}
+
+DT_bool KIN_makeMovement(DT_leg* leg_l, DT_leg* leg_r) {
 	DT_bool ans = true, tmp_bool;
 
 	leg_r->hip.set_value = UTL_getDegree(leg_r->hip.set_value);
@@ -131,18 +164,24 @@ DT_bool KIN_makeMovement(DT_leg* leg_l, DT_leg* leg_r){
 	leg_l->foot.set_value = UTL_getDegree(leg_l->foot.set_value);
 
 	tmp_bool = DNX_setAngle(leg_r->hip.id, leg_r->hip.set_value);
-	if(!tmp_bool) ans = false;
+	if (!tmp_bool)
+		ans = false;
 	tmp_bool = DNX_setAngle(leg_r->knee.id, leg_r->knee.set_value);
-	if(!tmp_bool) ans = false;
+	if (!tmp_bool)
+		ans = false;
 	tmp_bool = DNX_setAngle(leg_r->foot.id, leg_r->foot.set_value);
-	if(!tmp_bool) ans = false;
+	if (!tmp_bool)
+		ans = false;
 
 	tmp_bool = DNX_setAngle(leg_l->hip.id, leg_l->hip.set_value);
-	if(!tmp_bool) ans = false;
+	if (!tmp_bool)
+		ans = false;
 	tmp_bool = DNX_setAngle(leg_l->knee.id, leg_l->knee.set_value);
-	if(!tmp_bool) ans = false;
+	if (!tmp_bool)
+		ans = false;
 	tmp_bool = DNX_setAngle(leg_l->foot.id, leg_l->foot.set_value);
-	if(!tmp_bool) ans = false;
+	if (!tmp_bool)
+		ans = false;
 
 	return ans;
 }
