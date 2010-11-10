@@ -9,7 +9,6 @@
 #include "include/xmega.h"
 
 #define COM_START_BYTE 	0xFF
-#define DBL_SIZE		4
 
 /**
  * \brief	Berechnet die Checksum.
@@ -168,19 +167,17 @@ DT_size COM_requestStatus(DT_byte CpuID, DT_byte param, DT_byte* result) {
 
 }
 
-DT_byte* DoubleToByteArray(double value) {
-	DT_byte bytes[DBL_SIZE];
+void COM_doubleToByteArray(const DT_double value, DT_byte* const array) {
 	DT_byte* ptr = (DT_byte*) &value;
-	for (int i = 0; i < DBL_SIZE; i++)
-		bytes[i] = ptr[i];
-	return bytes;
+	for (DT_size i = 0; i < sizeof(DT_double); i++)
+		array[i] = ptr[i];
 }
 
-DT_double ByteArrayToDouble(DT_byte* ByteArray) {
+DT_double COM_byteArrayToDouble(const DT_byte* const array) {
 	DT_double value;
 	DT_byte* ptr = (DT_byte*) &value;
-	for (int i = 0; i < DBL_SIZE; i++)
-		ptr[i] = ByteArray[i];
+	for (DT_size i = 0; i < sizeof(DT_double); i++)
+		ptr[i] = array[i];
 	return value;
 }
 
@@ -189,21 +186,13 @@ DT_bool COM_sendPoint(DT_byte CpuID, DT_point* point) {
 	if (CpuID == COM_BRDCAST_ID)
 		return 0;
 	DT_byte result[DT_RESULT_BUFFER_SIZE];
-	DT_byte i;
 	DT_size len = 18;
 	DT_byte packet[len];
-	DT_byte* tmp;
 
 	// Point auf ByteArray casten
-	tmp = DoubleToByteArray(point->x);
-	for (i = 0; i < DBL_SIZE; i++)
-		packet[5 + i] = tmp[i];
-	tmp = DoubleToByteArray(point->y);
-	for (i = 0; i < DBL_SIZE; i++)
-		packet[5 + DBL_SIZE + i] = tmp[i];
-	tmp = DoubleToByteArray(point->z);
-	for (i = 0; i < DBL_SIZE; i++)
-		packet[5 + 2 * DBL_SIZE + i] = tmp[i];
+	COM_doubleToByteArray(point->x, &packet[5 + 0 * sizeof(DT_double)]);
+	COM_doubleToByteArray(point->y, &packet[5 + 1 * sizeof(DT_double)]);
+	COM_doubleToByteArray(point->z, &packet[5 + 2 * sizeof(DT_double)]);
 
 	packet[0] = COM_START_BYTE;
 	packet[1] = COM_START_BYTE;
@@ -222,16 +211,11 @@ DT_bool COM_sendPoint(DT_byte CpuID, DT_point* point) {
 
 DT_point COM_getPointFromPaket(DT_byte* result) {
 	DT_point p;
-	DT_byte tmp[DBL_SIZE], i;
-	for (i = 0; i < DBL_SIZE; i++)
-		tmp[i] = result[i + 5];
-	p.x = ByteArrayToDouble(tmp);
-	for (i = 0; i < DBL_SIZE; i++)
-		tmp[i] = result[i + 5 + DBL_SIZE];
-	p.y = ByteArrayToDouble(tmp);
-	for (i = 0; i < DBL_SIZE; i++)
-		tmp[i] = result[i + 5 + 2*DBL_SIZE];
-	p.z = ByteArrayToDouble(tmp);
+
+	p.x = COM_byteArrayToDouble(&result[5 + 0 * sizeof(DT_double)]);
+	p.y = COM_byteArrayToDouble(&result[5 + 1 * sizeof(DT_double)]);
+	p.z = COM_byteArrayToDouble(&result[5 + 1 * sizeof(DT_double)]);
+
 	return p;
 }
 

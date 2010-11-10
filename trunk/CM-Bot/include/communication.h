@@ -44,8 +44,8 @@ DT_bool COM_isAlive(DT_byte);
 void COM_sendACK(DT_byte);
 void COM_sendNAK(DT_byte, DT_byte);
 
-double ByteArrayToDouble(DT_byte*);
-DT_byte* DoubleToByteArray(double);
+DT_double COM_byteArrayToDouble(const DT_byte* const);
+void COM_doubleToByteArray(const DT_double, DT_byte* const);
 DT_point COM_getPointFromPaket(DT_byte*);
 
 #endif /* COMMUNICATION_H_ */
