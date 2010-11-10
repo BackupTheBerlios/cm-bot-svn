@@ -213,9 +213,10 @@ DT_double DNX_correctAngles(DT_byte id, DT_double value) {
  * \param	id	ID des Servos
  * \param	value	Winkel in Grad
  */
-void DNX_setAngle(DT_byte id, DT_double value) {
+DT_bool DNX_setAngle(DT_byte id, DT_double value) {
 	DT_byte result[DT_RESULT_BUFFER_SIZE];
 	DT_byte packet[9];
+	DT_size len;
 	value = DNX_correctAngles(id, value);
 	value = DNX_convertAngle(value);
 
@@ -233,8 +234,12 @@ void DNX_setAngle(DT_byte id, DT_double value) {
 	packet[5] = GL_POS;
 	packet[6] = angle_l; // Low
 	packet[7] = angle_h; // High
-	// packet[7] = checksum will set in send
-	DNX_send(packet, 9, result);
+	// packet[8] = checksum will set in send
+	len = DNX_send(packet, 9, result);
+	if(len>0)
+		return true;
+	else
+		return false;
 }
 
 /**

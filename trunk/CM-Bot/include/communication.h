@@ -29,9 +29,9 @@
 #define COM_NAK			0x15
 
 // NAK-Error-Codes
-#define COM_ANGLE_LIMIT			0x01
-#define COM_POINT_OUT_OF_BOUNDS	0x02
-#define COM_DEFAULT_ERROR		0x03
+#define COM_ERR_ANGLE_LIMIT			0x01
+#define COM_ERR_POINT_OUT_OF_BOUNDS	0x02
+#define COM_ERR_DEFAULT_ERROR		0x03
 
 DT_byte COM_getCpuID(DT_leg*);
 DT_byte COM_receive(USART_data_t* const, DT_byte* const);
@@ -43,5 +43,9 @@ void COM_sendAction(DT_byte);
 DT_bool COM_isAlive(DT_byte);
 void COM_sendACK(DT_byte);
 void COM_sendNAK(DT_byte, DT_byte);
+
+double ByteArrayToDouble(DT_byte*);
+DT_byte* DoubleToByteArray(double);
+DT_point COM_getPointFromPaket(DT_byte*);
 
 #endif /* COMMUNICATION_H_ */

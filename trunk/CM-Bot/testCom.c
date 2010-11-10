@@ -57,13 +57,37 @@ int main() {
 void master() {
 	DT_bool flag;
 	flag = COM_isAlive(COM_SLAVE1);
-	DEBUG(("ma_alive_sent",sizeof("ma_alive_sent")))
-	//COM_isAlive(COM_SLAVE2);
+	flag = COM_isAlive(COM_SLAVE3);
 
-	if (flag)
-		XM_LED_ON
+	DT_point p1, p2;
+
+	p1.x = 77.8553;
+	p1.y = 77.8553;
+	p1.z = -129.1041;
+
+	p2.x = 95.9985;
+	p2.y = -95.9985;
+	p2.z = -116.2699;
 
 	while (1) {
+
+		flag = COM_sendPoint(COM_SLAVE1, &p1);
+		flag = COM_sendPoint(COM_SLAVE3, &p1);
+		if (flag)
+			XM_LED_ON
+			else
+			XM_LED_OFF
+		COM_sendAction(COM_BRDCAST_ID);
+		UTL_wait(40);
+
+		flag = COM_sendPoint(COM_SLAVE1, &p2);
+		flag = COM_sendPoint(COM_SLAVE3, &p2);
+		if (flag)
+			XM_LED_ON
+			else
+			XM_LED_OFF
+		COM_sendAction(COM_BRDCAST_ID);
+		UTL_wait(40);
 
 	}
 }
@@ -71,6 +95,8 @@ void master() {
 void slave() {
 	DT_size len;
 	DT_byte result[DT_RESULT_BUFFER_SIZE];
+	DT_point p1;
+	DT_bool ans;
 	while (1) {
 		len = COM_receive(&XM_com_data, result);
 		if (len == 0)
@@ -92,10 +118,20 @@ void slave() {
 			}
 			break;
 		case COM_ACTION:
-
+			ans = KIN_makeMovement(&leg_l, &leg_r);
+			if (ans)
+				COM_sendACK(COM_MASTER);
+			else
+				COM_sendNAK(COM_MASTER, COM_ERR_DEFAULT_ERROR);
 			break;
 		case COM_POINT:
+			// point aus Paket lesen
+			p1 = COM_getPointFromPaket(result);
 
+			KIN_calculateServos(&p1, &leg_l);
+			KIN_calculateServos(&p1, &leg_r);
+
+			COM_sendACK(COM_MASTER);
 			break;
 
 		default:

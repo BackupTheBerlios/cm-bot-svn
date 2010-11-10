@@ -11,6 +11,7 @@
 
 #include "include/kinematics.h"
 #include "include/utils.h"
+#include "include/dynamixel.h"
 
 /**
  * \def	DIST_HK
@@ -116,4 +117,32 @@ void KIN_calculateServos(const DT_point* const p, DT_leg* const leg) {
 	leg->hip.set_value = hip;
 	leg->knee.set_value = knee;
 	leg->foot.set_value = foot;
+}
+
+DT_bool KIN_makeMovement(DT_leg* leg_l, DT_leg* leg_r){
+	DT_bool ans = true, tmp_bool;
+
+	leg_r->hip.set_value = UTL_getDegree(leg_r->hip.set_value);
+	leg_r->knee.set_value = UTL_getDegree(leg_r->knee.set_value);
+	leg_r->foot.set_value = UTL_getDegree(leg_r->foot.set_value);
+
+	leg_l->hip.set_value = UTL_getDegree(leg_l->hip.set_value);
+	leg_l->knee.set_value = UTL_getDegree(leg_l->knee.set_value);
+	leg_l->foot.set_value = UTL_getDegree(leg_l->foot.set_value);
+
+	tmp_bool = DNX_setAngle(leg_r->hip.id, leg_r->hip.set_value);
+	if(!tmp_bool) ans = false;
+	tmp_bool = DNX_setAngle(leg_r->knee.id, leg_r->knee.set_value);
+	if(!tmp_bool) ans = false;
+	tmp_bool = DNX_setAngle(leg_r->foot.id, leg_r->foot.set_value);
+	if(!tmp_bool) ans = false;
+
+	tmp_bool = DNX_setAngle(leg_l->hip.id, leg_l->hip.set_value);
+	if(!tmp_bool) ans = false;
+	tmp_bool = DNX_setAngle(leg_l->knee.id, leg_l->knee.set_value);
+	if(!tmp_bool) ans = false;
+	tmp_bool = DNX_setAngle(leg_l->foot.id, leg_l->foot.set_value);
+	if(!tmp_bool) ans = false;
+
+	return ans;
 }

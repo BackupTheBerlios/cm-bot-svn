@@ -9,6 +9,7 @@
 #include "include/xmega.h"
 
 #define COM_START_BYTE 	0xFF
+#define DBL_SIZE		4
 
 /**
  * \brief	Berechnet die Checksum.
@@ -60,7 +61,7 @@ DT_byte COM_getCpuID(DT_leg* leg_l) {
  */
 DT_byte COM_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 	USART_Buffer_t* buffer = &usart_data->buffer;
-	DEBUG_BYTE((buffer,127))
+	//DEBUG_BYTE((buffer,127))
 
 	// Sind Daten vorhanden
 	if (!USART_RXBufferData_Available(usart_data)) {
@@ -167,29 +168,71 @@ DT_size COM_requestStatus(DT_byte CpuID, DT_byte param, DT_byte* result) {
 
 }
 
+DT_byte* DoubleToByteArray(double value) {
+	DT_byte bytes[DBL_SIZE];
+	DT_byte* ptr = (DT_byte*) &value;
+	for (int i = 0; i < DBL_SIZE; i++)
+		bytes[i] = ptr[i];
+	return bytes;
+}
+
+DT_double ByteArrayToDouble(DT_byte* ByteArray) {
+	DT_double value;
+	DT_byte* ptr = (DT_byte*) &value;
+	for (int i = 0; i < DBL_SIZE; i++)
+		ptr[i] = ByteArray[i];
+	return value;
+}
+
 DT_bool COM_sendPoint(DT_byte CpuID, DT_point* point) {
 	// Broadcast bei requestStatus nicht möglich
-	DT_byte result[DT_RESULT_BUFFER_SIZE];
 	if (CpuID == COM_BRDCAST_ID)
 		return 0;
-	DT_size len = 7;
+	DT_byte result[DT_RESULT_BUFFER_SIZE];
+	DT_byte i;
+	DT_size len = 18;
 	DT_byte packet[len];
+	DT_byte* tmp;
 
-	//Todo: Point auf Byte casten
+	// Point auf ByteArray casten
+	tmp = DoubleToByteArray(point->x);
+	for (i = 0; i < DBL_SIZE; i++)
+		packet[5 + i] = tmp[i];
+	tmp = DoubleToByteArray(point->y);
+	for (i = 0; i < DBL_SIZE; i++)
+		packet[5 + DBL_SIZE + i] = tmp[i];
+	tmp = DoubleToByteArray(point->z);
+	for (i = 0; i < DBL_SIZE; i++)
+		packet[5 + 2 * DBL_SIZE + i] = tmp[i];
 
 	packet[0] = COM_START_BYTE;
 	packet[1] = COM_START_BYTE;
 	packet[2] = CpuID;
 	packet[3] = len - 4; // length
 	packet[4] = COM_POINT;
-	packet[5] = 0x00;
-	// packet[6] = checksum will set in send
+
+	// packet[17] = checksum will set in send
 
 	len = COM_send(packet, len, result, true);
-	// Todo: Antwort nach ACK überprüfen
+	if ((len > 0) && (result[4] == COM_ACK))
+		return true;
+	else
+		return false;
+}
 
-	return true;
-
+DT_point COM_getPointFromPaket(DT_byte* result) {
+	DT_point p;
+	DT_byte tmp[DBL_SIZE], i;
+	for (i = 0; i < DBL_SIZE; i++)
+		tmp[i] = result[i + 5];
+	p.x = ByteArrayToDouble(tmp);
+	for (i = 0; i < DBL_SIZE; i++)
+		tmp[i] = result[i + 5 + DBL_SIZE];
+	p.y = ByteArrayToDouble(tmp);
+	for (i = 0; i < DBL_SIZE; i++)
+		tmp[i] = result[i + 5 + 2*DBL_SIZE];
+	p.z = ByteArrayToDouble(tmp);
+	return p;
 }
 
 void COM_sendAction(DT_byte CpuID) {
@@ -209,7 +252,7 @@ DT_bool COM_isAlive(DT_byte CpuID) {
 	DT_byte result[DT_RESULT_BUFFER_SIZE];
 	DT_size len;
 	len = COM_requestStatus(CpuID, COM_IS_ALIVE, result);
-	if (len > 0)
+	if ((len > 0) && (result[4] == COM_ACK))
 		return true;
 	else
 		return false;
