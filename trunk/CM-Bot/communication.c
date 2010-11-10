@@ -214,7 +214,7 @@ DT_point COM_getPointFromPaket(DT_byte* result) {
 
 	p.x = COM_byteArrayToDouble(&result[5 + 0 * sizeof(DT_double)]);
 	p.y = COM_byteArrayToDouble(&result[5 + 1 * sizeof(DT_double)]);
-	p.z = COM_byteArrayToDouble(&result[5 + 1 * sizeof(DT_double)]);
+	p.z = COM_byteArrayToDouble(&result[5 + 2 * sizeof(DT_double)]);
 
 	return p;
 }
