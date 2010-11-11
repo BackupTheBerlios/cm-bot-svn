@@ -93,7 +93,7 @@ void XM_init_cpu() {
 	USART_Baudrate_Set(XM_debug_data.usart, 7, 0); // 250.000bps (BSEL = 7)
 
 	/* Enable RX and TX. */
-	USART_Rx_Enable(XM_debug_data.usart);
+	//USART_Rx_Enable(XM_debug_data.usart);
 	USART_Tx_Enable(XM_debug_data.usart);
 
 	USART_GetChar(XM_debug_data.usart); // Flush Receive Buffer
@@ -172,9 +172,9 @@ void XM_init_dnx() {
 
 	// Use USARTC0 / USARTD0 and initialize buffers
 	USART_InterruptDriver_Initialize(&XM_servo_data_R, &XM_USART_SERVO_R,
-			USART_DREINTLVL_LO_gc);
+			USART_DREINTLVL_HI_gc);
 	USART_InterruptDriver_Initialize(&XM_servo_data_L, &XM_USART_SERVO_L,
-			USART_DREINTLVL_LO_gc);
+			USART_DREINTLVL_HI_gc);
 
 	// 8 Data bits, No Parity, 1 Stop bit
 	USART_Format_Set(XM_servo_data_R.usart, USART_CHSIZE_8BIT_gc,
@@ -208,7 +208,7 @@ void XM_init_dnx() {
 	// Enable PMIC interrupt level low
 	PMIC.CTRL |= PMIC_LOLVLEX_bm;
 	// Enable Round-Robin-Scheduling
-	//PMIC.CTRL |= PMIC_RREN_bm;
+	PMIC.CTRL |= PMIC_RREN_bm;
 	// Enable global interrupts
 	sei();
 

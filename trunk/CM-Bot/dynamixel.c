@@ -61,7 +61,7 @@ DT_byte DNX_getChecksum(const DT_byte* const packet, DT_size l) {
  * \return	Länge des Antwortpakets
  */
 DT_byte DNX_receive(USART_data_t* const usart_data, DT_byte* const dest) {
-	USART_Buffer_t* buffer = &usart_data->buffer;
+	USART_Buffer_t* const buffer = &usart_data->buffer;
 
 	// Phantom-Paket verwerfen
 	while (USART_RXBufferData_Available(usart_data)
@@ -69,6 +69,10 @@ DT_byte DNX_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 		usart_data->lastPacketLength--;
 		USART_RXBuffer_GetByte(usart_data);
 	}
+
+	const DT_byte tempHead = buffer->RX_Head;
+	const DT_byte tempTail = buffer->RX_Tail;
+
 	if (usart_data->lastPacketLength > 0) {
 		DEBUG(("DNX_se",sizeof("DNX_se")))
 		return 0;
@@ -76,36 +80,29 @@ DT_byte DNX_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 
 	// Sind Daten vorhanden
 	if (!USART_RXBufferData_Available(usart_data)) {
-		DEBUG(("DNX_nd",sizeof("DNX_nd")))
-		return 0;
-	}
-	// Byte #1 und Byte #2 muessen laut Protokoll 0xFF sein
-	else if ((buffer->RX[buffer->RX_Tail] != 0xFF)
-			&& (buffer->RX[(buffer->RX_Tail + 1) & USART_RX_BUFFER_MASK]
-					!= 0xFF)) {
-		DEBUG(("DNX_ff",sizeof("DNX_ff")))
+		//DEBUG(("DNX_nd",sizeof("DNX_nd")))
 		return 0;
 	}
 	// Pruefen ob min. 4 Bytes im Buffer sind, um Laenge zu lesen
-	else if ((buffer->RX_Head > buffer->RX_Tail) && (buffer->RX_Head
-			- buffer->RX_Tail) < 4) {
+	else if (((tempTail + 4) & USART_RX_BUFFER_MASK) > tempHead) {
 		DEBUG(("DNX_le",sizeof("DNX_le")))
 		return 0;
-	} else if ((buffer->RX_Head < buffer->RX_Tail) && (USART_RX_BUFFER_SIZE
-			- buffer->RX_Tail + buffer->RX_Head) < 4) {
-		DEBUG(("DNX_le",sizeof("DNX_le")))
+	}
+	// Byte #1 und Byte #2 muessen laut Protokoll 0xFF sein
+	else if ((buffer->RX[tempTail] != 0xFF) && (buffer->RX[(tempTail + 1)
+			& USART_RX_BUFFER_MASK] != 0xFF)) {
+		DEBUG(("DNX_ff",sizeof("DNX_ff")))
 		return 0;
 	}
 	// Some data received. All data received if checksum is correct!
 	else {
 		// Calculate predicted length
 		DT_byte length;
-		length = buffer->RX[(buffer->RX_Tail + 3) & USART_RX_BUFFER_MASK];
+		length = buffer->RX[(tempTail + 3) & USART_RX_BUFFER_MASK];
 		// Complete length = (FF + FF + ID + LENGTH) + length
 		length += 4;
 		// Prüfen ob Paket bereits komplett im Buffer
-		if (((buffer->RX_Tail + length) & USART_RX_BUFFER_MASK)
-				> buffer->RX_Head) {
+		if (((tempTail + length) & USART_RX_BUFFER_MASK) > tempHead) {
 			DEBUG(("DNX_uc",sizeof("DNX_uc")))
 			return 0;
 		}
@@ -116,10 +113,11 @@ DT_byte DNX_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 		}
 
 		// Pruefen ob Checksumme korrekt ist
-		// ToDo: im Fehlerfall Buffer zurücksetzen
 		if (dest[length - 1] != DNX_getChecksum(dest, length)) {
 			DEBUG(("DNX_cks",sizeof("DNX_cks")))
-			DEBUG_BYTE((dest, length))
+			usart_data->buffer.RX_Tail = 0;
+			usart_data->buffer.RX_Head = 0;
+			//DEBUG_BYTE((dest, length))
 			return 0;
 		}
 		DEBUG(("DNX_ok",sizeof("DNX_ok")))

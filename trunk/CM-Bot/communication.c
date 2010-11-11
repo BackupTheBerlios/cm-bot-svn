@@ -59,47 +59,45 @@ DT_byte COM_getCpuID(const DT_leg* const leg_l) {
  * \return	Länge des Antwortpakets
  */
 DT_byte COM_receive(USART_data_t* const usart_data, DT_byte* const dest) {
-	USART_Buffer_t* buffer = &usart_data->buffer;
+	USART_Buffer_t* const buffer = &usart_data->buffer;
+	const DT_byte tempHead = buffer->RX_Head;
+	const DT_byte tempTail = buffer->RX_Tail;
+
 	//DEBUG_BYTE((buffer,127))
 
 	// Sind Daten vorhanden
 	if (!USART_RXBufferData_Available(usart_data)) {
-		DEBUG(("COM_nd",sizeof("COM_nd")))
+		//DEBUG(("COM_nd",sizeof("COM_nd")))
 		return 0;
 	}
 	// Init-Fehlerbytes ausfiltern
-	else if (buffer->RX[buffer->RX_Tail] != 0xFF) {
+	else if (buffer->RX[tempTail] != 0xFF) {
 		DEBUG(("COM_i",sizeof("COM_i")))
 		USART_RXBuffer_GetByte(usart_data);
 		return 0;
 	}
-	// Byte #1 und Byte #2 muessen laut Protokoll 0xFF sein
-	else if ((buffer->RX[buffer->RX_Tail] != 0xFF)
-			&& (buffer->RX[(buffer->RX_Tail + 1) & USART_RX_BUFFER_MASK]
-					!= 0xFF)) {
-		DEBUG(("COM_ff",sizeof("COM_ff")))
+	// Pruefen ob min. 4 Bytes im Buffer sind, um Laenge zu lesen
+	else if (((tempTail + 4) & USART_RX_BUFFER_MASK) > tempHead) {
+		DEBUG(("COM_le",sizeof("COM_le")))
 		return 0;
 	}
-	// Pruefen ob min. 4 Bytes im Buffer sind, um Laenge zu lesen
-	else if ((buffer->RX_Head > buffer->RX_Tail) && (buffer->RX_Head
-			- buffer->RX_Tail) < 4) {
-		DEBUG(("COM_le",sizeof("COM_le")))
-		return 0;
-	} else if ((buffer->RX_Head < buffer->RX_Tail) && (USART_RX_BUFFER_SIZE
-			- buffer->RX_Tail + buffer->RX_Head) < 4) {
-		DEBUG(("COM_le",sizeof("COM_le")))
+	// Byte #1 und Byte #2 muessen laut Protokoll 0xFF sein
+	else if ((buffer->RX[tempTail] != 0xFF)
+			&& (buffer->RX[(tempTail + 1) & USART_RX_BUFFER_MASK]
+					!= 0xFF)) {
+		DEBUG(("COM_ff",sizeof("COM_ff")))
 		return 0;
 	}
 	// Some data received. All data received if checksum is correct!
 	else {
 		// Calculate predicted length
 		DT_byte length;
-		length = buffer->RX[(buffer->RX_Tail + 3) & USART_RX_BUFFER_MASK];
+		length = buffer->RX[(tempTail + 3) & USART_RX_BUFFER_MASK];
 		// Complete length = (FF + FF + ID + LENGTH) + length
 		length += 4;
 		// Prüfen ob Paket bereits komplett im Buffer
-		if (((buffer->RX_Tail + length) & USART_RX_BUFFER_MASK)
-				> buffer->RX_Head) {
+		if (((tempTail + length) & USART_RX_BUFFER_MASK)
+				> tempHead) {
 			DEBUG(("COM_uc",sizeof("COM_uc")))
 			return 0;
 		}
@@ -110,13 +108,14 @@ DT_byte COM_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 		}
 
 		// Pruefen ob Checksumme korrekt ist
-		// ToDo: im Fehlerfall Buffer zurücksetzen
 		if (dest[length - 1] != COM_getChecksum(dest, length)) {
-			DEBUG(("cks",sizeof("cks")))
-			DEBUG_BYTE((dest, length))
+			DEBUG(("COM_cks",sizeof("COM_cks")))
+			usart_data->buffer.RX_Tail = 0;
+			usart_data->buffer.RX_Head = 0;
+			// DEBUG_BYTE((dest, length))
 			return 0;
 		}
-		DEBUG(("ok",sizeof("ok")))
+		DEBUG(("COM_ok",sizeof("COM_ok")))
 		return length;
 	}
 }
@@ -140,7 +139,7 @@ DT_byte COM_send(DT_byte* const packet, DT_size l, DT_byte* const result,
 	XM_USART_send(usart_data, packet, l);
 
 	DT_byte len = 0;
-	DT_size timeout = hasResponse ? 100 : 0;
+	DT_size timeout = hasResponse ? 1000 : 0;
 
 	while (len == 0 && timeout > 0) {
 		len = COM_receive(usart_data, result);
