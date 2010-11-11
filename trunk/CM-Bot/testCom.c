@@ -55,14 +55,17 @@ int main() {
 }
 
 void master() {
-	DT_bool flag1 = false, flag2 = false, flag;
+	DT_bool flag1 = false, flag2 = false;
 	do {
-		if (flag1 == false)
+		if (!flag1)
 			flag1 = COM_isAlive(COM_SLAVE1);
-		if (flag2 == false)
+		if (!flag2)
 			flag2 = COM_isAlive(COM_SLAVE3);
-		UTL_wait(5);
+		UTL_wait(4);
 	} while (!flag1 || !flag2);
+
+	XM_LED_ON
+
 	DT_point p1, p2;
 
 	p1.x = 77.8553;
@@ -74,29 +77,20 @@ void master() {
 	p2.z = -116.2699;
 
 	while (1) {
-		UTL_wait(1);
-		flag = COM_sendPoint(COM_SLAVE1, &p1);
-		UTL_wait(1);
-		flag = COM_sendPoint(COM_SLAVE3, &p1);
-		if (flag)
-			XM_LED_ON
-			else
-			XM_LED_OFF
-		UTL_wait(1);
-		COM_sendAction(COM_BRDCAST_ID);
-		UTL_wait(40);
-		UTL_wait(1);
-		flag = COM_sendPoint(COM_SLAVE1, &p2);
-		UTL_wait(1);
-		flag = COM_sendPoint(COM_SLAVE3, &p2);
-		if (flag)
-			XM_LED_ON
-			else
-			XM_LED_OFF
-		UTL_wait(1);
-		COM_sendAction(COM_BRDCAST_ID);
-		UTL_wait(40);
+		XM_LED_OFF
 
+		COM_sendPoint(COM_SLAVE1, &p1);
+		COM_sendPoint(COM_SLAVE3, &p1);
+		COM_sendAction(COM_BRDCAST_ID);
+
+		UTL_wait(40);
+		XM_LED_ON
+
+		COM_sendPoint(COM_SLAVE1, &p2);
+		COM_sendPoint(COM_SLAVE3, &p2);
+		COM_sendAction(COM_BRDCAST_ID);
+
+		UTL_wait(40);
 	}
 }
 
@@ -110,9 +104,11 @@ void slave() {
 		if (len == 0)
 			continue;
 		DEBUG(("sl_pck_rec",sizeof("sl_pck_rec")))
+
 		if (result[2] != Own_CpuID && result[2] != COM_BRDCAST_ID)
 			continue;
 		DEBUG(("sl_for_me",sizeof("sl_for_me")))
+
 		switch (result[4]) {
 		case COM_STATUS:
 			switch (result[5]) {

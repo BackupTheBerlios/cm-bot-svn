@@ -63,11 +63,16 @@ DT_byte COM_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 	const DT_byte tempHead = buffer->RX_Head;
 	const DT_byte tempTail = buffer->RX_Tail;
 
-	//DEBUG_BYTE((buffer,127))
+	// DEBUG_BYTE((buffer,127))
 
 	// Sind Daten vorhanden
 	if (!USART_RXBufferData_Available(usart_data)) {
-		//DEBUG(("COM_nd",sizeof("COM_nd")))
+		DEBUG(("COM_nd",sizeof("COM_nd")))
+		return 0;
+	}
+	// Pruefen ob min. 4 Bytes im Buffer sind, um Laenge zu lesen
+	else if (((tempTail + 4) & USART_RX_BUFFER_MASK) > tempHead) {
+		DEBUG(("COM_le",sizeof("COM_le")))
 		return 0;
 	}
 	// Init-Fehlerbytes ausfiltern
@@ -76,15 +81,9 @@ DT_byte COM_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 		USART_RXBuffer_GetByte(usart_data);
 		return 0;
 	}
-	// Pruefen ob min. 4 Bytes im Buffer sind, um Laenge zu lesen
-	else if (((tempTail + 4) & USART_RX_BUFFER_MASK) > tempHead) {
-		DEBUG(("COM_le",sizeof("COM_le")))
-		return 0;
-	}
 	// Byte #1 und Byte #2 muessen laut Protokoll 0xFF sein
-	else if ((buffer->RX[tempTail] != 0xFF)
-			&& (buffer->RX[(tempTail + 1) & USART_RX_BUFFER_MASK]
-					!= 0xFF)) {
+	else if ((buffer->RX[tempTail] != 0xFF) && (buffer->RX[(tempTail + 1)
+			& USART_RX_BUFFER_MASK] != 0xFF)) {
 		DEBUG(("COM_ff",sizeof("COM_ff")))
 		return 0;
 	}
@@ -96,8 +95,7 @@ DT_byte COM_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 		// Complete length = (FF + FF + ID + LENGTH) + length
 		length += 4;
 		// Prüfen ob Paket bereits komplett im Buffer
-		if (((tempTail + length) & USART_RX_BUFFER_MASK)
-				> tempHead) {
+		if (((tempTail + length) & USART_RX_BUFFER_MASK) > tempHead) {
 			DEBUG(("COM_uc",sizeof("COM_uc")))
 			return 0;
 		}
