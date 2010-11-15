@@ -44,8 +44,10 @@ int main() {
 	Own_CpuID = COM_getCpuID(&leg_l);
 
 	if (Own_CpuID == COM_MASTER) {
+		DEBUG(("master",sizeof("master")))
 		master();
 	} else {
+		DEBUG(("slave",sizeof("slave")))
 		slave();
 	}
 
@@ -53,13 +55,13 @@ int main() {
 }
 
 void master() {
-	XM_LED_ON
+	XM_LED_OFF
 	while (1) {
-		DEBUG(("pre_send_alive",sizeof("pre_send_alive")))
-		if (!COM_isAlive(COM_SLAVE3)) {
-			XM_LED_OFF
+		DEBUG(("pre_alive",sizeof("pre_alive")))
+		if (COM_isAlive(COM_SLAVE1)) {
+			XM_LED_ON
 		}
-			DEBUG(("aft_send_alive",sizeof("aft_send_alive")))
+		DEBUG(("aft_alive",sizeof("aft_alive")))
 	}
 }
 
@@ -80,9 +82,9 @@ void slave() {
 			switch (result[5]) {
 			case COM_IS_ALIVE:
 				XM_LED_ON
-				DEBUG(("pre_sl_alive",sizeof("pre_sl_alive")))
+				DEBUG(("rec_alive",sizeof("rec_alive")))
 				COM_sendACK(COM_MASTER);
-				DEBUG(("aft_sl_alive",sizeof("aft_sl_alive")))
+				DEBUG(("aft_ack",sizeof("aft_ack")))
 				break;
 			default:
 				break;

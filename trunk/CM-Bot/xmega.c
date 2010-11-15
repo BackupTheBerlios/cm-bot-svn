@@ -270,7 +270,7 @@ void XM_USART_send(USART_data_t* const usart_data, const DT_byte* const txData,
 		DT_size bytes) {
 	DT_size i = 0;
 
-	//DEBUG_BYTE((txData, bytes))
+	// DEBUG_BYTE((txData, bytes))
 
 	if (usart_data->usart == &XM_USART_DEBUG)
 		return;
