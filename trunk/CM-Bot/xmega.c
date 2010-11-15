@@ -282,7 +282,7 @@ void XM_USART_send(USART_data_t* const usart_data, const DT_byte* const txData,
 
 	// Send data
 	while (i < bytes) {
-		bool byteToBuffer;
+		DT_bool byteToBuffer;
 		byteToBuffer = USART_TXBuffer_PutByte(usart_data, txData[i]);
 		if (byteToBuffer) {
 			i++;
