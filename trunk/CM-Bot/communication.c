@@ -63,22 +63,19 @@ DT_byte COM_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 	const DT_byte tempHead = buffer->RX_Head;
 	const DT_byte tempTail = buffer->RX_Tail;
 
-	// DEBUG_BYTE((buffer,127))
+	DEBUG_BYTE((buffer,127))
 
-	// Sind Daten vorhanden
-	if (!USART_RXBufferData_Available(usart_data)) {
-		DEBUG(("COM_nd",sizeof("COM_nd")))
+
+	// Init-Fehlerbytes ausfiltern
+	if (buffer->RX[tempTail] != 0xFF && USART_RXBufferData_Available(
+			&XM_com_data)) {
+		DEBUG(("COM_i",sizeof("COM_i")))
+		USART_RXBuffer_GetByte(usart_data);
 		return 0;
 	}
 	// Pruefen ob min. 4 Bytes im Buffer sind, um Laenge zu lesen
 	else if (((tempTail + 4) & USART_RX_BUFFER_MASK) > tempHead) {
 		DEBUG(("COM_le",sizeof("COM_le")))
-		return 0;
-	}
-	// Init-Fehlerbytes ausfiltern
-	else if (buffer->RX[tempTail] != 0xFF) {
-		DEBUG(("COM_i",sizeof("COM_i")))
-		USART_RXBuffer_GetByte(usart_data);
 		return 0;
 	}
 	// Byte #1 und Byte #2 muessen laut Protokoll 0xFF sein
@@ -139,7 +136,7 @@ DT_byte COM_send(DT_byte* const packet, DT_size l, DT_byte* const result,
 	DT_byte len = 0;
 	DT_size timeout = hasResponse ? 1000 : 0;
 
-	while (len == 0 && timeout > 0) {
+	while (len == 0 && hasResponse /* && timeout > 0 */) {
 		len = COM_receive(usart_data, result);
 		timeout--;
 	}

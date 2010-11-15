@@ -4,7 +4,7 @@
  * \brief	Testprogramm für Kommunikation der CPUs.
  */
 
-#define TEST_ON
+#define TEST_OFF
 #ifdef TEST_ON
 
 #include "include/kinematics.h"
