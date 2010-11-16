@@ -202,7 +202,7 @@ DT_bool COM_sendPoint(DT_byte cpuID, const DT_point* const point) {
 		return false;
 }
 
-DT_point COM_getPointFromPaket(const DT_byte* const result) {
+DT_point COM_getPointFromPacket(const DT_byte* const result) {
 	DT_point p;
 
 	p.x = COM_byteArrayToDouble(&result[5 + 0 * sizeof(DT_double)]);

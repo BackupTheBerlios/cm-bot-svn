@@ -130,7 +130,7 @@ void slave() {
 			break;
 		case COM_POINT:
 			// point aus Paket lesen
-			p1 = COM_getPointFromPaket(result);
+			p1 = COM_getPointFromPacket(result);
 
 			KIN_calcServos(&p1, &leg_l);
 			KIN_calcServos(&p1, &leg_r);

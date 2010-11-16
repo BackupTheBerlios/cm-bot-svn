@@ -46,6 +46,6 @@ void COM_sendNAK(DT_byte, DT_byte);
 DT_byte COM_getCpuID(const DT_leg* const);
 DT_double COM_byteArrayToDouble(const DT_byte* const);
 void COM_doubleToByteArray(const DT_double, DT_byte* const);
-DT_point COM_getPointFromPaket(const DT_byte* const);
+DT_point COM_getPointFromPacket(const DT_byte* const);
 
 #endif /* COMMUNICATION_H_ */

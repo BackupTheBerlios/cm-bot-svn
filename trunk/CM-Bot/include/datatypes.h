@@ -22,20 +22,29 @@ typedef uint8_t DT_type;
 typedef char DT_char;
 typedef uint16_t DT_cmd;
 
+/** \brief Datenstruktur zur Speicherung von ID, Soll- und Ist-Wert eines Servos. */
 typedef struct {
-	DT_byte id;				/**< Servo-ID. */
-	DT_double set_value;    /**< Soll-Wert. */
-	DT_double act_value;	/**< Ist-Wert. */
-} DT_servo;					/**< Datenstruktur zur Speicherung von ID, Soll- und Ist-Wert eines Servos. */
+	DT_byte id; /**< Servo-ID. */
+	DT_double set_value; /**< Soll-Wert. */
+	DT_double act_value; /**< Ist-Wert. */
+} DT_servo;
 
+/** \brief Datenstruktur zur Speicherung von Servodaten bezüglich eines kompletten Beines. */
 typedef struct {
-	DT_servo hip;			/**< Hüftgelenk. */
-	DT_servo knee;			/**< Kniegelenk. */
-	DT_servo foot;			/**< Fußgelenk. */
-} DT_leg;					/**< Datenstruktur zur Speicherung von Servodaten bezüglich eines kompletten Beines. */
+	DT_servo hip; /**< Hüftgelenk. */
+	DT_servo knee; /**< Kniegelenk. */
+	DT_servo foot; /**< Fußgelenk. */
+} DT_leg;
 
+/** \brief Datenstruktur zur Speicherung karthesischer Koordinaten. */
 typedef struct {
 	DT_double x, y, z;
-} DT_point;                /**< Datenstruktur zur Speicherung karthesischer Koordinaten. */
+} DT_point;
+
+/** \brief Struktur zur vereinfachten Koordinatentransformation. */
+typedef struct {
+	DT_double x, y;
+	DT_bool zRotation;
+} DT_transformation;
 
 #endif /* DATATYPES_H_ */

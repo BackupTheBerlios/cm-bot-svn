@@ -32,15 +32,56 @@
 #define DIST_DZ -14
 
 /**
- * \brief	Initialisiert die benötigten Variablen.
+ * \brief	Liefert fuer ein Bein die Struktur zur Koordinatentransformation.
  *
- * 			Initialisiert die benötigten Variablen um
- * 			z.B. Punkte im Weltkoordinatensystem in das Roboterkoordinatensystem (Bein) umrechnen zu können.
+ * 			Liefert fuer ein Bein die Struktur zur Koordinatentransformation.
  *
- * \param	leg		Bein zur Erkennung der CPI-ID
+ * \param	leg		Bein
+ *
+ * \return	Struktur zur Koordinatentransformation fuer ein spez. Bein
  */
-void KIN_init(const DT_leg* const leg) {
-	// TODO
+DT_transformation KIN_getTransMat(const DT_leg* const leg) {
+	DT_transformation trans;
+	// TODO Werte der Beine eintragen
+	switch (leg->hip.id) {
+	case 1:
+		trans.x = 0;
+		trans.y = 0;
+		trans.zRotation = false;
+		break;
+	case 4:
+		trans.x = 0;
+		trans.y = 0;
+		trans.zRotation = false;
+		break;
+	case 7:
+		trans.x = 0;
+		trans.y = 0;
+		trans.zRotation = false;
+		break;
+	case 10:
+		trans.x = 0;
+		trans.y = 0;
+		trans.zRotation = false;
+		break;
+	case 13:
+		trans.x = 0;
+		trans.y = 0;
+		trans.zRotation = false;
+		break;
+	case 16:
+		trans.x = 0;
+		trans.y = 0;
+		trans.zRotation = false;
+		break;
+	default:
+		DEBUG(("KIN_noID", sizeof("KIN_noID")))
+		trans.x = 0;
+		trans.y = 0;
+		trans.zRotation = false;
+		break;
+	}
+	return trans;
 }
 
 /**
@@ -141,15 +182,27 @@ void KIN_calcServos(const DT_point* const p, DT_leg* const leg) {
 /**
  * \brief	Transformiert einen Punkt in das Roboterkoordinatensystem.
  *
- * 			Transformiert einen Punkt des Weltkoordinatensystems in das Roboterkoordinatensystem des jeweiligen Beines. Zuvor muss min. einmal KIN_init() ausgeführt worden sein.
+ * 			Transformiert einen Punkt des Weltkoordinatensystems in das Roboterkoordinatensystem eines Beines.
+ * 			Berechnet nur eine x-y-Verschiebung und eine Rotation von 0/180 Grad um die z-Achse.
  *
- * \param	leg		Bein zur Erkennung der CPI-ID
+ * \param	p		Punkt im Weltkooridnatensystem
+ * \param	trans	Struktur mit Informationen fuer die Koordinatentransformation
+ *
+ * \return	Punkt im Roboterkoordinatensystem eines Beines
  */
-DT_point KIN_calcLocalPoint(const DT_point* const point,
-		const DT_leg* const leg) {
-	DT_point p;
-	// TODO
-	return p;
+DT_point KIN_calcLocalPoint(const DT_point* const p,
+		const DT_transformation* const trans) {
+	DT_point pLocal;
+	if (trans->zRotation == true) {
+		pLocal.x = trans->x - p->x;
+		pLocal.y = trans->y - p->y;
+		pLocal.z = p->z;
+	} else {
+		pLocal.x = p->x - trans->x;
+		pLocal.y = p->y - trans->y;
+		pLocal.z = p->z;
+	}
+	return pLocal;
 }
 
 DT_bool KIN_makeMovement(DT_leg* leg_l, DT_leg* leg_r) {
