@@ -322,6 +322,7 @@ void XM_USART_send(USART_data_t* const usart_data, const DT_byte* const txData,
 	USART_TxdInterruptLevel_Set(usart_data->usart, USART_TXCINTLVL_HI_gc);
 }
 
+
 /**
  * \brief 	ISR für abgeschlossenen Sendevorgang der USARTC0 (SERVO L).
  */

@@ -42,37 +42,36 @@
  */
 DT_transformation KIN_getTransMat(const DT_leg* const leg) {
 	DT_transformation trans;
-	// TODO Werte der Beine eintragen
 	switch (leg->hip.id) {
 	case 1:
-		trans.x = 0;
-		trans.y = 0;
+		trans.x = 168.5;
+		trans.y = 208.5;
 		trans.zRotation = false;
 		break;
 	case 4:
-		trans.x = 0;
-		trans.y = 0;
-		trans.zRotation = false;
+		trans.x = -168.5;
+		trans.y = 208.5;
+		trans.zRotation = true;
 		break;
 	case 7:
-		trans.x = 0;
+		trans.x = 168.5;
 		trans.y = 0;
 		trans.zRotation = false;
 		break;
 	case 10:
-		trans.x = 0;
+		trans.x = -168.5;
 		trans.y = 0;
-		trans.zRotation = false;
+		trans.zRotation = true;
 		break;
 	case 13:
-		trans.x = 0;
-		trans.y = 0;
+		trans.x = 168.5;
+		trans.y = -208.5;
 		trans.zRotation = false;
 		break;
 	case 16:
-		trans.x = 0;
-		trans.y = 0;
-		trans.zRotation = false;
+		trans.x = -168.5;
+		trans.y = -208.5;
+		trans.zRotation = true;
 		break;
 	default:
 		DEBUG(("KIN_noID", sizeof("KIN_noID")))
@@ -205,36 +204,3 @@ DT_point KIN_calcLocalPoint(const DT_point* const p,
 	return pLocal;
 }
 
-DT_bool KIN_makeMovement(DT_leg* leg_l, DT_leg* leg_r) {
-	DT_bool ans = true, tmp_bool;
-
-	leg_r->hip.set_value = UTL_getDegree(leg_r->hip.set_value);
-	leg_r->knee.set_value = UTL_getDegree(leg_r->knee.set_value);
-	leg_r->foot.set_value = UTL_getDegree(leg_r->foot.set_value);
-
-	leg_l->hip.set_value = UTL_getDegree(leg_l->hip.set_value);
-	leg_l->knee.set_value = UTL_getDegree(leg_l->knee.set_value);
-	leg_l->foot.set_value = UTL_getDegree(leg_l->foot.set_value);
-
-	tmp_bool = DNX_setAngle(leg_r->hip.id, leg_r->hip.set_value);
-	if (!tmp_bool)
-		ans = false;
-	tmp_bool = DNX_setAngle(leg_r->knee.id, leg_r->knee.set_value);
-	if (!tmp_bool)
-		ans = false;
-	tmp_bool = DNX_setAngle(leg_r->foot.id, leg_r->foot.set_value);
-	if (!tmp_bool)
-		ans = false;
-
-	tmp_bool = DNX_setAngle(leg_l->hip.id, leg_l->hip.set_value);
-	if (!tmp_bool)
-		ans = false;
-	tmp_bool = DNX_setAngle(leg_l->knee.id, leg_l->knee.set_value);
-	if (!tmp_bool)
-		ans = false;
-	tmp_bool = DNX_setAngle(leg_l->foot.id, leg_l->foot.set_value);
-	if (!tmp_bool)
-		ans = false;
-
-	return ans;
-}

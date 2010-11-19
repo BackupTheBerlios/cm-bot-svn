@@ -49,6 +49,8 @@ DT_byte DNX_getChecksum(const DT_byte* const packet, DT_size l) {
 	return ~chksm;
 }
 
+
+
 /**
  * \brief 	USART-Empfangsmethode.
  *
@@ -78,13 +80,8 @@ DT_byte DNX_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 		return 0;
 	}
 
-	// Sind Daten vorhanden
-	if (!USART_RXBufferData_Available(usart_data)) {
-		//DEBUG(("DNX_nd",sizeof("DNX_nd")))
-		return 0;
-	}
 	// Pruefen ob min. 4 Bytes im Buffer sind, um Laenge zu lesen
-	else if (((tempTail + 4) & USART_RX_BUFFER_MASK) > tempHead) {
+	if (USART_RXBuffer_checkPointerDiff(tempTail,tempHead, 4)) {
 		DEBUG(("DNX_le",sizeof("DNX_le")))
 		return 0;
 	}
@@ -102,7 +99,7 @@ DT_byte DNX_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 		// Complete length = (FF + FF + ID + LENGTH) + length
 		length += 4;
 		// Prüfen ob Paket bereits komplett im Buffer
-		if (((tempTail + length) & USART_RX_BUFFER_MASK) > tempHead) {
+		if (USART_RXBuffer_checkPointerDiff(tempTail, tempHead, length)) {
 			DEBUG(("DNX_uc",sizeof("DNX_uc")))
 			return 0;
 		}
@@ -213,7 +210,7 @@ DT_double DNX_correctAngles(DT_byte id, DT_double value) {
  * \param	id	ID des Servos
  * \param	value	Winkel in Grad
  */
-DT_bool DNX_setAngle(DT_byte id, DT_double value) {
+DT_bool DNX_setAngle(DT_byte id, DT_double value, DT_bool regWrite) {
 	DT_byte result[DT_RESULT_BUFFER_SIZE];
 	DT_size len = 9;
 	DT_byte packet[len];
@@ -230,7 +227,7 @@ DT_bool DNX_setAngle(DT_byte id, DT_double value) {
 	packet[1] = START_BYTE;
 	packet[2] = id;
 	packet[3] = len - 4; // length
-	packet[4] = WR_DATA;
+	packet[4] = regWrite ? REG_WR : WR_DATA;
 	packet[5] = GL_POS;
 	packet[6] = angle_l; // Low
 	packet[7] = angle_h; // High
@@ -312,6 +309,25 @@ DT_bool DNX_setLed(DT_byte id, DT_byte value) {
 		return true;
 	} else
 		return false;
+}
+
+/**
+ * \brief	Todo.
+ *
+ * \param	id	ID des Servos
+ * \param	value	Wert für LED (0x00 / 0x01)
+ */
+void DNX_sendAction(DT_byte id) {
+	DT_size len = 6;
+	DT_byte packet[len];
+	DT_byte result[DT_RESULT_BUFFER_SIZE];
+	packet[0] = START_BYTE;
+	packet[1] = START_BYTE;
+	packet[2] = id;
+	packet[3] = len - 4; // length
+	packet[4] = ACT;
+	// packet[5] = checksum will set in send
+	DNX_send(packet, len, result, false);
 }
 
 /**

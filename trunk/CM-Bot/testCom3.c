@@ -41,10 +41,10 @@ int main() {
 	case COM_MASTER:
 		DEBUG(("Master",sizeof("Master")))
 		break;
-	case COM_SLAVE1:
+	case COM_SLAVE1B:
 		DEBUG(("Slave1",sizeof("Slave1")))
 		break;
-	case COM_SLAVE3:
+	case COM_SLAVE3F:
 		DEBUG(("Slave3",sizeof("Slave3")))
 		break;
 	default: //case NOCPUID:
@@ -73,7 +73,7 @@ void master() {
 	XM_LED_OFF
 	while (1) {
 		DEBUG(("pre_alive",sizeof("pre_alive")))
-		if (COM_isAlive(COM_SLAVE1)) {
+		if (COM_isAlive(COM_SLAVE1B)) {
 			XM_LED_ON
 		}
 		DEBUG(("aft_alive",sizeof("aft_alive")))

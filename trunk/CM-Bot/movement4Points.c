@@ -4,7 +4,7 @@
  *  \brief	Algorithmus fuer das Vorwaertslaufen ueber 4 Punkte.
  */
 
-#define TEST_OFF TEST
+#define TEST_ON TEST
 #ifdef TEST_ON
 
 #include "include/kinematics.h"
@@ -14,7 +14,8 @@
 #include "include/communication.h"
 
 // TODO Versatz eintragen
-#define SL_DST_Y 0
+#define SL_DST_Y	208.5
+#define DST_X	168.5
 
 DT_leg leg_r, leg_l;
 DT_byte cpuID;
@@ -27,10 +28,8 @@ void ma_checkAlive();
 void ma_setInitialPosition();
 void ma_setPoints(DT_point* const , DT_point* const , DT_point* const ,
 		DT_point* const );
-void ma_state1(DT_point* const , DT_point* const );
-void ma_state2(DT_point* const , DT_point* const );
-void ma_state3(DT_point* const , DT_point* const );
-void ma_state4(DT_point* const , DT_point* const );
+void ma_prepare_step(DT_point* const , DT_point* const , const DT_bool);
+void ma_do_step(DT_point* const , DT_point* const , const DT_bool);
 
 void ma_sl_prepareLeg(DT_leg* const , const DT_point* const ,
 		const DT_transformation* const );
@@ -43,13 +42,13 @@ void sl_point();
 int main() {
 	XM_init_cpu();
 	XM_init_dnx();
-	XM_init_com();
-
-	XM_LED_OFF
-
 	// INIT: Hole benoetigte Daten
 	DNX_getConnectedIDs(&leg_r, &leg_l);
 	cpuID = COM_getCpuID(&leg_l);
+	XM_init_com(cpuID);
+
+	XM_LED_OFF
+
 	trans_r = KIN_getTransMat(&leg_r);
 	trans_l = KIN_getTransMat(&leg_l);
 
@@ -60,16 +59,16 @@ int main() {
 		DEBUG(("Master",sizeof("Master")))
 		master();
 		break;
-	case COM_SLAVE1:
+	case COM_SLAVE1B:
 		DEBUG(("Slave1",sizeof("Slave1")))
 		slave();
 		break;
-	case COM_SLAVE3:
+	case COM_SLAVE3F:
 		DEBUG(("Slave3",sizeof("Slave3")))
 		slave();
 		break;
 	default: //case NOCPUID:
-		DEBUG(("NoCpuID",sizeof("NoCpuID")))
+DEBUG		(("NoCpuID",sizeof("NoCpuID")))
 		XM_LED_OFF
 		break;
 	}
@@ -96,22 +95,23 @@ void master() {
 		case 0:
 			DEBUG(("ma_int_pos",sizeof("ma_int_pos")))
 			ma_setInitialPosition();
+			UTL_wait(40);
 			state = 1;
 			break;
 		case 1:
-			ma_state1(&pFntDwn, &pBckUp);
+			ma_prepare_step(&pFntDwn, &pBckUp, false);
 			state = 2;
 			break;
 		case 2:
-			ma_state2(&pBckDwn, &pFntUp);
+			ma_do_step(&pBckDwn, &pFntUp, false);
 			state = 3;
 			break;
 		case 3:
-			ma_state3(&pFntDwn, &pBckUp);
+			ma_prepare_step(&pFntDwn, &pBckUp, true);
 			state = 4;
 			break;
 		case 4:
-			ma_state4(&pBckDwn, &pFntUp);
+			ma_prepare_step(&pBckDwn, &pFntUp, true);
 			state = 1;
 			break;
 		default:
@@ -121,179 +121,169 @@ void master() {
 	}
 }
 
-void ma_state1(DT_point* const pDwn, DT_point* const pUp) {
-	// TODO rechts/links bei COM_sendPoint
+void ma_prepare_step(DT_point* const pDwn, DT_point* const pUp, DT_bool right) {
+	DT_byte config;
 	DT_point pTmp;
 	// F_R, B_R, M_L: vorne unten
 	pTmp = *pDwn;
-	// pTmp.x = -pDwn->x;
+	if (right) {
+		pTmp.x = -pDwn->x;
+		config = COM_CONF_LEFT | COM_CONF_GLOB;
+	} else {
+		config = COM_CONF_RIGHT | COM_CONF_GLOB;
+	}
 	pTmp.y += SL_DST_Y;
-	COM_sendPoint(COM_SLAVE1, &pTmp); // TODO slave nr pruefen
+	//COM_sendPoint(COM_SLAVE3, &pTmp, config);
 
 	pTmp = *pDwn;
-	// pTmp.x = -pDown->x;
+	if (right) {
+		pTmp.x = -pDwn->x;
+		config = COM_CONF_LEFT | COM_CONF_GLOB;
+	} else {
+		config = COM_CONF_RIGHT | COM_CONF_GLOB;
+	}
 	pTmp.y -= SL_DST_Y;
-	COM_sendPoint(COM_SLAVE3, &pTmp); // TODO slave nr pruefen
+	COM_sendPoint(COM_SLAVE1B, &pTmp, config);
 
-	ma_sl_prepareLeg(&leg_l, pDwn, &trans_l);
+	pTmp = *pDwn;
+	if (right) {
+		ma_sl_prepareLeg(&leg_r, &pTmp, &trans_r);
+	} else {
+		pTmp.x = -pDwn->x;
+		ma_sl_prepareLeg(&leg_l, &pTmp, &trans_l);
+	}
 
+	UTL_wait(20);
 	COM_sendAction(COM_BRDCAST_ID);
-	void ma_sl_action();
-
-	// TODO evt pause bzw warten bis beine unten sind
+	ma_sl_action();
 
 	// F_L, B_L, M_R: hinten oben
 	pTmp = *pUp;
-	pTmp.x = -pUp->x;
+	if (right) {
+		config = COM_CONF_RIGHT | COM_CONF_GLOB;
+	} else {
+		config = COM_CONF_LEFT | COM_CONF_GLOB;
+		pTmp.x = -pUp->x;
+	}
 	pTmp.y += SL_DST_Y;
-	COM_sendPoint(COM_SLAVE1, &pTmp); // TODO slave nr pruefen
+
+	//COM_sendPoint(COM_SLAVE3, &pTmp, config);
 
 	pTmp = *pUp;
-	pTmp.x = -pUp->x;
+	if (right) {
+		config = COM_CONF_RIGHT | COM_CONF_GLOB;
+	} else {
+		config = COM_CONF_LEFT | COM_CONF_GLOB;
+		pTmp.x = -pUp->x;
+	}
 	pTmp.y -= SL_DST_Y;
-	COM_sendPoint(COM_SLAVE3, &pTmp); // TODO slave nr pruefen
+	COM_sendPoint(COM_SLAVE1B, &pTmp, config);
 
-	ma_sl_prepareLeg(&leg_r, pUp, &trans_r);
+	pTmp = *pUp;
+	if (right) {
+		pTmp.x = -pDwn->x;
+		ma_sl_prepareLeg(&leg_l, &pTmp, &trans_l);
+	} else {
+		ma_sl_prepareLeg(&leg_r, &pTmp, &trans_r);
+	}
 
+	UTL_wait(20);
 	COM_sendAction(COM_BRDCAST_ID);
-	void ma_sl_action();
+	ma_sl_action();
 }
 
-void ma_state2(DT_point* const pDwn, DT_point* const pUp) {
-	// TODO rechts/links bei COM_sendPoint
+void ma_do_step(DT_point* const pDwn, DT_point* const pUp, DT_bool right) {
+	DT_byte config;
 	DT_point pTmp;
-	// F_R, B_R, M_L: hinten unten
+	// F_R, B_R, M_L: vorne unten
 	pTmp = *pDwn;
-	// pTmp.x = -pDwn->x;
+	if (right) {
+		pTmp.x = -pDwn->x;
+		config = COM_CONF_LEFT | COM_CONF_GLOB;
+	} else {
+		config = COM_CONF_RIGHT | COM_CONF_GLOB;
+	}
 	pTmp.y += SL_DST_Y;
-	COM_sendPoint(COM_SLAVE1, &pTmp); // TODO slave nr pruefen
-
-	pTmp = *pDwn;
-	// pTmp.x = -pDown->x;
-	pTmp.y -= SL_DST_Y;
-	COM_sendPoint(COM_SLAVE3, &pTmp); // TODO slave nr pruefen
-
-	ma_sl_prepareLeg(&leg_l, pDwn, &trans_l);
-
-	COM_sendAction(COM_BRDCAST_ID);
-	void ma_sl_action();
-
-	// TODO evt pause bzw warten bis beine unten sind
-
-	// F_L, B_L, M_R: vorne oben
-	pTmp = *pUp;
-	pTmp.x = -pUp->x;
-	pTmp.y += SL_DST_Y;
-	COM_sendPoint(COM_SLAVE1, &pTmp); // TODO slave nr pruefen
-
-	pTmp = *pUp;
-	pTmp.x = -pUp->x;
-	pTmp.y -= SL_DST_Y;
-	COM_sendPoint(COM_SLAVE3, &pTmp); // TODO slave nr pruefen
-
-	ma_sl_prepareLeg(&leg_r, pUp, &trans_r);
-
-	COM_sendAction(COM_BRDCAST_ID);
-	void ma_sl_action();
-}
-
-void ma_state3(DT_point* const pDwn, DT_point* const pUp) {
-	// TODO rechts/links bei COM_sendPoint
-	DT_point pTmp;
-	// F_L, B_L, M_R: vorne unten
-	pTmp = *pDwn;
-	pTmp.x = -pDwn->x;
-	pTmp.y += SL_DST_Y;
-	COM_sendPoint(COM_SLAVE1, &pTmp); // TODO slave nr pruefen
+	//COM_sendPoint(COM_SLAVE3, &pTmp, config);
 
 	pTmp = *pDwn;
-	pTmp.x = -pDwn->x;
+	if (right) {
+		pTmp.x = -pDwn->x;
+		config = COM_CONF_LEFT | COM_CONF_GLOB;
+	} else {
+		config = COM_CONF_RIGHT | COM_CONF_GLOB;
+	}
 	pTmp.y -= SL_DST_Y;
-	COM_sendPoint(COM_SLAVE3, &pTmp); // TODO slave nr pruefen
-
-	ma_sl_prepareLeg(&leg_r, pDwn, &trans_r);
-
-	COM_sendAction(COM_BRDCAST_ID);
-	void ma_sl_action();
-
-	// TODO evt pause bzw warten bis beine unten sind
-
-	// F_R, B_R, M_L: hinten oben
-	pTmp = *pUp;
-	// pTmp.x = -pDwn->x;
-	pTmp.y += SL_DST_Y;
-	COM_sendPoint(COM_SLAVE1, &pTmp); // TODO slave nr pruefen
-
-	pTmp = *pUp;
-	// pTmp.x = -pDown->x;
-	pTmp.y -= SL_DST_Y;
-	COM_sendPoint(COM_SLAVE3, &pTmp); // TODO slave nr pruefen
-
-	ma_sl_prepareLeg(&leg_l, pUp, &trans_l);
-
-	COM_sendAction(COM_BRDCAST_ID);
-	void ma_sl_action();
-}
-
-void ma_state4(DT_point* const pDwn, DT_point* const pUp) {
-	// TODO rechts/links bei COM_sendPoint
-	DT_point pTmp;
-	// F_L, B_L, M_R: hinten unten
-	pTmp = *pDwn;
-	pTmp.x = -pDwn->x;
-	pTmp.y += SL_DST_Y;
-	COM_sendPoint(COM_SLAVE1, &pTmp); // TODO slave nr pruefen
+	COM_sendPoint(COM_SLAVE1B, &pTmp, config);
 
 	pTmp = *pDwn;
-	pTmp.x = -pDwn->x;
-	pTmp.y -= SL_DST_Y;
-	COM_sendPoint(COM_SLAVE3, &pTmp); // TODO slave nr pruefen
+	if (right) {
+		ma_sl_prepareLeg(&leg_r, &pTmp, &trans_r);
+	} else {
+		pTmp.x = -pDwn->x;
+		ma_sl_prepareLeg(&leg_l, &pTmp, &trans_l);
+	}
 
-	ma_sl_prepareLeg(&leg_r, pDwn, &trans_r);
-
+	UTL_wait(20);
 	COM_sendAction(COM_BRDCAST_ID);
-	void ma_sl_action();
+	ma_sl_action();
 
-	// TODO evt pause bzw warten bis beine unten sind
-
-	// F_R, B_R, M_L: vorne oben
+	// F_L, B_L, M_R: hinten oben
 	pTmp = *pUp;
-	// pTmp.x = -pDwn->x;
+	if (right) {
+		config = COM_CONF_RIGHT | COM_CONF_GLOB;
+	} else {
+		config = COM_CONF_LEFT | COM_CONF_GLOB;
+		pTmp.x = -pUp->x;
+	}
 	pTmp.y += SL_DST_Y;
-	COM_sendPoint(COM_SLAVE1, &pTmp); // TODO slave nr pruefen
+
+	//COM_sendPoint(COM_SLAVE3, &pTmp, config);
 
 	pTmp = *pUp;
-	// pTmp.x = -pDown->x;
+	if (right) {
+		config = COM_CONF_RIGHT | COM_CONF_GLOB;
+	} else {
+		config = COM_CONF_LEFT | COM_CONF_GLOB;
+		pTmp.x = -pUp->x;
+	}
 	pTmp.y -= SL_DST_Y;
-	COM_sendPoint(COM_SLAVE3, &pTmp); // TODO slave nr pruefen
+	COM_sendPoint(COM_SLAVE1B, &pTmp, config);
 
-	ma_sl_prepareLeg(&leg_l, pUp, &trans_l);
+	pTmp = *pUp;
+	if (right) {
+		pTmp.x = -pDwn->x;
+		ma_sl_prepareLeg(&leg_l, &pTmp, &trans_l);
+	} else {
+		ma_sl_prepareLeg(&leg_r, &pTmp, &trans_r);
+	}
 
+	UTL_wait(20);
 	COM_sendAction(COM_BRDCAST_ID);
-	void ma_sl_action();
+	ma_sl_action();
 }
 
 void ma_setPoints(DT_point* const pFntDwn, DT_point* const pFntUp,
 		DT_point* const pBckUp, DT_point* const pBckDwn) {
 	XM_LED_OFF
 	// Fix-Koordinaten fuer Master, Berechnung fuer Slaves ueber Offset
-	pFntUp->x = 0;
-	pFntUp->y = 0;
-	pFntUp->z = 0;
+	pFntUp->x = 103.4640 + +DST_X;
+	pFntUp->y = 37.6578;
+	pFntUp->z = 101.1041;
 
-	pFntDwn->x = 77.8553;
-	pFntDwn->y = 77.8553;
+	pFntDwn->x = 103.4640 + +DST_X;
+	pFntDwn->y = 37.6578;
 	pFntDwn->z = -129.1041;
 
-	pBckUp->x = 0;
-	pBckUp->y = 0;
-	pBckUp->z = 0;
+	pBckUp->x = 103.4640 + +DST_X;
+	pBckUp->y = -37.6578;
+	pBckUp->z = 101.1041;
 
-	pBckDwn->x = 95.9985;
-	pBckDwn->y = -95.9985;
-	pBckDwn->z = -116.2699;
+	pBckDwn->x = 103.4640 + +DST_X;
+	pBckDwn->y = -37.6578;
+	pBckDwn->z = -129.1041;
 
-	DEBUG(("ma_set_pnt",sizeof("ma_set_pnt")))
+DEBUG	(("ma_set_pnt",sizeof("ma_set_pnt")))
 	XM_LED_ON
 }
 
@@ -302,22 +292,23 @@ void ma_checkAlive() {
 	DT_bool isAlive = false;
 	XM_LED_OFF
 	do {
-		if (COM_isAlive(COM_SLAVE1) && COM_isAlive(COM_SLAVE3)) {
+		if (COM_isAlive(COM_SLAVE1B) /*&& COM_isAlive(COM_SLAVE3)*/) {
 			isAlive = true;
 		} else
 			UTL_wait(5);
 	} while (isAlive == false);
-	DEBUG(("ma_alv_sl",sizeof("ma_alv_sl")))
+DEBUG	(("ma_alv_sl",sizeof("ma_alv_sl")))
 	XM_LED_ON
 }
 
 void ma_setInitialPosition() {
 	XM_LED_OFF
+	DT_byte config;
 	// Punkt fuer Null-Stellung mittleres rechtes Bein als Bezug
 	DT_point pTmp;
-	pTmp.x = 0;
+	pTmp.x = 190 + DST_X;
 	pTmp.y = 0;
-	pTmp.z = 0;
+	pTmp.z = -14;
 	const DT_point pNull = pTmp;
 
 	// Master rechts
@@ -332,34 +323,38 @@ void ma_setInitialPosition() {
 	// pTmp.y = pNull.y + 0;
 	ma_sl_prepareLeg(&leg_l, &pTmp, &trans_l);
 
-	// Slave1 rechts
-	pTmp = pNull;
-	// pTmp.x = pNull.x;
-	pTmp.y = pNull.y + SL_DST_Y; // +/- pruefen
-	COM_sendPoint(COM_SLAVE1, &pTmp);
-
-	// Slave1 links
-	pTmp = pNull;
-	pTmp.x = -pNull.x;
-	pTmp.y = pNull.y + SL_DST_Y; // +/- pruefen
-	COM_sendPoint(COM_SLAVE1, &pTmp);
-
 	// Slave3 rechts
 	pTmp = pNull;
 	// pTmp.x = pNull.x;
-	pTmp.y = pNull.y - SL_DST_Y; // +/- pruefen
-	COM_sendPoint(COM_SLAVE3, &pTmp);
+	pTmp.y = pNull.y + SL_DST_Y; // +/- pruefen
+	config = COM_CONF_RIGHT | COM_CONF_GLOB;
+	//COM_sendPoint(COM_SLAVE3, &pTmp, config);
 
 	// Slave3 links
 	pTmp = pNull;
 	pTmp.x = -pNull.x;
+	pTmp.y = pNull.y + SL_DST_Y; // +/- pruefen
+	config = COM_CONF_LEFT | COM_CONF_GLOB;
+	//COM_sendPoint(COM_SLAVE3, &pTmp, config);
+
+	// Slave1 rechts
+	pTmp = pNull;
+	// pTmp.x = pNull.x;
 	pTmp.y = pNull.y - SL_DST_Y; // +/- pruefen
-	COM_sendPoint(COM_SLAVE3, &pTmp);
+	config = COM_CONF_RIGHT | COM_CONF_GLOB;
+	COM_sendPoint(COM_SLAVE1B, &pTmp, config);
 
+	// Slave1 links
+	pTmp = pNull;
+	pTmp.x = -pNull.x;
+	pTmp.y = pNull.y - SL_DST_Y; // +/- pruefen
+	config = COM_CONF_LEFT | COM_CONF_GLOB;
+	COM_sendPoint(COM_SLAVE1B, &pTmp, config);
+
+	ma_sl_action();
 	COM_sendAction(COM_BRDCAST_ID);
-	void ma_sl_action();
 
-	DEBUG(("ma_int_pos_ok",sizeof("ma_int_pos_ok")))
+DEBUG(("ma_int_pos_ok",sizeof("ma_int_pos_ok")))
 	XM_LED_ON
 }
 
@@ -367,30 +362,29 @@ void ma_setInitialPosition() {
 void slave() {
 	while (1) {
 		XM_LED_OFF
-		len = COM_receive(&XM_com_data, result);
+		len = COM_receive(&XM_com_data3, result);
 
 		if (len == 0)
-			continue;
-		DEBUG(("sl_pck_rec",sizeof("sl_pck_rec")))
+			continue;DEBUG(("sl_pck_rec",sizeof("sl_pck_rec")))
 		if (result[2] != cpuID && result[2] != COM_BRDCAST_ID)
 			continue;
-		DEBUG(("sl_pck_acc",sizeof("sl_pck_acc")))
+DEBUG		(("sl_pck_acc",sizeof("sl_pck_acc")))
 
 		XM_LED_ON
 		switch (result[4]) {
-		case COM_STATUS:
+			case COM_STATUS:
 			DEBUG(("sl_rec_sts",sizeof("sl_rec_sts")))
 			sl_status();
 			break;
-		case COM_ACTION:
+			case COM_ACTION:
 			DEBUG(("sl_rec_act",sizeof("sl_rec_act")))
 			ma_sl_action();
 			break;
-		case COM_POINT:
+			case COM_POINT:
 			DEBUG(("sl_rec_pnt",sizeof("sl_rec_pnt")))
 			sl_point();
 			break;
-		default:
+			default:
 			DEBUG(("sl_err",sizeof("sl_err")))
 			break;
 		}
@@ -413,23 +407,25 @@ void sl_point() {
 	DT_point pGlobal;
 
 	pGlobal = COM_getPointFromPacket(result);
-	// TODO Unterscheidung Links/Rechts
-	ma_sl_prepareLeg(&leg_r, &pGlobal, &trans_r);
+	if (COM_isLeftLeg(result)) {
+		ma_sl_prepareLeg(&leg_l, &pGlobal, &trans_l);
+	}
+	if (COM_isRightLeg(result)) {
+		ma_sl_prepareLeg(&leg_r, &pGlobal, &trans_r);
+	}
 
 	COM_sendACK(COM_MASTER);
 }
 
 /* ___ Methoden fuer Master und Slave ___ */
 void ma_sl_action() {
-	/* TODO
-	 DNX_sendAction(leg_r.hip.id);
-	 DNX_sendAction(leg_r.knee.id);
-	 DNX_sendAction(leg_r.foot.id);
+	DNX_sendAction(leg_r.hip.id);
+	DNX_sendAction(leg_r.knee.id);
+	DNX_sendAction(leg_r.foot.id);
 
-	 DNX_sendAction(leg_l.hip.id);
-	 DNX_sendAction(leg_l.knee.id);
-	 DNX_sendAction(leg_l.foot.id);
-	 */
+	DNX_sendAction(leg_l.hip.id);
+	DNX_sendAction(leg_l.knee.id);
+	DNX_sendAction(leg_l.foot.id);
 }
 
 void ma_sl_prepareLeg(DT_leg* const leg, const DT_point* const pGlobal,
@@ -437,9 +433,9 @@ void ma_sl_prepareLeg(DT_leg* const leg, const DT_point* const pGlobal,
 	DT_point pLocal = KIN_calcLocalPoint(pGlobal, trans);
 	KIN_calcServos(&pLocal, leg);
 
-	DNX_setAngle(leg->hip.id, leg->hip.set_value);
-	DNX_setAngle(leg->knee.id, leg->knee.set_value);
-	DNX_setAngle(leg->foot.id, leg->foot.set_value);
+	DNX_setAngle(leg->hip.id, leg->hip.set_value, true);
+	DNX_setAngle(leg->knee.id, leg->knee.set_value, true);
+	DNX_setAngle(leg->foot.id, leg->foot.set_value, true);
 }
 
 #endif /* TEST_ON */

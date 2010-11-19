@@ -4,7 +4,7 @@
  * \brief	Testprogramm für Kommunikation der CPUs.
  */
 
-#define TEST_ON
+#define TEST_OFF
 #ifdef TEST_ON
 
 #include "include/kinematics.h"
@@ -32,10 +32,10 @@ int main() {
 	case COM_MASTER:
 		DEBUG(("Master",sizeof("Master")))
 		break;
-	case COM_SLAVE1:
+	case COM_SLAVE1B:
 		DEBUG(("Slave1",sizeof("Slave1")))
 		break;
-	case COM_SLAVE3:
+	case COM_SLAVE3F:
 		DEBUG(("Slave3",sizeof("Slave3")))
 		break;
 	default: //case NOCPUID:
@@ -53,14 +53,13 @@ int main() {
 }
 
 void master() {
-	DT_bool flag1 = false, flag2 = false;
+	DT_bool isAlive;
 	do {
-		if (!flag1)
-			flag1 = COM_isAlive(COM_SLAVE1);
-		if (!flag2)
-			flag2 = COM_isAlive(COM_SLAVE3);
-		UTL_wait(4);
-	} while (!flag1 || !flag2);
+			if (COM_isAlive(COM_SLAVE1B)/* && COM_isAlive(COM_SLAVE3)*/) {
+				isAlive = true;
+			} else
+				UTL_wait(5);
+		} while (isAlive == false);
 
 	XM_LED_OFF
 
@@ -74,18 +73,28 @@ void master() {
 	p2.y = -95.9985;
 	p2.z = -116.2699;
 
+	DT_bool flag;
+	XM_LED_OFF
 	while (1) {
-		XM_LED_OFF
 
-		COM_sendPoint(COM_SLAVE1, &p1);
-		COM_sendPoint(COM_SLAVE3, &p1);
+		flag = COM_sendPoint(COM_SLAVE1B, &p1);
+		if (flag) {
+			XM_LED_ON
+		} else {
+			XM_LED_OFF
+		}
+		//COM_sendPoint(COM_SLAVE3, &p1);
 		COM_sendAction(COM_BRDCAST_ID);
-
 		UTL_wait(40);
-		XM_LED_ON
 
-		COM_sendPoint(COM_SLAVE1, &p2);
-		COM_sendPoint(COM_SLAVE3, &p2);
+		flag = COM_sendPoint(COM_SLAVE1B, &p2);
+		if (flag) {
+			XM_LED_ON
+		} else {
+			XM_LED_OFF
+		}
+
+		//COM_sendPoint(COM_SLAVE3, &p2);
 		COM_sendAction(COM_BRDCAST_ID);
 
 		UTL_wait(40);
@@ -111,22 +120,20 @@ void slave() {
 		case COM_STATUS:
 			switch (result[5]) {
 			case COM_IS_ALIVE:
+				DEBUG(("sl_alive",sizeof("sl_alive")))
 				XM_LED_ON
 				COM_sendACK(COM_MASTER);
-				DEBUG(("sl_alive",sizeof("sl_alive")))
 				break;
 			default:
 				break;
 			}
 			break;
 		case COM_ACTION:
+			DEBUG(("sl_action", sizeof("sl_action")))
 			ans = KIN_makeMovement(&leg_l, &leg_r);
-			if (ans)
-				COM_sendACK(COM_MASTER);
-			else
-				COM_sendNAK(COM_MASTER, COM_ERR_DEFAULT_ERROR);
 			break;
 		case COM_POINT:
+			DEBUG(("sl_point", sizeof("sl_point")))
 			// point aus Paket lesen
 			p1 = COM_getPointFromPacket(result);
 

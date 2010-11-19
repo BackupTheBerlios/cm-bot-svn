@@ -40,9 +40,9 @@ DT_byte COM_getCpuID(const DT_leg* const leg_l) {
 	if (leg_l->hip.id == 10)
 		return COM_MASTER; // Master
 	else if (leg_l->hip.id == 4)
-		return COM_SLAVE3; // Slave
+		return COM_SLAVE3F; // Slave
 	else if (leg_l->hip.id == 16)
-		return COM_SLAVE1; // Slave
+		return COM_SLAVE1B; // Slave
 	else
 		return COM_NOCPUID; // falsche ID
 }
@@ -63,17 +63,18 @@ DT_byte COM_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 	const DT_byte tempHead = buffer->RX_Head;
 	const DT_byte tempTail = buffer->RX_Tail;
 
-	// DEBUG_BYTE((buffer->RX, 127))
+	DEBUG_BYTE((&tempTail,1))
+	DEBUG_BYTE((&tempHead,1))
+	DEBUG_BYTE((buffer->RX, 127))
 
 	// Init-Fehlerbytes ausfiltern
-	if (buffer->RX[tempTail] != 0xFF
-			&& USART_RXBufferData_Available(usart_data)) {
+	if (buffer->RX[tempTail] != 0xFF && (tempHead != tempTail)) {
 		DEBUG(("COM_i",sizeof("COM_i")))
 		USART_RXBuffer_GetByte(usart_data);
 		return 0;
 	}
 	// Pruefen ob min. 4 Bytes im Buffer sind, um Laenge zu lesen
-	else if (((tempTail + 4) & USART_RX_BUFFER_MASK) > tempHead) {
+	else if (USART_RXBuffer_checkPointerDiff(tempTail,tempHead, 4)) {
 		DEBUG(("COM_le",sizeof("COM_le")))
 		return 0;
 	}
@@ -91,7 +92,7 @@ DT_byte COM_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 		// Complete length = (FF + FF + ID + LENGTH) + length
 		length += 4;
 		// Prüfen ob Paket bereits komplett im Buffer
-		if (((tempTail + length) & USART_RX_BUFFER_MASK) > tempHead) {
+		if (USART_RXBuffer_checkPointerDiff(tempTail, tempHead, length)) {
 			DEBUG(("COM_uc",sizeof("COM_uc")))
 			return 0;
 		}
@@ -109,6 +110,7 @@ DT_byte COM_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 			// DEBUG_BYTE((dest, length))
 			return 0;
 		}
+
 		DEBUG(("COM_ok",sizeof("COM_ok")))
 		return length;
 	}
@@ -139,10 +141,10 @@ DT_byte COM_send(DT_byte* const packet, DT_size l, DT_byte* const result,
 		usart_data = &XM_com_data3;
 		XM_USART_send(usart_data, packet, l);
 	} else {
-		if (cpuID == COM_SLAVE3 || cpuID == COM_MASTER) {
+		if (cpuID == COM_SLAVE3F || cpuID == COM_MASTER) {
 			DEBUG(("SND_S3_M", sizeof("SND_S3_M")))
 			usart_data = &XM_com_data3;
-		} else if (cpuID == COM_SLAVE1) {
+		} else if (cpuID == COM_SLAVE1B) {
 			DEBUG(("SND_S1", sizeof("SND_S1")))
 			usart_data = &XM_com_data1;
 		}
@@ -190,27 +192,37 @@ DT_double COM_byteArrayToDouble(const DT_byte* const array) {
 	return value;
 }
 
-DT_bool COM_sendPoint(DT_byte cpuID, const DT_point* const point) {
+DT_bool COM_isRightLeg(const DT_byte* const result){
+	return COM_CONF_RIGHT == (result[5] & COM_CONF_RIGHT);
+}
+
+DT_bool COM_isLeftLeg(const DT_byte* const result){
+	return (COM_CONF_LEFT == (result[5] & COM_CONF_LEFT));
+}
+
+DT_bool COM_sendPoint(DT_byte cpuID, const DT_point* const point, const DT_byte config) {
+	DEBUG(("pre_snd_pnt",sizeof("pre_snd_pnt")))
 	// Broadcast bei requestStatus nicht möglich
 	if (cpuID == COM_BRDCAST_ID)
 		return 0;
 	DT_byte result[DT_RESULT_BUFFER_SIZE];
-	DT_size len = 6 + 3 * sizeof(DT_double);
+	DT_size len = 7 + 3 * sizeof(DT_double);
 	DT_byte packet[len];
 
 	// Point auf ByteArray casten
-	COM_doubleToByteArray(point->x, &packet[5 + 0 * sizeof(DT_double)]);
-	COM_doubleToByteArray(point->y, &packet[5 + 1 * sizeof(DT_double)]);
-	COM_doubleToByteArray(point->z, &packet[5 + 2 * sizeof(DT_double)]);
+	COM_doubleToByteArray(point->x, &packet[6 + 0 * sizeof(DT_double)]);
+	COM_doubleToByteArray(point->y, &packet[6 + 1 * sizeof(DT_double)]);
+	COM_doubleToByteArray(point->z, &packet[6 + 2 * sizeof(DT_double)]);
 
 	packet[0] = COM_START_BYTE;
 	packet[1] = COM_START_BYTE;
 	packet[2] = cpuID;
 	packet[3] = len - 4; // length
 	packet[4] = COM_POINT;
+	packet[5] = config;
 
 	// packet[17] = checksum will set in send
-
+	DEBUG(("aft_snd_pnt",sizeof("aft_snd_pnt")))
 	len = COM_send(packet, len, result, true);
 	if ((len > 0) && (result[4] == COM_ACK))
 		return true;
@@ -221,14 +233,15 @@ DT_bool COM_sendPoint(DT_byte cpuID, const DT_point* const point) {
 DT_point COM_getPointFromPacket(const DT_byte* const result) {
 	DT_point p;
 
-	p.x = COM_byteArrayToDouble(&result[5 + 0 * sizeof(DT_double)]);
-	p.y = COM_byteArrayToDouble(&result[5 + 1 * sizeof(DT_double)]);
-	p.z = COM_byteArrayToDouble(&result[5 + 2 * sizeof(DT_double)]);
+	p.x = COM_byteArrayToDouble(&result[6 + 0 * sizeof(DT_double)]);
+	p.y = COM_byteArrayToDouble(&result[6 + 1 * sizeof(DT_double)]);
+	p.z = COM_byteArrayToDouble(&result[6 + 2 * sizeof(DT_double)]);
 
 	return p;
 }
 
 void COM_sendAction(DT_byte cpuID) {
+	DEBUG(("snd_act",sizeof("snd_act")))
 	DT_byte result[DT_RESULT_BUFFER_SIZE];
 	const DT_size len = 6;
 	DT_byte packet[len];

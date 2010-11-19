@@ -276,7 +276,7 @@ bool USART_RXBufferData_Available(USART_data_t * usart_data);
 uint8_t USART_RXBuffer_GetByte(USART_data_t * usart_data);
 bool USART_RXComplete(USART_data_t * usart_data);
 void USART_DataRegEmpty(USART_data_t * usart_data);
-
+DT_bool USART_RXBuffer_checkPointerDiff(DT_byte, DT_byte, DT_byte);
 /* Functions for polled driver. */
 void USART_NineBits_PutChar(USART_t * usart, uint16_t data);
 uint16_t USART_NineBits_GetChar(USART_t * usart);

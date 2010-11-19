@@ -130,6 +130,9 @@ void UTL_printDebug(const DT_char* const msg, DT_size size) {
 	}
 	USART_PutChar(XM_debug_data.usart, ';');
 	while (!USART_IsTXDataRegisterEmpty(XM_debug_data.usart))
+				;
+	USART_PutChar(XM_debug_data.usart, 0x00);
+	while (!USART_IsTXDataRegisterEmpty(XM_debug_data.usart))
 		;
 #else
 	for (i = 0; i < size; i++)
@@ -192,3 +195,5 @@ void UTL_wait(DT_size rounds) {
 			;
 	}
 }
+
+
