@@ -12,13 +12,15 @@
 
 #define XM_PORT_SERVO_L PORTC
 #define XM_PORT_SERVO_R PORTD
-#define XM_PORT_COM		PORTE
+#define XM_PORT_COM1	PORTD
+#define XM_PORT_COM3	PORTE
 #define XM_PORT_REMOTE 	PORTE
 #define XM_PORT_DEBUG 	PORTF
 
 #define XM_USART_SERVO_L USARTC0
 #define XM_USART_SERVO_R USARTD0
-#define XM_USART_COM	 USARTE0
+#define XM_USART_COM1	 USARTD1
+#define XM_USART_COM3	 USARTE0
 #define XM_USART_REMOTE  USARTE1
 #define XM_USART_DEBUG   USARTF0
 
@@ -41,14 +43,15 @@ USART_data_t XM_servo_data_L;	/**< USART-Struktur für linke Dynamixel. */
 USART_data_t XM_servo_data_R;	/**< USART-Struktur für rechte Dynamixel. */
 USART_data_t XM_debug_data;		/**< USART-Struktur für Debug-Ausgaben. */
 USART_data_t XM_remote_data;	/**< USART-Struktur für Remote-Controller. */
-USART_data_t XM_com_data;		/**< USART-Struktur für Communication. */
+USART_data_t XM_com_data1;		/**< USART-Struktur für Communication (Master -> Slave 1). */
+USART_data_t XM_com_data3;		/**< USART-Struktur für Communication (Master -> Slave 3).*/
 
 #define XM_USART_FAILURE  0xFF /**< signalisiert Fehler beim Empfangen */
 
 void XM_init_cpu();
 void XM_init_remote();
 void XM_init_dnx();
-void XM_init_com();
+void XM_init_com(DT_byte);
 void XM_USART_send(USART_data_t* const, const DT_byte* const, DT_size);
 
 #endif /* XMEGA_H_ */

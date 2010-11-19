@@ -66,8 +66,8 @@ DT_byte COM_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 	// DEBUG_BYTE((buffer->RX, 127))
 
 	// Init-Fehlerbytes ausfiltern
-	if (buffer->RX[tempTail] != 0xFF && USART_RXBufferData_Available(
-			&XM_com_data)) {
+	if (buffer->RX[tempTail] != 0xFF
+			&& USART_RXBufferData_Available(usart_data)) {
 		DEBUG(("COM_i",sizeof("COM_i")))
 		USART_RXBuffer_GetByte(usart_data);
 		return 0;
@@ -128,18 +128,34 @@ DT_byte COM_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 DT_byte COM_send(DT_byte* const packet, DT_size l, DT_byte* const result,
 		DT_bool hasResponse) {
 	packet[l - 1] = COM_getChecksum(packet, l);
-	USART_data_t* usart_data = &XM_com_data;
-	// packet[2] -> ID
-	XM_USART_send(usart_data, packet, l);
-
+	DT_byte cpuID = packet[2];
+	USART_data_t* usart_data;
 	DT_byte len = 0;
-	DT_size timeout = hasResponse ? 1000 : 0;
 
-	while (len == 0 && hasResponse /* && timeout > 0 */) {
-		len = COM_receive(usart_data, result);
-		timeout--;
+	if (cpuID == COM_BRDCAST_ID) {
+		DEBUG(("SND_BDC", sizeof("SND_BDC")));
+		usart_data = &XM_com_data1;
+		XM_USART_send(usart_data, packet, l);
+		usart_data = &XM_com_data3;
+		XM_USART_send(usart_data, packet, l);
+	} else {
+		if (cpuID == COM_SLAVE3 || cpuID == COM_MASTER) {
+			DEBUG(("SND_S3_M", sizeof("SND_S3_M")))
+			usart_data = &XM_com_data3;
+		} else if (cpuID == COM_SLAVE1) {
+			DEBUG(("SND_S1", sizeof("SND_S1")))
+			usart_data = &XM_com_data1;
+		}
+		// packet[2] -> ID
+		XM_USART_send(usart_data, packet, l);
+
+		DT_size timeout = hasResponse ? 1000 : 0;
+
+		while (len == 0 && hasResponse /* && timeout > 0 */) {
+			len = COM_receive(usart_data, result);
+			timeout--;
+		}
 	}
-
 	return len;
 }
 

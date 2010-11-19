@@ -4,7 +4,7 @@
  * \brief	Testprogramm für Kommunikation der CPUs.
  */
 
-#define TEST_OFF
+#define TEST_ON
 #ifdef TEST_ON
 
 #include "include/kinematics.h"
@@ -22,13 +22,11 @@ void slave();
 int main() {
 	XM_init_cpu();
 	XM_init_dnx();
-	XM_init_com();
-	//XM_init_remote();
-
-	XM_LED_OFF
 
 	DNX_getConnectedIDs(&leg_r, &leg_l);
 	Own_CpuID = COM_getCpuID(&leg_l);
+
+	XM_init_com(Own_CpuID);
 
 	switch (Own_CpuID) {
 	case COM_MASTER:
@@ -64,7 +62,7 @@ void master() {
 		UTL_wait(4);
 	} while (!flag1 || !flag2);
 
-	XM_LED_ON
+	XM_LED_OFF
 
 	DT_point p1, p2;
 
@@ -100,7 +98,7 @@ void slave() {
 	DT_point p1;
 	DT_bool ans;
 	while (1) {
-		len = COM_receive(&XM_com_data, result);
+		len = COM_receive(&XM_com_data3, result);
 		if (len == 0)
 			continue;
 		DEBUG(("sl_pck_rec",sizeof("sl_pck_rec")))

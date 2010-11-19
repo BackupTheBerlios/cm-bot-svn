@@ -4,7 +4,7 @@
  *  \brief	Algorithmus fuer das Vorwaertslaufen ueber 4 Punkte.
  */
 
-#define TEST_ON TEST
+#define TEST_OFF TEST
 #ifdef TEST_ON
 
 #include "include/kinematics.h"

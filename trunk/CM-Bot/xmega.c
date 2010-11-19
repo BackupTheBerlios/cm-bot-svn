@@ -8,6 +8,7 @@
 #include "include/utils.h"
 #include "include/clksys_driver.h"
 #include "include/avr_compiler.h"
+#include "include/communication.h"
 #include <avr/io.h>
 #include <stdlib.h>
 
@@ -217,40 +218,68 @@ void XM_init_dnx() {
 /**
  * \brief 	Initialisiert USARTs für die CPU-Kommunikation.
  */
-void XM_init_com() {
+void XM_init_com(DT_byte cpuID) {
 	cli();
 
-	XM_com_data.port = &XM_PORT_COM;
-	XM_com_data.port->DIRSET = XM_OE_MASK;
-	XM_com_data.port->OUTSET = XM_OE_MASK;
+	XM_com_data3.port = &XM_PORT_COM3;
 
 	// Set pins for TX and RX
-	XM_com_data.port->DIRSET = PIN3_bm; // Pin3 of PortC (TXD0) is output
-	XM_com_data.port->DIRCLR = PIN2_bm; // Pin2 of PortC (RXD0) is input
+	XM_com_data3.port->DIRSET = PIN3_bm; // Pin7 of PortC (TXD0) is output
+	XM_com_data3.port->DIRCLR = PIN2_bm; // Pin6 of PortC (RXD0) is input
 
 	// Use USARTE0 and initialize buffers
-	USART_InterruptDriver_Initialize(&XM_com_data, &XM_USART_COM,
+	USART_InterruptDriver_Initialize(&XM_com_data3, &XM_USART_COM3,
 			USART_DREINTLVL_MED_gc);
 
 	// 8 Data bits, No Parity, 1 Stop bit
-	USART_Format_Set(XM_com_data.usart, USART_CHSIZE_8BIT_gc,
+	USART_Format_Set(XM_com_data3.usart, USART_CHSIZE_8BIT_gc,
 			USART_PMODE_DISABLED_gc, false);
 
 	// Enable RXC interrupt
-	USART_RxdInterruptLevel_Set(XM_com_data.usart, USART_RXCINTLVL_MED_gc);
+	USART_RxdInterruptLevel_Set(XM_com_data3.usart, USART_RXCINTLVL_MED_gc);
 
 	// Set Baudrate
-	USART_Baudrate_Set(XM_com_data.usart, 1, 0); // 1 Mbps (BSEL = 1)
+	USART_Baudrate_Set(XM_com_data3.usart, 1, 0); // 1 Mbps (BSEL = 1)
 
 	// Enable RX and TX
-	USART_Rx_Enable(XM_com_data.usart);
-	USART_Tx_Enable(XM_com_data.usart);
+	USART_Rx_Enable(XM_com_data3.usart);
+	USART_Tx_Enable(XM_com_data3.usart);
 
 	// Flush Receive Buffer
-	USART_GetChar(XM_com_data.usart); // Flush Receive Buffer
+	USART_GetChar(XM_com_data3.usart); // Flush Receive Buffer
 
 	// Enable Interrupt Level Medium
 	//PMIC.CTRL |= PMIC_LOLVLEX_bm;
+
+	if(cpuID == COM_MASTER){
+		XM_com_data1.port = &XM_PORT_COM1;
+
+		// Set pins for TX and RX
+		XM_com_data1.port->DIRSET = PIN7_bm; // Pin3 of PortC (TXD0) is output
+		XM_com_data1.port->DIRCLR = PIN6_bm; // Pin2 of PortC (RXD0) is input
+
+		// Use USARTE0 and initialize buffers
+		USART_InterruptDriver_Initialize(&XM_com_data1, &XM_USART_COM1,
+				USART_DREINTLVL_MED_gc);
+
+		// 8 Data bits, No Parity, 1 Stop bit
+		USART_Format_Set(XM_com_data1.usart, USART_CHSIZE_8BIT_gc,
+				USART_PMODE_DISABLED_gc, false);
+
+		// Enable RXC interrupt
+		USART_RxdInterruptLevel_Set(XM_com_data1.usart, USART_RXCINTLVL_MED_gc);
+
+		// Set Baudrate
+		USART_Baudrate_Set(XM_com_data1.usart, 1, 0); // 1 Mbps (BSEL = 1)
+
+		// Enable RX and TX
+		USART_Rx_Enable(XM_com_data1.usart);
+		USART_Tx_Enable(XM_com_data1.usart);
+
+		// Flush Receive Buffer
+		USART_GetChar(XM_com_data1.usart); // Flush Receive Buffer
+	}
+
 	sei();
 }
 
@@ -346,10 +375,35 @@ ISR( USARTD0_RXC_vect)
 /**
  * \brief 	ISR für abgeschlossenen Sendevorgang der USARTD0 (SERVO R).
  */
+ISR( USARTD1_TXC_vect)
+{
+	USART_TxdInterruptLevel_Set(&USARTD1, USART_TXCINTLVL_OFF_gc);
+}
+
+/**
+ * \brief 	ISR für Sendebereitschaft der USARTD0 (SERVO R).
+ */
+ISR(USARTD1_DRE_vect)
+{
+	USART_DataRegEmpty(&XM_com_data1);
+}
+
+/**
+ * \brief 	ISR für Empfangsvorgang der USARTD0 (SERVO R).
+ */
+ISR( USARTD1_RXC_vect)
+{
+	USART_RXComplete(&XM_com_data1);
+}
+
+
+/**
+ * \brief 	ISR für abgeschlossenen Sendevorgang der USARTD0 (SERVO R).
+ */
 ISR( USARTE0_TXC_vect)
 {
 	USART_TxdInterruptLevel_Set(&USARTE0, USART_TXCINTLVL_OFF_gc);
-	XM_com_data.port->OUTSET = XM_OE_MASK;
+	//XM_com_data3.port->OUTSET = XM_OE_MASK;
 }
 
 /**
@@ -357,7 +411,7 @@ ISR( USARTE0_TXC_vect)
  */
 ISR(USARTE0_DRE_vect)
 {
-	USART_DataRegEmpty(&XM_com_data);
+	USART_DataRegEmpty(&XM_com_data3);
 }
 
 /**
@@ -365,7 +419,7 @@ ISR(USARTE0_DRE_vect)
  */
 ISR( USARTE0_RXC_vect)
 {
-	USART_RXComplete(&XM_com_data);
+	USART_RXComplete(&XM_com_data3);
 }
 
 /**

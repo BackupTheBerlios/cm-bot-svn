@@ -30,18 +30,33 @@ DT_byte rxArray[DT_RESULT_BUFFER_SIZE];
 int main() {
 	XM_init_cpu();
 	XM_init_dnx();
-	XM_init_com();
+
+	DNX_getConnectedIDs(&leg_r, &leg_l);
+	Own_CpuID = COM_getCpuID(&leg_l);
+
+	XM_init_com(Own_CpuID);
 	//XM_init_remote();
 
+	switch (Own_CpuID) {
+	case COM_MASTER:
+		DEBUG(("Master",sizeof("Master")))
+		break;
+	case COM_SLAVE1:
+		DEBUG(("Slave1",sizeof("Slave1")))
+		break;
+	case COM_SLAVE3:
+		DEBUG(("Slave3",sizeof("Slave3")))
+		break;
+	default: //case NOCPUID:
+		DEBUG(("NoCpuID",sizeof("NoCpuID")))
+		break;
+	}
 
 	DT_byte i;
 	for (i = 0; i < DT_RESULT_BUFFER_SIZE - 3; i++)
 		txArray[i] = i;
 
 	XM_LED_OFF
-
-	DNX_getConnectedIDs(&leg_r, &leg_l);
-	Own_CpuID = COM_getCpuID(&leg_l);
 
 	if (Own_CpuID == COM_MASTER) {
 		DEBUG(("master",sizeof("master")))
@@ -68,7 +83,7 @@ void master() {
 void slave() {
 	XM_LED_OFF
 	while (1) {
-		len = COM_receive(&XM_com_data, result);
+		len = COM_receive(&XM_com_data3, result);
 		if (len == 0)
 			continue;
 		DEBUG(("sl_pck_rec",sizeof("sl_pck_rec")))
