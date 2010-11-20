@@ -267,19 +267,19 @@ void ma_setPoints(DT_point* const pFntDwn, DT_point* const pFntUp,
 		DT_point* const pBckUp, DT_point* const pBckDwn) {
 	XM_LED_OFF
 	// Fix-Koordinaten fuer Master, Berechnung fuer Slaves ueber Offset
-	pFntUp->x = 103.4640 + +DST_X;
+	pFntUp->x = 103.4640 + DST_X;
 	pFntUp->y = 37.6578;
 	pFntUp->z = 101.1041;
 
-	pFntDwn->x = 103.4640 + +DST_X;
+	pFntDwn->x = 103.4640 + DST_X;
 	pFntDwn->y = 37.6578;
 	pFntDwn->z = -129.1041;
 
-	pBckUp->x = 103.4640 + +DST_X;
+	pBckUp->x = 103.4640 + DST_X;
 	pBckUp->y = -37.6578;
 	pBckUp->z = 101.1041;
 
-	pBckDwn->x = 103.4640 + +DST_X;
+	pBckDwn->x = 103.4640 + DST_X;
 	pBckDwn->y = -37.6578;
 	pBckDwn->z = -129.1041;
 

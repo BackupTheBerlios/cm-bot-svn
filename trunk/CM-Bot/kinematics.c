@@ -168,10 +168,17 @@ void KIN_calcServos(const DT_point* const p, DT_leg* const leg) {
 	// CASES
 	if (z < 0) { // defined for z < 0: foot-axis is between h3 and h-axis
 		knee = gamma - beta;
+		foot = M_PI - alpha;
 	} else { // defined for z >= 0: foot-axis is not between h3 and h-axis
-		knee = -gamma - beta;
+		/* Knick nach oben */
+		knee = -(gamma + beta);
+		foot = M_PI - alpha;
+
+		/* Knick nach unten
+		 knee = -(gamma - beta);
+		 foot = -(M_PI - alpha);
+		 */
 	}
-	foot = M_PI - alpha;
 
 	leg->hip.set_value = hip;
 	leg->knee.set_value = knee;
