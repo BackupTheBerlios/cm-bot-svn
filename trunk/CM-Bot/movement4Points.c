@@ -28,8 +28,8 @@ void ma_checkAlive();
 void ma_setInitialPosition();
 void ma_setPoints(DT_point* const , DT_point* const , DT_point* const ,
 		DT_point* const );
-void ma_prepare_step(DT_point* const , DT_point* const , const DT_bool);
-void ma_do_step(DT_point* const , DT_point* const , const DT_bool);
+void ma_prepareStep(DT_point* const , DT_point* const , const DT_bool);
+void ma_doStep(DT_point* const , DT_point* const , const DT_bool);
 
 void ma_sl_prepareLeg(DT_leg* const , const DT_point* const ,
 		const DT_transformation* const );
@@ -99,19 +99,19 @@ void master() {
 			state = 1;
 			break;
 		case 1:
-			ma_prepare_step(&pFntDwn, &pBckUp, false);
+			ma_prepareStep(&pFntDwn, &pBckUp, false);
 			state = 2;
 			break;
 		case 2:
-			ma_do_step(&pBckDwn, &pFntUp, false);
+			ma_doStep(&pBckDwn, &pFntUp, false);
 			state = 3;
 			break;
 		case 3:
-			ma_prepare_step(&pFntDwn, &pBckUp, true);
+			ma_prepareStep(&pFntDwn, &pBckUp, true);
 			state = 4;
 			break;
 		case 4:
-			ma_prepare_step(&pBckDwn, &pFntUp, true);
+			ma_prepareStep(&pBckDwn, &pFntUp, true);
 			state = 1;
 			break;
 		default:
@@ -121,7 +121,7 @@ void master() {
 	}
 }
 
-void ma_prepare_step(DT_point* const pDwn, DT_point* const pUp, DT_bool right) {
+void ma_prepareStep(DT_point* const pDwn, DT_point* const pUp, DT_bool right) {
 	DT_byte config;
 	DT_point pTmp;
 	// F_R, B_R, M_L: vorne unten
@@ -192,7 +192,7 @@ void ma_prepare_step(DT_point* const pDwn, DT_point* const pUp, DT_bool right) {
 	ma_sl_action();
 }
 
-void ma_do_step(DT_point* const pDwn, DT_point* const pUp, DT_bool right) {
+void ma_doStep(DT_point* const pDwn, DT_point* const pUp, DT_bool right) {
 	DT_byte config;
 	DT_point pTmp;
 	// F_R, B_R, M_L: vorne unten
