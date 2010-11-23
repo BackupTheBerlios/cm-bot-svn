@@ -200,6 +200,10 @@ DT_bool COM_isLeftLeg(const DT_byte* const result){
 	return (COM_CONF_LEFT == (result[5] & COM_CONF_LEFT));
 }
 
+DT_bool COM_isGlobal(const DT_byte* const result){
+	return (COM_CONF_GLOB == (result[5] & COM_CONF_GLOB));
+}
+
 DT_bool COM_sendPoint(DT_byte cpuID, const DT_point* const point, const DT_byte config) {
 	DEBUG(("pre_snd_pnt",sizeof("pre_snd_pnt")))
 	// Broadcast bei requestStatus nicht möglich
