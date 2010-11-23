@@ -37,50 +37,46 @@
  * 			Liefert fuer ein Bein die Struktur zur Koordinatentransformation.
  *
  * \param	leg		Bein
- *
- * \return	Struktur zur Koordinatentransformation fuer ein spez. Bein
  */
-DT_transformation KIN_getTransMat(const DT_leg* const leg) {
-	DT_transformation trans;
+void KIN_setTransMat(DT_leg* const leg) {
 	switch (leg->hip.id) {
 	case 1:
-		trans.x = 168.5;
-		trans.y = 208.5;
-		trans.zRotation = false;
+		leg->trans.x = 168.5;
+		leg->trans.y = 208.5;
+		leg->trans.zRotation = false;
 		break;
 	case 4:
-		trans.x = -168.5;
-		trans.y = 208.5;
-		trans.zRotation = true;
+		leg->trans.x = -168.5;
+		leg->trans.y = 208.5;
+		leg->trans.zRotation = true;
 		break;
 	case 7:
-		trans.x = 168.5;
-		trans.y = 0;
-		trans.zRotation = false;
+		leg->trans.x = 168.5;
+		leg->trans.y = 0;
+		leg->trans.zRotation = false;
 		break;
 	case 10:
-		trans.x = -168.5;
-		trans.y = 0;
-		trans.zRotation = true;
+		leg->trans.x = -168.5;
+		leg->trans.y = 0;
+		leg->trans.zRotation = true;
 		break;
 	case 13:
-		trans.x = 168.5;
-		trans.y = -208.5;
-		trans.zRotation = false;
+		leg->trans.x = 168.5;
+		leg->trans.y = -208.5;
+		leg->trans.zRotation = false;
 		break;
 	case 16:
-		trans.x = -168.5;
-		trans.y = -208.5;
-		trans.zRotation = true;
+		leg->trans.x = -168.5;
+		leg->trans.y = -208.5;
+		leg->trans.zRotation = true;
 		break;
 	default:
 		DEBUG(("KIN_noID", sizeof("KIN_noID")))
-		trans.x = 0;
-		trans.y = 0;
-		trans.zRotation = false;
+		leg->trans.x = 0;
+		leg->trans.y = 0;
+		leg->trans.zRotation = false;
 		break;
 	}
-	return trans;
 }
 
 /**

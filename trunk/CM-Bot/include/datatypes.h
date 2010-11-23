@@ -29,22 +29,23 @@ typedef struct {
 	DT_double act_value; /**< Ist-Wert. */
 } DT_servo;
 
+/** \brief Struktur zur vereinfachten Koordinatentransformation. */
+typedef struct {
+	DT_double x, y;
+	DT_bool zRotation;
+} DT_transformation;
+
 /** \brief Datenstruktur zur Speicherung von Servodaten bezüglich eines kompletten Beines. */
 typedef struct {
 	DT_servo hip; /**< Hüftgelenk. */
 	DT_servo knee; /**< Kniegelenk. */
 	DT_servo foot; /**< Fußgelenk. */
+	DT_transformation trans; /**< Infos fuer Koordinatentransformation. */
 } DT_leg;
 
 /** \brief Datenstruktur zur Speicherung karthesischer Koordinaten. */
 typedef struct {
 	DT_double x, y, z;
 } DT_point;
-
-/** \brief Struktur zur vereinfachten Koordinatentransformation. */
-typedef struct {
-	DT_double x, y;
-	DT_bool zRotation;
-} DT_transformation;
 
 #endif /* DATATYPES_H_ */
