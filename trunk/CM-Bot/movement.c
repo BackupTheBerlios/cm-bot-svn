@@ -40,7 +40,7 @@ void MV_slave(DT_byte cpuID, DT_leg* const leg_r, DT_leg* const leg_l) {
 		switch (result[4]) {
 		case COM_STATUS:
 			DEBUG(("sl_rec_sts",sizeof("sl_rec_sts")))
-			MV_slaveStatus(&result, len);
+			MV_slaveStatus(result, len);
 			break;
 		case COM_ACTION:
 			DEBUG(("sl_rec_act",sizeof("sl_rec_act")))
@@ -48,7 +48,7 @@ void MV_slave(DT_byte cpuID, DT_leg* const leg_r, DT_leg* const leg_l) {
 			break;
 		case COM_POINT:
 			DEBUG(("sl_rec_pnt",sizeof("sl_rec_pnt")))
-			sl_point();
+			MV_slavePoint(leg_r, leg_l, result, len);
 			break;
 		default:
 			DEBUG (("sl_err",sizeof("sl_err")))
@@ -73,21 +73,21 @@ void MV_slavePoint(DT_leg* const leg_r, DT_leg* const leg_l, const DT_byte* cons
 	DT_bool isGlobal = COM_isGlobal(result);
 
 	if (COM_isLeftLeg(result)) {
-		MV_point(leg_l,p, isGlobal);
+		MV_point(leg_l, &p, isGlobal);
 	}
 	if (COM_isRightLeg(result)) {
-		MV_point(leg_r,p, isGlobal);
+		MV_point(leg_r, &p, isGlobal);
 	}
 
 	COM_sendACK(COM_MASTER);
 }
 
-void MV_point(DT_leg* const leg, const DT_point* const point, DT_bool isGLobal) {
+void MV_point(DT_leg* const leg, const DT_point* const point, DT_bool isGlobal) {
 	if (isGlobal == true) {
-		DT_point pLocal = KIN_calcLocalPoint(point, leg->trans);
+		DT_point pLocal = KIN_calcLocalPoint(point, &leg->trans);
 		KIN_calcServos(&pLocal, leg);
 	} else
-		KIN_calcServos(&point, leg);
+		KIN_calcServos(point, leg);
 
 	DNX_setAngle(leg->hip.id, leg->hip.set_value, true);
 	DNX_setAngle(leg->knee.id, leg->knee.set_value, true);

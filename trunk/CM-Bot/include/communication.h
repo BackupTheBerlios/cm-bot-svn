@@ -55,4 +55,5 @@ void COM_doubleToByteArray(const DT_double, DT_byte* const);
 DT_point COM_getPointFromPacket(const DT_byte* const);
 DT_bool COM_isLeftLeg(const DT_byte* const result);
 DT_bool COM_isRightLeg(const DT_byte* const result);
+DT_bool COM_isGlobal(const DT_byte* const result);
 #endif /* COMMUNICATION_H_ */
