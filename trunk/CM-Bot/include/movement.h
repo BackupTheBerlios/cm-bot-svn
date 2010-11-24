@@ -15,5 +15,6 @@ void MV_slave(DT_byte, DT_leg* const, DT_leg* const);
 void MV_slaveStatus(const DT_byte* const, const DT_size);
 void MV_slavePoint(DT_leg* const, DT_leg* const, const DT_byte* const, DT_size);
 void MV_point(DT_leg* const, const DT_point* const, DT_bool);
+void MV_masterCheckAlive();
 
 #endif /* MOVEMENT_H_ */

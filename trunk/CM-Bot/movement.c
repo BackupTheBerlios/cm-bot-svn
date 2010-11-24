@@ -31,7 +31,8 @@ void MV_slave(DT_byte cpuID, DT_leg* const leg_r, DT_leg* const leg_l) {
 		len = COM_receive(&XM_com_data3, result);
 
 		if (len == 0)
-			continue;DEBUG (("sl_pck_rec",sizeof("sl_pck_rec")))
+			continue;
+		DEBUG (("sl_pck_rec",sizeof("sl_pck_rec")))
 		if (result[2] != cpuID && result[2] != COM_BRDCAST_ID)
 			continue;
 		DEBUG (("sl_pck_acc",sizeof("sl_pck_acc")))
@@ -57,6 +58,20 @@ void MV_slave(DT_byte cpuID, DT_leg* const leg_r, DT_leg* const leg_l) {
 	}
 }
 
+void MV_masterCheckAlive() {
+	// CHECK CPUs
+	DT_bool isAlive = false;
+	XM_LED_OFF
+	do {
+		if (COM_isAlive(COM_SLAVE1B) && COM_isAlive(COM_SLAVE3F)) {
+			isAlive = true;
+		} else
+			UTL_wait(5);
+	} while (isAlive == false);
+	DEBUG (("ma_alv",sizeof("ma_alv")))
+	XM_LED_ON
+}
+
 void MV_slaveStatus(const DT_byte* const result, const DT_size len) {
 	switch (result[5]) {
 	case COM_IS_ALIVE:
@@ -68,7 +83,8 @@ void MV_slaveStatus(const DT_byte* const result, const DT_size len) {
 	}
 }
 
-void MV_slavePoint(DT_leg* const leg_r, DT_leg* const leg_l, const DT_byte* const result, DT_size len) {
+void MV_slavePoint(DT_leg* const leg_r, DT_leg* const leg_l,
+		const DT_byte* const result, DT_size len) {
 	DT_point p = COM_getPointFromPacket(result);
 	DT_bool isGlobal = COM_isGlobal(result);
 
@@ -88,6 +104,10 @@ void MV_point(DT_leg* const leg, const DT_point* const point, DT_bool isGlobal) 
 		KIN_calcServos(&pLocal, leg);
 	} else
 		KIN_calcServos(point, leg);
+
+	leg->hip.set_value = UTL_getDegree(leg->hip.set_value);
+	leg->knee.set_value = UTL_getDegree(leg->knee.set_value);
+	leg->foot.set_value = UTL_getDegree(leg->foot.set_value);
 
 	DNX_setAngle(leg->hip.id, leg->hip.set_value, true);
 	DNX_setAngle(leg->knee.id, leg->knee.set_value, true);

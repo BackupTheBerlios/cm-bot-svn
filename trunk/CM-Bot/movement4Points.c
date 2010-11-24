@@ -4,7 +4,7 @@
  *  \brief	Algorithmus fuer das Vorwaertslaufen ueber 4 Punkte.
  */
 
-#define TEST_ON TEST
+#define TEST_OFF TEST
 #ifdef TEST_ON
 
 #include "include/kinematics.h"
@@ -22,7 +22,6 @@ DT_leg leg_r, leg_l;
 DT_byte cpuID;
 
 void master();
-void ma_checkAlive();
 void ma_setInitialPosition();
 void ma_setPoints(DT_point* const , DT_point* const , DT_point* const ,
 		DT_point* const );
@@ -69,7 +68,7 @@ int main() {
 /* ___ Methoden fuer Master ___ */
 void master() {
 	DEBUG(("ma_chk_al",sizeof("ma_chk_al")))
-	ma_checkAlive();
+	MV_masterCheckAlive();
 
 	DEBUG(("ma_int_pnt",sizeof("ma_int_pnt")))
 	DT_point pFntDwn, pFntUp, pBckUp, pBckDwn;
@@ -137,15 +136,15 @@ void ma_prepareStep(DT_point* const pDwn, DT_point* const pUp, DT_bool right) {
 
 	pTmp = *pDwn;
 	if (right) {
-		ma_sl_prepareLeg(&leg_r, &pTmp, &trans_r);
+		MV_point(&leg_r, &pTmp, true);
 	} else {
 		pTmp.x = -pDwn->x;
-		ma_sl_prepareLeg(&leg_l, &pTmp, &trans_l);
+		MV_point(&leg_l, &pTmp, true);
 	}
 
 	UTL_wait(20);
 	COM_sendAction(COM_BRDCAST_ID);
-	ma_sl_action();
+	MV_action(&leg_r, &leg_l);
 
 	// F_L, B_L, M_R: hinten oben
 	pTmp = *pUp;
@@ -172,14 +171,14 @@ void ma_prepareStep(DT_point* const pDwn, DT_point* const pUp, DT_bool right) {
 	pTmp = *pUp;
 	if (right) {
 		pTmp.x = -pDwn->x;
-		ma_sl_prepareLeg(&leg_l, &pTmp, &trans_l);
+		MV_point(&leg_l, &pTmp, true);
 	} else {
-		ma_sl_prepareLeg(&leg_r, &pTmp, &trans_r);
+		MV_point(&leg_r, &pTmp, true);
 	}
 
 	UTL_wait(20);
 	COM_sendAction(COM_BRDCAST_ID);
-	ma_sl_action();
+	MV_action(&leg_r, &leg_l);
 }
 
 void ma_doStep(DT_point* const pDwn, DT_point* const pUp, DT_bool right) {
@@ -208,15 +207,15 @@ void ma_doStep(DT_point* const pDwn, DT_point* const pUp, DT_bool right) {
 
 	pTmp = *pDwn;
 	if (right) {
-		ma_sl_prepareLeg(&leg_r, &pTmp, &trans_r);
+		MV_point(&leg_r, &pTmp, true);
 	} else {
 		pTmp.x = -pDwn->x;
-		ma_sl_prepareLeg(&leg_l, &pTmp, &trans_l);
+		MV_point(&leg_l, &pTmp, true);
 	}
 
 	UTL_wait(20);
 	COM_sendAction(COM_BRDCAST_ID);
-	ma_sl_action();
+	MV_action(&leg_r, &leg_l);
 
 	// F_L, B_L, M_R: hinten oben
 	pTmp = *pUp;
@@ -243,14 +242,14 @@ void ma_doStep(DT_point* const pDwn, DT_point* const pUp, DT_bool right) {
 	pTmp = *pUp;
 	if (right) {
 		pTmp.x = -pDwn->x;
-		ma_sl_prepareLeg(&leg_l, &pTmp, &trans_l);
+		MV_point(&leg_l, &pTmp, true);
 	} else {
-		ma_sl_prepareLeg(&leg_r, &pTmp, &trans_r);
+		MV_point(&leg_r, &pTmp, true);
 	}
 
 	UTL_wait(20);
 	COM_sendAction(COM_BRDCAST_ID);
-	ma_sl_action();
+	MV_action(&leg_r, &leg_l);
 }
 
 void ma_setPoints(DT_point* const pFntDwn, DT_point* const pFntUp,
@@ -277,20 +276,6 @@ void ma_setPoints(DT_point* const pFntDwn, DT_point* const pFntUp,
 	XM_LED_ON
 }
 
-void ma_checkAlive() {
-	// CHECK CPUs
-	DT_bool isAlive = false;
-	XM_LED_OFF
-	do {
-		if (COM_isAlive(COM_SLAVE1B) /*&& COM_isAlive(COM_SLAVE3)*/) {
-			isAlive = true;
-		} else
-			UTL_wait(5);
-	} while (isAlive == false);
-	DEBUG (("ma_alv_sl",sizeof("ma_alv_sl")))
-	XM_LED_ON
-}
-
 void ma_setInitialPosition() {
 	XM_LED_OFF
 	DT_byte config;
@@ -305,13 +290,13 @@ void ma_setInitialPosition() {
 	// pTmp = pNull;
 	// pTmp.x = pNull.x;
 	// pTmp.y = pNull.y + 0;
-	ma_sl_prepareLeg(&leg_r, &pTmp, &trans_r);
+	MV_point(&leg_r, &pTmp, true);
 
 	// Master links
 	pTmp = pNull;
 	pTmp.x = -pNull.x;
 	// pTmp.y = pNull.y + 0;
-	ma_sl_prepareLeg(&leg_l, &pTmp, &trans_l);
+	MV_point(&leg_l, &pTmp, true);
 
 	// Slave3 rechts
 	pTmp = pNull;
@@ -341,7 +326,7 @@ void ma_setInitialPosition() {
 	config = COM_CONF_LEFT | COM_CONF_GLOB;
 	COM_sendPoint(COM_SLAVE1B, &pTmp, config);
 
-	ma_sl_action();
+	MV_action(&leg_r, &leg_l);
 	COM_sendAction(COM_BRDCAST_ID);
 
 	DEBUG(("ma_int_pos_ok",sizeof("ma_int_pos_ok")))

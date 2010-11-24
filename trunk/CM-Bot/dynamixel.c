@@ -49,8 +49,6 @@ DT_byte DNX_getChecksum(const DT_byte* const packet, DT_size l) {
 	return ~chksm;
 }
 
-
-
 /**
  * \brief 	USART-Empfangsmethode.
  *
@@ -81,7 +79,7 @@ DT_byte DNX_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 	}
 
 	// Pruefen ob min. 4 Bytes im Buffer sind, um Laenge zu lesen
-	if (USART_RXBuffer_checkPointerDiff(tempTail,tempHead, 4)) {
+	if (USART_RXBuffer_checkPointerDiff(tempTail, tempHead, 4)) {
 		DEBUG(("DNX_le",sizeof("DNX_le")))
 		return 0;
 	}
@@ -137,22 +135,26 @@ DT_byte DNX_send(DT_byte* const packet, DT_size l, DT_byte* const result,
 		DT_bool hasResponse) {
 	packet[l - 1] = DNX_getChecksum(packet, l);
 	USART_data_t* usart_data;
-	// packet[2] -> ID
-	if ((packet[2] - 1) % 6 < 3) // Right: 1 - 3, 7 - 9, ...
-		usart_data = &XM_servo_data_R;
-	else
-		// Left:  4 - 6, ...
-		usart_data = &XM_servo_data_L;
-
-	XM_USART_send(usart_data, packet, l);
-
 	DT_byte len = 0;
-	DT_size timeout = hasResponse ? 100 : 0;
-	while (len == 0 && timeout > 0) {
-		len = DNX_receive(usart_data, result);
-		timeout--;
-	}
+	// packet[2] -> ID
+	if (packet[2] == DNX_BRDCAST_ID) {
+		XM_USART_send(&XM_servo_data_R, packet, l);
+		XM_USART_send(&XM_servo_data_L, packet, l);
+	} else {
+		if ((packet[2] - 1) % 6 < 3) // Right: 1 - 3, 7 - 9, ...
+			usart_data = &XM_servo_data_R;
+		else
+			// Left:  4 - 6, ...
+			usart_data = &XM_servo_data_L;
 
+		XM_USART_send(usart_data, packet, l);
+
+		DT_size timeout = hasResponse ? 100 : 0;
+		while (len == 0 && timeout > 0) {
+			len = DNX_receive(usart_data, result);
+			timeout--;
+		}
+	}
 	return len;
 }
 
