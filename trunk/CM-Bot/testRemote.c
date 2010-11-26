@@ -45,49 +45,44 @@ int main() {
 	while (1) {
 		cmd = RMT_getCommand();
 		if (RMT_isButton1Pressed(cmd)) {
-			DEBUG(("Button1",sizeof("Button1")))
-			KIN_calcServos(&p1, &leg_l);
-			KIN_calcServos(&p1, &leg_r);
-
-			leg_r.hip.set_value = UTL_getDegree(leg_r.hip.set_value);
-			leg_r.knee.set_value = UTL_getDegree(leg_r.knee.set_value);
-			leg_r.foot.set_value = UTL_getDegree(leg_r.foot.set_value);
-
-			leg_l.hip.set_value = UTL_getDegree(leg_l.hip.set_value);
-			leg_l.knee.set_value = UTL_getDegree(leg_l.knee.set_value);
-			leg_l.foot.set_value = UTL_getDegree(leg_l.foot.set_value);
-
-			DNX_setAngle(leg_l.hip.id, leg_l.hip.set_value, false);
-			DNX_setAngle(leg_l.knee.id, leg_l.knee.set_value, false);
-			DNX_setAngle(leg_l.foot.id, leg_l.foot.set_value, false);
-
-			DNX_setAngle(leg_r.hip.id, leg_r.hip.set_value, false);
-			DNX_setAngle(leg_r.knee.id, leg_r.knee.set_value, false);
-			DNX_setAngle(leg_r.foot.id, leg_r.foot.set_value, false);
-
+			p1.x = p1.x + 1;
 		}
 
 		if (RMT_isButton2Pressed(cmd)) {
-			DEBUG(("Button2",sizeof("Button2")))
-			KIN_calcServos(&p2, &leg_l);
-			KIN_calcServos(&p2, &leg_r);
-
-			leg_r.hip.set_value = UTL_getDegree(leg_r.hip.set_value);
-			leg_r.knee.set_value = UTL_getDegree(leg_r.knee.set_value);
-			leg_r.foot.set_value = UTL_getDegree(leg_r.foot.set_value);
-
-			leg_l.hip.set_value = UTL_getDegree(leg_l.hip.set_value);
-			leg_l.knee.set_value = UTL_getDegree(leg_l.knee.set_value);
-			leg_l.foot.set_value = UTL_getDegree(leg_l.foot.set_value);
-
-			DNX_setAngle(leg_l.hip.id, leg_l.hip.set_value, false);
-			DNX_setAngle(leg_l.knee.id, leg_l.knee.set_value, false);
-			DNX_setAngle(leg_l.foot.id, leg_l.foot.set_value, false);
-
-			DNX_setAngle(leg_r.hip.id, leg_r.hip.set_value, false);
-			DNX_setAngle(leg_r.knee.id, leg_r.knee.set_value, false);
-			DNX_setAngle(leg_r.foot.id, leg_r.foot.set_value, false);
+			p1.x = p1.x - 1;
 		}
+
+		if (RMT_isButton3Pressed(cmd)) {
+			p1.y = p1.y + 1;
+		}
+
+		if (RMT_isButton4Pressed(cmd)) {
+			p1.y = p1.y - 1;
+		}
+		if (RMT_isLeftPressed(cmd)) {
+			p1.y = p1.z + 1;
+		}
+		if (RMT_isRightPressed(cmd)) {
+			p1.y = p1.z - 1;
+		}
+		KIN_calcServos(&p1, &leg_l);
+		KIN_calcServos(&p1, &leg_r);
+
+		leg_r.hip.set_value = UTL_getDegree(leg_r.hip.set_value);
+		leg_r.knee.set_value = UTL_getDegree(leg_r.knee.set_value);
+		leg_r.foot.set_value = UTL_getDegree(leg_r.foot.set_value);
+
+		leg_l.hip.set_value = UTL_getDegree(leg_l.hip.set_value);
+		leg_l.knee.set_value = UTL_getDegree(leg_l.knee.set_value);
+		leg_l.foot.set_value = UTL_getDegree(leg_l.foot.set_value);
+
+		DNX_setAngle(leg_l.hip.id, leg_l.hip.set_value, false);
+		DNX_setAngle(leg_l.knee.id, leg_l.knee.set_value, false);
+		DNX_setAngle(leg_l.foot.id, leg_l.foot.set_value, false);
+
+		DNX_setAngle(leg_r.hip.id, leg_r.hip.set_value, false);
+		DNX_setAngle(leg_r.knee.id, leg_r.knee.set_value, false);
+		DNX_setAngle(leg_r.foot.id, leg_r.foot.set_value, false);
 	}
 	return 0;
 }
