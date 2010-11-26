@@ -1,0 +1,34 @@
+EAGLE Version 4.16r2 Copyright (c) 1988-2006 CadSoft
+
+Electrical Rule Check für C:/Program Files/EAGLE-4.16r2/projects/Hexapod/untitled.sch am 08.08.2010 13:12:12 
+
+FEHLER: Seite 1/1: Nicht angeschlossener INPUT-Pin: MODULE1 RESET\
+FEHLER: Seite 1/1: kein SUPPLY für impliziten POWER-Pin MODULE1-PWR VCC
+FEHLER: Seite 1/1: kein SUPPLY für impliziten POWER-Pin MODULE1-PWR VCC
+FEHLER: Seite 1/1: kein SUPPLY für impliziten POWER-Pin MODULE1-PWR VCC
+FEHLER: Seite 1/1: kein SUPPLY für impliziten POWER-Pin MODULE1-PWR VCC
+FEHLER: Seite 1/1: kein SUPPLY für impliziten POWER-Pin MODULE1-PWR VCC
+FEHLER: Seite 1/1: kein SUPPLY für impliziten POWER-Pin MODULE1-PWR VCC
+FEHLER: Seite 1/1: kein SUPPLY für impliziten POWER-Pin MODULE1-PWR VCC
+FEHLER: Seite 1/1: kein SUPPLY für impliziten POWER-Pin MODULE1-PWR VCC
+FEHLER: Seite 1/1: kein SUPPLY für impliziten POWER-Pin MODULE1-PWR GND
+FEHLER: Seite 1/1: kein SUPPLY für impliziten POWER-Pin MODULE1-PWR GND
+FEHLER: Seite 1/1: kein SUPPLY für impliziten POWER-Pin MODULE1-PWR GND
+FEHLER: Seite 1/1: kein SUPPLY für impliziten POWER-Pin MODULE1-PWR GND
+FEHLER: Seite 1/1: kein SUPPLY für impliziten POWER-Pin MODULE1-PWR GND
+FEHLER: Seite 1/1: kein SUPPLY für impliziten POWER-Pin MODULE1-PWR GND
+FEHLER: Seite 1/1: kein SUPPLY für impliziten POWER-Pin MODULE1-PWR GND
+FEHLER: Seite 1/1: kein SUPPLY für impliziten POWER-Pin MODULE1-PWR GND
+FEHLER: Seite 1/1: kein SUPPLY für impliziten POWER-Pin MODULE1-PWR GND
+FEHLER: Seite 1/1: kein SUPPLY für impliziten POWER-Pin MODULE1-PWR GND
+FEHLER: Seite 1/1: kein SUPPLY für impliziten POWER-Pin MODULE1-PWR GND
+FEHLER: Seite 1/1: kein SUPPLY für impliziten POWER-Pin MODULE1-PWR GND
+FEHLER: Seite 1/1: kein SUPPLY für impliziten POWER-Pin MODULE1-PWR GND
+FEHLER: Seite 1/1: kein SUPPLY für impliziten POWER-Pin MODULE1-PWR GND
+FEHLER: Seite 1/1: kein SUPPLY für impliziten POWER-Pin MODULE1-PWR AVCCA
+FEHLER: Seite 1/1: kein SUPPLY für impliziten POWER-Pin MODULE1-PWR AVCCB
+
+ Kein Board geladen - Die Konsistenz ist nicht überprüft
+
+   25 Fehler
+    0 Warnungen
