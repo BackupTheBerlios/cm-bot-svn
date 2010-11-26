@@ -63,7 +63,7 @@ void MV_masterCheckAlive() {
 	DT_bool isAlive = false;
 	XM_LED_OFF
 	do {
-		if (COM_isAlive(COM_SLAVE1B) && COM_isAlive(COM_SLAVE3F)) {
+		if (COM_isAlive(COM_SLAVE1B)/* && COM_isAlive(COM_SLAVE3F)*/) {
 			isAlive = true;
 		} else
 			UTL_wait(5);
@@ -98,6 +98,7 @@ void MV_slavePoint(DT_leg* const leg_r, DT_leg* const leg_l,
 	COM_sendACK(COM_MASTER);
 }
 
+
 void MV_point(DT_leg* const leg, const DT_point* const point, DT_bool isGlobal) {
 	if (isGlobal == true) {
 		DT_point pLocal = KIN_calcLocalPoint(point, &leg->trans);
@@ -108,6 +109,7 @@ void MV_point(DT_leg* const leg, const DT_point* const point, DT_bool isGlobal) 
 	leg->hip.set_value = UTL_getDegree(leg->hip.set_value);
 	leg->knee.set_value = UTL_getDegree(leg->knee.set_value);
 	leg->foot.set_value = UTL_getDegree(leg->foot.set_value);
+
 
 	DNX_setAngle(leg->hip.id, leg->hip.set_value, true);
 	DNX_setAngle(leg->knee.id, leg->knee.set_value, true);

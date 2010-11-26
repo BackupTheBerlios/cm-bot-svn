@@ -5,7 +5,7 @@
  *      Author: christof
  */
 
-#define TEST_ON TEST
+#define TEST_OFF TEST
 #ifdef TEST_ON
 
 #include "include/utils.h"

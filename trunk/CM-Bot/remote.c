@@ -41,18 +41,21 @@ DT_cmd RMT_getCommand() {
 	DT_cmd tmp_cmd = 0xFFFF;
 	DT_bool button_release = false;
 	DT_size timeout = 65000;
-	for(i=0; i<DT_RESULT_BUFFER_SIZE; i++)
+	for (i = 0; i < DT_RESULT_BUFFER_SIZE; i++)
 		result[i] = 0x00;
-	RMT_receive(&XM_remote_data, result);
-	cmd = (result[4] << 8) | result[2];
-	/*
-	while (!button_release && timeout > 0) {
-		RMT_receive(&XM_remote_data, result);
-		tmp_cmd = (result[4] << 8) | result[2];
-		if (tmp_cmd == B_NON_PRESSED)
-			button_release = true;
-		timeout--;
-	}*/
+	if(RMT_receive(&XM_remote_data, result) > 0){
+		DEBUG(("CMD_EX", sizeof("CMD_EX")))
+		cmd = (result[4] << 8) | result[2];
+	} else {
+		cmd = B_NON_PRESSED;
+	}
+	/*while (!button_release && timeout > 0) {
+	 RMT_receive(&XM_remote_data, result);
+	 tmp_cmd = (result[4] << 8) | result[2];
+	 if (tmp_cmd == B_NON_PRESSED)
+	 button_release = true;
+	 timeout--;
+	 }*/
 	//if(cmd!=0)DEBUG_BYTE((&cmd,sizeof(&cmd)))
 	return cmd;
 }
@@ -70,10 +73,13 @@ DT_cmd RMT_getCommand() {
  */
 DT_byte RMT_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 	USART_Buffer_t* buffer = &usart_data->buffer;
+	const DT_byte tempHead = buffer->RX_Head;
+	const DT_byte tempTail = buffer->RX_Tail;
+	DT_byte length = 6;
 
 	// Sind Daten vorhanden
-	if (!USART_RXBufferData_Available(usart_data)) {
-		//DEBUG(("RMT_nd",sizeof("RMT_nd")))
+	if (USART_RXBuffer_checkPointerDiff(tempTail, tempHead, length)) {
+		DEBUG(("RMT_nd",sizeof("RMT_nd")))
 		return 0;
 	}
 	// Byte #1 und Byte #2 muessen laut Protokoll 0xFF und 0x55 sein
@@ -82,25 +88,11 @@ DT_byte RMT_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 					!= 0x55)) {
 		DEBUG(("RMT_ff",sizeof("RMT_ff")))
 		return 0;
-	}
-	// Some data received. All data received if checksum is correct!
-	else {
-		// length = (FF + 55 + LL + !LL + HH + !HH)
-		DT_byte length = 6;
-		// Prüfen ob Paket bereits komplett im Buffer
-		if (((buffer->RX_Tail + length) & USART_RX_BUFFER_MASK)
-				>= buffer->RX_Head) {
-			//DEBUG(("RMT_uc",sizeof("RMT_uc")))
-			return 0;
-		}
-		//DEBUG_BYTE((buffer->RX, 127))
-		// Copy packet from buffer in destination array
+	} else {
 		DT_byte i;
 		for (i = 0; i < length; i++) {
 			dest[i] = USART_RXBuffer_GetByte(usart_data);
 		}
-		//DEBUG_BYTE((dest, 127))
-
 		DEBUG(("RMT_ok",sizeof("RMT_ok")))
 		return length;
 	}

@@ -45,6 +45,7 @@ int main() {
 
 	switch (cpuID) {
 	case COM_MASTER:
+		XM_init_remote();
 		DEBUG(("Master",sizeof("Master")))
 		master();
 		break;
@@ -75,11 +76,11 @@ void master() {
 	ma_setPoints(&pFntDwn, &pFntUp, &pBckUp, &pBckDwn);
 
 	DT_byte state = 0;
+	DT_byte cmd;
 
 	// Automat: 0(->1->2->3->4)+
 	while (1) {
 		XM_LED_ON
-
 		switch (state) {
 		case 0:
 			DEBUG(("ma_int_pos",sizeof("ma_int_pos")))
@@ -122,7 +123,7 @@ void ma_prepareStep(DT_point* const pDwn, DT_point* const pUp, DT_bool right) {
 		config = COM_CONF_RIGHT | COM_CONF_GLOB;
 	}
 	pTmp.y += SL_DST_Y;
-	//COM_sendPoint(COM_SLAVE3, &pTmp, config);
+	COM_sendPoint(COM_SLAVE3F, &pTmp, config);
 
 	pTmp = *pDwn;
 	if (right) {
@@ -156,7 +157,7 @@ void ma_prepareStep(DT_point* const pDwn, DT_point* const pUp, DT_bool right) {
 	}
 	pTmp.y += SL_DST_Y;
 
-	//COM_sendPoint(COM_SLAVE3, &pTmp, config);
+	COM_sendPoint(COM_SLAVE3F, &pTmp, config);
 
 	pTmp = *pUp;
 	if (right) {
@@ -193,7 +194,7 @@ void ma_doStep(DT_point* const pDwn, DT_point* const pUp, DT_bool right) {
 		config = COM_CONF_RIGHT | COM_CONF_GLOB;
 	}
 	pTmp.y += SL_DST_Y;
-	//COM_sendPoint(COM_SLAVE3, &pTmp, config);
+	COM_sendPoint(COM_SLAVE3F, &pTmp, config);
 
 	pTmp = *pDwn;
 	if (right) {
@@ -227,7 +228,7 @@ void ma_doStep(DT_point* const pDwn, DT_point* const pUp, DT_bool right) {
 	}
 	pTmp.y += SL_DST_Y;
 
-	//COM_sendPoint(COM_SLAVE3, &pTmp, config);
+	COM_sendPoint(COM_SLAVE3F, &pTmp, config);
 
 	pTmp = *pUp;
 	if (right) {
@@ -303,14 +304,14 @@ void ma_setInitialPosition() {
 	// pTmp.x = pNull.x;
 	pTmp.y = pNull.y + SL_DST_Y; // +/- pruefen
 	config = COM_CONF_RIGHT | COM_CONF_GLOB;
-	//COM_sendPoint(COM_SLAVE3, &pTmp, config);
+	COM_sendPoint(COM_SLAVE3F, &pTmp, config);
 
 	// Slave3 links
 	pTmp = pNull;
 	pTmp.x = -pNull.x;
 	pTmp.y = pNull.y + SL_DST_Y; // +/- pruefen
 	config = COM_CONF_LEFT | COM_CONF_GLOB;
-	//COM_sendPoint(COM_SLAVE3, &pTmp, config);
+	COM_sendPoint(COM_SLAVE3F, &pTmp, config);
 
 	// Slave1 rechts
 	pTmp = pNull;

@@ -4,7 +4,7 @@
  * \brief	Testprogramm für die Kinematik.
  */
 
-#define TEST_OFF
+#define TEST_ON
 #ifdef TEST_ON
 
 #include "include/kinematics.h"
@@ -12,12 +12,19 @@
 #include "include/xmega.h"
 #include "include/dynamixel.h"
 #include "include/remote.h"
+#include "include/communication.h"
+
+DT_leg leg_r, leg_l;
+DT_byte cpuID;
 
 int main() {
 	XM_init_cpu();
-	XM_init_remote();
 	XM_init_dnx();
-
+	// INIT: Hole benoetigte Daten
+	DNX_getConnectedIDs(&leg_r, &leg_l);
+	cpuID = COM_getCpuID(&leg_l);
+	XM_init_com(cpuID);
+	XM_init_remote();
 	XM_LED_OFF
 
 	DT_cmd cmd = 0x0000;
@@ -36,41 +43,51 @@ int main() {
 
 	DT_char flag = 0;
 	while (1) {
-		if (flag == 0) {
-			KIN_calcServos(&p1, &leg_l);
-			KIN_calcServos(&p1, &leg_r);
-			flag = 1;
-			XM_LED_ON
-		} else {
-			KIN_calcServos(&p2, &leg_l);
-			KIN_calcServos(&p2, &leg_r);
-			flag = 0;
-			XM_LED_OFF
-		}
-
-		leg_r.hip.set_value = UTL_getDegree(leg_r.hip.set_value);
-		leg_r.knee.set_value = UTL_getDegree(leg_r.knee.set_value);
-		leg_r.foot.set_value = UTL_getDegree(leg_r.foot.set_value);
-
-		leg_l.hip.set_value = UTL_getDegree(leg_l.hip.set_value);
-		leg_l.knee.set_value = UTL_getDegree(leg_l.knee.set_value);
-		leg_l.foot.set_value = UTL_getDegree(leg_l.foot.set_value);
-
 		cmd = RMT_getCommand();
 		if (RMT_isButton1Pressed(cmd)) {
 			DEBUG(("Button1",sizeof("Button1")))
-			DNX_setAngle(leg_r.hip.id, leg_r.hip.set_value);
-			DNX_setAngle(leg_r.knee.id, leg_r.knee.set_value);
-			DNX_setAngle(leg_r.foot.id, leg_r.foot.set_value);
+			KIN_calcServos(&p1, &leg_l);
+			KIN_calcServos(&p1, &leg_r);
+
+			leg_r.hip.set_value = UTL_getDegree(leg_r.hip.set_value);
+			leg_r.knee.set_value = UTL_getDegree(leg_r.knee.set_value);
+			leg_r.foot.set_value = UTL_getDegree(leg_r.foot.set_value);
+
+			leg_l.hip.set_value = UTL_getDegree(leg_l.hip.set_value);
+			leg_l.knee.set_value = UTL_getDegree(leg_l.knee.set_value);
+			leg_l.foot.set_value = UTL_getDegree(leg_l.foot.set_value);
+
+			DNX_setAngle(leg_l.hip.id, leg_l.hip.set_value, false);
+			DNX_setAngle(leg_l.knee.id, leg_l.knee.set_value, false);
+			DNX_setAngle(leg_l.foot.id, leg_l.foot.set_value, false);
+
+			DNX_setAngle(leg_r.hip.id, leg_r.hip.set_value, false);
+			DNX_setAngle(leg_r.knee.id, leg_r.knee.set_value, false);
+			DNX_setAngle(leg_r.foot.id, leg_r.foot.set_value, false);
+
 		}
 
 		if (RMT_isButton2Pressed(cmd)) {
 			DEBUG(("Button2",sizeof("Button2")))
-			DNX_setAngle(leg_l.hip.id, leg_l.hip.set_value);
-			DNX_setAngle(leg_l.knee.id, leg_l.knee.set_value);
-			DNX_setAngle(leg_l.foot.id, leg_l.foot.set_value);
+			KIN_calcServos(&p2, &leg_l);
+			KIN_calcServos(&p2, &leg_r);
+
+			leg_r.hip.set_value = UTL_getDegree(leg_r.hip.set_value);
+			leg_r.knee.set_value = UTL_getDegree(leg_r.knee.set_value);
+			leg_r.foot.set_value = UTL_getDegree(leg_r.foot.set_value);
+
+			leg_l.hip.set_value = UTL_getDegree(leg_l.hip.set_value);
+			leg_l.knee.set_value = UTL_getDegree(leg_l.knee.set_value);
+			leg_l.foot.set_value = UTL_getDegree(leg_l.foot.set_value);
+
+			DNX_setAngle(leg_l.hip.id, leg_l.hip.set_value, false);
+			DNX_setAngle(leg_l.knee.id, leg_l.knee.set_value, false);
+			DNX_setAngle(leg_l.foot.id, leg_l.foot.set_value, false);
+
+			DNX_setAngle(leg_r.hip.id, leg_r.hip.set_value, false);
+			DNX_setAngle(leg_r.knee.id, leg_r.knee.set_value, false);
+			DNX_setAngle(leg_r.foot.id, leg_r.foot.set_value, false);
 		}
-		UTL_wait(5);
 	}
 	return 0;
 }
