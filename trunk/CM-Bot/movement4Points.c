@@ -14,14 +14,10 @@
 #include "include/communication.h"
 #include "include/movement.h"
 
-#define SL_DST_Y	208.5
-#define DST_X	168.5
-
 DT_leg leg_r, leg_l;
 DT_byte cpuID;
 
 void master();
-void ma_doInitPosition();
 void ma_setPoints(DT_point* const , DT_point* const , DT_point* const ,
 		DT_point* const );
 void ma_prepareStep(DT_point* const , DT_point* const , const DT_bool);
@@ -82,7 +78,7 @@ void master() {
 		switch (state) {
 		case 0:
 			DEBUG(("ma_int_pos",sizeof("ma_int_pos")))
-			ma_doInitPosition();
+			MV_doInitPosition(&leg_r, &leg_l);
 			UTL_wait(40);
 			state = 1;
 			break;
@@ -122,7 +118,7 @@ void ma_prepareStep(DT_point* const pDwn, DT_point* const pUp, DT_bool right) {
 	} else {
 		config = COM_CONF_RIGHT | COM_CONF_GLOB;
 	}
-	pTmp.y += SL_DST_Y;
+	pTmp.y += MV_DST_Y;
 	COM_sendPoint(COM_SLAVE3F, &pTmp, config);
 
 	pTmp = *pDwn;
@@ -132,7 +128,7 @@ void ma_prepareStep(DT_point* const pDwn, DT_point* const pUp, DT_bool right) {
 	} else {
 		config = COM_CONF_RIGHT | COM_CONF_GLOB;
 	}
-	pTmp.y -= SL_DST_Y;
+	pTmp.y -= MV_DST_Y;
 	COM_sendPoint(COM_SLAVE1B, &pTmp, config);
 
 	pTmp = *pDwn;
@@ -156,7 +152,7 @@ void ma_prepareStep(DT_point* const pDwn, DT_point* const pUp, DT_bool right) {
 		config = COM_CONF_LEFT | COM_CONF_GLOB;
 		pTmp.x = -pUp->x;
 	}
-	pTmp.y += SL_DST_Y;
+	pTmp.y += MV_DST_Y;
 
 	COM_sendPoint(COM_SLAVE3F, &pTmp, config);
 
@@ -167,7 +163,7 @@ void ma_prepareStep(DT_point* const pDwn, DT_point* const pUp, DT_bool right) {
 		config = COM_CONF_LEFT | COM_CONF_GLOB;
 		pTmp.x = -pUp->x;
 	}
-	pTmp.y -= SL_DST_Y;
+	pTmp.y -= MV_DST_Y;
 	COM_sendPoint(COM_SLAVE1B, &pTmp, config);
 
 	pTmp = *pUp;
@@ -193,7 +189,7 @@ void ma_doStep(DT_point* const pDwn, DT_point* const pUp, DT_bool right) {
 	} else {
 		config = COM_CONF_RIGHT | COM_CONF_GLOB;
 	}
-	pTmp.y += SL_DST_Y;
+	pTmp.y += MV_DST_Y;
 	COM_sendPoint(COM_SLAVE3F, &pTmp, config);
 
 	pTmp = *pDwn;
@@ -203,7 +199,7 @@ void ma_doStep(DT_point* const pDwn, DT_point* const pUp, DT_bool right) {
 	} else {
 		config = COM_CONF_RIGHT | COM_CONF_GLOB;
 	}
-	pTmp.y -= SL_DST_Y;
+	pTmp.y -= MV_DST_Y;
 	COM_sendPoint(COM_SLAVE1B, &pTmp, config);
 
 	pTmp = *pDwn;
@@ -222,7 +218,7 @@ void ma_doStep(DT_point* const pDwn, DT_point* const pUp, DT_bool right) {
 		config = COM_CONF_LEFT | COM_CONF_GLOB;
 		pTmp.x = -pUp->x;
 	}
-	pTmp.y += SL_DST_Y;
+	pTmp.y += MV_DST_Y;
 
 	COM_sendPoint(COM_SLAVE3F, &pTmp, config);
 
@@ -233,7 +229,7 @@ void ma_doStep(DT_point* const pDwn, DT_point* const pUp, DT_bool right) {
 		config = COM_CONF_LEFT | COM_CONF_GLOB;
 		pTmp.x = -pUp->x;
 	}
-	pTmp.y -= SL_DST_Y;
+	pTmp.y -= MV_DST_Y;
 	COM_sendPoint(COM_SLAVE1B, &pTmp, config);
 
 	pTmp = *pUp;
@@ -252,19 +248,19 @@ void ma_setPoints(DT_point* const pFntDwn, DT_point* const pFntUp,
 		DT_point* const pBckUp, DT_point* const pBckDwn) {
 	XM_LED_OFF
 	// Fix-Koordinaten fuer Master, Berechnung fuer Slaves ueber Offset
-	pFntUp->x = 103.4640 + DST_X;
+	pFntUp->x = 103.4640 + MV_DST_X;
 	pFntUp->y = 37.6578;
 	pFntUp->z = 101.1041;
 
-	pFntDwn->x = 103.4640 + DST_X;
+	pFntDwn->x = 103.4640 + MV_DST_X;
 	pFntDwn->y = 37.6578;
 	pFntDwn->z = -129.1041;
 
-	pBckUp->x = 103.4640 + DST_X;
+	pBckUp->x = 103.4640 + MV_DST_X;
 	pBckUp->y = -37.6578;
 	pBckUp->z = 101.1041;
 
-	pBckDwn->x = 103.4640 + DST_X;
+	pBckDwn->x = 103.4640 + MV_DST_X;
 	pBckDwn->y = -37.6578;
 	pBckDwn->z = -129.1041;
 
@@ -272,112 +268,5 @@ void ma_setPoints(DT_point* const pFntDwn, DT_point* const pFntUp,
 	XM_LED_ON
 }
 
-void ma_doInitPosition() {
-	XM_LED_OFF
-	DT_byte config;
-	// Punkt fuer Null-Stellung mittleres rechtes Bein als Bezug
-	DT_point pTmp;
-	pTmp.x = 190 + DST_X;
-	pTmp.y = 0;
-	pTmp.z = -14;
-	DT_point pNull = pTmp;
-
-	// Master rechts
-	// pTmp = pNull;
-	// pTmp.x = pNull.x;
-	// pTmp.y = pNull.y + 0;
-	MV_point(&leg_r, &pTmp, true);
-
-	// Master links
-	pTmp = pNull;
-	pTmp.x = -pNull.x;
-	// pTmp.y = pNull.y + 0;
-	MV_point(&leg_l, &pTmp, true);
-
-	// Slave3 rechts
-	pTmp = pNull;
-	// pTmp.x = pNull.x;
-	pTmp.y = pNull.y + SL_DST_Y; // +/- pruefen
-	config = COM_CONF_RIGHT | COM_CONF_GLOB;
-	COM_sendPoint(COM_SLAVE3F, &pTmp, config);
-
-	// Slave3 links
-	pTmp = pNull;
-	pTmp.x = -pNull.x;
-	pTmp.y = pNull.y + SL_DST_Y; // +/- pruefen
-	config = COM_CONF_LEFT | COM_CONF_GLOB;
-	COM_sendPoint(COM_SLAVE3F, &pTmp, config);
-
-	// Slave1 rechts
-	pTmp = pNull;
-	// pTmp.x = pNull.x;
-	pTmp.y = pNull.y - SL_DST_Y; // +/- pruefen
-	config = COM_CONF_RIGHT | COM_CONF_GLOB;
-	COM_sendPoint(COM_SLAVE1B, &pTmp, config);
-
-	// Slave1 links
-	pTmp = pNull;
-	pTmp.x = -pNull.x;
-	pTmp.y = pNull.y - SL_DST_Y; // +/- pruefen
-	config = COM_CONF_LEFT | COM_CONF_GLOB;
-	COM_sendPoint(COM_SLAVE1B, &pTmp, config);
-
-	COM_sendAction(COM_BRDCAST_ID);
-	MV_action(&leg_r, &leg_l);
-
-	UTL_wait(20);
-
-	// Roboter auf Beine stellen
-	pTmp.x = 103.4640 + DST_X;
-	pTmp.y = 37.6578;
-	pTmp.z = -129.1041;
-	pNull = pTmp;
-
-	// Master rechts
-	// pTmp = pNull;
-	// pTmp.x = pNull.x;
-	// pTmp.y = pNull.y + 0;
-	MV_point(&leg_r, &pTmp, true);
-
-	// Master links
-	pTmp = pNull;
-	pTmp.x = -pNull.x;
-	// pTmp.y = pNull.y + 0;
-	MV_point(&leg_l, &pTmp, true);
-
-	// Slave3 rechts
-	pTmp = pNull;
-	// pTmp.x = pNull.x;
-	pTmp.y = pNull.y + SL_DST_Y; // +/- pruefen
-	config = COM_CONF_RIGHT | COM_CONF_GLOB;
-	COM_sendPoint(COM_SLAVE3F, &pTmp, config);
-
-	// Slave3 links
-	pTmp = pNull;
-	pTmp.x = -pNull.x;
-	pTmp.y = pNull.y + SL_DST_Y; // +/- pruefen
-	config = COM_CONF_LEFT | COM_CONF_GLOB;
-	COM_sendPoint(COM_SLAVE3F, &pTmp, config);
-
-	// Slave1 rechts
-	pTmp = pNull;
-	// pTmp.x = pNull.x;
-	pTmp.y = pNull.y - SL_DST_Y; // +/- pruefen
-	config = COM_CONF_RIGHT | COM_CONF_GLOB;
-	COM_sendPoint(COM_SLAVE1B, &pTmp, config);
-
-	// Slave1 links
-	pTmp = pNull;
-	pTmp.x = -pNull.x;
-	pTmp.y = pNull.y - SL_DST_Y; // +/- pruefen
-	config = COM_CONF_LEFT | COM_CONF_GLOB;
-	COM_sendPoint(COM_SLAVE1B, &pTmp, config);
-
-	COM_sendAction(COM_BRDCAST_ID);
-	MV_action(&leg_r, &leg_l);
-
-	DEBUG(("ma_int_pos_ok",sizeof("ma_int_pos_ok")))
-	XM_LED_ON
-}
 
 #endif /* TEST_ON */

@@ -12,6 +12,8 @@
 #include "include/dynamixel.h"
 #include "include/kinematics.h"
 
+#define MV_DST_X	168.5
+
 void MV_action(DT_leg* const leg_r, DT_leg* const leg_l) {
 	DNX_sendAction(leg_r->hip.id);
 	DNX_sendAction(leg_r->knee.id);
@@ -114,4 +116,113 @@ void MV_point(DT_leg* const leg, const DT_point* const point, DT_bool isGlobal) 
 	DNX_setAngle(leg->hip.id, leg->hip.set_value, true);
 	DNX_setAngle(leg->knee.id, leg->knee.set_value, true);
 	DNX_setAngle(leg->foot.id, leg->foot.set_value, true);
+}
+
+void MV_doInitPosition(DT_leg* const leg_r, DT_leg* const leg_l) {
+	XM_LED_OFF
+	DT_byte config;
+
+	// Punkt fuer Null-Stellung mittleres rechtes Bein als Bezug
+	DT_point pTmp;
+	pTmp.x = 190 + MV_DST_X;
+	pTmp.y = 0;
+	pTmp.z = -14;
+	DT_point pNull = pTmp;
+
+	// Master rechts
+	// pTmp = pNull;
+	// pTmp.x = pNull.x;
+	// pTmp.y = pNull.y + 0;
+	MV_point(leg_r, &pTmp, true);
+
+	// Master links
+	pTmp = pNull;
+	pTmp.x = -pNull.x;
+	// pTmp.y = pNull.y + 0;
+	MV_point(leg_l, &pTmp, true);
+
+	// Slave3 rechts
+	pTmp = pNull;
+	// pTmp.x = pNull.x;
+	pTmp.y = pNull.y + MV_DST_Y; // +/- pruefen
+	config = COM_CONF_RIGHT | COM_CONF_GLOB;
+	COM_sendPoint(COM_SLAVE3F, &pTmp, config);
+
+	// Slave3 links
+	pTmp = pNull;
+	pTmp.x = -pNull.x;
+	pTmp.y = pNull.y + MV_DST_Y; // +/- pruefen
+	config = COM_CONF_LEFT | COM_CONF_GLOB;
+	COM_sendPoint(COM_SLAVE3F, &pTmp, config);
+
+	// Slave1 rechts
+	pTmp = pNull;
+	// pTmp.x = pNull.x;
+	pTmp.y = pNull.y - MV_DST_Y; // +/- pruefen
+	config = COM_CONF_RIGHT | COM_CONF_GLOB;
+	COM_sendPoint(COM_SLAVE1B, &pTmp, config);
+
+	// Slave1 links
+	pTmp = pNull;
+	pTmp.x = -pNull.x;
+	pTmp.y = pNull.y - MV_DST_Y; // +/- pruefen
+	config = COM_CONF_LEFT | COM_CONF_GLOB;
+	COM_sendPoint(COM_SLAVE1B, &pTmp, config);
+
+	COM_sendAction(COM_BRDCAST_ID);
+	MV_action(leg_r, leg_l);
+
+	UTL_wait(20);
+
+	// Roboter auf Beine stellen
+	pTmp.x = 110.1041 + MV_DST_X;
+	pTmp.y = 0;
+	pTmp.z = -129.1041;
+	pNull = pTmp;
+
+	// Master rechts
+	// pTmp = pNull;
+	// pTmp.x = pNull.x;
+	// pTmp.y = pNull.y + 0;
+	MV_point(leg_r, &pTmp, true);
+
+	// Master links
+	pTmp = pNull;
+	pTmp.x = -pNull.x;
+	// pTmp.y = pNull.y + 0;
+	MV_point(leg_l, &pTmp, true);
+
+	// Slave3 rechts
+	pTmp = pNull;
+	// pTmp.x = pNull.x;
+	pTmp.y = pNull.y + MV_DST_Y; // +/- pruefen
+	config = COM_CONF_RIGHT | COM_CONF_GLOB;
+	COM_sendPoint(COM_SLAVE3F, &pTmp, config);
+
+	// Slave3 links
+	pTmp = pNull;
+	pTmp.x = -pNull.x;
+	pTmp.y = pNull.y + MV_DST_Y; // +/- pruefen
+	config = COM_CONF_LEFT | COM_CONF_GLOB;
+	COM_sendPoint(COM_SLAVE3F, &pTmp, config);
+
+	// Slave1 rechts
+	pTmp = pNull;
+	// pTmp.x = pNull.x;
+	pTmp.y = pNull.y - MV_DST_Y; // +/- pruefen
+	config = COM_CONF_RIGHT | COM_CONF_GLOB;
+	COM_sendPoint(COM_SLAVE1B, &pTmp, config);
+
+	// Slave1 links
+	pTmp = pNull;
+	pTmp.x = -pNull.x;
+	pTmp.y = pNull.y - MV_DST_Y; // +/- pruefen
+	config = COM_CONF_LEFT | COM_CONF_GLOB;
+	COM_sendPoint(COM_SLAVE1B, &pTmp, config);
+
+	COM_sendAction(COM_BRDCAST_ID);
+	MV_action(leg_r, leg_l);
+
+	DEBUG(("ma_int_pos_ok",sizeof("ma_int_pos_ok")))
+	XM_LED_ON
 }
