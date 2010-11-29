@@ -22,7 +22,7 @@ DT_leg leg_r, leg_l;
 DT_byte cpuID;
 
 void master();
-void ma_setInitialPosition();
+void ma_doInitPosition();
 void ma_setPoints(DT_point* const , DT_point* const , DT_point* const ,
 		DT_point* const );
 void ma_prepareStep(DT_point* const , DT_point* const , const DT_bool);
@@ -93,7 +93,7 @@ void master() {
 		switch (state) {
 		case 0:
 			DEBUG(("ma_int_pos",sizeof("ma_int_pos")))
-			ma_setInitialPosition();
+			ma_doInitPosition();
 			UTL_wait(40);
 			state = 1;
 			break;
@@ -312,7 +312,7 @@ void ma_setPoints(DT_point* const pFntDwn, DT_point* const pFntUp,
 	XM_LED_ON
 }
 
-void ma_setInitialPosition() {
+void ma_doInitPosition() {
 	XM_LED_OFF
 	DT_byte config;
 	// Punkt fuer Null-Stellung mittleres rechtes Bein als Bezug

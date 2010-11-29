@@ -4,7 +4,7 @@
  *  \brief	Algorithmus fuer das Vorwaertslaufen ueber 4 Punkte.
  */
 
-#define TEST_OFF TEST
+#define TEST_ON TEST
 #ifdef TEST_ON
 
 #include "include/kinematics.h"
@@ -14,7 +14,6 @@
 #include "include/communication.h"
 #include "include/movement.h"
 
-// TODO Versatz eintragen
 #define SL_DST_Y	208.5
 #define DST_X	168.5
 
@@ -22,7 +21,7 @@ DT_leg leg_r, leg_l;
 DT_byte cpuID;
 
 void master();
-void ma_setInitialPosition();
+void ma_doInitPosition();
 void ma_setPoints(DT_point* const , DT_point* const , DT_point* const ,
 		DT_point* const );
 void ma_prepareStep(DT_point* const , DT_point* const , const DT_bool);
@@ -76,7 +75,6 @@ void master() {
 	ma_setPoints(&pFntDwn, &pFntUp, &pBckUp, &pBckDwn);
 
 	DT_byte state = 0;
-	DT_byte cmd;
 
 	// Automat: 0(->1->2->3->4)+
 	while (1) {
@@ -84,7 +82,7 @@ void master() {
 		switch (state) {
 		case 0:
 			DEBUG(("ma_int_pos",sizeof("ma_int_pos")))
-			ma_setInitialPosition();
+			ma_doInitPosition();
 			UTL_wait(40);
 			state = 1;
 			break;
@@ -94,6 +92,7 @@ void master() {
 			break;
 		case 2:
 			ma_doStep(&pBckDwn, &pFntUp, false);
+			UTL_wait(5);
 			state = 3;
 			break;
 		case 3:
@@ -101,7 +100,8 @@ void master() {
 			state = 4;
 			break;
 		case 4:
-			ma_prepareStep(&pBckDwn, &pFntUp, true);
+			ma_doStep(&pBckDwn, &pFntUp, true);
+			UTL_wait(5);
 			state = 1;
 			break;
 		default:
@@ -143,9 +143,10 @@ void ma_prepareStep(DT_point* const pDwn, DT_point* const pUp, DT_bool right) {
 		MV_point(&leg_l, &pTmp, true);
 	}
 
-	UTL_wait(20);
 	COM_sendAction(COM_BRDCAST_ID);
 	MV_action(&leg_r, &leg_l);
+
+	UTL_wait(10);
 
 	// F_L, B_L, M_R: hinten oben
 	pTmp = *pUp;
@@ -177,7 +178,6 @@ void ma_prepareStep(DT_point* const pDwn, DT_point* const pUp, DT_bool right) {
 		MV_point(&leg_r, &pTmp, true);
 	}
 
-	UTL_wait(20);
 	COM_sendAction(COM_BRDCAST_ID);
 	MV_action(&leg_r, &leg_l);
 }
@@ -214,10 +214,6 @@ void ma_doStep(DT_point* const pDwn, DT_point* const pUp, DT_bool right) {
 		MV_point(&leg_l, &pTmp, true);
 	}
 
-	UTL_wait(20);
-	COM_sendAction(COM_BRDCAST_ID);
-	MV_action(&leg_r, &leg_l);
-
 	// F_L, B_L, M_R: hinten oben
 	pTmp = *pUp;
 	if (right) {
@@ -248,7 +244,6 @@ void ma_doStep(DT_point* const pDwn, DT_point* const pUp, DT_bool right) {
 		MV_point(&leg_r, &pTmp, true);
 	}
 
-	UTL_wait(20);
 	COM_sendAction(COM_BRDCAST_ID);
 	MV_action(&leg_r, &leg_l);
 }
@@ -277,7 +272,7 @@ void ma_setPoints(DT_point* const pFntDwn, DT_point* const pFntUp,
 	XM_LED_ON
 }
 
-void ma_setInitialPosition() {
+void ma_doInitPosition() {
 	XM_LED_OFF
 	DT_byte config;
 	// Punkt fuer Null-Stellung mittleres rechtes Bein als Bezug
@@ -285,7 +280,7 @@ void ma_setInitialPosition() {
 	pTmp.x = 190 + DST_X;
 	pTmp.y = 0;
 	pTmp.z = -14;
-	const DT_point pNull = pTmp;
+	DT_point pNull = pTmp;
 
 	// Master rechts
 	// pTmp = pNull;
@@ -327,12 +322,62 @@ void ma_setInitialPosition() {
 	config = COM_CONF_LEFT | COM_CONF_GLOB;
 	COM_sendPoint(COM_SLAVE1B, &pTmp, config);
 
-	MV_action(&leg_r, &leg_l);
 	COM_sendAction(COM_BRDCAST_ID);
+	MV_action(&leg_r, &leg_l);
+
+	UTL_wait(20);
+
+	// Roboter auf Beine stellen
+	pTmp.x = 103.4640 + DST_X;
+	pTmp.y = 37.6578;
+	pTmp.z = -129.1041;
+	pNull = pTmp;
+
+	// Master rechts
+	// pTmp = pNull;
+	// pTmp.x = pNull.x;
+	// pTmp.y = pNull.y + 0;
+	MV_point(&leg_r, &pTmp, true);
+
+	// Master links
+	pTmp = pNull;
+	pTmp.x = -pNull.x;
+	// pTmp.y = pNull.y + 0;
+	MV_point(&leg_l, &pTmp, true);
+
+	// Slave3 rechts
+	pTmp = pNull;
+	// pTmp.x = pNull.x;
+	pTmp.y = pNull.y + SL_DST_Y; // +/- pruefen
+	config = COM_CONF_RIGHT | COM_CONF_GLOB;
+	COM_sendPoint(COM_SLAVE3F, &pTmp, config);
+
+	// Slave3 links
+	pTmp = pNull;
+	pTmp.x = -pNull.x;
+	pTmp.y = pNull.y + SL_DST_Y; // +/- pruefen
+	config = COM_CONF_LEFT | COM_CONF_GLOB;
+	COM_sendPoint(COM_SLAVE3F, &pTmp, config);
+
+	// Slave1 rechts
+	pTmp = pNull;
+	// pTmp.x = pNull.x;
+	pTmp.y = pNull.y - SL_DST_Y; // +/- pruefen
+	config = COM_CONF_RIGHT | COM_CONF_GLOB;
+	COM_sendPoint(COM_SLAVE1B, &pTmp, config);
+
+	// Slave1 links
+	pTmp = pNull;
+	pTmp.x = -pNull.x;
+	pTmp.y = pNull.y - SL_DST_Y; // +/- pruefen
+	config = COM_CONF_LEFT | COM_CONF_GLOB;
+	COM_sendPoint(COM_SLAVE1B, &pTmp, config);
+
+	COM_sendAction(COM_BRDCAST_ID);
+	MV_action(&leg_r, &leg_l);
 
 	DEBUG(("ma_int_pos_ok",sizeof("ma_int_pos_ok")))
 	XM_LED_ON
 }
-
 
 #endif /* TEST_ON */
