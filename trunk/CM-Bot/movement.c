@@ -65,7 +65,7 @@ void MV_masterCheckAlive() {
 	DT_bool isAlive = false;
 	XM_LED_OFF
 	do {
-		if (COM_isAlive(COM_SLAVE1B)/* && COM_isAlive(COM_SLAVE3F)*/) {
+		if (COM_isAlive(COM_SLAVE1B) && COM_isAlive(COM_SLAVE3F)) {
 			isAlive = true;
 		} else
 			UTL_wait(5);

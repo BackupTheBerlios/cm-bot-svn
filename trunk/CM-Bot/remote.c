@@ -79,7 +79,7 @@ DT_byte RMT_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 
 	// Sind Daten vorhanden
 	if (USART_RXBuffer_checkPointerDiff(tempTail, tempHead, length)) {
-		DEBUG(("RMT_nd",sizeof("RMT_nd")))
+		//DEBUG(("RMT_nd",sizeof("RMT_nd")))
 		return 0;
 	}
 	// Byte #1 und Byte #2 muessen laut Protokoll 0xFF und 0x55 sein
