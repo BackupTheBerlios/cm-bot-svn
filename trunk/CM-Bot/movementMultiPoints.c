@@ -18,10 +18,12 @@
 DT_leg leg_r, leg_l;
 DT_byte cpuID;
 
+#define STEP_SIZE	3
+
 void master();
 void ma_setInitialPoint(DT_point* const );
 void ma_changeActiveLeg();
-void ma_doStep();
+void ma_doStep(const DT_point* const );
 
 int main() {
 	XM_init_cpu();
@@ -78,40 +80,41 @@ void master() {
 	while (1) {
 		XM_LED_ON
 		cmd = RMT_getCommand();
-		if (RMT_isButton1Pressed(cmd)) {
-			DEBUG(("B1",sizeof("B1")))
-			p1.x = p1.x + 1;
-		}
 
-		if (RMT_isButton2Pressed(cmd)) {
-			DEBUG(("B2",sizeof("B2")))
-			p1.x = p1.x - 1;
+		// Vorwärts & Rückwärts
+		if (RMT_isUpPressed(cmd)) {
+			DEBUG(("UP",sizeof("UP")))
+			p1.y = p1.y + STEP_SIZE;
 		}
-
-		if (RMT_isButton3Pressed(cmd)) {
-			DEBUG(("B3",sizeof("B3")))
-			p1.y = p1.y + 1;
+		if (RMT_isDownPressed(cmd)) {
+			DEBUG(("DWN",sizeof("DWN")))
+			p1.y = p1.y - STEP_SIZE;
 		}
-
-		if (RMT_isButton4Pressed(cmd)) {
-			DEBUG(("B4",sizeof("B4")))
-			p1.y = p1.y - 1;
-		}
+		// Links & Rechts
 		if (RMT_isLeftPressed(cmd)) {
-			DEBUG(("B1",sizeof("BL")))
-			p1.y = p1.z + 1;
+			DEBUG(("LFT",sizeof("LFT")))
+			p1.x = p1.x - STEP_SIZE;
 		}
 		if (RMT_isRightPressed(cmd)) {
-			DEBUG(("B1",sizeof("BR")))
-			p1.y = p1.z - 1;
+			DEBUG(("RGT",sizeof("RGT")))
+			p1.x = p1.x + STEP_SIZE;
 		}
-		ma_doStep(p1);
+		// Hoch & Runter
+		if (RMT_isButton1Pressed(cmd)) {
+			DEBUG(("B1",sizeof("B1")))
+			p1.z = p1.z + STEP_SIZE;
+		}
+		if (RMT_isButton3Pressed(cmd)) {
+			DEBUG(("B3",sizeof("B3")))
+			p1.z = p1.z - STEP_SIZE;
+		}
+
+		ma_doStep(&p1);
 	}
 }
 
-void ma_doStep(DT_point* point) {
+void ma_doStep(const DT_point* const point) {
 	DT_byte config;
-	DT_point pTmp;
 
 	config = COM_CONF_LEFT | COM_CONF_RIGHT;
 	COM_sendPoint(COM_SLAVE1B, point, config);
@@ -120,7 +123,7 @@ void ma_doStep(DT_point* point) {
 	MV_point(&leg_l, point, false);
 	MV_point(&leg_r, point, false);
 
-	//COM_sendAction(COM_BRDCAST_ID);
+	COM_sendAction(COM_BRDCAST_ID);
 	MV_action(&leg_r, &leg_l);
 }
 
