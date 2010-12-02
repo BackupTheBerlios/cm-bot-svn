@@ -14,14 +14,44 @@
 #include "include/communication.h"
 #include "include/movement.h"
 #include "include/remote.h"
+#include <math.h>
 
 DT_leg leg_r, leg_l;
 DT_byte cpuID;
 
 #define STEP_SIZE	3
 
-DT_point ma_calcStartPoint(const DT_point* const v, DT_double z,
+DT_point ma_calcStartPoint(const DT_point* const v, DT_bool isDown,
 		const DT_byte side) {
+	/* TODO: neu
+	 * - alpha = tan(vec.y/vec.x)
+	 * - alpha prüfen ob zwischen 30, 15 oder 0 (und -30, -15)
+	 * - dementsprechend mit Hilfe von DH-Berechnung die Punkte
+	 *   berechnen für 30, 22.5, 15, 7.5 und 0
+	 */
+	DT_leg leg;
+	DT_double alpha = v->y != 0 ? atan(v->y / v->x) : M_PI / 2;
+	alpha = UTL_getDegree(alpha);
+	if (40 < alpha && alpha < 50)
+		alpha = 15;
+	else if (-5 < alpha && alpha < 5)
+		alpha = 0;
+	else if (80 < alpha && alpha < 100)
+		alpha = 30;
+	alpha = 0;
+	leg.hip.set_value = alpha;
+	leg.knee.set_value = isDown == true ? 45 : 0;
+	leg.hip.set_value = 90;
+
+	DT_double dh03[4][4];
+	KIN_calcDH(&leg, dh03);
+	DT_point p = UTL_getPointOfDH(dh03);
+	p.x += MV_DST_X;
+
+	if (side == COM_CONF_LEFT) {
+		p.x = -p.x;
+	}
+
 	// TODO Startpunkt für vektor im Arbeitsraum suchen
 	/*
 	 * - Arbeitsraum als Kugel erstellen
@@ -29,7 +59,21 @@ DT_point ma_calcStartPoint(const DT_point* const v, DT_double z,
 	 * - In definierter Abeitsfläche (Kreissegment) längste Sekante mit dem Vektor v suchen/berechnen und deren Schnittpunkte -> Startpunkt
 	 * - wie neues z fuer Punkt berechnen, da z Abhänhig von x und y
 	 */
-	DT_point p;
+
+	/*
+	 DT_point p;
+	 if (side == COM_CONF_LEFT) {
+	 p.x = -(103.4640 + MV_DST_X);
+	 p.y = 37.6578;
+	 p.z = z;
+
+	 } else {
+	 p.x = 103.4640 + MV_DST_X;
+	 p.y = 37.6578;
+	 p.z = z;
+
+	 }
+	 */
 	return p;
 }
 
@@ -44,7 +88,7 @@ DT_point ma_movePnt(DT_point* const p, const DT_point* const v) {
 
 DT_point ma_calcUnitVec(const DT_point* const v) {
 	// TODO Vektor auf gewuensche Schrittweite umrechnennach der
-	DT_point vUnt;
+	DT_point vUnt = *v;
 	return vUnt;
 }
 
@@ -56,37 +100,47 @@ DT_point ma_negateVec(const DT_point* const v) {
 	return vNeg;
 }
 
-void ma_switchLegs(DT_byte* side, DT_leg* leg_dwn, DT_leg* leg_up,
+void ma_switchLegs(DT_byte* side, DT_byte* master_dwn, DT_byte* master_up,
 		DT_byte* slave_dwn, DT_byte* slave_up) {
 	if (*side == COM_CONF_LEFT) {
 		*side = COM_CONF_RIGHT;
 
-		leg_dwn = &leg_r;
+		*master_dwn = COM_CONF_RIGHT;
 		*slave_dwn = COM_CONF_LEFT;
 
-		leg_up = &leg_l;
+		*master_up = COM_CONF_LEFT;
 		*slave_up = COM_CONF_RIGHT;
 	} else {
 		*side = COM_CONF_LEFT;
 
-		leg_dwn = &leg_l;
+		*master_dwn = COM_CONF_LEFT;
 		*slave_dwn = COM_CONF_RIGHT;
 
-		leg_up = &leg_r;
+		*master_up = COM_CONF_RIGHT;
 		*slave_up = COM_CONF_LEFT;
 	}
 }
 
-DT_point ma_getPntForCpuSide(const DT_point* const p, const DT_byte cpuId,
-		const DT_byte side) {
+DT_point ma_getPntForCpuSide(const DT_point* const p, const DT_byte cpuId) {
 	DT_point pTmp = *p;
 	if (cpuId == COM_SLAVE1B) {
+		pTmp.x = -p->x;
 		pTmp.y = p->y - MV_DST_Y;
 	}
 	if (cpuId == COM_SLAVE3F) {
+		pTmp.x = -p->x;
 		pTmp.y = p->y + MV_DST_Y;
 	}
 	return pTmp;
+}
+
+DT_leg * ma_getLegForSide(DT_byte side) {
+	if (side == COM_CONF_LEFT) {
+		return &leg_l;
+	} else {
+		return &leg_r;
+	}
+
 }
 
 void master();
@@ -143,51 +197,81 @@ void master() {
 
 	MV_doInitPosition(&leg_r, &leg_l);
 
-	DT_double zUp, zDwn;
+	//DT_double zUp = 101.1041;
+	//DT_double zDwn = -129.1041;
 	DT_point vDwn, vUp, pDwn, pUp, pTmp;
-	vDwn.x = 0;
-	vDwn.y = 0;
-	vDwn.z = 0;
 
 	vUp = ma_negateVec(&vDwn);
 	DT_bool resDwn = true, resUp = true;
 	DT_byte side = COM_CONF_LEFT;
-	DT_byte config, slaveDwn, slaveUp;
+	DT_byte config, masterDwn, masterUp, slaveDwn, slaveUp;
 	DT_leg leg_up, leg_dwn;
+	DT_bool firstStepOfMovement = true;
+
+	ma_switchLegs(&side, &masterDwn, &masterUp, &slaveDwn, &slaveUp);
+
+	leg_dwn = leg_r;
+	leg_up = leg_l;
 
 	while (1) {
 		XM_LED_ON
 
+		vDwn.x = 0;
+		vDwn.y = -5;
+		vDwn.z = 0;
+
+		vUp = ma_negateVec(&vDwn);
+
 		vUp = ma_calcUnitVec(&vUp);
 		vDwn = ma_calcUnitVec(&vDwn);
 
-		pDwn = ma_calcStartPoint(&vDwn, zDwn, slaveUp);
-		pUp = ma_calcStartPoint(&vUp, zUp, slaveDwn);
+		pDwn = ma_calcStartPoint(&vDwn, true, masterDwn);
+		pUp = ma_calcStartPoint(&vUp, false, masterUp);
 
 		do {
 			// TODO MV_point und COM_send auswerten ob Punkt angefahren werden kann
-			config = slaveDwn;
-			pTmp = ma_getPntForCpuSide(&pDwn, COM_SLAVE1B, slaveDwn);
+			config = slaveDwn | COM_CONF_GLOB;
+			pTmp = ma_getPntForCpuSide(&pDwn, COM_SLAVE1B);
 			resDwn = resDwn && COM_sendPoint(COM_SLAVE1B, &pTmp, config);
-			pTmp = ma_getPntForCpuSide(&pDwn, COM_SLAVE3F, slaveDwn);
+			pTmp = ma_getPntForCpuSide(&pDwn, COM_SLAVE3F);
 			resDwn = resDwn && COM_sendPoint(COM_SLAVE3F, &pTmp, config);
-			pTmp = ma_getPntForCpuSide(&pDwn, COM_MASTER, slaveUp);
+			pTmp = ma_getPntForCpuSide(&pDwn, COM_MASTER);
 			//resDwn = resDwn && MV_point(&leg_dwn, &pTmp, false);
-			MV_point(&leg_dwn, &pTmp, false);
+			MV_point(ma_getLegForSide(masterDwn), &pDwn, true);
 
-			config = slaveUp;
-			pTmp = ma_getPntForCpuSide(&pUp, COM_SLAVE1B, slaveUp);
+			if (firstStepOfMovement == true) {
+				firstStepOfMovement = false;
+				if (resUp && resDwn) {
+					MV_action(&leg_r, &leg_l);
+					COM_sendAction(COM_BRDCAST_ID);
+				}
+				UTL_wait(5);
+			}
+
+			config = slaveUp | COM_CONF_GLOB;
+			pTmp = ma_getPntForCpuSide(&pUp, COM_SLAVE1B);
 			resUp = resUp && COM_sendPoint(COM_SLAVE1B, &pTmp, config);
-			pTmp = ma_getPntForCpuSide(&pUp, COM_SLAVE3F, slaveUp);
+			pTmp = ma_getPntForCpuSide(&pUp, COM_SLAVE3F);
 			resUp = resUp && COM_sendPoint(COM_SLAVE3F, &pTmp, config);
-			pTmp = ma_getPntForCpuSide(&pUp, COM_MASTER, slaveDwn);
+			pTmp = ma_getPntForCpuSide(&pUp, COM_MASTER);
 			//resUp = resUp && MV_point(&leg_up, &pTmp, false);
-			MV_point(&leg_up, &pTmp, false);
+			MV_point(ma_getLegForSide(masterUp), &pUp, true);
+
+			if (resUp && resDwn) {
+				MV_action(&leg_r, &leg_l);
+				COM_sendAction(COM_BRDCAST_ID);
+			}
+
+			//UTL_wait(20);
 
 			pDwn = ma_movePnt(&pDwn, &vDwn);
 			pUp = ma_movePnt(&pUp, &vUp);
 		} while (resDwn && resUp);
-		ma_switchLegs(&side, &leg_dwn, &leg_up, &slaveDwn, &slaveUp);
+		DEBUG(("switch_leg",sizeof("switch_leg")))
+		ma_switchLegs(&side, &masterDwn, &masterUp, &slaveDwn, &slaveUp);
+		resDwn = true;
+		resUp = true;
+		firstStepOfMovement = true;
 		// TODO wechsle beine physisch
 
 		/*

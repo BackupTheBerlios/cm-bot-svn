@@ -138,12 +138,11 @@ void KIN_calcDH(const DT_leg* const leg, DT_double** dh03) {
  *
  * \return	Bein mit den errechneten Soll-Winkel für hip, knee und foot
  */
-void KIN_calcServos(const DT_point* const p, DT_leg* const leg) {
+DT_bool KIN_calcServos(const DT_point* const p, DT_leg* const leg) {
 	DT_double z = p->z - DIST_DZ;
 	DT_double h, h2, h3;
 	DT_double hip, knee, foot;
 	DT_double alpha, beta, gamma;
-
 	// STEP 1 (without dummy-axis)
 	// angle for hip axis in x-y-plane
 	h = sqrt(p->x * p->x + p->y * p->y);
@@ -176,9 +175,14 @@ void KIN_calcServos(const DT_point* const p, DT_leg* const leg) {
 		 */
 	}
 
+	if(hip!=hip || knee != knee || foot!=foot)
+		return false;
+
 	leg->hip.set_value = hip;
 	leg->knee.set_value = knee;
 	leg->foot.set_value = foot;
+
+	return true;
 }
 
 /**

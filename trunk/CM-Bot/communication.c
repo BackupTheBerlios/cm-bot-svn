@@ -63,9 +63,11 @@ DT_byte COM_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 	const DT_byte tempHead = buffer->RX_Head;
 	const DT_byte tempTail = buffer->RX_Tail;
 
+	/*
 	DEBUG_BYTE((&tempTail,1))
 	DEBUG_BYTE((&tempHead,1))
 	DEBUG_BYTE((buffer->RX, 127))
+	*/
 
 	// Init-Fehlerbytes ausfiltern
 	if (buffer->RX[tempTail] != 0xFF && (tempHead != tempTail)) {

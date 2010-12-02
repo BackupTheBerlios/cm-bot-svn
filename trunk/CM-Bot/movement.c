@@ -89,33 +89,41 @@ void MV_slavePoint(DT_leg* const leg_r, DT_leg* const leg_l,
 		const DT_byte* const result, DT_size len) {
 	DT_point p = COM_getPointFromPacket(result);
 	DT_bool isGlobal = COM_isGlobal(result);
+	DT_bool ret;
 
 	if (COM_isLeftLeg(result)) {
-		MV_point(leg_l, &p, isGlobal);
+		ret = MV_point(leg_l, &p, isGlobal);
 	}
 	if (COM_isRightLeg(result)) {
-		MV_point(leg_r, &p, isGlobal);
+		ret = MV_point(leg_r, &p, isGlobal);
 	}
-
-	COM_sendACK(COM_MASTER);
+	if(ret == true){
+		COM_sendACK(COM_MASTER);
+	}else{
+		COM_sendNAK(COM_MASTER, COM_ERR_POINT_OUT_OF_BOUNDS);
+	}
 }
 
-
-void MV_point(DT_leg* const leg, const DT_point* const point, DT_bool isGlobal) {
+DT_bool MV_point(DT_leg* const leg, const DT_point* const point, DT_bool isGlobal) {
+	DT_bool ret;
 	if (isGlobal == true) {
 		DT_point pLocal = KIN_calcLocalPoint(point, &leg->trans);
-		KIN_calcServos(&pLocal, leg);
+		ret = KIN_calcServos(&pLocal, leg);
 	} else
-		KIN_calcServos(point, leg);
+		ret = KIN_calcServos(point, leg);
 
-	leg->hip.set_value = UTL_getDegree(leg->hip.set_value);
-	leg->knee.set_value = UTL_getDegree(leg->knee.set_value);
-	leg->foot.set_value = UTL_getDegree(leg->foot.set_value);
+	if (ret == true) {
+		leg->hip.set_value = UTL_getDegree(leg->hip.set_value);
+		leg->knee.set_value = UTL_getDegree(leg->knee.set_value);
+		leg->foot.set_value = UTL_getDegree(leg->foot.set_value);
 
-
-	DNX_setAngle(leg->hip.id, leg->hip.set_value, true);
-	DNX_setAngle(leg->knee.id, leg->knee.set_value, true);
-	DNX_setAngle(leg->foot.id, leg->foot.set_value, true);
+		DNX_setAngle(leg->hip.id, leg->hip.set_value, true);
+		DNX_setAngle(leg->knee.id, leg->knee.set_value, true);
+		DNX_setAngle(leg->foot.id, leg->foot.set_value, true);
+		return true;
+	} else {
+		return false;
+	}
 }
 
 void MV_doInitPosition(DT_leg* const leg_r, DT_leg* const leg_l) {
@@ -225,4 +233,5 @@ void MV_doInitPosition(DT_leg* const leg_r, DT_leg* const leg_l) {
 
 	DEBUG(("ma_int_pos_ok",sizeof("ma_int_pos_ok")))
 	XM_LED_ON
+	UTL_wait(40);
 }
