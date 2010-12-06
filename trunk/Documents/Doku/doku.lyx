@@ -123,7 +123,7 @@ Fakultät Informatik, Mathematik und Naturwissenschaften
 \begin_inset VSpace 2cm
 \end_inset
 
-Prüfungsprojekt für das Wahlpflicht-Modul Robotik
+Prüfungsprojekt für das Wahlpflichtmodul Robotik
 \end_layout
 
 \begin_layout Title
@@ -197,19 +197,54 @@ LatexCommand tableofcontents
 \end_layout
 
 \begin_layout Chapter
-Einleitung
+Aufgabenstellung
 \end_layout
 
-\begin_layout Section
-Motivation & Zielsetzung
+\begin_layout Standard
+Als Praxisaufgabe für das Wahlpflichtmodul Robotik an der HTWK Leipzig ist
+ ein Hexapod zu entwickeln.
+\end_layout
+
+\begin_layout Standard
+Für jedes Beinpaar dieses sechsbeinigen Roboters ist ein eigener Controller
+ zu verwenden.
+ Die Controller sollen über eine geeignete Kommunikationsstruktur Daten
+ austauschen können.
+ Außerdem ist die direkte und inverse Kinematik zu lösen.
+ Unter Nutzung der zuvor erarbeiteten Erkenntnisse ist abschließend ein
+ Laufalgorithmus zu implementieren.
 \end_layout
 
 \begin_layout Chapter
 Vorbetrachtung
 \end_layout
 
+\begin_layout Standard
+TODO
+\end_layout
+
 \begin_layout Itemize
-Was ist alles zu machen! 
+Projekt auf BerliOS
+\end_layout
+
+\begin_layout Itemize
+Servos/ Robokit
+\end_layout
+
+\begin_layout Itemize
+Controller
+\end_layout
+
+\begin_layout Itemize
+Hardware
+\end_layout
+
+\begin_layout Itemize
+Kommunikationsstruktur
+\end_layout
+
+\begin_layout Itemize
+Servosanbindung
 \end_layout
 
 \begin_layout Chapter
@@ -225,7 +260,15 @@ Netzteil
 \end_layout
 
 \begin_layout Itemize
-...
+Kommunikationsstruktur
+\end_layout
+
+\begin_layout Itemize
+Maße Chassis
+\end_layout
+
+\begin_layout Itemize
+EAGLE-Schaltungen
 \end_layout
 
 \begin_layout Chapter
@@ -233,20 +276,14 @@ Kinematik
 \end_layout
 
 \begin_layout Section
-
-\lang english
 Direkte Kinematik
 \end_layout
 
 \begin_layout Subsection
-
-\lang english
 Denavit-Hartenberg-Parameter
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Tabular
 <lyxtabular version="3" rows="5" columns="4">
 <features>
@@ -268,8 +305,6 @@ Denavit-Hartenberg-Parameter
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Formula $G_{1}$
 \end_inset
 
@@ -282,8 +317,6 @@ Denavit-Hartenberg-Parameter
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Formula $G_{2}$
 \end_inset
 
@@ -296,8 +329,6 @@ Denavit-Hartenberg-Parameter
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Formula $G_{3}$
 \end_inset
 
@@ -312,8 +343,6 @@ Denavit-Hartenberg-Parameter
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Formula $l$
 \end_inset
 
@@ -326,8 +355,6 @@ Denavit-Hartenberg-Parameter
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Formula $-14$
 \end_inset
 
@@ -340,8 +367,6 @@ Denavit-Hartenberg-Parameter
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Formula $0$
 \end_inset
 
@@ -354,8 +379,6 @@ Denavit-Hartenberg-Parameter
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Formula $0$
 \end_inset
 
@@ -370,8 +393,6 @@ Denavit-Hartenberg-Parameter
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Formula $a$
 \end_inset
 
@@ -384,8 +405,6 @@ Denavit-Hartenberg-Parameter
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Formula $50$
 \end_inset
 
@@ -398,8 +417,6 @@ Denavit-Hartenberg-Parameter
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Formula $85$
 \end_inset
 
@@ -412,8 +429,6 @@ Denavit-Hartenberg-Parameter
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Formula $55$
 \end_inset
 
@@ -428,8 +443,6 @@ Denavit-Hartenberg-Parameter
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Formula $\alpha$
 \end_inset
 
@@ -442,8 +455,6 @@ Denavit-Hartenberg-Parameter
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Formula $-90$
 \end_inset
 
@@ -456,8 +467,6 @@ Denavit-Hartenberg-Parameter
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Formula $0$
 \end_inset
 
@@ -470,8 +479,6 @@ Denavit-Hartenberg-Parameter
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Formula $0$
 \end_inset
 
@@ -486,8 +493,6 @@ Denavit-Hartenberg-Parameter
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Formula $\vartheta$
 \end_inset
 
@@ -500,8 +505,6 @@ Denavit-Hartenberg-Parameter
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Formula $v$
 \end_inset
 
@@ -514,8 +517,6 @@ Denavit-Hartenberg-Parameter
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Formula $v$
 \end_inset
 
@@ -528,8 +529,6 @@ Denavit-Hartenberg-Parameter
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Formula $v$
 \end_inset
 
@@ -547,14 +546,10 @@ Denavit-Hartenberg-Parameter
 \end_layout
 
 \begin_layout Subsection
-
-\lang english
 Denavit-Hartenberg-Matrix
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Aus den Denavit-Hartenberg-Parametern ergeben sich die folgenden Matrizen:
 \begin_inset Newline newline
 \end_inset
@@ -563,8 +558,6 @@ Aus den Denavit-Hartenberg-Parametern ergeben sich die folgenden Matrizen:
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula $D_{01}=\left(\begin{array}{cccc}
 \cos\!\left(\vartheta_{1}\right) & 0 & -\sin\!\left(\vartheta_{1}\right) & 50\,\cos\!\left(\vartheta_{1}\right)\\
 \sin\!\left(\vartheta_{1}\right) & 0 & \cos\!\left(\vartheta_{1}\right) & 50\,\sin\!\left(\vartheta_{1}\right)\\
@@ -576,8 +569,6 @@ Aus den Denavit-Hartenberg-Parametern ergeben sich die folgenden Matrizen:
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula $D_{12}=\left(\begin{array}{cccc}
 \cos\!\left(\vartheta_{2}\right) & -\sin\!\left(\vartheta_{2}\right) & 0 & 85\,\cos\!\left(\vartheta_{2}\right)\\
 \sin\!\left(\vartheta_{2}\right) & \cos\!\left(\vartheta_{2}\right) & 0 & 85\,\sin\!\left(\vartheta_{2}\right)\\
@@ -589,8 +580,6 @@ Aus den Denavit-Hartenberg-Parametern ergeben sich die folgenden Matrizen:
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula $D_{12}=\left(\begin{array}{cccc}
 \cos\!\left(\vartheta_{3}\right) & -\sin\!\left(\vartheta_{3}\right) & 0 & 55\,\cos\!\left(\vartheta_{3}\right)\\
 \sin\!\left(\vartheta_{3}\right) & \cos\!\left(\vartheta_{3}\right) & 0 & 55\,\sin\!\left(\vartheta_{3}\right)\\
@@ -602,8 +591,6 @@ Aus den Denavit-Hartenberg-Parametern ergeben sich die folgenden Matrizen:
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset ERT
 status open
 
@@ -734,8 +721,6 @@ c\!\left(\vartheta_{2}\right)\, c\!\left(\vartheta_{3}\right)\, s\!\left(\varthe
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset ERT
 status open
 
@@ -752,8 +737,6 @@ end{landscape}
 \end_layout
 
 \begin_layout Section
-
-\lang english
 Inverse Kinematik
 \end_layout
 
@@ -1308,7 +1291,7 @@ status open
 
 \begin_layout Plain Layout
 
-movment4Points.c
+movement4Points.c
 \end_layout
 
 \end_inset
