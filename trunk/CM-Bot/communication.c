@@ -206,6 +206,18 @@ DT_bool COM_isGlobal(const DT_byte* const result){
 	return (COM_CONF_GLOB == (result[5] & COM_CONF_GLOB));
 }
 
+DT_bool COM_isHip(const DT_byte* const result){
+	return (COM_CONF_HIP == (result[5] & COM_CONF_HIP));
+}
+
+DT_bool COM_isKnee(const DT_byte* const result){
+	return (COM_CONF_KNEE == (result[5] & COM_CONF_KNEE));
+}
+
+DT_bool COM_isFoot(const DT_byte* const result){
+	return (COM_CONF_FOOT == (result[5] & COM_CONF_FOOT));
+}
+
 DT_bool COM_sendPoint(DT_byte cpuID, const DT_point* const point, const DT_byte config) {
 	DEBUG(("pre_snd_pnt",sizeof("pre_snd_pnt")))
 	// Broadcast bei requestStatus nicht möglich
@@ -244,6 +256,41 @@ DT_point COM_getPointFromPacket(const DT_byte* const result) {
 	p.z = COM_byteArrayToDouble(&result[6 + 2 * sizeof(DT_double)]);
 
 	return p;
+}
+
+DT_bool COM_sendAngle(DT_byte cpuID, const DT_double angle, const DT_byte config) {
+	DEBUG(("pre_snd_pnt",sizeof("pre_snd_pnt")))
+	// Broadcast bei requestStatus nicht möglich
+	if (cpuID == COM_BRDCAST_ID)
+		return 0;
+	DT_byte result[DT_RESULT_BUFFER_SIZE];
+	DT_size len = 7 + sizeof(DT_double);
+	DT_byte packet[len];
+
+	// Angle auf ByteArray casten
+	COM_doubleToByteArray(angle, &packet[6]);
+
+	packet[0] = COM_START_BYTE;
+	packet[1] = COM_START_BYTE;
+	packet[2] = cpuID;
+	packet[3] = len - 4; // length
+	packet[4] = COM_ANGLE;
+	packet[5] = config;
+
+	DEBUG(("aft_snd_pnt",sizeof("aft_snd_pnt")))
+	len = COM_send(packet, len, result, true);
+	if ((len > 0) && (result[4] == COM_ACK))
+		return true;
+	else
+		return false;
+}
+
+DT_double COM_getAngleFromPacket(const DT_byte* const result) {
+	DT_double angle;
+
+	angle = COM_byteArrayToDouble(&result[6]);
+
+	return angle;
 }
 
 void COM_sendAction(DT_byte cpuID) {

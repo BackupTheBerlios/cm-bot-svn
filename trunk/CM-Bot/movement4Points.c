@@ -4,7 +4,7 @@
  *  \brief	Algorithmus fuer das Vorwaertslaufen ueber 4 Punkte.
  */
 
-#define TEST_OFF TEST
+#define TEST_ON TEST
 #ifdef TEST_ON
 
 #include "include/kinematics.h"
@@ -18,10 +18,38 @@ DT_leg leg_r, leg_l;
 DT_byte cpuID;
 
 void master();
-void ma_setPoints(DT_point* const , DT_point* const , DT_point* const ,
-		DT_point* const );
-void ma_prepareStep(DT_point* const , DT_point* const , const DT_bool);
-void ma_doStep(DT_point* const , DT_point* const , const DT_bool);
+
+DT_leg * ma_getLegForSide(DT_byte side) {
+	if (side == COM_CONF_LEFT) {
+		return &leg_l;
+	} else {
+		return &leg_r;
+	}
+}
+
+void ma_setPoints(DT_point* const pFntDwn, DT_point* const pFntUp,
+		DT_point* const pBckUp, DT_point* const pBckDwn) {
+	XM_LED_OFF
+	// Fix-Koordinaten fuer Master, Berechnung fuer Slaves ueber Offset
+	pFntUp->x = 150.59391 + MV_DST_X;
+	pFntUp->y = 86.94544;
+	pFntUp->z = -52.89087;
+
+	pFntDwn->x = 95.35293 + MV_DST_X;
+	pFntDwn->y = 55.05204;
+	pFntDwn->z = -129.10408;
+
+	pBckUp->x = 150.59391 + MV_DST_X;
+	pBckUp->y = -86.94544;
+	pBckUp->z = -52.89087;
+
+	pBckDwn->x = 95.35293 + MV_DST_X;
+	pBckDwn->y = -55.05204;
+	pBckDwn->z = -129.10408;
+
+	DEBUG (("ma_set_pnt",sizeof("ma_set_pnt")))
+	XM_LED_ON
+}
 
 int main() {
 	XM_init_cpu();
@@ -67,37 +95,76 @@ void master() {
 	MV_masterCheckAlive();
 
 	DEBUG(("ma_int_pnt",sizeof("ma_int_pnt")))
-	DT_point pFntDwn, pFntUp, pBckUp, pBckDwn;
+	DT_point pFntDwn, pFntUp, pBckUp, pBckDwn, pTmp;
 	ma_setPoints(&pFntDwn, &pFntUp, &pBckUp, &pBckDwn);
+
+	DT_byte side = COM_CONF_LEFT;
+	DT_byte config, masterDwn, masterUp, slaveDwn, slaveUp;
+	MV_switchLegs(&side, &masterDwn, &masterUp, &slaveDwn, &slaveUp);
 
 	DT_byte state = 0;
 
-	// Automat: 0(->1->2->3->4)+
+	// Automat: 0(->1->2)+
 	while (1) {
 		XM_LED_ON
 		switch (state) {
 		case 0:
 			DEBUG(("ma_int_pos",sizeof("ma_int_pos")))
 			MV_doInitPosition(&leg_r, &leg_l);
-			UTL_wait(40);
+			UTL_wait(30);
 			state = 1;
 			break;
 		case 1:
-			ma_prepareStep(&pFntDwn, &pBckUp, false);
+			UTL_wait(5);
+
+			pTmp = MV_getPntForCpuSide(&pFntDwn, COM_MASTER, masterDwn);
+			MV_point(ma_getLegForSide(masterDwn), &pTmp, true);
+			config = slaveDwn | COM_CONF_GLOB;
+			pTmp = MV_getPntForCpuSide(&pFntDwn, COM_SLAVE1B, slaveDwn);
+			COM_sendPoint(COM_SLAVE1B, &pTmp, config);
+			pTmp = MV_getPntForCpuSide(&pFntDwn, COM_SLAVE3F, slaveDwn);
+			COM_sendPoint(COM_SLAVE3F, &pTmp, config);
+
+			MV_action(&leg_r, &leg_l);
+			COM_sendAction(COM_BRDCAST_ID);
+
+			UTL_wait(5);
+
+			pTmp = MV_getPntForCpuSide(&pBckUp, COM_MASTER, masterUp);
+			MV_point(ma_getLegForSide(masterUp), &pTmp, true);
+			config = slaveUp | COM_CONF_GLOB;
+			pTmp = MV_getPntForCpuSide(&pBckUp, COM_SLAVE1B, slaveUp);
+			COM_sendPoint(COM_SLAVE1B, &pTmp, config);
+			pTmp = MV_getPntForCpuSide(&pBckUp, COM_SLAVE3F, slaveUp);
+			COM_sendPoint(COM_SLAVE3F, &pTmp, config);
+
+			MV_action(&leg_r, &leg_l);
+			COM_sendAction(COM_BRDCAST_ID);
+
 			state = 2;
 			break;
 		case 2:
-			ma_doStep(&pBckDwn, &pFntUp, false);
-			UTL_wait(5);
-			state = 3;
-			break;
-		case 3:
-			ma_prepareStep(&pFntDwn, &pBckUp, true);
-			state = 4;
-			break;
-		case 4:
-			ma_doStep(&pBckDwn, &pFntUp, true);
-			UTL_wait(5);
+			pTmp = MV_getPntForCpuSide(&pBckDwn, COM_MASTER, masterDwn);
+			MV_point(ma_getLegForSide(masterDwn), &pTmp, true);
+			config = slaveDwn | COM_CONF_GLOB;
+			pTmp = MV_getPntForCpuSide(&pBckDwn, COM_SLAVE1B, slaveDwn);
+			COM_sendPoint(COM_SLAVE1B, &pTmp, config);
+			pTmp = MV_getPntForCpuSide(&pBckDwn, COM_SLAVE3F, slaveDwn);
+			COM_sendPoint(COM_SLAVE3F, &pTmp, config);
+
+			pTmp = MV_getPntForCpuSide(&pFntUp, COM_MASTER, masterUp);
+			MV_point(ma_getLegForSide(masterUp), &pTmp, true);
+			config = slaveUp | COM_CONF_GLOB;
+			pTmp = MV_getPntForCpuSide(&pFntUp, COM_SLAVE1B, slaveUp);
+			COM_sendPoint(COM_SLAVE1B, &pTmp, config);
+			pTmp = MV_getPntForCpuSide(&pFntUp, COM_SLAVE3F, slaveUp);
+			COM_sendPoint(COM_SLAVE3F, &pTmp, config);
+
+			MV_action(&leg_r, &leg_l);
+			COM_sendAction(COM_BRDCAST_ID);
+
+			MV_switchLegs(&side, &masterDwn, &masterUp, &slaveDwn, &slaveUp);
+
 			state = 1;
 			break;
 		default:
@@ -106,167 +173,5 @@ void master() {
 		}
 	}
 }
-
-void ma_prepareStep(DT_point* const pDwn, DT_point* const pUp, DT_bool right) {
-	DT_byte config;
-	DT_point pTmp;
-	// F_R, B_R, M_L: vorne unten
-	pTmp = *pDwn;
-	if (right) {
-		pTmp.x = -pDwn->x;
-		config = COM_CONF_LEFT | COM_CONF_GLOB;
-	} else {
-		config = COM_CONF_RIGHT | COM_CONF_GLOB;
-	}
-	pTmp.y += MV_DST_Y;
-	COM_sendPoint(COM_SLAVE3F, &pTmp, config);
-
-	pTmp = *pDwn;
-	if (right) {
-		pTmp.x = -pDwn->x;
-		config = COM_CONF_LEFT | COM_CONF_GLOB;
-	} else {
-		config = COM_CONF_RIGHT | COM_CONF_GLOB;
-	}
-	pTmp.y -= MV_DST_Y;
-	COM_sendPoint(COM_SLAVE1B, &pTmp, config);
-
-	pTmp = *pDwn;
-	if (right) {
-		MV_point(&leg_r, &pTmp, true);
-	} else {
-		pTmp.x = -pDwn->x;
-		MV_point(&leg_l, &pTmp, true);
-	}
-
-	COM_sendAction(COM_BRDCAST_ID);
-	MV_action(&leg_r, &leg_l);
-
-	UTL_wait(10);
-
-	// F_L, B_L, M_R: hinten oben
-	pTmp = *pUp;
-	if (right) {
-		config = COM_CONF_RIGHT | COM_CONF_GLOB;
-	} else {
-		config = COM_CONF_LEFT | COM_CONF_GLOB;
-		pTmp.x = -pUp->x;
-	}
-	pTmp.y += MV_DST_Y;
-
-	COM_sendPoint(COM_SLAVE3F, &pTmp, config);
-
-	pTmp = *pUp;
-	if (right) {
-		config = COM_CONF_RIGHT | COM_CONF_GLOB;
-	} else {
-		config = COM_CONF_LEFT | COM_CONF_GLOB;
-		pTmp.x = -pUp->x;
-	}
-	pTmp.y -= MV_DST_Y;
-	COM_sendPoint(COM_SLAVE1B, &pTmp, config);
-
-	pTmp = *pUp;
-	if (right) {
-		pTmp.x = -pDwn->x;
-		MV_point(&leg_l, &pTmp, true);
-	} else {
-		MV_point(&leg_r, &pTmp, true);
-	}
-
-	COM_sendAction(COM_BRDCAST_ID);
-	MV_action(&leg_r, &leg_l);
-}
-
-void ma_doStep(DT_point* const pDwn, DT_point* const pUp, DT_bool right) {
-	DT_byte config;
-	DT_point pTmp;
-	// F_R, B_R, M_L: vorne unten
-	pTmp = *pDwn;
-	if (right) {
-		pTmp.x = -pDwn->x;
-		config = COM_CONF_LEFT | COM_CONF_GLOB;
-	} else {
-		config = COM_CONF_RIGHT | COM_CONF_GLOB;
-	}
-	pTmp.y += MV_DST_Y;
-	COM_sendPoint(COM_SLAVE3F, &pTmp, config);
-
-	pTmp = *pDwn;
-	if (right) {
-		pTmp.x = -pDwn->x;
-		config = COM_CONF_LEFT | COM_CONF_GLOB;
-	} else {
-		config = COM_CONF_RIGHT | COM_CONF_GLOB;
-	}
-	pTmp.y -= MV_DST_Y;
-	COM_sendPoint(COM_SLAVE1B, &pTmp, config);
-
-	pTmp = *pDwn;
-	if (right) {
-		MV_point(&leg_r, &pTmp, true);
-	} else {
-		pTmp.x = -pDwn->x;
-		MV_point(&leg_l, &pTmp, true);
-	}
-
-	// F_L, B_L, M_R: hinten oben
-	pTmp = *pUp;
-	if (right) {
-		config = COM_CONF_RIGHT | COM_CONF_GLOB;
-	} else {
-		config = COM_CONF_LEFT | COM_CONF_GLOB;
-		pTmp.x = -pUp->x;
-	}
-	pTmp.y += MV_DST_Y;
-
-	COM_sendPoint(COM_SLAVE3F, &pTmp, config);
-
-	pTmp = *pUp;
-	if (right) {
-		config = COM_CONF_RIGHT | COM_CONF_GLOB;
-	} else {
-		config = COM_CONF_LEFT | COM_CONF_GLOB;
-		pTmp.x = -pUp->x;
-	}
-	pTmp.y -= MV_DST_Y;
-	COM_sendPoint(COM_SLAVE1B, &pTmp, config);
-
-	pTmp = *pUp;
-	if (right) {
-		pTmp.x = -pDwn->x;
-		MV_point(&leg_l, &pTmp, true);
-	} else {
-		MV_point(&leg_r, &pTmp, true);
-	}
-
-	COM_sendAction(COM_BRDCAST_ID);
-	MV_action(&leg_r, &leg_l);
-}
-
-void ma_setPoints(DT_point* const pFntDwn, DT_point* const pFntUp,
-		DT_point* const pBckUp, DT_point* const pBckDwn) {
-	XM_LED_OFF
-	// Fix-Koordinaten fuer Master, Berechnung fuer Slaves ueber Offset
-	pFntUp->x = 103.4640 + MV_DST_X;
-	pFntUp->y = 37.6578;
-	pFntUp->z = 101.1041;
-
-	pFntDwn->x = 103.4640 + MV_DST_X;
-	pFntDwn->y = 37.6578;
-	pFntDwn->z = -129.1041;
-
-	pBckUp->x = 103.4640 + MV_DST_X;
-	pBckUp->y = -37.6578;
-	pBckUp->z = 101.1041;
-
-	pBckDwn->x = 103.4640 + MV_DST_X;
-	pBckDwn->y = -37.6578;
-	pBckDwn->z = -129.1041;
-
-	DEBUG (("ma_set_pnt",sizeof("ma_set_pnt")))
-	XM_LED_ON
-}
-
 
 #endif /* TEST_ON */

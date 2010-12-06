@@ -4,7 +4,7 @@
  *  \brief	Algorithmus fuer das Vorwaertslaufen ueber 4 Punkte.
  */
 
-#define TEST_ON TEST
+#define TEST_OFF TEST
 #ifdef TEST_ON
 
 #include "include/kinematics.h"
@@ -44,8 +44,9 @@ DT_point ma_calcStartPoint(const DT_point* const v, DT_bool isDown,
 	leg.hip.set_value = 90;
 
 	DT_double dh03[4][4];
-	KIN_calcDH(&leg, dh03);
-	DT_point p = UTL_getPointOfDH(dh03);
+	dh03[0][1] = 0;
+	KIN_calcDH(&leg, &dh03[0]);
+	DT_point p = UTL_getPointOfDH(&dh03[0]);
 	p.x += MV_DST_X;
 
 	if (side == COM_CONF_LEFT) {
