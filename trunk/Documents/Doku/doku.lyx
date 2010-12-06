@@ -1,11 +1,11 @@
-#LyX 1.6.7 created this file. For more info see http://www.lyx.org/
+#LyX 1.6.5 created this file. For more info see http://www.lyx.org/
 \lyxformat 345
 \begin_document
 \begin_header
 \textclass scrreprt
 \begin_preamble
 % Font für PDF-Problem
-\usepackage{ae} %<-- keine korrekte Silbentrennung!
+%\usepackage{ae} %<-- keine korrekte Silbentrennung!
 %cm-super installieren
 % Seitenränder
 \usepackage{geometry}
@@ -28,8 +28,9 @@
 \usepackage{color}
 \usepackage{marvosym}
 \definecolor{light-gray}{gray}{0.85}
-%\lstset{frame=no, basicstyle=\ttfamily\small, tabsize=2, backgroundcolor=\color{light-gray}, breaklines=true, breakatwhitespace=true,prebreak={\Righttorque}}
+\lstset{frame=no, basicstyle=\ttfamily\small, tabsize=2, backgroundcolor=\color{light-gray}, breaklines=true, breakatwhitespace=true,prebreak={\Righttorque}}
 % Querverweise
+\usepackage{varioref}
 \usepackage{prettyref}
 \newrefformat{fig}{Abbildung~\vref{#1}}
 \newrefformat{cha}{Kapitel~\vref{#1}}
@@ -58,6 +59,7 @@
 \paperfontsize default
 \spacing single
 \use_hyperref true
+\pdf_title "Dokumentation des CM-Bot"
 \pdf_bookmarks true
 \pdf_bookmarksnumbered true
 \pdf_bookmarksopen false
@@ -1129,6 +1131,225 @@ Entfernung
 \end_inset
 
 
+\end_layout
+
+\begin_layout Chapter
+Programmierung
+\end_layout
+
+\begin_layout Standard
+In diesem Kapitel wird die Programmierung des Roboters beschrieben.
+ Zu Beginn wird kurz die erstellte API vorgestellt.
+ Anschließend wird die Umsetzung eines einfachen Lauf\SpecialChar \-
+algo\SpecialChar \-
+rithmus erläutert.
+\end_layout
+
+\begin_layout Section
+API
+\end_layout
+
+\begin_layout Standard
+Eine genaue Beschreibung der Dateien und deren Funktionen kann aus den Sourcecod
+e mit Hilfe des Tools Doxygen
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.doxygen.org
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ erstellt werden.
+ Der Sourcecode sowie die aktuelle API im HTML-Format ist im BerliOS-Projekt
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://developer.berlios.de/projects/cm-bot/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ verfügbar.
+\end_layout
+
+\begin_layout Description
+communication.h Methoden zur Kommunikation der CPUs
+\end_layout
+
+\begin_layout Description
+datatypes.h Abstraktion der elementaren Datentypen und Definition von benötigten
+ Strukturen
+\end_layout
+
+\begin_layout Description
+dynamixel.h Methoden und Protokoll zur Ansteurung der Dynamixel AX-12
+\end_layout
+
+\begin_layout Description
+kinematics.h Lösungsmethoden für inverse sowie direkte Kinematik
+\end_layout
+
+\begin_layout Description
+movement.h Allgemeine Methoden für den Ablauf eines Laufalgorithmus
+\end_layout
+
+\begin_layout Description
+remote.h Methoden für die Nutzung des Gamepads
+\end_layout
+
+\begin_layout Description
+usart_driver.h Erweiterter Beispieltreiber von Atmel für die USART
+\end_layout
+
+\begin_layout Description
+utils.h Hilfsmethoden zur Ausgabe und Umrechnung
+\end_layout
+
+\begin_layout Description
+xmega.h Spezifische Methoden zur Ansteuerung und Initialisierung der Komponenten
+ des Mikrocontrollers ATXmega
+\end_layout
+
+\begin_layout Section
+4-Punkte-Lauf
+\end_layout
+
+\begin_layout Standard
+Der 4-Punkte-Lauf ist ein sehr einfacher Laufalgorithmus, der den Roboter
+ ein Geradeauslaufen durch das Anfahren von vier verschiedenen Koordinaten
+ ermöglicht.
+ Bei einem Hexapod müssen sich zu jedem Zeitpunkt mindestens drei Beine
+ und mindestens eins auf jeder Seite auf dem Boden befinden.
+\end_layout
+
+\begin_layout Standard
+Jedes der sechs Beine benötigt entweder vier Roboterkoorinaten oder vier
+ Weltkoordinaten, welche koordiniert angefahren werden müssen.
+ In 
+\begin_inset CommandInset ref
+LatexCommand prettyref
+reference "fig:movement4Points"
+
+\end_inset
+
+ ist diese Bewegung verdeutlicht.
+ Alle Beine mit einem ausgemalten schwarzen Kreis befinden sich auf dem
+ Boden und alle anderen haben keinen Bodenkontakt.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename movement4Points.eps
+	width 90text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Darstellung einer Laufbewegung in vier aufeinander folgenden Schritten.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:movement4Points"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In der konkreten Implementierung, 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+movment4Points.c
+\end_layout
+
+\end_inset
+
+, wird mit Weltkoordinaten gearbeitet.
+ Der Nullpunkt des Weltkoordinatensystems ist die Mitte des Chassis und
+ ein Punkt dieses Systems wird im folgendem als globaler Punkt bezeichnet.
+ Jedes Bein besitzt sein eigenes Roboterkoordinatensystem, dessen Punkte
+ als lokale Punkte bezeichnet werden.
+ Aus diesen lokale Punkten können die Roboterkoordinaten, dass heisst die
+ anzufahrenden Gelenkwinkel für dieses Bein, errechnet werden.
+\end_layout
+
+\begin_layout Standard
+Theoretisch könnte nur mit vier Roboterkoordianten geareitet werden, da
+ für jedes Bein die selben Roboterkooridnaten genutzt werden könnten.
+ In der praktischen Umsetzung werden jedoch globale Punkte genutzt, um die
+ Transformation dieser in lokale Punkte und die nötige Berechnung der Roboterkoo
+rdinaten zu demonstrieren.
+\end_layout
+
+\begin_layout Standard
+Damit nicht für jedes Bein vier Weltkoordinaten ermittelt werden müssen,
+ wird das rechte mittlere Bein als Basis genutzt.
+ Aus den globalen Punkten für dieses Bein können durch Addition bzw.
+ Subtraktion der bekannten Abstände in der x-y-Ebene der Beine zueinander
+ die globalen Punkte für jedes weitere Bein errechnet werden.
+ Diese globalen Punkte werden durch einen CPU, den Master, in einer bestimmten
+ Reihenfolge an die anderen CPUs, die Slaves, gesendet.
+ Diese Punkte müssen nun zuerst von allen CPUs in lokale Punkte für das
+ bestimmte Bein transformiert werden, um anschließend aus diesen die Roboterkoor
+dinaten zu berechnen und die geforderte Position anfahren zu können.
+\end_layout
+
+\begin_layout Standard
+Der Master steuert hierbei die gesamte Bewegung, indem er jedem Beinpaar
+ die korrekten Punkte in einer festen Reihenfolge zuteilt.
+ Die Slaves haben in dieser Implementierung keine Kenntnis über den verwendeten
+ Laufalgorithmus, da sie nur die empfangenen Befehle des Masters ausführen.
+ Somit kann auf allen Slaves das selbe Programm verwendet werden und durch
+ eine Umprogrammierung des Masters, kann der Laufalgorithmus geändert werden.
 \end_layout
 
 \end_body
