@@ -26,33 +26,27 @@ DT_double getRandomNumber(DT_int, DT_int);
 void fitnessproportionalSelection(const DT_individuum * const , DT_int*,
 		const DT_int, const DT_int);
 void recombination(const DT_individuum const *, DT_individuum * const ,
-		const DT_int const *, const DT_int, const DT_int);
+		const DT_int const *, const DT_int, const DT_int, const DT_double);
 void uniformCrossover(const DT_individuum const *, const DT_individuum const *,
 		DT_individuum *, DT_individuum *);
-void mutation(DT_individuum *, const DT_int);
+void mutation(DT_individuum *, const DT_int, const DT_double);
 void gleichverteilte_reellwertige_mutation(DT_point *, const DT_double);
 void bestSelection(DT_individuum * const , DT_individuum *, const DT_int,
 		const DT_int);
 void getScores(DT_vector* const , DT_individuum* const , const DT_int);
 
-
-/**
- * \brief	Evolutionärer Algorithmus zur Startpunktfindung.
- *
- * 			Startpunktfindung auf Basis eines Evolutionären Algorithmus.
- *
- * \param	popsize		Größe der Population
- * \param	generations	Anzahl der Iterationen (Generationen)
- * \param	v			Vektor, der abgelaufen werden soll
- * \return	Bestes Individuum
- */
 DT_individuum evolutionaryAlgorithm(const DT_int popsize,
 		const DT_int generations, DT_vector* const v) {
 	initEvoAlg();
-	// Drehen des Koordinatensystems; - invertieren des Vektors, da der Weg zurückgelegt werden soll
+	// Rekombinationswahrscheinlichkeit
+	DT_double px = 1.0;
+	// Mutationsrate
+	DT_double pm = 0.4;
+
+	// Drehen des Koordinatensystems
 	DT_vector v_inv;
-	v_inv.y = - v->x;
-	v_inv.x = - v->y;
+	v_inv.y = v->x;
+	v_inv.x = v->y;
 	// Anzahl der Eltern pro Generation
 	DT_int parentCnt = 10;
 	// Population
@@ -69,33 +63,27 @@ DT_individuum evolutionaryAlgorithm(const DT_int popsize,
 		fitnessproportionalSelection(P, I, popsize, parentCnt);
 		DT_int popsizeNextGen = popsize + 2 * parentCnt;
 		DT_individuum P_nextGen[popsizeNextGen];
-		recombination(P, P_nextGen, I, popsize, parentCnt);
-		mutation(P_nextGen, popsizeNextGen);
+		recombination(P, P_nextGen, I, popsize, parentCnt, px);
+		mutation(P_nextGen, popsizeNextGen, pm);
 		getScores(&v_inv, P_nextGen, popsizeNextGen);
 		t++;
 		bestSelection(P_nextGen, P, popsizeNextGen, popsize);
 		printPopulation(P, popsize);
 	}
+	//return getBestIndividuum();
 	return P[0];
 }
 
-DT_point getPointFromIndividuum(DT_individuum * A){
+DT_point getPointFromIndividuum(DT_individuum * A) {
 	DT_point p;
 	p.x = A->G.y;
 	p.y = A->G.x;
 	p.z = A->G.z;
 	return p;
 }
-/**
- * \brief	Population erzeugen.
- *
- * 			Erzeugt randomisierte Individuen, die innerhalb der Fläche liegen.
- *
- * \param	P		Pointer auf Feld, auf das die Individuen geschrieben werden sollen
- * \param	popsize	Größe der Population
- */
+
 void generatePopulation(DT_individuum * const P, const DT_int popsize) {
-	DT_int prob = 123;
+	DT_int prob = 211;
 	int i;
 	for (i = 0; i < popsize; i++) {
 		P[i].G = generatePoint(prob);
@@ -103,9 +91,6 @@ void generatePopulation(DT_individuum * const P, const DT_int popsize) {
 	}
 }
 
-/**
- * \brief	Ausgabe der Population.
- */
 void printPopulation(DT_individuum* P, DT_int size) {
 	int i;
 	for (i = 0; i < size; i++)
@@ -113,19 +98,12 @@ void printPopulation(DT_individuum* P, DT_int size) {
 				P[i].F);
 }
 
-/**
- * \brief	Punkt für Individuum erzeugen.
- *
- * 			Erzeugt randomisiert einen x- und einen y-Wert für den Punkt eines Individuums.
- *
- * \param	prob	Wert, um die Entropie zu erhöhen
- */
 DT_point generatePoint(DT_int prob) {
 	DT_point p;
+	//unsigned int iseed = (unsigned int) time(NULL);
 	DT_size iseed = prob;
 	do {
-		iseed += prob;
-		prob += prob;
+		prob += prob - 123;
 		srand(iseed);
 		p.x = getRandomNumber(X_MIN, X_MAX);
 		iseed += prob;
@@ -137,30 +115,12 @@ DT_point generatePoint(DT_int prob) {
 	return p;
 }
 
-/**
- * \brief	Liefert einen Zufallswert.
- *
- *			Zufallswert zwischen den Schranken.
- *
- * \param	min		untere Schranke
- * \param	max		obere Schranke
- */
 DT_double getRandomNumber(DT_int min, DT_int max) {
 	double random;
 	random = (rand() % (max - min + 1)) + min;
 	return random;
 }
 
-/**
- * \brief	Fitnessproportionale Selektion.
- *
- *			Elternselektion auf Basis der Fitnessproportionalen Selektion.
- *
- * \param	P			Pointer auf Feld mit Individuen.
- * \param	I			Pointer auf Index-Feld, in dem die Indizes der Eltern-Individuen gespeichert werden soll.
- * \param	popsize		Größe der Population
- * \param	parentCnt	Anzahl der zu wählenden Eltern-Individuen
- */
 void fitnessproportionalSelection(const DT_individuum * const P, DT_int* I,
 		const DT_int popsize, const DT_int parentCnt) {
 	DT_int i;
@@ -181,29 +141,22 @@ void fitnessproportionalSelection(const DT_individuum * const P, DT_int* I,
 	}
 }
 
-/**
- * \brief	Rekombination.
- *
- *			Rekombination der selektierten Eltern-Individuen - dabei werden bisherige Eltern zunächst übernommen.
- *
- * \param	P			Pointer auf Feld mit Individuen.
- * \param	P_nextGen	Pointer auf Feld mit Individuen der nächsten Generation
- * \param	I			Pointer auf Index-Feld, in dem die Indizes der Eltern-Individuen gespeichert werden soll.
- * \param	popsize		Größe der Population
- * \param	parentCnt	Anzahl der zu wählenden Eltern-Individuen
- */
 void recombination(const DT_individuum const * P,
 		DT_individuum * const P_nextGen, const DT_int const * I,
-		const DT_int popsize, const DT_int parentCnt) {
+		const DT_int popsize, const DT_int parentCnt, const DT_double px) {
 	DT_int i;
+	DT_double u;
 	// Übernehmen der Eltern in neue Population
 	for (i = 0; i < popsize; i++)
 		P_nextGen[i] = P[i];
 	// Rekombination
 	for (i = 0; i < parentCnt; i++) {
-		DT_int partner = I[i];
-		uniformCrossover(&P[i], &P[partner], &P_nextGen[popsize + (i * 2)],
-				&P_nextGen[popsize + (i * 2) + 1]);
+		u = getRandomNumber(0, 10000) / 10000;
+		if (u <= px) {
+			DT_int partner = I[i];
+			uniformCrossover(&P[i], &P[partner], &P_nextGen[popsize + (i * 2)],
+					&P_nextGen[popsize + (i * 2) + 1]);
+		}
 	}
 }
 
@@ -232,9 +185,8 @@ void uniformCrossover(const DT_individuum const * A,
 	D->G.z = Z;
 }
 
-void mutation(DT_individuum * P, const DT_int popsize) {
+void mutation(DT_individuum * P, const DT_int popsize, const DT_double pm) {
 	DT_int i;
-	DT_double pm = 0.1;
 	for (i = 0; i < popsize; i++) {
 		gleichverteilte_reellwertige_mutation(&P[i].G, pm);
 	}
@@ -264,7 +216,8 @@ void bestSelection(DT_individuum * const P_nextGen, DT_individuum * P,
 	for (i = 0; i < popsize; i++) {
 		if (P_nextGen[i].F > 1000)
 			continue;
-		P[i] = P_nextGen[i];
+		else
+			P[i] = P_nextGen[i];
 	}
 }
 
@@ -274,9 +227,3 @@ void getScores(DT_vector* const v, DT_individuum* const P, const DT_int popsize)
 		P[i].F = scorePoint(v, &P[i].G);
 	}
 }
-
-// Todo:
-// Elternselektion
-// Rekombination
-// Selektion
-// Bewertungsfunktion
