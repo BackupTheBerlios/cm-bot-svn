@@ -13,6 +13,7 @@
 
 DT_cmd RMT_getCommand();
 DT_byte RMT_receive(USART_data_t* const, DT_byte* const);
+DT_bool RMT_NonPressed(DT_cmd);
 DT_bool RMT_isUpPressed(DT_cmd);
 DT_bool RMT_isDownPressed(DT_cmd);
 DT_bool RMT_isLeftPressed(DT_cmd);

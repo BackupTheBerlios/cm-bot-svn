@@ -1,0 +1,15 @@
+/**
+ *	\file evolutionaryHelper.h
+ *
+ */
+
+#include "datatypes.h"
+
+#define Z  -129.1041
+
+DT_bool isInArea(const DT_point*);
+DT_double scorePoint(DT_vector* const, const DT_point* const);
+void bubblesort(DT_individuum* , const DT_int);
+void initEvoAlg();
+DT_double max(DT_double, DT_double);
+DT_double min(DT_double, DT_double);

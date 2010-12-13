@@ -43,19 +43,19 @@ DT_cmd RMT_getCommand() {
 	DT_size timeout = 65000;
 	for (i = 0; i < DT_RESULT_BUFFER_SIZE; i++)
 		result[i] = 0x00;
-	if(RMT_receive(&XM_remote_data, result) > 0){
+	if (RMT_receive(&XM_remote_data, result) > 0) {
 		DEBUG(("CMD_EX", sizeof("CMD_EX")))
 		cmd = (result[4] << 8) | result[2];
 	} else {
 		cmd = B_NON_PRESSED;
 	}
-	/*while (!button_release && timeout > 0) {
-	 RMT_receive(&XM_remote_data, result);
-	 tmp_cmd = (result[4] << 8) | result[2];
-	 if (tmp_cmd == B_NON_PRESSED)
-	 button_release = true;
-	 timeout--;
-	 }*/
+	while (!button_release /* && timeout > 0*/) {
+		RMT_receive(&XM_remote_data, result);
+		tmp_cmd = (result[4] << 8) | result[2];
+		if (tmp_cmd == B_NON_PRESSED)
+			button_release = true;
+		//timeout--;
+	}
 	//if(cmd!=0)DEBUG_BYTE((&cmd,sizeof(&cmd)))
 	return cmd;
 }
@@ -96,6 +96,22 @@ DT_byte RMT_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 		DEBUG(("RMT_ok",sizeof("RMT_ok")))
 		return length;
 	}
+}
+
+/*
+ * \brief 	Kein Taster gedrückt.
+ *
+ * 			Achtung: cmd muss zunächst durch getCommand abgerufen werden.
+ *
+ * \param	cmd		16-Bit Command-Wert
+ *
+ * \return	Bool
+ */
+DT_bool RMT_NonPressed(DT_cmd cmd) {
+	if (cmd == B_NON_PRESSED)
+		return true;
+	else
+		return false;
 }
 
 /*

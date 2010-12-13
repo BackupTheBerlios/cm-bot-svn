@@ -37,9 +37,9 @@ typedef struct {
 
 /** \brief Datenstruktur zur Speicherung von Servodaten bezüglich eines kompletten Beines. */
 typedef struct {
-	DT_servo hip; /**< Hüftgelenk. */
+	DT_servo hip; /**< HÃ¼ftgelenk. */
 	DT_servo knee; /**< Kniegelenk. */
-	DT_servo foot; /**< Fußgelenk. */
+	DT_servo foot; /**< FuÃŸgelenk. */
 	DT_transformation trans; /**< Infos fuer Koordinatentransformation. */
 } DT_leg;
 
@@ -47,5 +47,27 @@ typedef struct {
 typedef struct {
 	DT_double x, y, z;
 } DT_point;
+
+/** \brief Datenstruktur zur Speicherung eines Vektors. */
+typedef struct {
+	DT_double x, y;
+} DT_vector;
+
+/** \brief Datenstruktur zur Speicherung einer linearen Funktion: y = mx + n. */
+typedef struct {
+	DT_double m;
+	DT_double n;
+} DT_lin_func;
+
+/** \brief Datenstruktur zur Speicherung einer Kreisfunktion: y = sqrt(r² - x²). */
+typedef struct {
+	DT_double sqr_r;
+} DT_half_circle;
+
+/** \brief Datenstruktur für ein Individuum des Evolutionären Algorithmus zur Startpunktfindung. */
+typedef struct {
+	DT_point G;
+	DT_double F;
+} DT_individuum;
 
 #endif /* DATATYPES_H_ */
