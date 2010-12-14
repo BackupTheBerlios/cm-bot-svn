@@ -257,7 +257,7 @@ DT_double scorePoint(DT_vector* const v, const DT_point* const p) {
 	// y = mx + n
 	DT_lin_func f;
 	if (v->x == 0) {
-		v->x += 0.0000000001;
+		v->x += 0.01;
 	}
 	//	if(v->y ==0)
 	f.m = v->y / v->x;

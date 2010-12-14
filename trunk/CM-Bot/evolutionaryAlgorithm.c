@@ -41,7 +41,7 @@ DT_individuum evolutionaryAlgorithm(const DT_int popsize,
 	// Rekombinationswahrscheinlichkeit
 	DT_double px = 1.0;
 	// Mutationsrate
-	DT_double pm = 0.4;
+	DT_double pm = 0.2;
 
 	// Drehen des Koordinatensystems
 	DT_vector v_inv;
@@ -194,7 +194,7 @@ void mutation(DT_individuum * P, const DT_int popsize, const DT_double pm) {
 
 void gleichverteilte_reellwertige_mutation(DT_point * A, const DT_double pm) {
 	DT_double u = getRandomNumber(0, 10000) / 10000;
-	DT_double unten, oben, smax = 30;
+	DT_double unten, oben, smax = 10;
 	if (u <= pm) {
 		//printf("\nMutate:\nBefore: A.x = %f\tA.y = %f\n", A->x, A->y);
 		do {
