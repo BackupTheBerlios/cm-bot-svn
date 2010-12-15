@@ -258,10 +258,12 @@ DT_double scorePoint(DT_vector* const v, const DT_point* const p, DT_point * s) 
 	DT_lin_func f;
 	if (v->x == 0) {
 		v->x += 0.01;
-	}
-	//	if(v->y ==0)
-	f.m = v->y / v->x;
+		f.m = 0;
+	} else
+		f.m = v->y / v->x;
 	f.n = p->y - f.m * p->x;
+
+	printf("\nFunktion f: y = %f x + %f", f.m, f.n);
 
 	DT_point isect, isect_tmp, isect_tmp1;
 	isect.x = -10000;
@@ -279,26 +281,54 @@ DT_double scorePoint(DT_vector* const v, const DT_point* const p, DT_point * s) 
 	// Lower Circle
 	DT_byte LinCircConf = isectLinCirc(&f, &CEA, &isect_tmp, &isect_tmp1);
 	if (LinCircConf != NO_VALUE) {
-		if (LinCircConf == SECOND_VALUE) {
-			isect_tmp = isect_tmp1;
-		} else if (LinCircConf == (FIRST_VALUE | SECOND_VALUE)) {
-			isect_tmp = getNearerPoint(p, &isect_tmp, &isect_tmp1);
+		if (LinCircConf == FIRST_VALUE) {
+			if (!isVectorialPoint(p, v, &isect_tmp))
+				LinCircConf = NO_VALUE;
+		} else if (LinCircConf == SECOND_VALUE) {
+			if (!isVectorialPoint(p, v, &isect_tmp1))
+				LinCircConf = NO_VALUE;
 		}
-		if (isVectorialPoint(p, v, &isect_tmp))
+		if (LinCircConf == (FIRST_VALUE | SECOND_VALUE)) {
+			if (!isVectorialPoint(p, v, &isect_tmp))
+				LinCircConf = LinCircConf & SECOND_VALUE;
+			if (!isVectorialPoint(p, v, &isect_tmp1))
+				LinCircConf = LinCircConf & FIRST_VALUE;
+		}
+		if (LinCircConf != NO_VALUE) {
+			if (LinCircConf == SECOND_VALUE)
+				isect_tmp = isect_tmp1;
+			if (LinCircConf == (FIRST_VALUE | SECOND_VALUE)) {
+				isect_tmp = getNearerPoint(p, &isect_tmp, &isect_tmp1);
+			}
 			if (getDistance(p, &isect) > getDistance(p, &isect_tmp))
 				isect = isect_tmp;
+		}
 	}
 	// Upper Circle
 	LinCircConf = isectLinCirc(&f, &DFB, &isect_tmp, &isect_tmp1);
 	if (LinCircConf != NO_VALUE) {
-		if (LinCircConf == SECOND_VALUE) {
-			isect_tmp = isect_tmp1;
-		} else if (LinCircConf == (FIRST_VALUE | SECOND_VALUE)) {
-			isect_tmp = getNearerPoint(p, &isect_tmp, &isect_tmp1);
+		if (LinCircConf == FIRST_VALUE) {
+			if (!isVectorialPoint(p, v, &isect_tmp))
+				LinCircConf = NO_VALUE;
+		} else if (LinCircConf == SECOND_VALUE) {
+			if (!isVectorialPoint(p, v, &isect_tmp1))
+				LinCircConf = NO_VALUE;
 		}
-		if (isVectorialPoint(p, v, &isect_tmp))
+		if (LinCircConf == (FIRST_VALUE | SECOND_VALUE)) {
+			if (!isVectorialPoint(p, v, &isect_tmp))
+				LinCircConf = LinCircConf & SECOND_VALUE;
+			if (!isVectorialPoint(p, v, &isect_tmp1))
+				LinCircConf = LinCircConf & FIRST_VALUE;
+		}
+		if (LinCircConf != NO_VALUE) {
+			if (LinCircConf == SECOND_VALUE)
+				isect_tmp = isect_tmp1;
+			if (LinCircConf == (FIRST_VALUE | SECOND_VALUE)) {
+				isect_tmp = getNearerPoint(p, &isect_tmp, &isect_tmp1);
+			}
 			if (getDistance(p, &isect) > getDistance(p, &isect_tmp))
 				isect = isect_tmp;
+		}
 	}
 	s->x = isect.x;
 	s->y = isect.y;
