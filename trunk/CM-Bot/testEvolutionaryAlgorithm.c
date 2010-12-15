@@ -212,6 +212,8 @@ void doStep(const DT_double speed) {
 
 void evolutionaryCalculation(DT_vector * v, const DT_double speed) {
 	DT_individuum A, B;
+	if (MasterActive == COM_CONF_LEFT)
+		invertVector(v);
 	A = evolutionaryAlgorithm(10, 5, v);
 	pM = getPointFromIndividuum(&A);
 	isectM = getIsectFromIndividuum(&A);
@@ -221,22 +223,20 @@ void evolutionaryCalculation(DT_vector * v, const DT_double speed) {
 	isectS = getIsectFromIndividuum(&B);
 }
 
-void waitForButton3(){
+void waitForButton3() {
 	DT_cmd cmd;
-	do{
+	do {
 		cmd = RMT_getCommand();
-	}while(!RMT_isButton3Pressed(cmd));
+	} while (!RMT_isButton3Pressed(cmd));
 }
 
 void master() {
 	DT_cmd cmd;
 	DT_vector v;
-	DT_double speed = 300;
+	DT_double speed = 200;
 	init_pMpSpMiddle();
 	initConf();
 	DT_point pM_old, pS_old;
-
-
 
 	// Alle Beine auf dem Boden
 	TripodGaitMove(&pM, &pS, speed, 0);
@@ -253,63 +253,42 @@ void master() {
 				v.y += 10;
 			if (RMT_isDownPressed(cmd))
 				v.y -= 10;
-			if (RMT_isLeftPressed(cmd))
-				v.x += 10;
 			if (RMT_isRightPressed(cmd))
+				v.x += 10;
+			if (RMT_isLeftPressed(cmd))
 				v.x -= 10;
 			if (RMT_isButton1Pressed(cmd))
-				TripodGaitMove(&pM, &pS, speed, NO_OFFSET);
+				TripodGaitMove(&pMiddle, &pMiddle, speed, NO_OFFSET);
 			if (RMT_isButton2Pressed(cmd))
 				switchLegs();
 		} while (!RMT_isButton6Pressed(cmd));
 
 		// Inaktive Beine in die Luft
 		prepareStepMove(&pMiddle, &pMiddle, speed, OFFSET);
-		waitForButton3();
 		// Inaktive Beine fahren in der Luft Startpunkt an
 		evolutionaryCalculation(&v, speed);
 		calculateMovementPoints();
 		prepareStepMove(&isectM, &isectS, speed, OFFSET);
-		waitForButton3();
-		//UTL_wait(20);
+		UTL_wait(5);
 		// Alle Beine auf dem Boden
 		prepareStepMove(&isectM, &isectS, speed, NO_OFFSET);
-		waitForButton3();
-		//UTL_wait(20);
+		UTL_wait(10);
 		// Beine wechseln
 		switchLegs();
-		//UTL_wait(20);
 		// Inaktive Beine in die Luft
 		prepareStepMove(&pM_old, &pS_old, speed, OFFSET);
-		waitForButton3();
+		UTL_wait(5);
 		prepareStepMove(&pMiddle, &pMiddle, speed, OFFSET);
-		waitForButton3();
-		//UTL_wait(50);
+		UTL_wait(5);
 		// Aktive Beine führen Bewegung aus
-		//doStep(speed);
-		//TripodGaitMove(&isectM, &isectS, speed, OFFSET);
-		//waitForButton3();
 		doStepMove(&midM, &midS, speed);
-		waitForButton3();
 		doStepMove(&pM, &pS, speed);
+		// Zwischenspeichern des alten Punktes
 		pM_old = copyPoint(&pM);
 		pS_old = copyPoint(&pS);
-		waitForButton3();
-		//UTL_wait(10);
+		UTL_wait(5);
 		// Alle Beine wieder auf den Boden
 		prepareStepMove(&pMiddle, &pMiddle, speed, NO_OFFSET);
-		//		EvolutionaryTripodGaitMove(&v);
-
-		// Algorithmus
-		// -----------
-		// 1. Alle Beine auf dem Boden
-		// 2. Inaktive Beine in die Luft
-		// 3. Inaktive Beine fahren Startpunkt an
-		// 4. Alle Beine auf dem Boden
-		// 5. Beine Wechseln
-		// 6. Inaktive Beine in die Luft
-		// 7. Aktive Beine führen Bewegung aus
-
 	}
 }
 

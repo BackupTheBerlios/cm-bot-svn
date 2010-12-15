@@ -330,8 +330,9 @@ DT_double scorePoint(DT_vector* const v, const DT_point* const p, DT_point * s) 
 				isect = isect_tmp;
 		}
 	}
-	s->x = isect.x;
-	s->y = isect.y;
+
+	s->x = (isect.x > 0) ? isect.x - 1 : isect.x + 1;
+	s->y = (isect.y > 0) ? isect.y - 1 : isect.y + 1;
 	s->z = Z;
 	return getDistance(p, &isect);
 }
