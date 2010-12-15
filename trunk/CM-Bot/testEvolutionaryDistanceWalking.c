@@ -4,7 +4,7 @@
  * \brief	Testprogramm für Evolutionären Algorithmus zur Startpunktfindung.
  */
 
-#define TEST_ON
+#define TEST_OFF
 #ifdef TEST_ON
 
 #include <stdio.h>
