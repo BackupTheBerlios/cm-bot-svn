@@ -82,6 +82,14 @@ DT_point getPointFromIndividuum(DT_individuum * A) {
 	return p;
 }
 
+DT_point getIsectFromIndividuum(DT_individuum * A) {
+	DT_point p;
+	p.x = A->S.y;
+	p.y = A->S.x;
+	p.z = A->S.z;
+	return p;
+}
+
 void generatePopulation(DT_individuum * const P, const DT_int popsize) {
 	DT_int prob = 211;
 	int i;
@@ -224,6 +232,7 @@ void bestSelection(DT_individuum * const P_nextGen, DT_individuum * P,
 void getScores(DT_vector* const v, DT_individuum* const P, const DT_int popsize) {
 	DT_int i;
 	for (i = 0; i < popsize; i++) {
-		P[i].F = scorePoint(v, &P[i].G);
+		P[i].F = scorePoint(v, &P[i].G, &P[i].S);
+
 	}
 }

@@ -64,10 +64,10 @@ DT_byte COM_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 	const DT_byte tempTail = buffer->RX_Tail;
 
 	/*
-	DEBUG_BYTE((&tempTail,1))
-	DEBUG_BYTE((&tempHead,1))
-	DEBUG_BYTE((buffer->RX, 127))
-	*/
+	 DEBUG_BYTE((&tempTail,1))
+	 DEBUG_BYTE((&tempHead,1))
+	 DEBUG_BYTE((buffer->RX, 127))
+	 */
 
 	// Init-Fehlerbytes ausfiltern
 	if (buffer->RX[tempTail] != 0xFF && (tempHead != tempTail)) {
@@ -76,7 +76,7 @@ DT_byte COM_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 		return 0;
 	}
 	// Pruefen ob min. 4 Bytes im Buffer sind, um Laenge zu lesen
-	else if (USART_RXBuffer_checkPointerDiff(tempTail,tempHead, 4)) {
+	else if (USART_RXBuffer_checkPointerDiff(tempTail, tempHead, 4)) {
 		DEBUG(("COM_le",sizeof("COM_le")))
 		return 0;
 	}
@@ -194,31 +194,32 @@ DT_double COM_byteArrayToDouble(const DT_byte* const array) {
 	return value;
 }
 
-DT_bool COM_isRightLeg(const DT_byte* const result){
+DT_bool COM_isRightLeg(const DT_byte* const result) {
 	return COM_CONF_RIGHT == (result[5] & COM_CONF_RIGHT);
 }
 
-DT_bool COM_isLeftLeg(const DT_byte* const result){
+DT_bool COM_isLeftLeg(const DT_byte* const result) {
 	return (COM_CONF_LEFT == (result[5] & COM_CONF_LEFT));
 }
 
-DT_bool COM_isGlobal(const DT_byte* const result){
+DT_bool COM_isGlobal(const DT_byte* const result) {
 	return (COM_CONF_GLOB == (result[5] & COM_CONF_GLOB));
 }
 
-DT_bool COM_isHip(const DT_byte* const result){
+DT_bool COM_isHip(const DT_byte* const result) {
 	return (COM_CONF_HIP == (result[5] & COM_CONF_HIP));
 }
 
-DT_bool COM_isKnee(const DT_byte* const result){
+DT_bool COM_isKnee(const DT_byte* const result) {
 	return (COM_CONF_KNEE == (result[5] & COM_CONF_KNEE));
 }
 
-DT_bool COM_isFoot(const DT_byte* const result){
+DT_bool COM_isFoot(const DT_byte* const result) {
 	return (COM_CONF_FOOT == (result[5] & COM_CONF_FOOT));
 }
 
-DT_bool COM_sendPoint(DT_byte cpuID, const DT_point* const point, const DT_byte config) {
+DT_bool COM_sendPoint(DT_byte cpuID, const DT_point* const point,
+		const DT_byte config) {
 	DEBUG(("pre_snd_pnt",sizeof("pre_snd_pnt")))
 	// Broadcast bei requestStatus nicht möglich
 	if (cpuID == COM_BRDCAST_ID)
@@ -248,6 +249,40 @@ DT_bool COM_sendPoint(DT_byte cpuID, const DT_point* const point, const DT_byte 
 		return false;
 }
 
+DT_bool COM_sendPointAndSpeed(DT_byte cpuID, const DT_point* const point,
+		const DT_double speed, const DT_byte config) {
+	DEBUG(("pre_snd_pnt",sizeof("pre_snd_pnt")))
+	// Broadcast bei requestStatus nicht möglich
+	if (cpuID == COM_BRDCAST_ID)
+		return 0;
+	DT_byte result[DT_RESULT_BUFFER_SIZE];
+	DT_size len = 24;
+	DT_byte packet[len];
+
+	packet[0] = COM_START_BYTE;
+	packet[1] = COM_START_BYTE;
+	packet[2] = cpuID;
+	packet[3] = len - 4; // length
+	packet[4] = COM_POINT;
+	packet[5] = config;
+
+	// Point auf ByteArray casten
+	COM_doubleToByteArray(point->x, &packet[6 + 0 * sizeof(DT_double)]);
+	COM_doubleToByteArray(point->y, &packet[6 + 1 * sizeof(DT_double)]);
+	COM_doubleToByteArray(point->z, &packet[6 + 2 * sizeof(DT_double)]);
+
+	packet[18] = COM_SPEED;
+	COM_doubleToByteArray(speed, &packet[19]);
+
+	// packet[17] = checksum will set in send
+	DEBUG(("aft_snd_pnt",sizeof("aft_snd_pnt")))
+	len = COM_send(packet, len, result, true);
+	if ((len > 0) && (result[4] == COM_ACK))
+		return true;
+	else
+		return false;
+}
+
 DT_point COM_getPointFromPacket(const DT_byte* const result) {
 	DT_point p;
 
@@ -258,7 +293,14 @@ DT_point COM_getPointFromPacket(const DT_byte* const result) {
 	return p;
 }
 
-DT_bool COM_sendAngle(DT_byte cpuID, const DT_double angle, const DT_byte config) {
+DT_double COM_getSpeedFromPacket(const DT_byte* const result) {
+	DT_double speed;
+	speed = COM_byteArrayToDouble(&result[19]);
+	return speed;
+}
+
+DT_bool COM_sendAngle(DT_byte cpuID, const DT_double angle,
+		const DT_byte config) {
 	DEBUG(("pre_snd_pnt",sizeof("pre_snd_pnt")))
 	// Broadcast bei requestStatus nicht möglich
 	if (cpuID == COM_BRDCAST_ID)
@@ -287,9 +329,7 @@ DT_bool COM_sendAngle(DT_byte cpuID, const DT_double angle, const DT_byte config
 
 DT_double COM_getAngleFromPacket(const DT_byte* const result) {
 	DT_double angle;
-
 	angle = COM_byteArrayToDouble(&result[6]);
-
 	return angle;
 }
 

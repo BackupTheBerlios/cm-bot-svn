@@ -17,6 +17,7 @@ DT_byte DNX_receive(USART_data_t* const, DT_byte* const);
 
 DT_byte DNX_getChecksum(const DT_byte* const, DT_size);
 DT_bool DNX_setAngle(DT_byte, DT_double, DT_bool);
+DT_bool DNX_setAngleAndSpeed(DT_byte id, DT_double angle, DT_double speed, DT_bool regWrite);
 void DNX_setId(DT_byte, DT_byte);
 void DNX_setSpeed(DT_byte, DT_byte);
 DT_bool DNX_setLed(DT_byte, DT_byte);

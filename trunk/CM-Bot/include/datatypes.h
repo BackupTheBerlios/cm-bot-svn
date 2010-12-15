@@ -68,6 +68,7 @@ typedef struct {
 typedef struct {
 	DT_point G;
 	DT_double F;
+	DT_point S;
 } DT_individuum;
 
 #endif /* DATATYPES_H_ */

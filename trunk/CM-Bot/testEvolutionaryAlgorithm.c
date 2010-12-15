@@ -19,6 +19,9 @@
 #include "include/movement.h"
 #include "include/remote.h"
 
+#define OFFSET 50
+#define NO_OFFSET 0
+
 DT_leg leg_r, leg_l;
 DT_byte MasterActive, SlavesActive, MasterInactive, SlavesInactive;
 DT_byte cpuID;
@@ -64,6 +67,14 @@ void invertVector(DT_vector * v) {
 	v->y = -v->y;
 }
 
+DT_point copyPoint(const DT_point * const p) {
+	DT_point pNew;
+	pNew.x = p->x;
+	pNew.y = p->y;
+	pNew.z = p->z;
+	return pNew;
+}
+
 void switchLegs() {
 	if (MasterActive == COM_CONF_LEFT) {
 		MasterActive = COM_CONF_RIGHT;
@@ -85,91 +96,152 @@ void initConf() {
 	SlavesInactive = COM_CONF_LEFT;
 }
 
-void TripodGaitMove(DT_point* pM, DT_point* pS, DT_double offset) {
+void TripodGaitMove(DT_point* pM, DT_point* pS, const DT_double speed,
+		const DT_double offset) {
 	DT_double z;
 	z = pM->z;
 	if (MasterActive == COM_CONF_LEFT) {
-		MV_point(&leg_l, pM, false);
+		MV_pointAndSpeed(&leg_l, pM, speed, false);
 		pM->z += offset;
-		MV_point(&leg_r, pM, false);
+		MV_pointAndSpeed(&leg_r, pM, speed, false);
 	} else {
-		MV_point(&leg_r, pM, false);
+		MV_pointAndSpeed(&leg_r, pM, speed, false);
 		pM->z += offset;
-		MV_point(&leg_l, pM, false);
+		MV_pointAndSpeed(&leg_l, pM, speed, false);
 	}
 	pM->z = z;
 	z = pS->z;
-	COM_sendPoint(COM_SLAVE1B, pS, SlavesActive);
-	COM_sendPoint(COM_SLAVE3F, pS, SlavesActive);
+	COM_sendPointAndSpeed(COM_SLAVE1B, pS, speed, SlavesActive);
+	COM_sendPointAndSpeed(COM_SLAVE3F, pS, speed, SlavesActive);
 	pS->z += offset;
-	COM_sendPoint(COM_SLAVE1B, pS, SlavesInactive);
-	COM_sendPoint(COM_SLAVE3F, pS, SlavesInactive);
+	COM_sendPointAndSpeed(COM_SLAVE1B, pS, speed, SlavesInactive);
+	COM_sendPointAndSpeed(COM_SLAVE3F, pS, speed, SlavesInactive);
 	pS->z = z;
 	COM_sendAction(COM_BRDCAST_ID);
 	MV_action(&leg_r, &leg_l);
 }
 
-DT_point pM, pS;
+DT_point pM, pS, midM, midS, isectM, isectS, pMiddle;
 
-void init_pMpS(){
+void init_pMpSpMiddle() {
 	pM.x = 110.1041;
 	pM.y = 0;
 	pM.z = Z;
 	pS.x = 110.1041;
 	pS.y = 0;
 	pS.z = Z;
+	pMiddle.x = 110.1041;
+	pMiddle.y = 0;
+	pMiddle.z = Z;
 }
 
-void EvolutionaryTripodGaitMove(DT_vector * v) {
-	DT_individuum A, B;
-	A = evolutionaryAlgorithm(10, 5, v);
-	pM = getPointFromIndividuum(&A);
-	invertVector(v);
-	B = evolutionaryAlgorithm(10, 5, v);
-	pS = getPointFromIndividuum(&B);
-	TripodGaitMove(&pM, &pS, 50);
+void calculateMovementPoints() {
+	DT_double distM = getDistance(&pM, &isectM);
+	DT_double distS = getDistance(&pS, &isectS);
+	// Bewegung anhand von 3 Punkten auf einer geraden
+	DT_double ratio;
+	DT_point distV;
+	if (distM <= distS) {
+		// Mittelpunkt berechnen
+		midM.x = (pM.x + isectM.x) / 2;
+		midM.y = (pM.y + isectM.y) / 2;
+		midM.z = Z;
+		// Verhältnis der beiden Abstände wird zur Mittel- und Endpunktsberechnung verwendet
+		ratio = distM / distS;
+		distV.x = isectS.x - pS.x;
+		distV.y = isectS.y - pS.y;
+		isectS.x = pS.x + ratio * distV.x;
+		isectS.y = pS.y + ratio * distV.y;
+		isectS.z = Z;
+		midS.x = (pS.x + isectS.x) / 2;
+		midS.y = (pS.y + isectS.y) / 2;
+		midS.z = Z;
+	} else {
+		midS.x = (pS.x + isectS.x) / 2;
+		midS.y = (pS.y + isectS.y) / 2;
+		midS.z = Z;
+		// Verhältnis der beiden Abstände wird zur Mittel- und Endpunktsberechnung verwendet
+		ratio = distS / distM;
+		distV.x = isectM.x - pM.x;
+		distV.y = isectM.y - pM.y;
+		isectM.x = pM.x + ratio * distV.x;
+		isectM.y = pM.y + ratio * distV.y;
+		isectM.z = Z;
+		midM.x = (pM.x + isectM.x) / 2;
+		midM.y = (pM.y + isectM.y) / 2;
+		midM.z = Z;
+	}
 }
 
-void prepareStepMove(DT_point* pM, DT_point* pS, DT_double offset) {
+void doStepMove(DT_point* pM, DT_point* pS, const DT_double speed) {
+	if (MasterActive == COM_CONF_LEFT) {
+		MV_pointAndSpeed(&leg_l, pM, speed, false);
+	} else {
+		MV_pointAndSpeed(&leg_r, pM, speed, false);
+	}
+	COM_sendPointAndSpeed(COM_SLAVE1B, pS, speed, SlavesActive);
+	COM_sendPointAndSpeed(COM_SLAVE3F, pS, speed, SlavesActive);
+	COM_sendAction(COM_BRDCAST_ID);
+	MV_action(&leg_r, &leg_l);
+}
+
+void prepareStepMove(DT_point* pM, DT_point* pS, const DT_double speed,
+		const DT_double offset) {
 	DT_double z;
 	z = pM->z;
 	if (MasterInactive == COM_CONF_LEFT) {
 		pM->z += offset;
-		MV_point(&leg_l, pM, false);
+		MV_pointAndSpeed(&leg_l, pM, speed, false);
 	} else {
 		pM->z += offset;
-		MV_point(&leg_r, pM, false);
+		MV_pointAndSpeed(&leg_r, pM, speed, false);
 	}
 	pM->z = z;
 	z = pS->z;
 	pS->z += offset;
-	COM_sendPoint(COM_SLAVE1B, pS, SlavesInactive);
-	COM_sendPoint(COM_SLAVE3F, pS, SlavesInactive);
+	COM_sendPointAndSpeed(COM_SLAVE1B, pS, speed, SlavesInactive);
+	COM_sendPointAndSpeed(COM_SLAVE3F, pS, speed, SlavesInactive);
 	pS->z = z;
 	COM_sendAction(COM_BRDCAST_ID);
 	MV_action(&leg_r, &leg_l);
 }
 
+void doStep(const DT_double speed) {
 
-void evolutionaryPrepareStepMove(DT_vector * v){
+}
+
+void evolutionaryCalculation(DT_vector * v, const DT_double speed) {
 	DT_individuum A, B;
 	A = evolutionaryAlgorithm(10, 5, v);
 	pM = getPointFromIndividuum(&A);
+	isectM = getIsectFromIndividuum(&A);
 	invertVector(v);
 	B = evolutionaryAlgorithm(10, 5, v);
 	pS = getPointFromIndividuum(&B);
-	prepareStepMove(&pM, &pS, 50);
+	isectS = getIsectFromIndividuum(&B);
+}
+
+void waitForButton3(){
+	DT_cmd cmd;
+	do{
+		cmd = RMT_getCommand();
+	}while(!RMT_isButton3Pressed(cmd));
 }
 
 void master() {
 	DT_cmd cmd;
 	DT_vector v;
-
-	init_pMpS();
+	DT_double speed = 300;
+	init_pMpSpMiddle();
 	initConf();
+	DT_point pM_old, pS_old;
 
-	TripodGaitMove(&pM, &pS, 0);
 
+
+	// Alle Beine auf dem Boden
+	TripodGaitMove(&pM, &pS, speed, 0);
+	pM_old = copyPoint(&pM);
+	pS_old = copyPoint(&pS);
 	while (1) {
 		// Lokaler Vektor
 		v.x = 0;
@@ -186,16 +258,50 @@ void master() {
 			if (RMT_isRightPressed(cmd))
 				v.x -= 10;
 			if (RMT_isButton1Pressed(cmd))
-				TripodGaitMove(&pM, &pS, 0);
+				TripodGaitMove(&pM, &pS, speed, NO_OFFSET);
 			if (RMT_isButton2Pressed(cmd))
 				switchLegs();
 		} while (!RMT_isButton6Pressed(cmd));
 
-		evolutionaryPrepareStepMove(&v);
-		prepareStepMove(&pM, &pS, 0);
+		// Inaktive Beine in die Luft
+		prepareStepMove(&pMiddle, &pMiddle, speed, OFFSET);
+		waitForButton3();
+		// Inaktive Beine fahren in der Luft Startpunkt an
+		evolutionaryCalculation(&v, speed);
+		calculateMovementPoints();
+		prepareStepMove(&isectM, &isectS, speed, OFFSET);
+		waitForButton3();
+		//UTL_wait(20);
+		// Alle Beine auf dem Boden
+		prepareStepMove(&isectM, &isectS, speed, NO_OFFSET);
+		waitForButton3();
+		//UTL_wait(20);
+		// Beine wechseln
+		switchLegs();
+		//UTL_wait(20);
+		// Inaktive Beine in die Luft
+		prepareStepMove(&pM_old, &pS_old, speed, OFFSET);
+		waitForButton3();
+		prepareStepMove(&pMiddle, &pMiddle, speed, OFFSET);
+		waitForButton3();
+		//UTL_wait(50);
+		// Aktive Beine führen Bewegung aus
+		//doStep(speed);
+		//TripodGaitMove(&isectM, &isectS, speed, OFFSET);
+		//waitForButton3();
+		doStepMove(&midM, &midS, speed);
+		waitForButton3();
+		doStepMove(&pM, &pS, speed);
+		pM_old = copyPoint(&pM);
+		pS_old = copyPoint(&pS);
+		waitForButton3();
+		//UTL_wait(10);
+		// Alle Beine wieder auf den Boden
+		prepareStepMove(&pMiddle, &pMiddle, speed, NO_OFFSET);
+		//		EvolutionaryTripodGaitMove(&v);
 
-//		EvolutionaryTripodGaitMove(&v);
-
+		// Algorithmus
+		// -----------
 		// 1. Alle Beine auf dem Boden
 		// 2. Inaktive Beine in die Luft
 		// 3. Inaktive Beine fahren Startpunkt an

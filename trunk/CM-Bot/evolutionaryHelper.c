@@ -251,7 +251,7 @@ DT_bool isVectorialPoint(const DT_point* const p_ref, const DT_vector* v,
 		return false;
 }
 
-DT_double scorePoint(DT_vector* const v, const DT_point* const p) {
+DT_double scorePoint(DT_vector* const v, const DT_point* const p, DT_point * s) {
 	if ((v->x == 0) && (v->y == 0))
 		return 0.0;
 	// y = mx + n
@@ -300,6 +300,9 @@ DT_double scorePoint(DT_vector* const v, const DT_point* const p) {
 			if (getDistance(p, &isect) > getDistance(p, &isect_tmp))
 				isect = isect_tmp;
 	}
+	s->x = isect.x;
+	s->y = isect.y;
+	s->z = Z;
 	return getDistance(p, &isect);
 }
 
@@ -328,4 +331,14 @@ DT_double min(DT_double x, DT_double y) {
 		return y;
 	else
 		return x;
+}
+
+void getFunctionOfPoints(DT_lin_func * f, const DT_point* const p1,
+		const DT_point * const p2) {
+	if ((p1->x - p2->x) != 0)
+		f->m = (p1->y - p2->y) / (p1->x - p2->x);
+	else
+		f->m = 0;
+	f->n = p1->y - f->m * p1->x;
+
 }

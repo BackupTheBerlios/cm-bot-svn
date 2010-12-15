@@ -80,7 +80,7 @@ DT_byte DNX_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 
 	// Pruefen ob min. 4 Bytes im Buffer sind, um Laenge zu lesen
 	if (USART_RXBuffer_checkPointerDiff(tempTail, tempHead, 4)) {
-		DEBUG(("DNX_le",sizeof("DNX_le")))
+		//DEBUG(("DNX_le",sizeof("DNX_le")))
 		return 0;
 	}
 	// Byte #1 und Byte #2 muessen laut Protokoll 0xFF sein
@@ -106,7 +106,7 @@ DT_byte DNX_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 		for (i = 0; i < length; i++) {
 			dest[i] = USART_RXBuffer_GetByte(usart_data);
 		}
-
+		DEBUG_BYTE((dest,25))
 		// Pruefen ob Checksumme korrekt ist
 		if (dest[length - 1] != DNX_getChecksum(dest, length)) {
 			DEBUG(("DNX_cks",sizeof("DNX_cks")))
@@ -207,7 +207,7 @@ DT_double DNX_correctAngles(DT_byte id, DT_double value) {
 }
 
 /**
- * \brief	Sendet einen sofort anzufahrenden Winkel an Servo.
+ * \brief	Sendet einen Winkel an Servo.
  *
  * \param	id	ID des Servos
  * \param	value	Winkel in Grad
@@ -234,6 +234,47 @@ DT_bool DNX_setAngle(DT_byte id, DT_double value, DT_bool regWrite) {
 	packet[6] = angle_l; // Low
 	packet[7] = angle_h; // High
 	// packet[8] = checksum will set in send
+	len = DNX_send(packet, len, result, true);
+	// TODO status pruefen
+	if (len > 0)
+		return true;
+	else
+		return false;
+}
+
+/**
+ * \brief	Sendet Winkel und Speed an Servo.
+ *
+ * \param	id	ID des Servos
+ * \param	value	Winkel in Grad
+ */
+DT_bool DNX_setAngleAndSpeed(DT_byte id, DT_double angle, DT_double speed,
+		DT_bool regWrite) {
+
+	DT_byte result[DT_RESULT_BUFFER_SIZE];
+	DT_size len = 11;
+	DT_byte packet[len];
+	angle = DNX_correctAngles(id, angle);
+	angle = DNX_convertAngle(angle);
+	//DEBUG(("SET_AuS",sizeof("SET_AuS")))
+	DT_int tmp = floor(3.41 * ((double) angle));
+	DT_byte angle_l = tmp & 0xFF;
+	DT_byte angle_h = tmp >> 8;
+	tmp = floor(speed);
+	DT_byte speed_l = tmp & 0xFF;
+	DT_byte speed_h = tmp >> 8;
+
+	packet[0] = START_BYTE;
+	packet[1] = START_BYTE;
+	packet[2] = id;
+	packet[3] = len - 4; // length
+	packet[4] = regWrite ? REG_WR : WR_DATA;
+	packet[5] = GL_POS;
+	packet[6] = angle_l; // Low
+	packet[7] = angle_h; // High
+	packet[8] = speed_l;
+	packet[9] = speed_h;
+	// packet[10] = checksum will set in send
 	len = DNX_send(packet, len, result, true);
 	// TODO status pruefen
 	if (len > 0)

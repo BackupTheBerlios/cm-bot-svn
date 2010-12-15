@@ -51,7 +51,12 @@ void MV_slave(DT_byte cpuID, DT_leg* const leg_r, DT_leg* const leg_l) {
 			break;
 		case COM_POINT:
 			DEBUG(("sl_rec_pnt",sizeof("sl_rec_pnt")))
-			MV_slavePoint(leg_r, leg_l, result, len);
+			if(result[18] == COM_SPEED){
+				DEBUG(("sl_rec_spd",sizeof("sl_rec_spd")))
+				MV_slavePointAndSpeed(leg_r, leg_l, result, len);
+			}else{
+				MV_slavePoint(leg_r, leg_l, result, len);
+			}
 			break;
 		case COM_ANGLE:
 			DEBUG(("sl_rec_ang",sizeof("sl_rec_ang")))
@@ -108,6 +113,26 @@ void MV_slavePoint(DT_leg* const leg_r, DT_leg* const leg_l,
 	}
 }
 
+void MV_slavePointAndSpeed(DT_leg* const leg_r, DT_leg* const leg_l,
+		const DT_byte* const result, DT_size len) {
+	DEBUG(("SPEED", sizeof("SPEED")))
+	DT_point p = COM_getPointFromPacket(result);
+	DT_bool isGlobal = COM_isGlobal(result);
+	DT_bool ret;
+	DT_double speed = COM_getSpeedFromPacket(result);
+	if (COM_isLeftLeg(result)) {
+		ret = MV_pointAndSpeed(leg_l, &p, speed, isGlobal);
+	}
+	if (COM_isRightLeg(result)) {
+		ret = MV_pointAndSpeed(leg_r, &p, speed, isGlobal);
+	}
+	if (ret == true) {
+		COM_sendACK(COM_MASTER);
+	} else {
+		COM_sendNAK(COM_MASTER, COM_ERR_POINT_OUT_OF_BOUNDS);
+	}
+}
+
 void MV_slaveAngle(DT_leg* const leg_r, DT_leg* const leg_l,
 		const DT_byte* const result, DT_size len) {
 	DT_double angle = COM_getAngleFromPacket(result);
@@ -149,6 +174,29 @@ DT_bool MV_point(DT_leg* const leg, const DT_point* const point,
 		DNX_setAngle(leg->hip.id, leg->hip.set_value, true);
 		DNX_setAngle(leg->knee.id, leg->knee.set_value, true);
 		DNX_setAngle(leg->foot.id, leg->foot.set_value, true);
+		return true;
+	} else {
+		return false;
+	}
+}
+
+DT_bool MV_pointAndSpeed(DT_leg* const leg, const DT_point* const point, const DT_double speed,
+		DT_bool isGlobal) {
+	DT_bool ret;
+	if (isGlobal == true) {
+		DT_point pLocal = KIN_calcLocalPoint(point, &leg->trans);
+		ret = KIN_calcServos(&pLocal, leg);
+	} else
+		ret = KIN_calcServos(point, leg);
+
+	if (ret == true) {
+		leg->hip.set_value = UTL_getDegree(leg->hip.set_value);
+		leg->knee.set_value = UTL_getDegree(leg->knee.set_value);
+		leg->foot.set_value = UTL_getDegree(leg->foot.set_value);
+
+		DNX_setAngleAndSpeed(leg->hip.id, leg->hip.set_value, speed, true);
+		DNX_setAngleAndSpeed(leg->knee.id, leg->knee.set_value, speed, true);
+		DNX_setAngleAndSpeed(leg->foot.id, leg->foot.set_value, speed, true);
 		return true;
 	} else {
 		return false;
