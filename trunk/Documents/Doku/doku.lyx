@@ -197,6 +197,10 @@ LatexCommand tableofcontents
 \end_layout
 
 \begin_layout Chapter
+Einleitung
+\end_layout
+
+\begin_layout Section
 Aufgabenstellung
 \end_layout
 
@@ -215,60 +219,81 @@ Für jedes Beinpaar dieses sechsbeinigen Roboters ist ein eigener Controller
  Laufalgorithmus zu implementieren.
 \end_layout
 
-\begin_layout Chapter
+\begin_layout Section
 Vorbetrachtung
 \end_layout
 
+\begin_layout Subsection
+Bioloid Premium Robot Kit
+\end_layout
+
 \begin_layout Standard
-TODO
+Ausgangspunkt für das Praxisprojekt des Moduls Robotik ist das Premium Robot
+ Kit von Bioloid.
+ Dieser beinhaltet 18 AX-12 Servomotoren der Marke Dynamixel, ein Controllermodu
+l, ein Zigbee-Fernsteuermodul und noch einige andere Peripherie.
+ Gedacht ist dieses Robot Kit für humanoide Roboter, die mittels der mitgeliefer
+ten Software programmiert werden können.
+ Diese ermöglicht es einfache Bewegungen mittels statischer Abläufe zu modellier
+en.
+ 
 \end_layout
 
-\begin_layout Itemize
-Projekt auf BerliOS
+\begin_layout Standard
+Da im Rahmen des Projektes ein Hexapod entwickelt werden soll, der sich
+ mittels der Lösung des inversen kinematischen Problems bewegen soll, werden
+ im wesentlichen nur die 
+\shape italic
+Dynamixel AX-12
+\shape default
+-Servomotoren genutzt.
+ Das bedeutet, dass sämtliche Mechanik und Elektronik neu entwickelt werden
+ muss.
+ 
 \end_layout
 
-\begin_layout Itemize
-Servos/ Robokit
+\begin_layout Subsection
+Atmel ATXmega
 \end_layout
 
 \begin_layout Itemize
 Controller
 \end_layout
 
-\begin_layout Itemize
-Hardware
+\begin_layout Subsection
+Projekt auf BerliOS
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Chapter
+Hardware/Mechanik
+\end_layout
+
+\begin_layout Section
 Kommunikationsstruktur
 \end_layout
 
 \begin_layout Itemize
-Servosanbindung
+Master-Slave-Protokoll
 \end_layout
 
-\begin_layout Chapter
-Hardware
-\end_layout
-
-\begin_layout Itemize
+\begin_layout Section
 Servoanbindung
 \end_layout
 
 \begin_layout Itemize
-Netzteil
+Level-Shifting
 \end_layout
 
 \begin_layout Itemize
-Kommunikationsstruktur
+Verweis zu Schaltung
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Section
 Maße Chassis
 \end_layout
 
-\begin_layout Itemize
-EAGLE-Schaltungen
+\begin_layout Section
+Netzteil
 \end_layout
 
 \begin_layout Standard
@@ -1076,10 +1101,6 @@ name "fig:Schritt-1:-x-y-Ebene"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
