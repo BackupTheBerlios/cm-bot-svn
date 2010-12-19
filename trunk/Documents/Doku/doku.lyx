@@ -271,6 +271,219 @@ Maße Chassis
 EAGLE-Schaltungen
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Eagle-Schaltungen
+\end_layout
+
+\begin_layout Subsection
+Dynamixel-Anbindung
+\end_layout
+
+\begin_layout Standard
+Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "Flo: Dynamixel-Anbindung"
+
+\end_inset
+
+ zeigt die Anbindung der Dynamixel, inklusive der Spannungsversorung und
+ dem Levelshifting.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset CommandInset label
+LatexCommand label
+name "Flo: Dynamixel-Anbindung"
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename Bilder/CM-Bot_schematic_DNX.png
+	lyxscale 20
+	scale 80
+	rotateAngle 90
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Dynamixel-Anbindung
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Kommunikation - Bus
+\end_layout
+
+\begin_layout Standard
+Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "Flo: Kommunikation - Bus"
+
+\end_inset
+
+ zeigt die angedachte Schaltung, die als Bussystem angedacht war.
+ Aufgrund eines Hardwaredefekts des Tristate-Treibers wurde aber zunächst
+ die Schaltung wie unter 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Kommunikation"
+
+\end_inset
+
+ realisiert.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset CommandInset label
+LatexCommand label
+name "Flo: Kommunikation - Bus"
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename Bilder/CM-Bot_schematic_Com_Bus.png
+	lyxscale 50
+	rotateAngle 90
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Kommunikation
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Kommunikation"
+
+\end_inset
+
+Kommunikation
+\end_layout
+
+\begin_layout Standard
+Abbildung 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "Flo:Kommunikation"
+
+\end_inset
+
+ zeigt die konkrete Umsetzung, die aus einem Hardwaredefekt des Tristate-Treiber
+s resultiert.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset CommandInset label
+LatexCommand label
+name "Flo:Kommunikation"
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename Bilder/CM-Bot_schematic_Com.png
+	lyxscale 30
+	rotateAngle 90
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Kommunikation
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Chapter
 Kinematik
 \end_layout
