@@ -1,4 +1,4 @@
-#LyX 1.6.5 created this file. For more info see http://www.lyx.org/
+#LyX 1.6.7 created this file. For more info see http://www.lyx.org/
 \lyxformat 345
 \begin_document
 \begin_header
@@ -30,7 +30,7 @@
 \definecolor{light-gray}{gray}{0.85}
 \lstset{frame=no, basicstyle=\ttfamily\small, tabsize=2, backgroundcolor=\color{light-gray}, breaklines=true, breakatwhitespace=true,prebreak={\Righttorque}}
 % Querverweise
-\usepackage{varioref}
+%\usepackage{varioref}
 \usepackage{prettyref}
 \newrefformat{fig}{Abbildung~\vref{#1}}
 \newrefformat{cha}{Kapitel~\vref{#1}}
@@ -40,6 +40,8 @@
 
 %\usepackage{lscape}
 \usepackage{pdflscape}
+
+\usepackage[titles]{tocloft}
 \end_preamble
 \options abstracton,liststotoc,bibtotoc,intoc
 \use_default_options true
@@ -73,7 +75,7 @@
 \use_geometry false
 \use_amsmath 1
 \use_esint 1
-\cite_engine basic
+\cite_engine natbib_authoryear
 \use_bibtopic false
 \paperorientation portrait
 \secnumdepth 3
@@ -257,6 +259,10 @@ Atmel ATXmega
 \end_layout
 
 \begin_layout Itemize
+//TODO
+\end_layout
+
+\begin_layout Itemize
 Controller
 \end_layout
 
@@ -264,16 +270,47 @@ Controller
 Projekt auf BerliOS
 \end_layout
 
+\begin_layout Standard
+// TODO
+\end_layout
+
 \begin_layout Chapter
 Hardware/Mechanik
 \end_layout
 
 \begin_layout Section
-Kommunikationsstruktur
+Maße Chassis
+\end_layout
+
+\begin_layout Standard
+// TODO
+\end_layout
+
+\begin_layout Section
+Netzteil
 \end_layout
 
 \begin_layout Itemize
-Master-Slave-Protokoll
+Es werden verschiedene Spannungen benötigt.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+12 V
+\end_layout
+
+\begin_layout Itemize
+5 V
+\end_layout
+
+\begin_layout Itemize
+3,3 V
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+// TODO
 \end_layout
 
 \begin_layout Section
@@ -289,11 +326,11 @@ Verweis zu Schaltung
 \end_layout
 
 \begin_layout Section
-Maße Chassis
+Kommunikationsstruktur
 \end_layout
 
-\begin_layout Section
-Netzteil
+\begin_layout Itemize
+Master-Slave-Protokoll
 \end_layout
 
 \begin_layout Standard
@@ -315,7 +352,7 @@ Dynamixel-Anbindung
 Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "Flo: Dynamixel-Anbindung"
+reference "fig:Dynamixel-Anbindung"
 
 \end_inset
 
@@ -333,13 +370,6 @@ status collapsed
 \begin_layout Plain Layout
 \noindent
 \align center
-\begin_inset CommandInset label
-LatexCommand label
-name "Flo: Dynamixel-Anbindung"
-
-\end_inset
-
-
 \begin_inset Graphics
 	filename Bilder/CM-Bot_schematic_DNX.png
 	lyxscale 20
@@ -356,6 +386,13 @@ name "Flo: Dynamixel-Anbindung"
 
 \begin_layout Plain Layout
 Dynamixel-Anbindung
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Dynamixel-Anbindung"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -376,7 +413,7 @@ Kommunikation - Bus
 Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "Flo: Kommunikation - Bus"
+reference "fig:Kommunikation---Bus"
 
 \end_inset
 
@@ -389,7 +426,7 @@ reference "sub:Kommunikation"
 
 \end_inset
 
- realisiert.
+ beschrieben, realisiert.
 \end_layout
 
 \begin_layout Standard
@@ -402,13 +439,6 @@ status collapsed
 \begin_layout Plain Layout
 \noindent
 \align center
-\begin_inset CommandInset label
-LatexCommand label
-name "Flo: Kommunikation - Bus"
-
-\end_inset
-
-
 \begin_inset Graphics
 	filename Bilder/CM-Bot_schematic_Com_Bus.png
 	lyxscale 50
@@ -423,7 +453,14 @@ name "Flo: Kommunikation - Bus"
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Kommunikation
+Kommunikation - Bus
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Kommunikation---Bus"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -450,14 +487,14 @@ name "sub:Kommunikation"
 
 \end_inset
 
-Kommunikation
+Kommunikation - Alternativschaltung
 \end_layout
 
 \begin_layout Standard
 Abbildung 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "Flo:Kommunikation"
+reference "fig:Kommunikation"
 
 \end_inset
 
@@ -475,13 +512,6 @@ status collapsed
 \begin_layout Plain Layout
 \noindent
 \align center
-\begin_inset CommandInset label
-LatexCommand label
-name "Flo:Kommunikation"
-
-\end_inset
-
-
 \begin_inset Graphics
 	filename Bilder/CM-Bot_schematic_Com.png
 	lyxscale 30
@@ -497,6 +527,13 @@ name "Flo:Kommunikation"
 
 \begin_layout Plain Layout
 Kommunikation
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Kommunikation"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1465,9 +1502,9 @@ Der 4-Punkte-Lauf ist ein sehr einfacher Laufalgorithmus, der den Roboter
 \begin_layout Standard
 Jedes der sechs Beine benötigt entweder vier Roboterkoorinaten oder vier
  Weltkoordinaten, welche koordiniert angefahren werden müssen.
- In 
+ In Abbildung 
 \begin_inset CommandInset ref
-LatexCommand prettyref
+LatexCommand ref
 reference "fig:movement4Points"
 
 \end_inset
@@ -1481,7 +1518,7 @@ reference "fig:movement4Points"
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
