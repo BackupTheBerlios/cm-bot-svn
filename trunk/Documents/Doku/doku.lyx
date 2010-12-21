@@ -1,4 +1,4 @@
-#LyX 1.6.7 created this file. For more info see http://www.lyx.org/
+#LyX 1.6.5 created this file. For more info see http://www.lyx.org/
 \lyxformat 345
 \begin_document
 \begin_header
@@ -30,8 +30,8 @@
 \definecolor{light-gray}{gray}{0.85}
 \lstset{frame=no, basicstyle=\ttfamily\small, tabsize=2, backgroundcolor=\color{light-gray}, breaklines=true, breakatwhitespace=true,prebreak={\Righttorque}}
 % Querverweise
-%\usepackage{varioref}
 \usepackage{prettyref}
+%\usepackage{varioref}
 \newrefformat{fig}{Abbildung~\vref{#1}}
 \newrefformat{cha}{Kapitel~\vref{#1}}
 \newrefformat{sec}{Abschnitt~\vref{#1}}
@@ -282,57 +282,81 @@ Hardware/Mechanik
 Maße Chassis
 \end_layout
 
-\begin_layout Standard
-// TODO
+\begin_layout Itemize
+Höhe: 60 mm
+\end_layout
+
+\begin_layout Itemize
+Länge: 500 mm
+\end_layout
+
+\begin_layout Itemize
+Breite: 250 mm
+\end_layout
+
+\begin_layout Itemize
+Vorderes/Hinteres Bein: 41 mm (von außen)
+\end_layout
+
+\begin_layout Itemize
+Mittleres Bein: 250 mm
+\end_layout
+
+\begin_layout Itemize
+Abstand der Beine zueinander: 
 \end_layout
 
 \begin_layout Section
 Netzteil
 \end_layout
 
-\begin_layout Itemize
-Es werden verschiedene Spannungen benötigt.
- 
+\begin_layout Standard
+Es werden für die verschiedene Komponenten drei unterschiedliche Versorgungsspan
+nungen benötigt:
 \end_layout
 
-\begin_deeper
 \begin_layout Itemize
 12 V
 \end_layout
 
+\begin_deeper
+\begin_layout Itemize
+VCC der Servomotoren
+\end_layout
+
+\end_deeper
 \begin_layout Itemize
 5 V
 \end_layout
 
+\begin_deeper
+\begin_layout Itemize
+Steuerleitung für die Servomotoren
+\end_layout
+
+\begin_layout Itemize
+Levelshifting-ICs von 3,3 V auf 5 V
+\end_layout
+
+\end_deeper
 \begin_layout Itemize
 3,3 V
 \end_layout
 
+\begin_deeper
+\begin_layout Itemize
+Mikrcontrollermodule
+\end_layout
+
+\begin_layout Itemize
+Levelshifting-ICs von 5 V auf 3,3 V
+\end_layout
+
+\begin_layout Itemize
+Tri-State-ICs für Kommunikation
+\end_layout
+
 \end_deeper
-\begin_layout Standard
-// TODO
-\end_layout
-
-\begin_layout Section
-Servoanbindung
-\end_layout
-
-\begin_layout Itemize
-Level-Shifting
-\end_layout
-
-\begin_layout Itemize
-Verweis zu Schaltung
-\end_layout
-
-\begin_layout Section
-Kommunikationsstruktur
-\end_layout
-
-\begin_layout Itemize
-Master-Slave-Protokoll
-\end_layout
-
 \begin_layout Standard
 \begin_inset Newpage newpage
 \end_inset
@@ -417,7 +441,8 @@ reference "fig:Kommunikation---Bus"
 
 \end_inset
 
- zeigt die angedachte Schaltung, die als Bussystem angedacht war.
+ zeigt die angedachte Schaltung, die als Master-Slave-Bussystem angedacht
+ war.
  Aufgrund eines Hardwaredefekts des Tristate-Treibers wurde aber zunächst
  die Schaltung wie unter 
 \begin_inset CommandInset ref
