@@ -550,8 +550,39 @@ name "fig:Kommunikation"
 Kinematik
 \end_layout
 
+\begin_layout Standard
+Um koordinierte Bewegungen des CM-Bot zu ermöglichen, wird den Bewegungen
+ ein mathematisches Modell zugrunde gelegt.
+ Dabei spielen zwei Begriffe eine wichtige Rolle.
+ Zum einen sind das die Roboterkoordinaten, die eine Repräsentation der
+ einzelnen Gelenkwinkel des Roboters darstellen, und zum anderen die karthesisch
+en Weltkoordinaten.
+ Während die Weltkoordinaten den Arbeitsraum des Roboters definieren, bestimmen
+ die Roboterkoordinaten den Konfigurationsraum.
+ Mit Hilfe der 
+\shape italic
+Direkten
+\shape default
+ und 
+\shape italic
+Inversen Kinematik
+\shape default
+ können diese beiden Koordinatendarstellungen ineinander überführt werden.
+ 
+\end_layout
+
 \begin_layout Section
 Direkte Kinematik
+\end_layout
+
+\begin_layout Standard
+Die 
+\shape italic
+Direkte Kinematik
+\shape default
+ steht für die Umrechnung von Roboterkoordinaten in Weltkoordinaten.
+ Dazu wird hierbei die Koordinatentransformation nach Denavit-Hartenberg
+ angewendet.
 \end_layout
 
 \begin_layout Subsection
@@ -559,6 +590,27 @@ Denavit-Hartenberg-Parameter
 \end_layout
 
 \begin_layout Standard
+Aus den physischen Gegebenheiten der einzelnen Beinglieder des Roboters
+ ergeben sich die Paramter für die Koordinatentransformation nach Denavit-Harten
+berg die in Tabelle 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Denavit-Hartenberg-Parameter"
+
+\end_inset
+
+ eingetragen sind.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="5" columns="4">
 <features>
@@ -820,8 +872,32 @@ Denavit-Hartenberg-Parameter
 
 \end_layout
 
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Denavit-Hartenberg-Parameter
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Denavit-Hartenberg-Parameter"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
-Denavit-Hartenberg-Matrix
+Berechnung der Denavit-Hartenberg-Matrix
 \end_layout
 
 \begin_layout Standard
@@ -833,6 +909,8 @@ Aus den Denavit-Hartenberg-Parametern ergeben sich die folgenden Matrizen:
 \end_layout
 
 \begin_layout Standard
+
+\size footnotesize
 \begin_inset Formula $D_{01}=\left(\begin{array}{cccc}
 \cos\!\left(\vartheta_{1}\right) & 0 & -\sin\!\left(\vartheta_{1}\right) & 50\,\cos\!\left(\vartheta_{1}\right)\\
 \sin\!\left(\vartheta_{1}\right) & 0 & \cos\!\left(\vartheta_{1}\right) & 50\,\sin\!\left(\vartheta_{1}\right)\\
@@ -844,6 +922,8 @@ Aus den Denavit-Hartenberg-Parametern ergeben sich die folgenden Matrizen:
 \end_layout
 
 \begin_layout Standard
+
+\size footnotesize
 \begin_inset Formula $D_{12}=\left(\begin{array}{cccc}
 \cos\!\left(\vartheta_{2}\right) & -\sin\!\left(\vartheta_{2}\right) & 0 & 85\,\cos\!\left(\vartheta_{2}\right)\\
 \sin\!\left(\vartheta_{2}\right) & \cos\!\left(\vartheta_{2}\right) & 0 & 85\,\sin\!\left(\vartheta_{2}\right)\\
@@ -855,7 +935,9 @@ Aus den Denavit-Hartenberg-Parametern ergeben sich die folgenden Matrizen:
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $D_{12}=\left(\begin{array}{cccc}
+
+\size footnotesize
+\begin_inset Formula $D_{23}=\left(\begin{array}{cccc}
 \cos\!\left(\vartheta_{3}\right) & -\sin\!\left(\vartheta_{3}\right) & 0 & 55\,\cos\!\left(\vartheta_{3}\right)\\
 \sin\!\left(\vartheta_{3}\right) & \cos\!\left(\vartheta_{3}\right) & 0 & 55\,\sin\!\left(\vartheta_{3}\right)\\
 0 & 0 & 1 & 0\\
@@ -881,17 +963,17 @@ begin{landscape}
 
 \end_layout
 
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-thispagestyle{empty}
+\begin_layout Subsubsection
+Die komplette Denavit-Hartenberg-Matrix des CM-Bot
 \end_layout
 
+\begin_layout Standard
+Nach ausmultiplizieren von 
+\begin_inset Formula $D_{01}\cdot D_{12}\cdot D_{23}$
+\end_inset
+
+ erhält man:
+\begin_inset Newline newline
 \end_inset
 
 
@@ -899,7 +981,7 @@ thispagestyle{empty}
 
 \begin_layout Standard
 
-\size small
+\size footnotesize
 \lang english
 \begin_inset Formula $D_{03}=\left(\begin{array}{cccc}
 c\!\left(\vartheta_{1}\right)\, c\!\left(\vartheta_{2}\right)\, c\!\left(\vartheta_{3}\right)-c\!\left(\vartheta_{1}\right)\, s\!\left(\vartheta_{2}\right)\, s\!\left(\vartheta_{3}\right) & -c\!\left(\vartheta_{1}\right)\, c\!\left(\vartheta_{2}\right)\, s\!\left(\vartheta_{3}\right)-c\!\left(\vartheta_{1}\right)\, c\!\left(\vartheta_{3}\right)\, s\!\left(\vartheta_{2}\right) & -s\!\left(\vartheta_{1}\right) & 50\, c\!\left(\vartheta_{1}\right)+85\, c\!\left(\vartheta_{1}\right)\, c\!\left(\vartheta_{2}\right)-55\, c\!\left(\vartheta_{1}\right)\, s\!\left(\vartheta_{2}\right)\, s\!\left(\vartheta_{3}\right)+55\, c\!\left(\vartheta_{1}\right)\, c\!\left(\vartheta_{2}\right)\, c\!\left(\vartheta_{3}\right)\\
@@ -909,6 +991,24 @@ c\!\left(\vartheta_{2}\right)\, c\!\left(\vartheta_{3}\right)\, s\!\left(\varthe
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsubsection
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Einzelne-Terme-der"
+
+\end_inset
+
+Einzelne Terme der Matrix
+\end_layout
+
+\begin_layout Standard
+Aus den einzelnen Terme der 
+\begin_inset Formula $D_{03}$
+\end_inset
+
+- Matrix ergibt sich das folgende Gleichungssystem: 
 \end_layout
 
 \begin_layout Standard
@@ -933,7 +1033,7 @@ c\!\left(\vartheta_{2}\right)\, c\!\left(\vartheta_{3}\right)\, s\!\left(\varthe
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $p_{ex}=f_{13}=50\,\cos\!\left(\vartheta_{1}\right)+85\,\cos\!\left(\vartheta_{1}\right)\,\cos\!\left(\vartheta_{2}\right)-55\,\cos\!\left(\vartheta_{1}\right)\,\sin\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right)+55\,\cos\!\left(\vartheta_{1}\right)\,\cos\!\left(\vartheta_{2}\right)\,\cos\!\left(\vartheta_{3}\right)$
+\begin_inset Formula $p_{x}=f_{13}=50\,\cos\!\left(\vartheta_{1}\right)+85\,\cos\!\left(\vartheta_{1}\right)\,\cos\!\left(\vartheta_{2}\right)-55\,\cos\!\left(\vartheta_{1}\right)\,\sin\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right)+55\,\cos\!\left(\vartheta_{1}\right)\,\cos\!\left(\vartheta_{2}\right)\,\cos\!\left(\vartheta_{3}\right)$
 \end_inset
 
 
@@ -961,7 +1061,7 @@ c\!\left(\vartheta_{2}\right)\, c\!\left(\vartheta_{3}\right)\, s\!\left(\varthe
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $p_{ey}=f_{23}=50\,\sin\!\left(\vartheta_{1}\right)+85\,\cos\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{1}\right)-55\,\sin\!\left(\vartheta_{1}\right)\,\sin\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right)+55\,\cos\!\left(\vartheta_{2}\right)\,\cos\!\left(\vartheta_{3}\right)\,\sin\!\left(\vartheta_{1}\right)$
+\begin_inset Formula $p_{y}=f_{23}=50\,\sin\!\left(\vartheta_{1}\right)+85\,\cos\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{1}\right)-55\,\sin\!\left(\vartheta_{1}\right)\,\sin\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right)+55\,\cos\!\left(\vartheta_{2}\right)\,\cos\!\left(\vartheta_{3}\right)\,\sin\!\left(\vartheta_{1}\right)$
 \end_inset
 
 
@@ -989,7 +1089,7 @@ c\!\left(\vartheta_{2}\right)\, c\!\left(\vartheta_{3}\right)\, s\!\left(\varthe
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $p_{ez}=f_{33}=-85\,\sin\!\left(\vartheta_{2}\right)-55\,\cos\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right)-55\,\cos\!\left(\vartheta_{3}\right)\,\sin\!\left(\vartheta_{2}\right)-14$
+\begin_inset Formula $p_{z}=f_{33}=-85\,\sin\!\left(\vartheta_{2}\right)-55\,\cos\!\left(\vartheta_{2}\right)\,\sin\!\left(\vartheta_{3}\right)-55\,\cos\!\left(\vartheta_{3}\right)\,\sin\!\left(\vartheta_{2}\right)-14$
 \end_inset
 
 
@@ -1016,9 +1116,34 @@ Inverse Kinematik
 \end_layout
 
 \begin_layout Standard
-Die Lösung des inversen kinematischen Problems wird durch ein geometrisches
+Die
+\shape italic
+ Inverse Kinematik
+\shape default
+ ist das Gegenstück zur 
+\shape italic
+Direkten Kinematik
+\shape default
+.
+ Das bedeutet, dass sie zur Umrechnung von Weltkoordinaten in Roboterkoordinaten
+ dient.
+ Dafür gibt es mehrere Lösungsverfahren.
+ Beispielsweise könnte man das unter 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Einzelne-Terme-der"
+
+\end_inset
+
+ notierte Gleichungssystem verwenden.
+ Da es sich dabei um ein Nichtlineares Gleichungssystem mit drei Unbekannten
+ handelt wird im vorliegenden Projekt die Lösung durch ein geometrisches
  Verfahren berechnet.
- Durch Abbildung des 3-dimensionalen Koordinatensystems auf zwei 2-dimensionale
+ 
+\end_layout
+
+\begin_layout Standard
+Durch Abbildung des 3-dimensionalen Koordinatensystems auf zwei 2-dimensionale
  Koordinatensyteme können die Gelenkwinkel mit Hilfe der Trigonometrie berechnet
  werden.
 \end_layout
