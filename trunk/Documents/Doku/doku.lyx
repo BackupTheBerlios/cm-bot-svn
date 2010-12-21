@@ -299,11 +299,7 @@ Vorderes/Hinteres Bein: 41 mm (von außen)
 \end_layout
 
 \begin_layout Itemize
-Mittleres Bein: 250 mm
-\end_layout
-
-\begin_layout Itemize
-Abstand der Beine zueinander: 
+Mittleres Bein: 250 mm (von außen)
 \end_layout
 
 \begin_layout Section
@@ -1638,6 +1634,12 @@ xmega.h Spezifische Methoden zur Ansteuerung und Initialisierung der Komponenten
 \end_layout
 
 \begin_layout Section
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:4-Punkte-Lauf"
+
+\end_inset
+
 4-Punkte-Lauf
 \end_layout
 
@@ -1754,6 +1756,108 @@ Der Master steuert hierbei die gesamte Bewegung, indem er jedem Beinpaar
  Laufalgorithmus, da sie nur die empfangenen Befehle des Masters ausführen.
  Somit kann auf allen Slaves das selbe Programm verwendet werden und durch
  eine Umprogrammierung des Masters, kann der Laufalgorithmus geändert werden.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Evolutionäres Laufen
+\end_layout
+
+\begin_layout Standard
+Im Rahmen des Wahlpflichtmoduls Evolutionäre Algorithmen entstand noch ein
+ weiterer Algorithmus.
+ Dieser bekam die Bezeichnung Evolutionäres Laufen.
+ Dieser basiert im wesentlichen auf einer Startpunktsuche für Bewegungen
+ bei vorgegebenem Vektor im Raum.
+ Der Startpunkt ist dabei der Punkt, wo ein Bein des Roboters auf den Boden
+ aufsetzt und die Bewegung beginnt.
+ Diese Bewegung soll in Richtung des Vektors liegen, innerhalb des Arbeitsraumes
+ liegen und eine maximale Länge haben.
+ Als Laufmuster wird dabei der Tripod-Gait zugrunde gelegt, der vom Prinzip
+ her, wie auch der 4-Punkt-Laufalgorithmus (Siehe 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:4-Punkte-Lauf"
+
+\end_inset
+
+), ein Bewegung so ausführt, dass dabei drei Beine in der Luft sind und
+ die anderen drei auf dem Boden.
+\end_layout
+
+\begin_layout Standard
+Der Evolutionäre Algorithmus liefert für einen vorgegebenen Vektor einen
+ Startpunkt, sowie den maximal anfahrbaren Punkt, der vom Startpunkt ausgehend
+ in Vektorrichtung liegt.
+ Dies muss jeweils für ein Bein auf jeder Seite des Roboters ausgeführt
+ werden.
+ Realisiert wird dies, in dem der Evolutionäre Algorithmus einmal mit dem
+ normalen Vektor und einmal mit dem invertierten Vektor ausgeführt wird.
+ Da sich daraus normalerweise zwei unterschiedliche Längen ergeben und zwischen
+ den einzelnen Beinen Abhängigkeiten bestehen, wird die kürzere Distanz
+ als die zurückzulegende Distanz gewählt.
+ Daraufhin werden noch die Mittelpunkte zwischen den Start- und Endpunkten
+ berechnet, damit beliebige Bewegungen möglich sind.
+ 
+\end_layout
+
+\begin_layout Standard
+Anschließend wird dann ein Schritt nach dem folgenden Algorithmus ausgeführt:
+\end_layout
+
+\begin_layout Enumerate
+Inaktive Beine in die Luft
+\end_layout
+
+\begin_layout Enumerate
+Inaktive Beine fahren in der Luft Startpunkt an 
+\end_layout
+
+\begin_layout Enumerate
+Alle Beine auf den Boden setzen
+\end_layout
+
+\begin_layout Enumerate
+Beine wechseln (aktive Beine werden inaktiv und inaktive Beine werden aktiv)
+\end_layout
+
+\begin_layout Enumerate
+Inaktive Beine in die Luft
+\end_layout
+
+\begin_layout Enumerate
+Aktive Beine führen Bewegung aus 
+\end_layout
+
+\begin_layout Enumerate
+Alle Beine wieder auf den Boden
+\end_layout
+
+\begin_layout Standard
+Dieser Algorithmus ermöglicht es dem CM-Bot Bewegungen in beliebige Richtungen
+ ausfzuführen.
+ 
+\end_layout
+
+\begin_layout Standard
+Nähere Informationen zum Evolutionären Algorithmus können unter 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.imn.htwk-leipzig.de/~mrick1
+\end_layout
+
+\end_inset
+
+ eingesehen werden.
 \end_layout
 
 \end_body
