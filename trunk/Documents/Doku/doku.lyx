@@ -1,4 +1,4 @@
-#LyX 1.6.5 created this file. For more info see http://www.lyx.org/
+#LyX 1.6.7 created this file. For more info see http://www.lyx.org/
 \lyxformat 345
 \begin_document
 \begin_header
@@ -271,15 +271,63 @@ Projekt auf BerliOS
 \end_layout
 
 \begin_layout Standard
-// TODO
+BerliOS ist ein Webportal der Fraunhofer-Gesellschaft zur Verwaltung quelloffene
+r Softwareprojekte.
+ Das Portal stellt unentgeldlich viele nützliche Funktionen für Entwickler
+ bereit:
+\end_layout
+
+\begin_layout Itemize
+Versionsverwaltung: CVS, SVN, GIT, Mercurial
+\end_layout
+
+\begin_layout Itemize
+FTP & Webspace
+\end_layout
+
+\begin_layout Itemize
+Wiki
+\end_layout
+
+\begin_layout Itemize
+u.m.
+\end_layout
+
+\begin_layout Standard
+Für diese Praxisaufgabe wurde auf BerliOS das Projekt 
+\begin_inset Quotes pld
+\end_inset
+
+CM-Bot
+\begin_inset Quotes prd
+\end_inset
+
+ erstellt, welches unter 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://developer.berlios.de/projects/cm-bot/
+\end_layout
+
+\end_inset
+
+ erreichbar ist.
+ Der Projektname leitet sich aus den Anfangsbuchstaben der beiden Entwickler
+ Christof Pieloth und Matthias Rick her.
+ Auf BerliOS ist der gesamte Quellcode in der Versionsverwaltung SVN verfügbar.
+ Des Weiteren ist eine Wiki eingerichtet, in dem Spezifikationen der verwendeten
+ Hardware, Handbücher, Dokumentationen sowie die zur Entwicklung benötigten
+ Programme aufgelistet sind.
 \end_layout
 
 \begin_layout Chapter
-Hardware/Mechanik
+Hardware & Mechanik
 \end_layout
 
 \begin_layout Section
-Maße Chassis
+Chassis
 \end_layout
 
 \begin_layout Itemize
@@ -341,7 +389,7 @@ Levelshifting-ICs von 3,3 V auf 5 V
 
 \begin_deeper
 \begin_layout Itemize
-Mikrcontrollermodule
+Mikrocontrollermodule
 \end_layout
 
 \begin_layout Itemize
@@ -1540,9 +1588,9 @@ Programmierung
 \begin_layout Standard
 In diesem Kapitel wird die Programmierung des Roboters beschrieben.
  Zu Beginn wird kurz die erstellte API vorgestellt.
- Anschließend wird die Umsetzung eines einfachen Lauf\SpecialChar \-
+ Anschließend wird die Umsetzung der Lauf\SpecialChar \-
 algo\SpecialChar \-
-rithmus erläutert.
+rithmen erläutert.
 \end_layout
 
 \begin_layout Section
@@ -1780,7 +1828,7 @@ Im Rahmen des Wahlpflichtmoduls Evolutionäre Algorithmen entstand noch ein
  Diese Bewegung soll in Richtung des Vektors liegen, innerhalb des Arbeitsraumes
  liegen und eine maximale Länge haben.
  Als Laufmuster wird dabei der Tripod-Gait zugrunde gelegt, der vom Prinzip
- her, wie auch der 4-Punkt-Laufalgorithmus (Siehe 
+ her, wie auch der 4-Punkt-Laufalgorithmus (siehe 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:4-Punkte-Lauf"
@@ -1841,7 +1889,7 @@ Alle Beine wieder auf den Boden
 
 \begin_layout Standard
 Dieser Algorithmus ermöglicht es dem CM-Bot Bewegungen in beliebige Richtungen
- ausfzuführen.
+ auszuführen.
  
 \end_layout
 
