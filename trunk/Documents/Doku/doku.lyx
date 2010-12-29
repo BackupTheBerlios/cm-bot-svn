@@ -1,4 +1,4 @@
-#LyX 1.6.7 created this file. For more info see http://www.lyx.org/
+#LyX 1.6.5 created this file. For more info see http://www.lyx.org/
 \lyxformat 345
 \begin_document
 \begin_header
@@ -32,16 +32,16 @@
 % Querverweise
 \usepackage{prettyref}
 %\usepackage{varioref}
-\newrefformat{fig}{Abbildung~\vref{#1}}
-\newrefformat{cha}{Kapitel~\vref{#1}}
-\newrefformat{sec}{Abschnitt~\vref{#1}}
-\newrefformat{sub}{Unterabschnitt~\vref{#1}}
-\newrefformat{tab}{Tabelle~\vref{#1}}
+%\newrefformat{fig}{Abbildung~\vref{#1}}
+%\newrefformat{cha}{Kapitel~\vref{#1}}
+%\newrefformat{sec}{Abschnitt~\vref{#1}}
+%\newrefformat{sub}{Unterabschnitt~\vref{#1}}
+%\newrefformat{tab}{Tabelle~\vref{#1}}
 
 %\usepackage{lscape}
 \usepackage{pdflscape}
 
-\usepackage[titles]{tocloft}
+%\usepackage[titles]{tocloft}
 \end_preamble
 \options abstracton,liststotoc,bibtotoc,intoc
 \use_default_options true
@@ -255,15 +255,54 @@ Dynamixel AX-12
 \end_layout
 
 \begin_layout Subsection
-Atmel ATXmega
+Atmel ATxmega
 \end_layout
 
-\begin_layout Itemize
-//TODO
+\begin_layout Standard
+Der verwendete Controller muss genügend Rechenleistung besitzen, um die
+ aufwendige inverse Kinematik und einen Laufalgorithmus berechnen zu können.
+ Des Weiteren benötigt er mindestens eine USART-Schnittstelle um mit den
+ Servomotoren kommunizieren zu können.
+ Zusätzlich wird eine weitere Datenschnittstelle benötigt um eine Kommunikations
+struktur aufbauen zu können.
 \end_layout
 
-\begin_layout Itemize
-Controller
+\begin_layout Standard
+Atmel bietet mit der AVR XMEGA Serie günstige und leistungsstarke 8/16-bit
+ Controller an.
+ Mit vier SPI-, vier TWI- und acht USART-Schnittstellen sind die zuvor genannten
+ Anforderungen erfüllt.
+ Außerdem stellt Atmel eine umfangreiche Dokumentation, Beispielcode und
+ Software zur Verfügung.
+\end_layout
+
+\begin_layout Standard
+Um den Hardwareaufwand gering zu halten, wird ein schlankes Mikrocontroller-Modu
+l
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://mikrocontroller-praxis.de/de/Development-Tools/MC-Module/XMEGA-A1-USB.html
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ aus dem Online-Shop von 
+\shape italic
+Mikrocontroller-Praxis
+\shape default
+ genutzt.
 \end_layout
 
 \begin_layout Subsection
@@ -1620,26 +1659,7 @@ http://www.doxygen.org
 \end_inset
 
  erstellt werden.
- Der Sourcecode sowie die aktuelle API im HTML-Format ist im BerliOS-Projekt
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-\begin_inset Flex URL
-status collapsed
-
-\begin_layout Plain Layout
-
-http://developer.berlios.de/projects/cm-bot/
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
+ Der Quellcode sowie die aktuelle API im HTML-Format sind im BerliOS-Projekt
  verfügbar.
 \end_layout
 
