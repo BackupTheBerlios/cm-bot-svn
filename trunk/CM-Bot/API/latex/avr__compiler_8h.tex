@@ -1,0 +1,85 @@
+\section{include/avr\_\-compiler.h-\/Dateireferenz}
+\label{avr__compiler_8h}\index{include/avr\_\-compiler.h@{include/avr\_\-compiler.h}}
+
+
+This file implements some macros that makes the IAR C-\/compiler and avr-\/gcc work with the same code base for the AVR architecture.  
+
+
+{\ttfamily \#include $<$stdint.h$>$}\par
+{\ttfamily \#include $<$stdbool.h$>$}\par
+{\ttfamily \#include $<$stdlib.h$>$}\par
+\subsection*{Makrodefinitionen}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf F\_\-CPU}~2000000UL
+\begin{DoxyCompactList}\small\item\em Define default CPU frequency, if this is not already defined. \item\end{DoxyCompactList}\item 
+\#define {\bf AVR\_\-ENTER\_\-CRITICAL\_\-REGION}()
+\begin{DoxyCompactList}\small\item\em This macro will protect the following code from interrupts. \item\end{DoxyCompactList}\item 
+\#define {\bf AVR\_\-LEAVE\_\-CRITICAL\_\-REGION}()~SREG = saved\_\-sreg;
+\begin{DoxyCompactList}\small\item\em This macro must always be used in conjunction with AVR\_\-ENTER\_\-CRITICAL\_\-REGION so the interrupts are enabled again. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Ausführliche Beschreibung}
+This file implements some macros that makes the IAR C-\/compiler and avr-\/gcc work with the same code base for the AVR architecture. \begin{DoxyParagraph}{Documentation}
+For comprehensive code documentation, supported compilers, compiler settings and supported devices see readme.html
+\end{DoxyParagraph}
+\begin{DoxyAuthor}{Autor}
+Atmel Corporation: {\tt http://www.atmel.com} \par
+ Support email: {\tt avr@atmel.com}
+\end{DoxyAuthor}
+\begin{DoxyParagraph}{Revision:}
+613 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Date:}
+2006-\/04-\/07 14:40:07 +0200 (fr, 07 apr 2006) 
+\end{DoxyParagraph}
+\par
+
+
+Copyright (c) 2008, Atmel Corporation All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+3. The name of ATMEL may not be used to endorse or promote products derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY ATMEL \char`\"{}AS IS\char`\"{} AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE EXPRESSLY AND SPECIFICALLY DISCLAIMED. IN NO EVENT SHALL ATMEL BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+
+\subsection{Makro-\/Dokumentation}
+\index{avr\_\-compiler.h@{avr\_\-compiler.h}!AVR\_\-ENTER\_\-CRITICAL\_\-REGION@{AVR\_\-ENTER\_\-CRITICAL\_\-REGION}}
+\index{AVR\_\-ENTER\_\-CRITICAL\_\-REGION@{AVR\_\-ENTER\_\-CRITICAL\_\-REGION}!avr_compiler.h@{avr\_\-compiler.h}}
+\subsubsection[{AVR\_\-ENTER\_\-CRITICAL\_\-REGION}]{\setlength{\rightskip}{0pt plus 5cm}\#define AVR\_\-ENTER\_\-CRITICAL\_\-REGION(
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{avr__compiler_8h_a0a4fb62f9e69209c9c8c8e34ebb3df6f}
+{\bfseries Wert:}
+\begin{DoxyCode}
+uint8_t volatile saved_sreg = SREG; \
+                                     cli();
+\end{DoxyCode}
+
+
+This macro will protect the following code from interrupts. 
+
+\index{avr\_\-compiler.h@{avr\_\-compiler.h}!AVR\_\-LEAVE\_\-CRITICAL\_\-REGION@{AVR\_\-LEAVE\_\-CRITICAL\_\-REGION}}
+\index{AVR\_\-LEAVE\_\-CRITICAL\_\-REGION@{AVR\_\-LEAVE\_\-CRITICAL\_\-REGION}!avr_compiler.h@{avr\_\-compiler.h}}
+\subsubsection[{AVR\_\-LEAVE\_\-CRITICAL\_\-REGION}]{\setlength{\rightskip}{0pt plus 5cm}\#define AVR\_\-LEAVE\_\-CRITICAL\_\-REGION(
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)~SREG = saved\_\-sreg;}\label{avr__compiler_8h_a770b47b04eec57748be0826a3d23503b}
+
+
+This macro must always be used in conjunction with AVR\_\-ENTER\_\-CRITICAL\_\-REGION so the interrupts are enabled again. 
+
+\index{avr\_\-compiler.h@{avr\_\-compiler.h}!F\_\-CPU@{F\_\-CPU}}
+\index{F\_\-CPU@{F\_\-CPU}!avr_compiler.h@{avr\_\-compiler.h}}
+\subsubsection[{F\_\-CPU}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\_\-CPU~2000000UL}\label{avr__compiler_8h_a43bafb28b29491ec7f871319b5a3b2f8}
+
+
+Define default CPU frequency, if this is not already defined. 
+

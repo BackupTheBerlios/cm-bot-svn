@@ -1,0 +1,223 @@
+\section{utils.c-\/Dateireferenz}
+\label{utils_8c}\index{utils.c@{utils.c}}
+
+
+Verschiedene Hilfsmethoden.  
+
+
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include $<$math.h$>$}\par
+{\ttfamily \#include \char`\"{}include/utils.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}include/xmega.h\char`\"{}}\par
+\subsection*{Makrodefinitionen}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf USART\_\-ON}
+\begin{DoxyCompactList}\small\item\em Debug-\/Ausgabe auf stdo oder USART. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Funktionen}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf UTL\_\-printMatrix} (const {\bf DT\_\-double} $\ast$$\ast$const mat, {\bf DT\_\-size} rows, {\bf DT\_\-size} columns)
+\begin{DoxyCompactList}\small\item\em Gibt eine Matrix auf stdo aus. \item\end{DoxyCompactList}\item 
+void {\bf UTL\_\-printLeg} (const {\bf DT\_\-leg} $\ast$const leg, {\bf DT\_\-type} type)
+\begin{DoxyCompactList}\small\item\em Gibt die Soll-\/Winkel eines Beines auf stdo aus. \item\end{DoxyCompactList}\item 
+void {\bf UTL\_\-printPoint} (const {\bf DT\_\-point} $\ast$const p)
+\begin{DoxyCompactList}\small\item\em Gibt einen Punkt auf stdo aus. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-double} {\bf UTL\_\-getRadiant} ({\bf DT\_\-double} angle)
+\begin{DoxyCompactList}\small\item\em Umrechnung in das Bogenmaß. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-double} {\bf UTL\_\-getDegree} ({\bf DT\_\-double} radiant)
+\begin{DoxyCompactList}\small\item\em Umrechnung in das Gradmaß. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-point} {\bf UTL\_\-getPointOfDH} (const {\bf DT\_\-double} $\ast$$\ast$const dh)
+\begin{DoxyCompactList}\small\item\em Extrahiert den Punkt aus der DH-\/Matrix. \item\end{DoxyCompactList}\item 
+void {\bf UTL\_\-printDebug} (const {\bf DT\_\-char} $\ast$const msg, {\bf DT\_\-size} size)
+\begin{DoxyCompactList}\small\item\em Debug-\/Ausgabe. \item\end{DoxyCompactList}\item 
+void {\bf UTL\_\-printDebugByte} (const {\bf DT\_\-byte} $\ast$const packet, {\bf DT\_\-size} size)
+\begin{DoxyCompactList}\small\item\em Debug-\/Ausgabe von Bytes. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-byte} {\bf UTL\_\-byteToHexChar} ({\bf DT\_\-char} $\ast$const dest, const {\bf DT\_\-byte} $\ast$const src, {\bf DT\_\-size} size)
+\begin{DoxyCompactList}\small\item\em Konvertierung eines Bytes in das Hexadezimal-\/Format. \item\end{DoxyCompactList}\item 
+void {\bf UTL\_\-wait} ({\bf DT\_\-size} rounds)
+\begin{DoxyCompactList}\small\item\em Abstraktion von einer Pause/Delay. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Ausführliche Beschreibung}
+Verschiedene Hilfsmethoden. Stellt verschiedene Hilfsmethoden für allgemeinen Gebrauch zur Verfügung. 
+
+\subsection{Makro-\/Dokumentation}
+\index{utils.c@{utils.c}!USART\_\-ON@{USART\_\-ON}}
+\index{USART\_\-ON@{USART\_\-ON}!utils.c@{utils.c}}
+\subsubsection[{USART\_\-ON}]{\setlength{\rightskip}{0pt plus 5cm}\#define USART\_\-ON}\label{utils_8c_a4f991907e1258478927acfccf15dccbb}
+
+
+Debug-\/Ausgabe auf stdo oder USART. 
+
+
+
+\subsection{Dokumentation der Funktionen}
+\index{utils.c@{utils.c}!UTL\_\-byteToHexChar@{UTL\_\-byteToHexChar}}
+\index{UTL\_\-byteToHexChar@{UTL\_\-byteToHexChar}!utils.c@{utils.c}}
+\subsubsection[{UTL\_\-byteToHexChar}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-byte} UTL\_\-byteToHexChar (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-char} $\ast$const }]{ dest, }
+\item[{const {\bf DT\_\-byte} $\ast$const }]{ src, }
+\item[{{\bf DT\_\-size}}]{ size}
+\end{DoxyParamCaption}
+)}\label{utils_8c_a86e5aa9496f9fb8b77493fec77140172}
+
+
+Konvertierung eines Bytes in das Hexadezimal-\/Format. 
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em dest}]Pointer auf das Zielfeld \item[{\em src}]Pointer auf das Quellfeld \item[{\em size}]Größe des Quellfelds \end{DoxyParams}
+\index{utils.c@{utils.c}!UTL\_\-getDegree@{UTL\_\-getDegree}}
+\index{UTL\_\-getDegree@{UTL\_\-getDegree}!utils.c@{utils.c}}
+\subsubsection[{UTL\_\-getDegree}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-double} UTL\_\-getDegree (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-double}}]{ radiant}
+\end{DoxyParamCaption}
+)}\label{utils_8c_ac29d0a5bbdc15ef9a9d8a9c8922c3e05}
+
+
+Umrechnung in das Gradmaß. 
+
+Rechnet einen Winkel in das Gradmaß um.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em radiant}]Winkel im Bogenmaß\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+In das Gradmaß umgerechneter Winkel 
+\end{DoxyReturn}
+\index{utils.c@{utils.c}!UTL\_\-getPointOfDH@{UTL\_\-getPointOfDH}}
+\index{UTL\_\-getPointOfDH@{UTL\_\-getPointOfDH}!utils.c@{utils.c}}
+\subsubsection[{UTL\_\-getPointOfDH}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-point} UTL\_\-getPointOfDH (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-double} $\ast$$\ast$const }]{ dh}
+\end{DoxyParamCaption}
+)}\label{utils_8c_a2cc858e1e09d4a0eb002fb537a1e1fe5}
+
+
+Extrahiert den Punkt aus der DH-\/Matrix. 
+
+Extrahiert den Punkt ohne Orientierung aus der DH-\/Matrix.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em dh}]DH-\/Matrix\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+Extrahierter Punkt 
+\end{DoxyReturn}
+\index{utils.c@{utils.c}!UTL\_\-getRadiant@{UTL\_\-getRadiant}}
+\index{UTL\_\-getRadiant@{UTL\_\-getRadiant}!utils.c@{utils.c}}
+\subsubsection[{UTL\_\-getRadiant}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-double} UTL\_\-getRadiant (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-double}}]{ angle}
+\end{DoxyParamCaption}
+)}\label{utils_8c_a870b7c9ba02d0cf180953c74dadc6d7e}
+
+
+Umrechnung in das Bogenmaß. 
+
+Rechnet einen Winkel in das Bogenmaß um.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em angle}]Winkel in Grad\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+In das Bogenmaß umgerechneter Winkel 
+\end{DoxyReturn}
+\index{utils.c@{utils.c}!UTL\_\-printDebug@{UTL\_\-printDebug}}
+\index{UTL\_\-printDebug@{UTL\_\-printDebug}!utils.c@{utils.c}}
+\subsubsection[{UTL\_\-printDebug}]{\setlength{\rightskip}{0pt plus 5cm}void UTL\_\-printDebug (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-char} $\ast$const }]{ msg, }
+\item[{{\bf DT\_\-size}}]{ size}
+\end{DoxyParamCaption}
+)}\label{utils_8c_a2bd4bb411b5240a2b44993ba1baca555}
+
+
+Debug-\/Ausgabe. 
+
+Gibt einen Text auf der stdo oder der definierten Debug-\/USART aus.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em msg}]Text für die Ausgabe \item[{\em size}]Länge des Textes \end{DoxyParams}
+\index{utils.c@{utils.c}!UTL\_\-printDebugByte@{UTL\_\-printDebugByte}}
+\index{UTL\_\-printDebugByte@{UTL\_\-printDebugByte}!utils.c@{utils.c}}
+\subsubsection[{UTL\_\-printDebugByte}]{\setlength{\rightskip}{0pt plus 5cm}void UTL\_\-printDebugByte (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-byte} $\ast$const }]{ packet, }
+\item[{{\bf DT\_\-size}}]{ size}
+\end{DoxyParamCaption}
+)}\label{utils_8c_ac7cc5c386a3d480d5870e2816c508474}
+
+
+Debug-\/Ausgabe von Bytes. 
+
+Gibt Bytes in Hexadezimal auf der stdo oder der definierten Debug-\/USART aus.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em packet}]Paket für die Ausgabe \item[{\em size}]Größe des Pakets \end{DoxyParams}
+\index{utils.c@{utils.c}!UTL\_\-printLeg@{UTL\_\-printLeg}}
+\index{UTL\_\-printLeg@{UTL\_\-printLeg}!utils.c@{utils.c}}
+\subsubsection[{UTL\_\-printLeg}]{\setlength{\rightskip}{0pt plus 5cm}void UTL\_\-printLeg (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-leg} $\ast$const }]{ leg, }
+\item[{{\bf DT\_\-type}}]{ type}
+\end{DoxyParamCaption}
+)}\label{utils_8c_a59058245a80860925ee867cfaa8eefe5}
+
+
+Gibt die Soll-\/Winkel eines Beines auf stdo aus. 
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em leg}]Bein für das die Daten ausgegeben werden sollen \item[{\em type}]Typ der Ausgabe in Bogenmaß oder Grad \end{DoxyParams}
+\index{utils.c@{utils.c}!UTL\_\-printMatrix@{UTL\_\-printMatrix}}
+\index{UTL\_\-printMatrix@{UTL\_\-printMatrix}!utils.c@{utils.c}}
+\subsubsection[{UTL\_\-printMatrix}]{\setlength{\rightskip}{0pt plus 5cm}void UTL\_\-printMatrix (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-double} $\ast$$\ast$const }]{ mat, }
+\item[{{\bf DT\_\-size}}]{ rows, }
+\item[{{\bf DT\_\-size}}]{ columns}
+\end{DoxyParamCaption}
+)}\label{utils_8c_a0aeb6d17e666b020133374a3ef53c269}
+
+
+Gibt eine Matrix auf stdo aus. 
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em mat}]Point auf Matrix \item[{\em rows}]Zeilenanzahl \item[{\em columns}]Spaltenanzahl \end{DoxyParams}
+\index{utils.c@{utils.c}!UTL\_\-printPoint@{UTL\_\-printPoint}}
+\index{UTL\_\-printPoint@{UTL\_\-printPoint}!utils.c@{utils.c}}
+\subsubsection[{UTL\_\-printPoint}]{\setlength{\rightskip}{0pt plus 5cm}void UTL\_\-printPoint (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-point} $\ast$const }]{ p}
+\end{DoxyParamCaption}
+)}\label{utils_8c_ad9db66a9a467f9b94a2195c0b7791c07}
+
+
+Gibt einen Punkt auf stdo aus. 
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em p}]Punkt zur Ausgabe \end{DoxyParams}
+\index{utils.c@{utils.c}!UTL\_\-wait@{UTL\_\-wait}}
+\index{UTL\_\-wait@{UTL\_\-wait}!utils.c@{utils.c}}
+\subsubsection[{UTL\_\-wait}]{\setlength{\rightskip}{0pt plus 5cm}void UTL\_\-wait (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-size}}]{ rounds}
+\end{DoxyParamCaption}
+)}\label{utils_8c_ab47e67a27ae6aa59d7ae38502ff6ecc5}
+
+
+Abstraktion von einer Pause/Delay. 
+
+Implementierung durch Schleifen (rounds $\ast$ 64k).
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em rounds}]Länge der Pause \end{DoxyParams}

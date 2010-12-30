@@ -1,0 +1,291 @@
+\section{evolutionaryHelper.c-\/Dateireferenz}
+\label{evolutionary_helper_8c}\index{evolutionaryHelper.c@{evolutionaryHelper.c}}
+
+
+Hilfsfunktion für Evolutionären Algorithmus.  
+
+
+{\ttfamily \#include \char`\"{}include/evolutionaryHelper.h\char`\"{}}\par
+{\ttfamily \#include $<$math.h$>$}\par
+{\ttfamily \#include $<$stdio.h$>$}\par
+\subsection*{Makrodefinitionen}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf NO\_\-VALUE}~0x00
+\begin{DoxyCompactList}\small\item\em Kein Rückgabewert der Funktion. \item\end{DoxyCompactList}\item 
+\#define {\bf FIRST\_\-VALUE}~0x01
+\begin{DoxyCompactList}\small\item\em Der erste Rückgabewert enthält einen gültigen Schnittpunkt. \item\end{DoxyCompactList}\item 
+\#define {\bf SECOND\_\-VALUE}~0x02
+\begin{DoxyCompactList}\small\item\em Der zweite Rückgabewert enthält einen gültigen Schnittpunkt. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Funktionen}
+\begin{DoxyCompactItemize}
+\item 
+{\bf DT\_\-bool} {\bf isectLinFuncs} (const {\bf DT\_\-lin\_\-func} $\ast$, const {\bf DT\_\-lin\_\-func} $\ast$, {\bf DT\_\-point} $\ast$)
+\item 
+void {\bf initFunctions} ()
+\begin{DoxyCompactList}\small\item\em Initialisiert die globalen Funktionen. \item\end{DoxyCompactList}\item 
+void {\bf initPoints} ()
+\item 
+{\bf DT\_\-double} {\bf f\_\-lin} (const {\bf DT\_\-lin\_\-func} $\ast$, const {\bf DT\_\-double})
+\item 
+{\bf DT\_\-double} {\bf f\_\-circ} (const {\bf DT\_\-half\_\-circle} $\ast$, const {\bf DT\_\-double})
+\item 
+{\bf DT\_\-byte} {\bf isectLinCirc} (const {\bf DT\_\-lin\_\-func} $\ast$, const {\bf DT\_\-half\_\-circle} $\ast$, {\bf DT\_\-point} $\ast$, {\bf DT\_\-point} $\ast$)
+\item 
+{\bf DT\_\-bool} {\bf isBetweenPoints} (const {\bf DT\_\-point} $\ast$, const {\bf DT\_\-point} $\ast$, const {\bf DT\_\-point} $\ast$)
+\item 
+{\bf DT\_\-double} {\bf getDistance} (const {\bf DT\_\-point} $\ast$const , const {\bf DT\_\-point} $\ast$const )
+\item 
+{\bf DT\_\-point} {\bf getNearerPoint} (const {\bf DT\_\-point} $\ast$, const {\bf DT\_\-point} $\ast$, const {\bf DT\_\-point} $\ast$)
+\item 
+{\bf DT\_\-bool} {\bf isVectorialPoint} (const {\bf DT\_\-point} $\ast$const , const {\bf DT\_\-vector} $\ast$, const {\bf DT\_\-point} $\ast$const )
+\item 
+void {\bf initEvoAlg} ()
+\item 
+{\bf DT\_\-bool} {\bf isInArea} (const {\bf DT\_\-point} $\ast$p)
+\item 
+{\bf DT\_\-double} {\bf scorePoint} ({\bf DT\_\-vector} $\ast$const v, const {\bf DT\_\-point} $\ast$const p, {\bf DT\_\-point} $\ast$s)
+\item 
+void {\bf bubblesort} ({\bf DT\_\-individuum} $\ast$P, const {\bf DT\_\-int} n)
+\item 
+{\bf DT\_\-double} {\bf max} ({\bf DT\_\-double} x, {\bf DT\_\-double} y)
+\item 
+{\bf DT\_\-double} {\bf min} ({\bf DT\_\-double} x, {\bf DT\_\-double} y)
+\item 
+void {\bf getFunctionOfPoints} ({\bf DT\_\-lin\_\-func} $\ast$f, const {\bf DT\_\-point} $\ast$const p1, const {\bf DT\_\-point} $\ast$const p2)
+\end{DoxyCompactItemize}
+\subsection*{Variablen}
+\begin{DoxyCompactItemize}
+\item 
+{\bf DT\_\-point} {\bf A}
+\item 
+{\bf DT\_\-point} {\bf B}
+\item 
+{\bf DT\_\-point} {\bf C}
+\item 
+{\bf DT\_\-point} {\bf D}
+\item 
+{\bf DT\_\-point} {\bf E}
+\item 
+{\bf DT\_\-point} {\bf F}
+\item 
+{\bf DT\_\-point} {\bf G}
+\item 
+{\bf DT\_\-lin\_\-func} {\bf AB}
+\item 
+{\bf DT\_\-lin\_\-func} {\bf CD}
+\item 
+{\bf DT\_\-half\_\-circle} {\bf CEA}
+\item 
+{\bf DT\_\-half\_\-circle} {\bf DFB}
+\end{DoxyCompactItemize}
+
+
+\subsection{Ausführliche Beschreibung}
+Hilfsfunktion für Evolutionären Algorithmus. Mathematische Funktionen. 
+
+\subsection{Makro-\/Dokumentation}
+\index{evolutionaryHelper.c@{evolutionaryHelper.c}!FIRST\_\-VALUE@{FIRST\_\-VALUE}}
+\index{FIRST\_\-VALUE@{FIRST\_\-VALUE}!evolutionaryHelper.c@{evolutionaryHelper.c}}
+\subsubsection[{FIRST\_\-VALUE}]{\setlength{\rightskip}{0pt plus 5cm}\#define FIRST\_\-VALUE~0x01}\label{evolutionary_helper_8c_a0b9925c98f366600fadd635ddbb68373}
+
+
+Der erste Rückgabewert enthält einen gültigen Schnittpunkt. 
+
+\index{evolutionaryHelper.c@{evolutionaryHelper.c}!NO\_\-VALUE@{NO\_\-VALUE}}
+\index{NO\_\-VALUE@{NO\_\-VALUE}!evolutionaryHelper.c@{evolutionaryHelper.c}}
+\subsubsection[{NO\_\-VALUE}]{\setlength{\rightskip}{0pt plus 5cm}\#define NO\_\-VALUE~0x00}\label{evolutionary_helper_8c_a0215deb9808d56a77e0372195607f52e}
+
+
+Kein Rückgabewert der Funktion. 
+
+\index{evolutionaryHelper.c@{evolutionaryHelper.c}!SECOND\_\-VALUE@{SECOND\_\-VALUE}}
+\index{SECOND\_\-VALUE@{SECOND\_\-VALUE}!evolutionaryHelper.c@{evolutionaryHelper.c}}
+\subsubsection[{SECOND\_\-VALUE}]{\setlength{\rightskip}{0pt plus 5cm}\#define SECOND\_\-VALUE~0x02}\label{evolutionary_helper_8c_a9fbd08507593062a21dcb4e07b7b3d22}
+
+
+Der zweite Rückgabewert enthält einen gültigen Schnittpunkt. 
+
+
+
+\subsection{Dokumentation der Funktionen}
+\index{evolutionaryHelper.c@{evolutionaryHelper.c}!bubblesort@{bubblesort}}
+\index{bubblesort@{bubblesort}!evolutionaryHelper.c@{evolutionaryHelper.c}}
+\subsubsection[{bubblesort}]{\setlength{\rightskip}{0pt plus 5cm}void bubblesort (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-individuum} $\ast$}]{ P, }
+\item[{const {\bf DT\_\-int}}]{ n}
+\end{DoxyParamCaption}
+)}\label{evolutionary_helper_8c_aa8cc923e87acf979cf8e48347c4441a2}
+\index{evolutionaryHelper.c@{evolutionaryHelper.c}!f\_\-circ@{f\_\-circ}}
+\index{f\_\-circ@{f\_\-circ}!evolutionaryHelper.c@{evolutionaryHelper.c}}
+\subsubsection[{f\_\-circ}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-double} f\_\-circ (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-half\_\-circle} $\ast$}]{ f1, }
+\item[{const {\bf DT\_\-double}}]{ x}
+\end{DoxyParamCaption}
+)}\label{evolutionary_helper_8c_a7b4fa32d3ad3fc04617ec36199e5781a}
+\index{evolutionaryHelper.c@{evolutionaryHelper.c}!f\_\-lin@{f\_\-lin}}
+\index{f\_\-lin@{f\_\-lin}!evolutionaryHelper.c@{evolutionaryHelper.c}}
+\subsubsection[{f\_\-lin}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-double} f\_\-lin (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-lin\_\-func} $\ast$}]{ f, }
+\item[{const {\bf DT\_\-double}}]{ x}
+\end{DoxyParamCaption}
+)}\label{evolutionary_helper_8c_a6eedc37976aab955567852240aa4555e}
+\index{evolutionaryHelper.c@{evolutionaryHelper.c}!getDistance@{getDistance}}
+\index{getDistance@{getDistance}!evolutionaryHelper.c@{evolutionaryHelper.c}}
+\subsubsection[{getDistance}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-double} getDistance (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-point} $\ast$ const}]{ p1, }
+\item[{const {\bf DT\_\-point} $\ast$ const}]{ p2}
+\end{DoxyParamCaption}
+)}\label{evolutionary_helper_8c_aa9118614852834655a3606ad124d70ac}
+\index{evolutionaryHelper.c@{evolutionaryHelper.c}!getFunctionOfPoints@{getFunctionOfPoints}}
+\index{getFunctionOfPoints@{getFunctionOfPoints}!evolutionaryHelper.c@{evolutionaryHelper.c}}
+\subsubsection[{getFunctionOfPoints}]{\setlength{\rightskip}{0pt plus 5cm}void getFunctionOfPoints (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-lin\_\-func} $\ast$}]{ f, }
+\item[{const {\bf DT\_\-point} $\ast$const }]{ p1, }
+\item[{const {\bf DT\_\-point} $\ast$const }]{ p2}
+\end{DoxyParamCaption}
+)}\label{evolutionary_helper_8c_af3e3931062d892e3df329b2cfe180746}
+\index{evolutionaryHelper.c@{evolutionaryHelper.c}!getNearerPoint@{getNearerPoint}}
+\index{getNearerPoint@{getNearerPoint}!evolutionaryHelper.c@{evolutionaryHelper.c}}
+\subsubsection[{getNearerPoint}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-point} getNearerPoint (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-point} $\ast$}]{ p\_\-ref, }
+\item[{const {\bf DT\_\-point} $\ast$}]{ p1, }
+\item[{const {\bf DT\_\-point} $\ast$}]{ p2}
+\end{DoxyParamCaption}
+)}\label{evolutionary_helper_8c_a096c012485e56bf2fdbba4773ef8d116}
+\index{evolutionaryHelper.c@{evolutionaryHelper.c}!initEvoAlg@{initEvoAlg}}
+\index{initEvoAlg@{initEvoAlg}!evolutionaryHelper.c@{evolutionaryHelper.c}}
+\subsubsection[{initEvoAlg}]{\setlength{\rightskip}{0pt plus 5cm}void initEvoAlg (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{evolutionary_helper_8c_ad01b7e05a3aa4d580bc95b5836ad83fd}
+\index{evolutionaryHelper.c@{evolutionaryHelper.c}!initFunctions@{initFunctions}}
+\index{initFunctions@{initFunctions}!evolutionaryHelper.c@{evolutionaryHelper.c}}
+\subsubsection[{initFunctions}]{\setlength{\rightskip}{0pt plus 5cm}void initFunctions (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{evolutionary_helper_8c_a575d1f29be9a1851752ff825fb379faf}
+
+
+Initialisiert die globalen Funktionen. 
+
+Initialisiert die globalen Funktionen zur Beschreibung der Schnittfläche des Arbeitsraums. \index{evolutionaryHelper.c@{evolutionaryHelper.c}!initPoints@{initPoints}}
+\index{initPoints@{initPoints}!evolutionaryHelper.c@{evolutionaryHelper.c}}
+\subsubsection[{initPoints}]{\setlength{\rightskip}{0pt plus 5cm}void initPoints (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{evolutionary_helper_8c_a3dfc27988a0be961df8b7e4ffcbea771}
+\index{evolutionaryHelper.c@{evolutionaryHelper.c}!isBetweenPoints@{isBetweenPoints}}
+\index{isBetweenPoints@{isBetweenPoints}!evolutionaryHelper.c@{evolutionaryHelper.c}}
+\subsubsection[{isBetweenPoints}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-bool} isBetweenPoints (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-point} $\ast$}]{ p1, }
+\item[{const {\bf DT\_\-point} $\ast$}]{ p2, }
+\item[{const {\bf DT\_\-point} $\ast$}]{ p\_\-between}
+\end{DoxyParamCaption}
+)}\label{evolutionary_helper_8c_ad2cf642ad278ab37f961e2f7c72c7811}
+\index{evolutionaryHelper.c@{evolutionaryHelper.c}!isectLinCirc@{isectLinCirc}}
+\index{isectLinCirc@{isectLinCirc}!evolutionaryHelper.c@{evolutionaryHelper.c}}
+\subsubsection[{isectLinCirc}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-byte} isectLinCirc (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-lin\_\-func} $\ast$}]{ f1, }
+\item[{const {\bf DT\_\-half\_\-circle} $\ast$}]{ f2, }
+\item[{{\bf DT\_\-point} $\ast$}]{ isect1, }
+\item[{{\bf DT\_\-point} $\ast$}]{ isect2}
+\end{DoxyParamCaption}
+)}\label{evolutionary_helper_8c_a89225f0abaf14fb3d78f0322ce4a0161}
+\index{evolutionaryHelper.c@{evolutionaryHelper.c}!isectLinFuncs@{isectLinFuncs}}
+\index{isectLinFuncs@{isectLinFuncs}!evolutionaryHelper.c@{evolutionaryHelper.c}}
+\subsubsection[{isectLinFuncs}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-bool} isectLinFuncs (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-lin\_\-func} $\ast$}]{ f1, }
+\item[{const {\bf DT\_\-lin\_\-func} $\ast$}]{ f2, }
+\item[{{\bf DT\_\-point} $\ast$}]{ isect}
+\end{DoxyParamCaption}
+)}\label{evolutionary_helper_8c_a878ff9d18d4bc2fa1972424ae03b86f8}
+\index{evolutionaryHelper.c@{evolutionaryHelper.c}!isInArea@{isInArea}}
+\index{isInArea@{isInArea}!evolutionaryHelper.c@{evolutionaryHelper.c}}
+\subsubsection[{isInArea}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-bool} isInArea (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-point} $\ast$}]{ p}
+\end{DoxyParamCaption}
+)}\label{evolutionary_helper_8c_a70facd733eb6c39b6c5e8d56f2b64900}
+\index{evolutionaryHelper.c@{evolutionaryHelper.c}!isVectorialPoint@{isVectorialPoint}}
+\index{isVectorialPoint@{isVectorialPoint}!evolutionaryHelper.c@{evolutionaryHelper.c}}
+\subsubsection[{isVectorialPoint}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-bool} isVectorialPoint (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-point} $\ast$ const}]{ p\_\-ref, }
+\item[{const {\bf DT\_\-vector} $\ast$}]{ v, }
+\item[{const {\bf DT\_\-point} $\ast$ const}]{ p\_\-chk}
+\end{DoxyParamCaption}
+)}\label{evolutionary_helper_8c_ac97ced4912b87a4f97c41c7b022d28e3}
+\index{evolutionaryHelper.c@{evolutionaryHelper.c}!max@{max}}
+\index{max@{max}!evolutionaryHelper.c@{evolutionaryHelper.c}}
+\subsubsection[{max}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-double} max (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-double}}]{ x, }
+\item[{{\bf DT\_\-double}}]{ y}
+\end{DoxyParamCaption}
+)}\label{evolutionary_helper_8c_ad1f25aeef359fa58b02b492c402ff726}
+\index{evolutionaryHelper.c@{evolutionaryHelper.c}!min@{min}}
+\index{min@{min}!evolutionaryHelper.c@{evolutionaryHelper.c}}
+\subsubsection[{min}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-double} min (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-double}}]{ x, }
+\item[{{\bf DT\_\-double}}]{ y}
+\end{DoxyParamCaption}
+)}\label{evolutionary_helper_8c_a7c3f0c2034f0d0983eba4ae4a759f7a0}
+\index{evolutionaryHelper.c@{evolutionaryHelper.c}!scorePoint@{scorePoint}}
+\index{scorePoint@{scorePoint}!evolutionaryHelper.c@{evolutionaryHelper.c}}
+\subsubsection[{scorePoint}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-double} scorePoint (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-vector} $\ast$const }]{ v, }
+\item[{const {\bf DT\_\-point} $\ast$const }]{ p, }
+\item[{{\bf DT\_\-point} $\ast$}]{ s}
+\end{DoxyParamCaption}
+)}\label{evolutionary_helper_8c_a587768a4d2c5ad4eb410c2506e89d9f7}
+
+
+\subsection{Variablen-\/Dokumentation}
+\index{evolutionaryHelper.c@{evolutionaryHelper.c}!A@{A}}
+\index{A@{A}!evolutionaryHelper.c@{evolutionaryHelper.c}}
+\subsubsection[{A}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-point} {\bf A}}\label{evolutionary_helper_8c_aa98b641887eaa8926e1d4edaa23a2bbe}
+\index{evolutionaryHelper.c@{evolutionaryHelper.c}!AB@{AB}}
+\index{AB@{AB}!evolutionaryHelper.c@{evolutionaryHelper.c}}
+\subsubsection[{AB}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-lin\_\-func} {\bf AB}}\label{evolutionary_helper_8c_a81133d9a73302241670514e35ce53cb6}
+\index{evolutionaryHelper.c@{evolutionaryHelper.c}!B@{B}}
+\index{B@{B}!evolutionaryHelper.c@{evolutionaryHelper.c}}
+\subsubsection[{B}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-point} {\bf B}}\label{evolutionary_helper_8c_a4ba38ff5c57b1ad1bce9d5a0ae302f76}
+\index{evolutionaryHelper.c@{evolutionaryHelper.c}!C@{C}}
+\index{C@{C}!evolutionaryHelper.c@{evolutionaryHelper.c}}
+\subsubsection[{C}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-point} {\bf C}}\label{evolutionary_helper_8c_a1cb65736e029f69561f301b6652a675f}
+\index{evolutionaryHelper.c@{evolutionaryHelper.c}!CD@{CD}}
+\index{CD@{CD}!evolutionaryHelper.c@{evolutionaryHelper.c}}
+\subsubsection[{CD}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-lin\_\-func} {\bf CD}}\label{evolutionary_helper_8c_aee1858a855addfe9502b1b56cf6f38ef}
+\index{evolutionaryHelper.c@{evolutionaryHelper.c}!CEA@{CEA}}
+\index{CEA@{CEA}!evolutionaryHelper.c@{evolutionaryHelper.c}}
+\subsubsection[{CEA}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-half\_\-circle} {\bf CEA}}\label{evolutionary_helper_8c_ace708134f87ef86e48aeed56924a45ad}
+\index{evolutionaryHelper.c@{evolutionaryHelper.c}!D@{D}}
+\index{D@{D}!evolutionaryHelper.c@{evolutionaryHelper.c}}
+\subsubsection[{D}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-point} {\bf D}}\label{evolutionary_helper_8c_af62066203b73de5c34e80fe22df7da8d}
+\index{evolutionaryHelper.c@{evolutionaryHelper.c}!DFB@{DFB}}
+\index{DFB@{DFB}!evolutionaryHelper.c@{evolutionaryHelper.c}}
+\subsubsection[{DFB}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-half\_\-circle} {\bf DFB}}\label{evolutionary_helper_8c_a26c03fa3657a8d1d7927dd201fefdc19}
+\index{evolutionaryHelper.c@{evolutionaryHelper.c}!E@{E}}
+\index{E@{E}!evolutionaryHelper.c@{evolutionaryHelper.c}}
+\subsubsection[{E}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-point} {\bf E}}\label{evolutionary_helper_8c_ae5fbc773f73057dd0150fc44f0b52439}
+\index{evolutionaryHelper.c@{evolutionaryHelper.c}!F@{F}}
+\index{F@{F}!evolutionaryHelper.c@{evolutionaryHelper.c}}
+\subsubsection[{F}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-point} {\bf F}}\label{evolutionary_helper_8c_a12139cb9c990d429b9b17553bb893c5d}
+\index{evolutionaryHelper.c@{evolutionaryHelper.c}!G@{G}}
+\index{G@{G}!evolutionaryHelper.c@{evolutionaryHelper.c}}
+\subsubsection[{G}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-point} {\bf G}}\label{evolutionary_helper_8c_aa6f4b59ea057406bffc5be7432ec33ba}

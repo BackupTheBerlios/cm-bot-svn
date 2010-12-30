@@ -1,0 +1,789 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>CM-Bot_API: evolutionaryHelper.c-Dateireferenz</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javaScript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body onload='searchBox.OnSelectItem(0);'>
+<!-- Erzeugt von Doxygen 1.7.1 -->
+<script type="text/javascript"><!--
+var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
+--></script>
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+      <li id="searchli">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Suchen" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Auflistung&nbsp;der&nbsp;Dateien</span></a></li>
+      <li><a href="globals.html"><span>Datei-Elemente</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="header">
+  <div class="summary">
+<a href="#define-members">Makrodefinitionen</a> &#124;
+<a href="#func-members">Funktionen</a> &#124;
+<a href="#var-members">Variablen</a>  </div>
+  <div class="headertitle">
+<h1>evolutionaryHelper.c-Dateireferenz</h1>  </div>
+</div>
+<div class="contents">
+
+<p>Hilfsfunktion für Evolutionären Algorithmus.  
+<a href="#_details">Mehr ...</a></p>
+<code>#include &quot;<a class="el" href="evolutionary_helper_8h_source.html">include/evolutionaryHelper.h</a>&quot;</code><br/>
+<code>#include &lt;math.h&gt;</code><br/>
+<code>#include &lt;stdio.h&gt;</code><br/>
+<table class="memberdecls">
+<tr><td colspan="2"><h2><a name="define-members"></a>
+Makrodefinitionen</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="evolutionary_helper_8c.html#a0215deb9808d56a77e0372195607f52e">NO_VALUE</a>&nbsp;&nbsp;&nbsp;0x00</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Kein Rückgabewert der Funktion.  <a href="#a0215deb9808d56a77e0372195607f52e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="evolutionary_helper_8c.html#a0b9925c98f366600fadd635ddbb68373">FIRST_VALUE</a>&nbsp;&nbsp;&nbsp;0x01</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Der erste Rückgabewert enthält einen gültigen Schnittpunkt.  <a href="#a0b9925c98f366600fadd635ddbb68373"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="evolutionary_helper_8c.html#a9fbd08507593062a21dcb4e07b7b3d22">SECOND_VALUE</a>&nbsp;&nbsp;&nbsp;0x02</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Der zweite Rückgabewert enthält einen gültigen Schnittpunkt.  <a href="#a9fbd08507593062a21dcb4e07b7b3d22"></a><br/></td></tr>
+<tr><td colspan="2"><h2><a name="func-members"></a>
+Funktionen</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="datatypes_8h.html#a3bdfaa5201ac30cf6908f74e3f8e1e9f">DT_bool</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="evolutionary_helper_8c.html#a878ff9d18d4bc2fa1972424ae03b86f8">isectLinFuncs</a> (const <a class="el" href="struct_d_t__lin__func.html">DT_lin_func</a> *, const <a class="el" href="struct_d_t__lin__func.html">DT_lin_func</a> *, <a class="el" href="struct_d_t__point.html">DT_point</a> *)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="evolutionary_helper_8c.html#a575d1f29be9a1851752ff825fb379faf">initFunctions</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Initialisiert die globalen Funktionen.  <a href="#a575d1f29be9a1851752ff825fb379faf"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="evolutionary_helper_8c.html#a3dfc27988a0be961df8b7e4ffcbea771">initPoints</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="evolutionary_helper_8c.html#a6eedc37976aab955567852240aa4555e">f_lin</a> (const <a class="el" href="struct_d_t__lin__func.html">DT_lin_func</a> *, const <a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a>)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="evolutionary_helper_8c.html#a7b4fa32d3ad3fc04617ec36199e5781a">f_circ</a> (const <a class="el" href="struct_d_t__half__circle.html">DT_half_circle</a> *, const <a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a>)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="evolutionary_helper_8c.html#a89225f0abaf14fb3d78f0322ce4a0161">isectLinCirc</a> (const <a class="el" href="struct_d_t__lin__func.html">DT_lin_func</a> *, const <a class="el" href="struct_d_t__half__circle.html">DT_half_circle</a> *, <a class="el" href="struct_d_t__point.html">DT_point</a> *, <a class="el" href="struct_d_t__point.html">DT_point</a> *)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="datatypes_8h.html#a3bdfaa5201ac30cf6908f74e3f8e1e9f">DT_bool</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="evolutionary_helper_8c.html#ad2cf642ad278ab37f961e2f7c72c7811">isBetweenPoints</a> (const <a class="el" href="struct_d_t__point.html">DT_point</a> *, const <a class="el" href="struct_d_t__point.html">DT_point</a> *, const <a class="el" href="struct_d_t__point.html">DT_point</a> *)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="evolutionary_helper_8c.html#aa9118614852834655a3606ad124d70ac">getDistance</a> (const <a class="el" href="struct_d_t__point.html">DT_point</a> *const , const <a class="el" href="struct_d_t__point.html">DT_point</a> *const )</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_d_t__point.html">DT_point</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="evolutionary_helper_8c.html#a096c012485e56bf2fdbba4773ef8d116">getNearerPoint</a> (const <a class="el" href="struct_d_t__point.html">DT_point</a> *, const <a class="el" href="struct_d_t__point.html">DT_point</a> *, const <a class="el" href="struct_d_t__point.html">DT_point</a> *)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="datatypes_8h.html#a3bdfaa5201ac30cf6908f74e3f8e1e9f">DT_bool</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="evolutionary_helper_8c.html#ac97ced4912b87a4f97c41c7b022d28e3">isVectorialPoint</a> (const <a class="el" href="struct_d_t__point.html">DT_point</a> *const , const <a class="el" href="struct_d_t__vector.html">DT_vector</a> *, const <a class="el" href="struct_d_t__point.html">DT_point</a> *const )</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="evolutionary_helper_8c.html#ad01b7e05a3aa4d580bc95b5836ad83fd">initEvoAlg</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="datatypes_8h.html#a3bdfaa5201ac30cf6908f74e3f8e1e9f">DT_bool</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="evolutionary_helper_8c.html#a70facd733eb6c39b6c5e8d56f2b64900">isInArea</a> (const <a class="el" href="struct_d_t__point.html">DT_point</a> *p)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="evolutionary_helper_8c.html#a587768a4d2c5ad4eb410c2506e89d9f7">scorePoint</a> (<a class="el" href="struct_d_t__vector.html">DT_vector</a> *const v, const <a class="el" href="struct_d_t__point.html">DT_point</a> *const p, <a class="el" href="struct_d_t__point.html">DT_point</a> *s)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="evolutionary_helper_8c.html#aa8cc923e87acf979cf8e48347c4441a2">bubblesort</a> (<a class="el" href="struct_d_t__individuum.html">DT_individuum</a> *P, const <a class="el" href="datatypes_8h.html#a6ae9a32229cf3ddd0996e852782f7ca4">DT_int</a> n)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="evolutionary_helper_8c.html#ad1f25aeef359fa58b02b492c402ff726">max</a> (<a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a> x, <a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a> y)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="evolutionary_helper_8c.html#a7c3f0c2034f0d0983eba4ae4a759f7a0">min</a> (<a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a> x, <a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a> y)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="evolutionary_helper_8c.html#af3e3931062d892e3df329b2cfe180746">getFunctionOfPoints</a> (<a class="el" href="struct_d_t__lin__func.html">DT_lin_func</a> *f, const <a class="el" href="struct_d_t__point.html">DT_point</a> *const p1, const <a class="el" href="struct_d_t__point.html">DT_point</a> *const p2)</td></tr>
+<tr><td colspan="2"><h2><a name="var-members"></a>
+Variablen</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_d_t__point.html">DT_point</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="evolutionary_helper_8c.html#aa98b641887eaa8926e1d4edaa23a2bbe">A</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_d_t__point.html">DT_point</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="evolutionary_helper_8c.html#a4ba38ff5c57b1ad1bce9d5a0ae302f76">B</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_d_t__point.html">DT_point</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="evolutionary_helper_8c.html#a1cb65736e029f69561f301b6652a675f">C</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_d_t__point.html">DT_point</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="evolutionary_helper_8c.html#af62066203b73de5c34e80fe22df7da8d">D</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_d_t__point.html">DT_point</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="evolutionary_helper_8c.html#ae5fbc773f73057dd0150fc44f0b52439">E</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_d_t__point.html">DT_point</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="evolutionary_helper_8c.html#a12139cb9c990d429b9b17553bb893c5d">F</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_d_t__point.html">DT_point</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="evolutionary_helper_8c.html#aa6f4b59ea057406bffc5be7432ec33ba">G</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_d_t__lin__func.html">DT_lin_func</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="evolutionary_helper_8c.html#a81133d9a73302241670514e35ce53cb6">AB</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_d_t__lin__func.html">DT_lin_func</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="evolutionary_helper_8c.html#aee1858a855addfe9502b1b56cf6f38ef">CD</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_d_t__half__circle.html">DT_half_circle</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="evolutionary_helper_8c.html#ace708134f87ef86e48aeed56924a45ad">CEA</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_d_t__half__circle.html">DT_half_circle</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="evolutionary_helper_8c.html#a26c03fa3657a8d1d7927dd201fefdc19">DFB</a></td></tr>
+</table>
+<hr/><a name="_details"></a><h2>Ausführliche Beschreibung</h2>
+<p>Hilfsfunktion für Evolutionären Algorithmus. </p>
+<p>Mathematische Funktionen. </p>
+<hr/><h2>Makro-Dokumentation</h2>
+<a class="anchor" id="a0b9925c98f366600fadd635ddbb68373"></a><!-- doxytag: member="evolutionaryHelper.c::FIRST_VALUE" ref="a0b9925c98f366600fadd635ddbb68373" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FIRST_VALUE&nbsp;&nbsp;&nbsp;0x01</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Der erste Rückgabewert enthält einen gültigen Schnittpunkt. </p>
+
+</div>
+</div>
+<a class="anchor" id="a0215deb9808d56a77e0372195607f52e"></a><!-- doxytag: member="evolutionaryHelper.c::NO_VALUE" ref="a0215deb9808d56a77e0372195607f52e" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NO_VALUE&nbsp;&nbsp;&nbsp;0x00</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Kein Rückgabewert der Funktion. </p>
+
+</div>
+</div>
+<a class="anchor" id="a9fbd08507593062a21dcb4e07b7b3d22"></a><!-- doxytag: member="evolutionaryHelper.c::SECOND_VALUE" ref="a9fbd08507593062a21dcb4e07b7b3d22" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SECOND_VALUE&nbsp;&nbsp;&nbsp;0x02</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Der zweite Rückgabewert enthält einen gültigen Schnittpunkt. </p>
+
+</div>
+</div>
+<hr/><h2>Dokumentation der Funktionen</h2>
+<a class="anchor" id="aa8cc923e87acf979cf8e48347c4441a2"></a><!-- doxytag: member="evolutionaryHelper.c::bubblesort" ref="aa8cc923e87acf979cf8e48347c4441a2" args="(DT_individuum *P, const DT_int n)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bubblesort </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_d_t__individuum.html">DT_individuum</a> *&nbsp;</td>
+          <td class="paramname"> <em>P</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="datatypes_8h.html#a6ae9a32229cf3ddd0996e852782f7ca4">DT_int</a>&nbsp;</td>
+          <td class="paramname"> <em>n</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7b4fa32d3ad3fc04617ec36199e5781a"></a><!-- doxytag: member="evolutionaryHelper.c::f_circ" ref="a7b4fa32d3ad3fc04617ec36199e5781a" args="(const DT_half_circle *, const DT_double)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a> f_circ </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_d_t__half__circle.html">DT_half_circle</a> *&nbsp;</td>
+          <td class="paramname"> <em>f1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a>&nbsp;</td>
+          <td class="paramname"> <em>x</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a6eedc37976aab955567852240aa4555e"></a><!-- doxytag: member="evolutionaryHelper.c::f_lin" ref="a6eedc37976aab955567852240aa4555e" args="(const DT_lin_func *, const DT_double)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a> f_lin </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_d_t__lin__func.html">DT_lin_func</a> *&nbsp;</td>
+          <td class="paramname"> <em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a>&nbsp;</td>
+          <td class="paramname"> <em>x</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa9118614852834655a3606ad124d70ac"></a><!-- doxytag: member="evolutionaryHelper.c::getDistance" ref="aa9118614852834655a3606ad124d70ac" args="(const DT_point *const , const DT_point *const )" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a> getDistance </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_d_t__point.html">DT_point</a> * const&nbsp;</td>
+          <td class="paramname"> <em>p1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_d_t__point.html">DT_point</a> * const&nbsp;</td>
+          <td class="paramname"> <em>p2</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af3e3931062d892e3df329b2cfe180746"></a><!-- doxytag: member="evolutionaryHelper.c::getFunctionOfPoints" ref="af3e3931062d892e3df329b2cfe180746" args="(DT_lin_func *f, const DT_point *const p1, const DT_point *const p2)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void getFunctionOfPoints </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_d_t__lin__func.html">DT_lin_func</a> *&nbsp;</td>
+          <td class="paramname"> <em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_d_t__point.html">DT_point</a> *const &nbsp;</td>
+          <td class="paramname"> <em>p1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_d_t__point.html">DT_point</a> *const &nbsp;</td>
+          <td class="paramname"> <em>p2</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a096c012485e56bf2fdbba4773ef8d116"></a><!-- doxytag: member="evolutionaryHelper.c::getNearerPoint" ref="a096c012485e56bf2fdbba4773ef8d116" args="(const DT_point *, const DT_point *, const DT_point *)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_d_t__point.html">DT_point</a> getNearerPoint </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_d_t__point.html">DT_point</a> *&nbsp;</td>
+          <td class="paramname"> <em>p_ref</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_d_t__point.html">DT_point</a> *&nbsp;</td>
+          <td class="paramname"> <em>p1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_d_t__point.html">DT_point</a> *&nbsp;</td>
+          <td class="paramname"> <em>p2</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ad01b7e05a3aa4d580bc95b5836ad83fd"></a><!-- doxytag: member="evolutionaryHelper.c::initEvoAlg" ref="ad01b7e05a3aa4d580bc95b5836ad83fd" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void initEvoAlg </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a575d1f29be9a1851752ff825fb379faf"></a><!-- doxytag: member="evolutionaryHelper.c::initFunctions" ref="a575d1f29be9a1851752ff825fb379faf" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void initFunctions </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Initialisiert die globalen Funktionen. </p>
+<p>Initialisiert die globalen Funktionen zur Beschreibung der Schnittfläche des Arbeitsraums. </p>
+
+</div>
+</div>
+<a class="anchor" id="a3dfc27988a0be961df8b7e4ffcbea771"></a><!-- doxytag: member="evolutionaryHelper.c::initPoints" ref="a3dfc27988a0be961df8b7e4ffcbea771" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void initPoints </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ad2cf642ad278ab37f961e2f7c72c7811"></a><!-- doxytag: member="evolutionaryHelper.c::isBetweenPoints" ref="ad2cf642ad278ab37f961e2f7c72c7811" args="(const DT_point *, const DT_point *, const DT_point *)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="datatypes_8h.html#a3bdfaa5201ac30cf6908f74e3f8e1e9f">DT_bool</a> isBetweenPoints </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_d_t__point.html">DT_point</a> *&nbsp;</td>
+          <td class="paramname"> <em>p1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_d_t__point.html">DT_point</a> *&nbsp;</td>
+          <td class="paramname"> <em>p2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_d_t__point.html">DT_point</a> *&nbsp;</td>
+          <td class="paramname"> <em>p_between</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a89225f0abaf14fb3d78f0322ce4a0161"></a><!-- doxytag: member="evolutionaryHelper.c::isectLinCirc" ref="a89225f0abaf14fb3d78f0322ce4a0161" args="(const DT_lin_func *, const DT_half_circle *, DT_point *, DT_point *)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> isectLinCirc </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_d_t__lin__func.html">DT_lin_func</a> *&nbsp;</td>
+          <td class="paramname"> <em>f1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_d_t__half__circle.html">DT_half_circle</a> *&nbsp;</td>
+          <td class="paramname"> <em>f2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_d_t__point.html">DT_point</a> *&nbsp;</td>
+          <td class="paramname"> <em>isect1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_d_t__point.html">DT_point</a> *&nbsp;</td>
+          <td class="paramname"> <em>isect2</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a878ff9d18d4bc2fa1972424ae03b86f8"></a><!-- doxytag: member="evolutionaryHelper.c::isectLinFuncs" ref="a878ff9d18d4bc2fa1972424ae03b86f8" args="(const DT_lin_func *, const DT_lin_func *, DT_point *)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="datatypes_8h.html#a3bdfaa5201ac30cf6908f74e3f8e1e9f">DT_bool</a> isectLinFuncs </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_d_t__lin__func.html">DT_lin_func</a> *&nbsp;</td>
+          <td class="paramname"> <em>f1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_d_t__lin__func.html">DT_lin_func</a> *&nbsp;</td>
+          <td class="paramname"> <em>f2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_d_t__point.html">DT_point</a> *&nbsp;</td>
+          <td class="paramname"> <em>isect</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a70facd733eb6c39b6c5e8d56f2b64900"></a><!-- doxytag: member="evolutionaryHelper.c::isInArea" ref="a70facd733eb6c39b6c5e8d56f2b64900" args="(const DT_point *p)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="datatypes_8h.html#a3bdfaa5201ac30cf6908f74e3f8e1e9f">DT_bool</a> isInArea </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_d_t__point.html">DT_point</a> *&nbsp;</td>
+          <td class="paramname"> <em>p</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac97ced4912b87a4f97c41c7b022d28e3"></a><!-- doxytag: member="evolutionaryHelper.c::isVectorialPoint" ref="ac97ced4912b87a4f97c41c7b022d28e3" args="(const DT_point *const , const DT_vector *, const DT_point *const )" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="datatypes_8h.html#a3bdfaa5201ac30cf6908f74e3f8e1e9f">DT_bool</a> isVectorialPoint </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_d_t__point.html">DT_point</a> * const&nbsp;</td>
+          <td class="paramname"> <em>p_ref</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_d_t__vector.html">DT_vector</a> *&nbsp;</td>
+          <td class="paramname"> <em>v</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_d_t__point.html">DT_point</a> * const&nbsp;</td>
+          <td class="paramname"> <em>p_chk</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ad1f25aeef359fa58b02b492c402ff726"></a><!-- doxytag: member="evolutionaryHelper.c::max" ref="ad1f25aeef359fa58b02b492c402ff726" args="(DT_double x, DT_double y)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a> max </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a>&nbsp;</td>
+          <td class="paramname"> <em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a>&nbsp;</td>
+          <td class="paramname"> <em>y</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7c3f0c2034f0d0983eba4ae4a759f7a0"></a><!-- doxytag: member="evolutionaryHelper.c::min" ref="a7c3f0c2034f0d0983eba4ae4a759f7a0" args="(DT_double x, DT_double y)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a> min </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a>&nbsp;</td>
+          <td class="paramname"> <em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a>&nbsp;</td>
+          <td class="paramname"> <em>y</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a587768a4d2c5ad4eb410c2506e89d9f7"></a><!-- doxytag: member="evolutionaryHelper.c::scorePoint" ref="a587768a4d2c5ad4eb410c2506e89d9f7" args="(DT_vector *const v, const DT_point *const p, DT_point *s)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a> scorePoint </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_d_t__vector.html">DT_vector</a> *const &nbsp;</td>
+          <td class="paramname"> <em>v</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_d_t__point.html">DT_point</a> *const &nbsp;</td>
+          <td class="paramname"> <em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_d_t__point.html">DT_point</a> *&nbsp;</td>
+          <td class="paramname"> <em>s</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<hr/><h2>Variablen-Dokumentation</h2>
+<a class="anchor" id="aa98b641887eaa8926e1d4edaa23a2bbe"></a><!-- doxytag: member="evolutionaryHelper.c::A" ref="aa98b641887eaa8926e1d4edaa23a2bbe" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_d_t__point.html">DT_point</a> <a class="el" href="evolutionary_helper_8c.html#aa98b641887eaa8926e1d4edaa23a2bbe">A</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a81133d9a73302241670514e35ce53cb6"></a><!-- doxytag: member="evolutionaryHelper.c::AB" ref="a81133d9a73302241670514e35ce53cb6" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_d_t__lin__func.html">DT_lin_func</a> <a class="el" href="evolutionary_helper_8c.html#a81133d9a73302241670514e35ce53cb6">AB</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4ba38ff5c57b1ad1bce9d5a0ae302f76"></a><!-- doxytag: member="evolutionaryHelper.c::B" ref="a4ba38ff5c57b1ad1bce9d5a0ae302f76" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_d_t__point.html">DT_point</a> <a class="el" href="evolutionary_helper_8c.html#a4ba38ff5c57b1ad1bce9d5a0ae302f76">B</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a1cb65736e029f69561f301b6652a675f"></a><!-- doxytag: member="evolutionaryHelper.c::C" ref="a1cb65736e029f69561f301b6652a675f" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_d_t__point.html">DT_point</a> <a class="el" href="evolutionary_helper_8c.html#a1cb65736e029f69561f301b6652a675f">C</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aee1858a855addfe9502b1b56cf6f38ef"></a><!-- doxytag: member="evolutionaryHelper.c::CD" ref="aee1858a855addfe9502b1b56cf6f38ef" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_d_t__lin__func.html">DT_lin_func</a> <a class="el" href="evolutionary_helper_8c.html#aee1858a855addfe9502b1b56cf6f38ef">CD</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ace708134f87ef86e48aeed56924a45ad"></a><!-- doxytag: member="evolutionaryHelper.c::CEA" ref="ace708134f87ef86e48aeed56924a45ad" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_d_t__half__circle.html">DT_half_circle</a> <a class="el" href="evolutionary_helper_8c.html#ace708134f87ef86e48aeed56924a45ad">CEA</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af62066203b73de5c34e80fe22df7da8d"></a><!-- doxytag: member="evolutionaryHelper.c::D" ref="af62066203b73de5c34e80fe22df7da8d" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_d_t__point.html">DT_point</a> <a class="el" href="evolutionary_helper_8c.html#af62066203b73de5c34e80fe22df7da8d">D</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a26c03fa3657a8d1d7927dd201fefdc19"></a><!-- doxytag: member="evolutionaryHelper.c::DFB" ref="a26c03fa3657a8d1d7927dd201fefdc19" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_d_t__half__circle.html">DT_half_circle</a> <a class="el" href="evolutionary_helper_8c.html#a26c03fa3657a8d1d7927dd201fefdc19">DFB</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae5fbc773f73057dd0150fc44f0b52439"></a><!-- doxytag: member="evolutionaryHelper.c::E" ref="ae5fbc773f73057dd0150fc44f0b52439" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_d_t__point.html">DT_point</a> <a class="el" href="evolutionary_helper_8c.html#ae5fbc773f73057dd0150fc44f0b52439">E</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a12139cb9c990d429b9b17553bb893c5d"></a><!-- doxytag: member="evolutionaryHelper.c::F" ref="a12139cb9c990d429b9b17553bb893c5d" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_d_t__point.html">DT_point</a> <a class="el" href="evolutionary_helper_8c.html#a12139cb9c990d429b9b17553bb893c5d">F</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa6f4b59ea057406bffc5be7432ec33ba"></a><!-- doxytag: member="evolutionaryHelper.c::G" ref="aa6f4b59ea057406bffc5be7432ec33ba" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_d_t__point.html">DT_point</a> <a class="el" href="evolutionary_helper_8c.html#aa6f4b59ea057406bffc5be7432ec33ba">G</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+</div>
+<!--- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&nbsp;</span>Alle</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&nbsp;</span>Datenstrukturen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&nbsp;</span>Dateien</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&nbsp;</span>Funktionen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&nbsp;</span>Variablen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&nbsp;</span>Typdefinitionen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&nbsp;</span>Makrodefinitionen</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<hr class="footer"/><address class="footer"><small>Erzeugt am Thu Dec 30 2010 16:08:55 für CM-Bot_API von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
+</body>
+</html>

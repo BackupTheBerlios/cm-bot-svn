@@ -1,0 +1,198 @@
+\section{evolutionaryAlgorithm.c-\/Dateireferenz}
+\label{evolutionary_algorithm_8c}\index{evolutionaryAlgorithm.c@{evolutionaryAlgorithm.c}}
+
+
+Evolutionärer Algorithmus zur Startpunktfindung.  
+
+
+{\ttfamily \#include \char`\"{}include/datatypes.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}include/evolutionaryHelper.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}include/evolutionaryAlgorithm.h\char`\"{}}\par
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include $<$stdlib.h$>$}\par
+{\ttfamily \#include $<$math.h$>$}\par
+\subsection*{Makrodefinitionen}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf X\_\-MIN}~-\/83
+\item 
+\#define {\bf X\_\-MAX}~83
+\item 
+\#define {\bf Y\_\-MIN}~42
+\item 
+\#define {\bf Y\_\-MAX}~129
+\end{DoxyCompactItemize}
+\subsection*{Funktionen}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf generatePopulation} ({\bf DT\_\-individuum} $\ast$const , const {\bf DT\_\-int})
+\item 
+void {\bf printPopulation} ({\bf DT\_\-individuum} $\ast$, {\bf DT\_\-int})
+\item 
+{\bf DT\_\-point} {\bf generatePoint} ({\bf DT\_\-int})
+\item 
+{\bf DT\_\-double} {\bf getRandomNumber} ({\bf DT\_\-int}, {\bf DT\_\-int})
+\item 
+void {\bf fitnessproportionalSelection} (const {\bf DT\_\-individuum} $\ast$const , {\bf DT\_\-int} $\ast$, const {\bf DT\_\-int}, const {\bf DT\_\-int})
+\item 
+void {\bf recombination} (const {\bf DT\_\-individuum} const $\ast$, {\bf DT\_\-individuum} $\ast$const , const {\bf DT\_\-int} const $\ast$, const {\bf DT\_\-int}, const {\bf DT\_\-int}, const {\bf DT\_\-double})
+\item 
+void {\bf uniformCrossover} (const {\bf DT\_\-individuum} const $\ast$, const {\bf DT\_\-individuum} const $\ast$, {\bf DT\_\-individuum} $\ast$, {\bf DT\_\-individuum} $\ast$)
+\item 
+void {\bf mutation} ({\bf DT\_\-individuum} $\ast$, const {\bf DT\_\-int}, const {\bf DT\_\-double})
+\item 
+void {\bf gleichverteilte\_\-reellwertige\_\-mutation} ({\bf DT\_\-point} $\ast$, const {\bf DT\_\-double})
+\item 
+void {\bf bestSelection} ({\bf DT\_\-individuum} $\ast$const , {\bf DT\_\-individuum} $\ast$, const {\bf DT\_\-int}, const {\bf DT\_\-int})
+\item 
+void {\bf getScores} ({\bf DT\_\-vector} $\ast$const , {\bf DT\_\-individuum} $\ast$const , const {\bf DT\_\-int})
+\item 
+{\bf DT\_\-individuum} {\bf evolutionaryAlgorithm} (const {\bf DT\_\-int} popsize, const {\bf DT\_\-int} generations, {\bf DT\_\-vector} $\ast$const v)
+\item 
+{\bf DT\_\-point} {\bf getPointFromIndividuum} ({\bf DT\_\-individuum} $\ast${\bf A})
+\item 
+{\bf DT\_\-point} {\bf getIsectFromIndividuum} ({\bf DT\_\-individuum} $\ast${\bf A})
+\end{DoxyCompactItemize}
+
+
+\subsection{Ausführliche Beschreibung}
+Evolutionärer Algorithmus zur Startpunktfindung. Startpunkfindung auf Basis eines Evolutionären Algorithmus. 
+
+\subsection{Makro-\/Dokumentation}
+\index{evolutionaryAlgorithm.c@{evolutionaryAlgorithm.c}!X\_\-MAX@{X\_\-MAX}}
+\index{X\_\-MAX@{X\_\-MAX}!evolutionaryAlgorithm.c@{evolutionaryAlgorithm.c}}
+\subsubsection[{X\_\-MAX}]{\setlength{\rightskip}{0pt plus 5cm}\#define X\_\-MAX~83}\label{evolutionary_algorithm_8c_a4fcc42e3f93581eb0459cb359adebc54}
+\index{evolutionaryAlgorithm.c@{evolutionaryAlgorithm.c}!X\_\-MIN@{X\_\-MIN}}
+\index{X\_\-MIN@{X\_\-MIN}!evolutionaryAlgorithm.c@{evolutionaryAlgorithm.c}}
+\subsubsection[{X\_\-MIN}]{\setlength{\rightskip}{0pt plus 5cm}\#define X\_\-MIN~-\/83}\label{evolutionary_algorithm_8c_aecb4dd17977d6a5bd0b4f9c4ce9e8fb0}
+\index{evolutionaryAlgorithm.c@{evolutionaryAlgorithm.c}!Y\_\-MAX@{Y\_\-MAX}}
+\index{Y\_\-MAX@{Y\_\-MAX}!evolutionaryAlgorithm.c@{evolutionaryAlgorithm.c}}
+\subsubsection[{Y\_\-MAX}]{\setlength{\rightskip}{0pt plus 5cm}\#define Y\_\-MAX~129}\label{evolutionary_algorithm_8c_a7296ba9091427ae54bab4bcbb1dc87e1}
+\index{evolutionaryAlgorithm.c@{evolutionaryAlgorithm.c}!Y\_\-MIN@{Y\_\-MIN}}
+\index{Y\_\-MIN@{Y\_\-MIN}!evolutionaryAlgorithm.c@{evolutionaryAlgorithm.c}}
+\subsubsection[{Y\_\-MIN}]{\setlength{\rightskip}{0pt plus 5cm}\#define Y\_\-MIN~42}\label{evolutionary_algorithm_8c_a68db164f44a0f1a010fefb729e6f95da}
+
+
+\subsection{Dokumentation der Funktionen}
+\index{evolutionaryAlgorithm.c@{evolutionaryAlgorithm.c}!bestSelection@{bestSelection}}
+\index{bestSelection@{bestSelection}!evolutionaryAlgorithm.c@{evolutionaryAlgorithm.c}}
+\subsubsection[{bestSelection}]{\setlength{\rightskip}{0pt plus 5cm}void bestSelection (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-individuum} $\ast$ const}]{ P\_\-nextGen, }
+\item[{{\bf DT\_\-individuum} $\ast$}]{ P, }
+\item[{const {\bf DT\_\-int}}]{ popsizeNextGen, }
+\item[{const {\bf DT\_\-int}}]{ popsize}
+\end{DoxyParamCaption}
+)}\label{evolutionary_algorithm_8c_a30a9d75c8d5889c9dcf45b2695b54260}
+\index{evolutionaryAlgorithm.c@{evolutionaryAlgorithm.c}!evolutionaryAlgorithm@{evolutionaryAlgorithm}}
+\index{evolutionaryAlgorithm@{evolutionaryAlgorithm}!evolutionaryAlgorithm.c@{evolutionaryAlgorithm.c}}
+\subsubsection[{evolutionaryAlgorithm}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-individuum} evolutionaryAlgorithm (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-int}}]{ popsize, }
+\item[{const {\bf DT\_\-int}}]{ generations, }
+\item[{{\bf DT\_\-vector} $\ast$const }]{ v}
+\end{DoxyParamCaption}
+)}\label{evolutionary_algorithm_8c_a3f5a68de5ba37d402963dba47233fe14}
+\index{evolutionaryAlgorithm.c@{evolutionaryAlgorithm.c}!fitnessproportionalSelection@{fitnessproportionalSelection}}
+\index{fitnessproportionalSelection@{fitnessproportionalSelection}!evolutionaryAlgorithm.c@{evolutionaryAlgorithm.c}}
+\subsubsection[{fitnessproportionalSelection}]{\setlength{\rightskip}{0pt plus 5cm}void fitnessproportionalSelection (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-individuum} $\ast$ const}]{ P, }
+\item[{{\bf DT\_\-int} $\ast$}]{ I, }
+\item[{const {\bf DT\_\-int}}]{ popsize, }
+\item[{const {\bf DT\_\-int}}]{ parentCnt}
+\end{DoxyParamCaption}
+)}\label{evolutionary_algorithm_8c_a6d673ce7a9fd6b4a64f60d5e255c69ee}
+\index{evolutionaryAlgorithm.c@{evolutionaryAlgorithm.c}!generatePoint@{generatePoint}}
+\index{generatePoint@{generatePoint}!evolutionaryAlgorithm.c@{evolutionaryAlgorithm.c}}
+\subsubsection[{generatePoint}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-point} generatePoint (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-int}}]{ prob}
+\end{DoxyParamCaption}
+)}\label{evolutionary_algorithm_8c_a7b965839f872811006f27bf2df99cc68}
+\index{evolutionaryAlgorithm.c@{evolutionaryAlgorithm.c}!generatePopulation@{generatePopulation}}
+\index{generatePopulation@{generatePopulation}!evolutionaryAlgorithm.c@{evolutionaryAlgorithm.c}}
+\subsubsection[{generatePopulation}]{\setlength{\rightskip}{0pt plus 5cm}void generatePopulation (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-individuum} $\ast$ const}]{ P, }
+\item[{const {\bf DT\_\-int}}]{ popsize}
+\end{DoxyParamCaption}
+)}\label{evolutionary_algorithm_8c_a16b3c84d0405e1c2d939ed8eed5c1c4d}
+\index{evolutionaryAlgorithm.c@{evolutionaryAlgorithm.c}!getIsectFromIndividuum@{getIsectFromIndividuum}}
+\index{getIsectFromIndividuum@{getIsectFromIndividuum}!evolutionaryAlgorithm.c@{evolutionaryAlgorithm.c}}
+\subsubsection[{getIsectFromIndividuum}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-point} getIsectFromIndividuum (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-individuum} $\ast$}]{ A}
+\end{DoxyParamCaption}
+)}\label{evolutionary_algorithm_8c_ae78dcc49d9d85fb71bf70e58ff3ed4e7}
+\index{evolutionaryAlgorithm.c@{evolutionaryAlgorithm.c}!getPointFromIndividuum@{getPointFromIndividuum}}
+\index{getPointFromIndividuum@{getPointFromIndividuum}!evolutionaryAlgorithm.c@{evolutionaryAlgorithm.c}}
+\subsubsection[{getPointFromIndividuum}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-point} getPointFromIndividuum (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-individuum} $\ast$}]{ A}
+\end{DoxyParamCaption}
+)}\label{evolutionary_algorithm_8c_ac1c070b0c03b21429e96e0951118d4c7}
+\index{evolutionaryAlgorithm.c@{evolutionaryAlgorithm.c}!getRandomNumber@{getRandomNumber}}
+\index{getRandomNumber@{getRandomNumber}!evolutionaryAlgorithm.c@{evolutionaryAlgorithm.c}}
+\subsubsection[{getRandomNumber}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-double} getRandomNumber (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-int}}]{ min, }
+\item[{{\bf DT\_\-int}}]{ max}
+\end{DoxyParamCaption}
+)}\label{evolutionary_algorithm_8c_afb2ffc85f3f26faef5137f291f0a46fc}
+\index{evolutionaryAlgorithm.c@{evolutionaryAlgorithm.c}!getScores@{getScores}}
+\index{getScores@{getScores}!evolutionaryAlgorithm.c@{evolutionaryAlgorithm.c}}
+\subsubsection[{getScores}]{\setlength{\rightskip}{0pt plus 5cm}void getScores (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-vector} $\ast$ const}]{ v, }
+\item[{{\bf DT\_\-individuum} $\ast$ const}]{ P, }
+\item[{const {\bf DT\_\-int}}]{ popsize}
+\end{DoxyParamCaption}
+)}\label{evolutionary_algorithm_8c_ae12d1e516b54be554e30650c7e022471}
+\index{evolutionaryAlgorithm.c@{evolutionaryAlgorithm.c}!gleichverteilte\_\-reellwertige\_\-mutation@{gleichverteilte\_\-reellwertige\_\-mutation}}
+\index{gleichverteilte\_\-reellwertige\_\-mutation@{gleichverteilte\_\-reellwertige\_\-mutation}!evolutionaryAlgorithm.c@{evolutionaryAlgorithm.c}}
+\subsubsection[{gleichverteilte\_\-reellwertige\_\-mutation}]{\setlength{\rightskip}{0pt plus 5cm}void gleichverteilte\_\-reellwertige\_\-mutation (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-point} $\ast$}]{ A, }
+\item[{const {\bf DT\_\-double}}]{ pm}
+\end{DoxyParamCaption}
+)}\label{evolutionary_algorithm_8c_a6769f3ebed9c4154a43fb132f3a97e29}
+\index{evolutionaryAlgorithm.c@{evolutionaryAlgorithm.c}!mutation@{mutation}}
+\index{mutation@{mutation}!evolutionaryAlgorithm.c@{evolutionaryAlgorithm.c}}
+\subsubsection[{mutation}]{\setlength{\rightskip}{0pt plus 5cm}void mutation (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-individuum} $\ast$}]{ P, }
+\item[{const {\bf DT\_\-int}}]{ popsize, }
+\item[{const {\bf DT\_\-double}}]{ pm}
+\end{DoxyParamCaption}
+)}\label{evolutionary_algorithm_8c_ad12928c7e929f8eb1ced5e94908ee007}
+\index{evolutionaryAlgorithm.c@{evolutionaryAlgorithm.c}!printPopulation@{printPopulation}}
+\index{printPopulation@{printPopulation}!evolutionaryAlgorithm.c@{evolutionaryAlgorithm.c}}
+\subsubsection[{printPopulation}]{\setlength{\rightskip}{0pt plus 5cm}void printPopulation (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-individuum} $\ast$}]{ P, }
+\item[{{\bf DT\_\-int}}]{ size}
+\end{DoxyParamCaption}
+)}\label{evolutionary_algorithm_8c_a7c834bb5574484fde1b08a90e78e1844}
+\index{evolutionaryAlgorithm.c@{evolutionaryAlgorithm.c}!recombination@{recombination}}
+\index{recombination@{recombination}!evolutionaryAlgorithm.c@{evolutionaryAlgorithm.c}}
+\subsubsection[{recombination}]{\setlength{\rightskip}{0pt plus 5cm}void recombination (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-individuum} const $\ast$}]{ P, }
+\item[{{\bf DT\_\-individuum} $\ast$ const}]{ P\_\-nextGen, }
+\item[{const {\bf DT\_\-int} const $\ast$}]{ I, }
+\item[{const {\bf DT\_\-int}}]{ popsize, }
+\item[{const {\bf DT\_\-int}}]{ parentCnt, }
+\item[{const {\bf DT\_\-double}}]{ px}
+\end{DoxyParamCaption}
+)}\label{evolutionary_algorithm_8c_ae15dd1b8677131396321eb89046d2dd7}
+\index{evolutionaryAlgorithm.c@{evolutionaryAlgorithm.c}!uniformCrossover@{uniformCrossover}}
+\index{uniformCrossover@{uniformCrossover}!evolutionaryAlgorithm.c@{evolutionaryAlgorithm.c}}
+\subsubsection[{uniformCrossover}]{\setlength{\rightskip}{0pt plus 5cm}void uniformCrossover (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-individuum} const $\ast$}]{ A, }
+\item[{const {\bf DT\_\-individuum} const $\ast$}]{ B, }
+\item[{{\bf DT\_\-individuum} $\ast$}]{ C, }
+\item[{{\bf DT\_\-individuum} $\ast$}]{ D}
+\end{DoxyParamCaption}
+)}\label{evolutionary_algorithm_8c_a2a33fd5625f9a2ea1dbcc20d1530088a}

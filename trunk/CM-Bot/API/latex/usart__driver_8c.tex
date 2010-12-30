@@ -1,0 +1,277 @@
+\section{usart\_\-driver.c-\/Dateireferenz}
+\label{usart__driver_8c}\index{usart\_\-driver.c@{usart\_\-driver.c}}
+
+
+XMEGA USART driver source file.  
+
+
+{\ttfamily \#include \char`\"{}include/usart\_\-driver.h\char`\"{}}\par
+\subsection*{Funktionen}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf USART\_\-InterruptDriver\_\-Initialize} ({\bf USART\_\-data\_\-t} $\ast$usart\_\-data, USART\_\-t $\ast$usart, USART\_\-DREINTLVL\_\-t dreIntLevel)
+\begin{DoxyCompactList}\small\item\em Initializes buffer and selects what USART module to use. \item\end{DoxyCompactList}\item 
+void {\bf USART\_\-InterruptDriver\_\-DreInterruptLevel\_\-Set} ({\bf USART\_\-data\_\-t} $\ast$usart\_\-data, USART\_\-DREINTLVL\_\-t dreIntLevel)
+\begin{DoxyCompactList}\small\item\em Set USART DRE interrupt level. \item\end{DoxyCompactList}\item 
+bool {\bf USART\_\-TXBuffer\_\-FreeSpace} ({\bf USART\_\-data\_\-t} $\ast$usart\_\-data)
+\begin{DoxyCompactList}\small\item\em Test if there is data in the transmitter software buffer. \item\end{DoxyCompactList}\item 
+bool {\bf USART\_\-TXBuffer\_\-PutByte} ({\bf USART\_\-data\_\-t} $\ast$usart\_\-data, uint8\_\-t data)
+\begin{DoxyCompactList}\small\item\em Put data (5-\/8 bit character). \item\end{DoxyCompactList}\item 
+bool {\bf USART\_\-RXBufferData\_\-Available} ({\bf USART\_\-data\_\-t} $\ast$usart\_\-data)
+\begin{DoxyCompactList}\small\item\em Test if there is data in the receive software buffer. \item\end{DoxyCompactList}\item 
+uint8\_\-t {\bf USART\_\-RXBuffer\_\-GetByte} ({\bf USART\_\-data\_\-t} $\ast$usart\_\-data)
+\begin{DoxyCompactList}\small\item\em Get received data (5-\/8 bit character). \item\end{DoxyCompactList}\item 
+{\bf DT\_\-bool} {\bf USART\_\-RXBuffer\_\-checkPointerDiff} ({\bf DT\_\-byte} tail, {\bf DT\_\-byte} head, {\bf DT\_\-byte} diff)
+\begin{DoxyCompactList}\small\item\em Überprüft Differenzen der Empfangs-\/Pointer. \item\end{DoxyCompactList}\item 
+bool {\bf USART\_\-RXComplete} ({\bf USART\_\-data\_\-t} $\ast$usart\_\-data)
+\begin{DoxyCompactList}\small\item\em RX Complete Interrupt Service Routine. \item\end{DoxyCompactList}\item 
+void {\bf USART\_\-DataRegEmpty} ({\bf USART\_\-data\_\-t} $\ast$usart\_\-data)
+\begin{DoxyCompactList}\small\item\em Data Register Empty Interrupt Service Routine. \item\end{DoxyCompactList}\item 
+void {\bf USART\_\-NineBits\_\-PutChar} (USART\_\-t $\ast$usart, uint16\_\-t data)
+\begin{DoxyCompactList}\small\item\em Put data (9 bit character). \item\end{DoxyCompactList}\item 
+uint16\_\-t {\bf USART\_\-NineBits\_\-GetChar} (USART\_\-t $\ast$usart)
+\begin{DoxyCompactList}\small\item\em Get received data (9 bit character). \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Ausführliche Beschreibung}
+XMEGA USART driver source file. This file contains the function implementations the XMEGA interrupt and polled USART driver.
+
+The driver is not intended for size and/or speed critical code, since most functions are just a few lines of code, and the function call overhead would decrease code performance. The driver is intended for rapid prototyping and documentation purposes for getting started with the XMEGA ADC module.
+
+For size and/or speed critical code, it is recommended to copy the function contents directly into your application instead of making a function call.
+
+Some functions use the following construct: \char`\"{}some\_\-register = ... $|$ (some\_\-parameter ? SOME\_\-BIT\_\-bm : 0) $|$ ...\char`\"{} Although the use of the ternary operator ( if ? then : else ) is discouraged, in some occasions the operator makes it possible to write pretty clean and neat code. In this driver, the construct is used to set or not set a configuration bit based on a boolean input parameter, such as the \char`\"{}some\_\-parameter\char`\"{} in the example above.
+
+\begin{DoxyParagraph}{Application note:}
+AVR1307: Using the XMEGA USART
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Documentation}
+For comprehensive code documentation, supported compilers, compiler settings and supported devices see readme.html
+\end{DoxyParagraph}
+\begin{DoxyAuthor}{Autor}
+Atmel Corporation: {\tt http://www.atmel.com} \par
+ Support email: {\tt avr@atmel.com}
+\end{DoxyAuthor}
+\begin{DoxyParagraph}{Revision:}
+481 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Date:}
+2007-\/03-\/06 10:12:53 +0100 (ty, 06 mar 2007) 
+\end{DoxyParagraph}
+\par
+
+
+Copyright (c) 2008, Atmel Corporation All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+3. The name of ATMEL may not be used to endorse or promote products derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY ATMEL \char`\"{}AS IS\char`\"{} AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE EXPRESSLY AND SPECIFICALLY DISCLAIMED. IN NO EVENT SHALL ATMEL BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+
+\subsection{Dokumentation der Funktionen}
+\index{usart\_\-driver.c@{usart\_\-driver.c}!USART\_\-DataRegEmpty@{USART\_\-DataRegEmpty}}
+\index{USART\_\-DataRegEmpty@{USART\_\-DataRegEmpty}!usart_driver.c@{usart\_\-driver.c}}
+\subsubsection[{USART\_\-DataRegEmpty}]{\setlength{\rightskip}{0pt plus 5cm}void USART\_\-DataRegEmpty (
+\begin{DoxyParamCaption}
+\item[{{\bf USART\_\-data\_\-t} $\ast$}]{ usart\_\-data}
+\end{DoxyParamCaption}
+)}\label{usart__driver_8c_a7fdb922f6b858bef8515e23229efd970}
+
+
+Data Register Empty Interrupt Service Routine. 
+
+Data Register Empty Interrupt Service Routine. Transmits one byte from TX software buffer. Disables DRE interrupt if buffer is empty. Argument is pointer to USART (USART\_\-data\_\-t).
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em usart\_\-data}]The USART\_\-data\_\-t struct instance. \end{DoxyParams}
+\index{usart\_\-driver.c@{usart\_\-driver.c}!USART\_\-InterruptDriver\_\-DreInterruptLevel\_\-Set@{USART\_\-InterruptDriver\_\-DreInterruptLevel\_\-Set}}
+\index{USART\_\-InterruptDriver\_\-DreInterruptLevel\_\-Set@{USART\_\-InterruptDriver\_\-DreInterruptLevel\_\-Set}!usart_driver.c@{usart\_\-driver.c}}
+\subsubsection[{USART\_\-InterruptDriver\_\-DreInterruptLevel\_\-Set}]{\setlength{\rightskip}{0pt plus 5cm}void USART\_\-InterruptDriver\_\-DreInterruptLevel\_\-Set (
+\begin{DoxyParamCaption}
+\item[{{\bf USART\_\-data\_\-t} $\ast$}]{ usart\_\-data, }
+\item[{USART\_\-DREINTLVL\_\-t}]{ dreIntLevel}
+\end{DoxyParamCaption}
+)}\label{usart__driver_8c_a5df0d3f812fd03444a7f2748f761a401}
+
+
+Set USART DRE interrupt level. 
+
+Set the interrupt level on Data Register interrupt.
+
+\begin{DoxyNote}{Zu beachten}
+Changing the DRE interrupt level in the interrupt driver while it is running will not change the DRE interrupt level in the USART before the DRE interrupt have been disabled and enabled again.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameter}
+\item[{\em usart\_\-data}]The USART\_\-data\_\-t struct instance \item[{\em dreIntLevel}]Interrupt level of the DRE interrupt. \end{DoxyParams}
+\index{usart\_\-driver.c@{usart\_\-driver.c}!USART\_\-InterruptDriver\_\-Initialize@{USART\_\-InterruptDriver\_\-Initialize}}
+\index{USART\_\-InterruptDriver\_\-Initialize@{USART\_\-InterruptDriver\_\-Initialize}!usart_driver.c@{usart\_\-driver.c}}
+\subsubsection[{USART\_\-InterruptDriver\_\-Initialize}]{\setlength{\rightskip}{0pt plus 5cm}void USART\_\-InterruptDriver\_\-Initialize (
+\begin{DoxyParamCaption}
+\item[{{\bf USART\_\-data\_\-t} $\ast$}]{ usart\_\-data, }
+\item[{USART\_\-t $\ast$}]{ usart, }
+\item[{USART\_\-DREINTLVL\_\-t}]{ dreIntLevel}
+\end{DoxyParamCaption}
+)}\label{usart__driver_8c_a73739bc5a8060fa175df2dd43bb6174a}
+
+
+Initializes buffer and selects what USART module to use. 
+
+Initializes receive and transmit buffer and selects what USART module to use, and stores the data register empty interrupt level.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em usart\_\-data}]The USART\_\-data\_\-t struct instance. \item[{\em usart}]The USART module. \item[{\em dreIntLevel}]Data register empty interrupt level. \end{DoxyParams}
+\index{usart\_\-driver.c@{usart\_\-driver.c}!USART\_\-NineBits\_\-GetChar@{USART\_\-NineBits\_\-GetChar}}
+\index{USART\_\-NineBits\_\-GetChar@{USART\_\-NineBits\_\-GetChar}!usart_driver.c@{usart\_\-driver.c}}
+\subsubsection[{USART\_\-NineBits\_\-GetChar}]{\setlength{\rightskip}{0pt plus 5cm}uint16\_\-t USART\_\-NineBits\_\-GetChar (
+\begin{DoxyParamCaption}
+\item[{USART\_\-t $\ast$}]{ usart}
+\end{DoxyParamCaption}
+)}\label{usart__driver_8c_ad98fa51459c8fc8a1d554cd0a8d81cd4}
+
+
+Get received data (9 bit character). 
+
+This function reads out the received 9 bit character (uint16\_\-t). Use the function USART\_\-IsRXComplete to check if anything is received.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em usart}]The USART module.\end{DoxyParams}
+
+\begin{DoxyRetVals}{Rückgabewerte}
+\item[{\em Received}]data. \end{DoxyRetVals}
+\index{usart\_\-driver.c@{usart\_\-driver.c}!USART\_\-NineBits\_\-PutChar@{USART\_\-NineBits\_\-PutChar}}
+\index{USART\_\-NineBits\_\-PutChar@{USART\_\-NineBits\_\-PutChar}!usart_driver.c@{usart\_\-driver.c}}
+\subsubsection[{USART\_\-NineBits\_\-PutChar}]{\setlength{\rightskip}{0pt plus 5cm}void USART\_\-NineBits\_\-PutChar (
+\begin{DoxyParamCaption}
+\item[{USART\_\-t $\ast$}]{ usart, }
+\item[{uint16\_\-t}]{ data}
+\end{DoxyParamCaption}
+)}\label{usart__driver_8c_abcbf436801dae8ea99e55d1dd58c311f}
+
+
+Put data (9 bit character). 
+
+Use the function USART\_\-IsTXDataRegisterEmpty before using this function to put 9 bit character to the TX register.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em usart}]The USART module. \item[{\em data}]The data to send. \end{DoxyParams}
+\index{usart\_\-driver.c@{usart\_\-driver.c}!USART\_\-RXBuffer\_\-checkPointerDiff@{USART\_\-RXBuffer\_\-checkPointerDiff}}
+\index{USART\_\-RXBuffer\_\-checkPointerDiff@{USART\_\-RXBuffer\_\-checkPointerDiff}!usart_driver.c@{usart\_\-driver.c}}
+\subsubsection[{USART\_\-RXBuffer\_\-checkPointerDiff}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-bool} USART\_\-RXBuffer\_\-checkPointerDiff (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-byte}}]{ tail, }
+\item[{{\bf DT\_\-byte}}]{ head, }
+\item[{{\bf DT\_\-byte}}]{ diff}
+\end{DoxyParamCaption}
+)}\label{usart__driver_8c_a14e090e7a37a3fe7189292b8816d2648}
+
+
+Überprüft Differenzen der Empfangs-\/Pointer. 
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em tail}]Tail-\/Pointer \item[{\em head}]Head-\/Pointer \item[{\em diff}]Differenz\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+Bool 
+\end{DoxyReturn}
+\index{usart\_\-driver.c@{usart\_\-driver.c}!USART\_\-RXBuffer\_\-GetByte@{USART\_\-RXBuffer\_\-GetByte}}
+\index{USART\_\-RXBuffer\_\-GetByte@{USART\_\-RXBuffer\_\-GetByte}!usart_driver.c@{usart\_\-driver.c}}
+\subsubsection[{USART\_\-RXBuffer\_\-GetByte}]{\setlength{\rightskip}{0pt plus 5cm}uint8\_\-t USART\_\-RXBuffer\_\-GetByte (
+\begin{DoxyParamCaption}
+\item[{{\bf USART\_\-data\_\-t} $\ast$}]{ usart\_\-data}
+\end{DoxyParamCaption}
+)}\label{usart__driver_8c_a36cca099e37ec451e52efebe4c60180e}
+
+
+Get received data (5-\/8 bit character). 
+
+The function USART\_\-RXBufferData\_\-Available should be used before this function is used to ensure that data is available.
+
+Returns data from RX software buffer.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em usart\_\-data}]The USART\_\-data\_\-t struct instance.\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+Received data. 
+\end{DoxyReturn}
+\index{usart\_\-driver.c@{usart\_\-driver.c}!USART\_\-RXBufferData\_\-Available@{USART\_\-RXBufferData\_\-Available}}
+\index{USART\_\-RXBufferData\_\-Available@{USART\_\-RXBufferData\_\-Available}!usart_driver.c@{usart\_\-driver.c}}
+\subsubsection[{USART\_\-RXBufferData\_\-Available}]{\setlength{\rightskip}{0pt plus 5cm}bool USART\_\-RXBufferData\_\-Available (
+\begin{DoxyParamCaption}
+\item[{{\bf USART\_\-data\_\-t} $\ast$}]{ usart\_\-data}
+\end{DoxyParamCaption}
+)}\label{usart__driver_8c_ac65d5461255def6cd49b05a88d5aa411}
+
+
+Test if there is data in the receive software buffer. 
+
+This function can be used to test if there is data in the receive software buffer.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em usart\_\-data}]The USART\_\-data\_\-t struct instance\end{DoxyParams}
+
+\begin{DoxyRetVals}{Rückgabewerte}
+\item[{\em true}]There is data in the receive buffer. \item[{\em false}]The receive buffer is empty. \end{DoxyRetVals}
+\index{usart\_\-driver.c@{usart\_\-driver.c}!USART\_\-RXComplete@{USART\_\-RXComplete}}
+\index{USART\_\-RXComplete@{USART\_\-RXComplete}!usart_driver.c@{usart\_\-driver.c}}
+\subsubsection[{USART\_\-RXComplete}]{\setlength{\rightskip}{0pt plus 5cm}bool USART\_\-RXComplete (
+\begin{DoxyParamCaption}
+\item[{{\bf USART\_\-data\_\-t} $\ast$}]{ usart\_\-data}
+\end{DoxyParamCaption}
+)}\label{usart__driver_8c_a6c2c49f32a74cb6a84b16d8647d3e9b6}
+
+
+RX Complete Interrupt Service Routine. 
+
+RX Complete Interrupt Service Routine. Stores received data in RX software buffer.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em usart\_\-data}]The USART\_\-data\_\-t struct instance. \end{DoxyParams}
+\index{usart\_\-driver.c@{usart\_\-driver.c}!USART\_\-TXBuffer\_\-FreeSpace@{USART\_\-TXBuffer\_\-FreeSpace}}
+\index{USART\_\-TXBuffer\_\-FreeSpace@{USART\_\-TXBuffer\_\-FreeSpace}!usart_driver.c@{usart\_\-driver.c}}
+\subsubsection[{USART\_\-TXBuffer\_\-FreeSpace}]{\setlength{\rightskip}{0pt plus 5cm}bool USART\_\-TXBuffer\_\-FreeSpace (
+\begin{DoxyParamCaption}
+\item[{{\bf USART\_\-data\_\-t} $\ast$}]{ usart\_\-data}
+\end{DoxyParamCaption}
+)}\label{usart__driver_8c_aecbd49900666abf476cf5cce10fb372a}
+
+
+Test if there is data in the transmitter software buffer. 
+
+This function can be used to test if there is free space in the transmitter software buffer.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em usart\_\-data}]The USART\_\-data\_\-t struct instance.\end{DoxyParams}
+
+\begin{DoxyRetVals}{Rückgabewerte}
+\item[{\em true}]There is data in the receive buffer. \item[{\em false}]The receive buffer is empty. \end{DoxyRetVals}
+\index{usart\_\-driver.c@{usart\_\-driver.c}!USART\_\-TXBuffer\_\-PutByte@{USART\_\-TXBuffer\_\-PutByte}}
+\index{USART\_\-TXBuffer\_\-PutByte@{USART\_\-TXBuffer\_\-PutByte}!usart_driver.c@{usart\_\-driver.c}}
+\subsubsection[{USART\_\-TXBuffer\_\-PutByte}]{\setlength{\rightskip}{0pt plus 5cm}bool USART\_\-TXBuffer\_\-PutByte (
+\begin{DoxyParamCaption}
+\item[{{\bf USART\_\-data\_\-t} $\ast$}]{ usart\_\-data, }
+\item[{uint8\_\-t}]{ data}
+\end{DoxyParamCaption}
+)}\label{usart__driver_8c_ac6a0c12350c501c1b8189aca778f5129}
+
+
+Put data (5-\/8 bit character). 
+
+Stores data byte in TX software buffer and enables DRE interrupt if there is free space in the TX software buffer.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em usart\_\-data}]The USART\_\-data\_\-t struct instance. \item[{\em data}]The data to send. \end{DoxyParams}

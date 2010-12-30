@@ -1,0 +1,272 @@
+\section{include/movement.h-\/Dateireferenz}
+\label{movement_8h}\index{include/movement.h@{include/movement.h}}
+
+
+Stellt Grundfunktionen für einen Laufalgorithmus bereit.  
+
+
+{\ttfamily \#include \char`\"{}datatypes.h\char`\"{}}\par
+\subsection*{Makrodefinitionen}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf MV\_\-DST\_\-Y}~208.5
+\item 
+\#define {\bf MV\_\-DST\_\-X}~168.5
+\end{DoxyCompactItemize}
+\subsection*{Funktionen}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf MV\_\-action} ({\bf DT\_\-leg} $\ast$const, {\bf DT\_\-leg} $\ast$const)
+\begin{DoxyCompactList}\small\item\em Sendet das ACTION-\/Kommando an ein Bein. \item\end{DoxyCompactList}\item 
+void {\bf MV\_\-slave} ({\bf DT\_\-byte}, {\bf DT\_\-leg} $\ast$const, {\bf DT\_\-leg} $\ast$const)
+\begin{DoxyCompactList}\small\item\em Standard-\/Methode für einen Slave-\/Controller. \item\end{DoxyCompactList}\item 
+void {\bf MV\_\-slaveStatus} (const {\bf DT\_\-byte} $\ast$const, const {\bf DT\_\-size})
+\begin{DoxyCompactList}\small\item\em Antwortet auf eine Status-\/Anfrage eines Masters. (Slave). \item\end{DoxyCompactList}\item 
+void {\bf MV\_\-slavePoint} ({\bf DT\_\-leg} $\ast$const, {\bf DT\_\-leg} $\ast$const, const {\bf DT\_\-byte} $\ast$const, {\bf DT\_\-size})
+\begin{DoxyCompactList}\small\item\em Führt die benötigten Aktionen für einen empfangenen Punkt aus. (Slave). \item\end{DoxyCompactList}\item 
+void {\bf MV\_\-slavePointAndSpeed} ({\bf DT\_\-leg} $\ast$const, {\bf DT\_\-leg} $\ast$const, const {\bf DT\_\-byte} $\ast$const, {\bf DT\_\-size})
+\begin{DoxyCompactList}\small\item\em Führt die benötigten Aktionen für einen empfangenen Punkt und Anfahrgeschwindigkeit aus. (Slave). \item\end{DoxyCompactList}\item 
+void {\bf MV\_\-slaveAngle} ({\bf DT\_\-leg} $\ast$const, {\bf DT\_\-leg} $\ast$const, const {\bf DT\_\-byte} $\ast$const, {\bf DT\_\-size})
+\begin{DoxyCompactList}\small\item\em Führt die benötigten Aktionen für einen empfangenen Winkel aus. (Slave). \item\end{DoxyCompactList}\item 
+{\bf DT\_\-bool} {\bf MV\_\-point} ({\bf DT\_\-leg} $\ast$const, const {\bf DT\_\-point} $\ast$const, {\bf DT\_\-bool})
+\begin{DoxyCompactList}\small\item\em Berechnet Winkel anhand des Punktes für die Servos und versendet diese. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-bool} {\bf MV\_\-pointAndSpeed} ({\bf DT\_\-leg} $\ast$const, const {\bf DT\_\-point} $\ast$const, const {\bf DT\_\-double}, {\bf DT\_\-bool})
+\begin{DoxyCompactList}\small\item\em Berechnet Winkel anhand des Punktes für die Servos und versendet diese zusammen mit der Anfahrgeschwindigkeit. \item\end{DoxyCompactList}\item 
+void {\bf MV\_\-masterCheckAlive} ()
+\begin{DoxyCompactList}\small\item\em Prüft ob die Slaves alive sind. (Master). \item\end{DoxyCompactList}\item 
+void {\bf MV\_\-doInitPosition} ({\bf DT\_\-leg} $\ast$const, {\bf DT\_\-leg} $\ast$const)
+\begin{DoxyCompactList}\small\item\em Fährt das rechte und linke Bein in eine Startposition. \item\end{DoxyCompactList}\item 
+void {\bf MV\_\-switchLegs} ({\bf DT\_\-byte} $\ast$side, {\bf DT\_\-byte} $\ast$master\_\-dwn, {\bf DT\_\-byte} $\ast$master\_\-up, {\bf DT\_\-byte} $\ast$slave\_\-dwn, {\bf DT\_\-byte} $\ast$slave\_\-up)
+\begin{DoxyCompactList}\small\item\em Wechselt die aktiven und passiven Beine. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-point} {\bf MV\_\-getPntForCpuSide} (const {\bf DT\_\-point} $\ast$const, const {\bf DT\_\-byte}, const {\bf DT\_\-byte})
+\begin{DoxyCompactList}\small\item\em Rechnet einen lokalen Punkt mit Bezug auf das mittlere Bein in einen globalen Punkt für einen Controller um. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Ausführliche Beschreibung}
+Stellt Grundfunktionen für einen Laufalgorithmus bereit. 
+
+\subsection{Makro-\/Dokumentation}
+\index{movement.h@{movement.h}!MV\_\-DST\_\-X@{MV\_\-DST\_\-X}}
+\index{MV\_\-DST\_\-X@{MV\_\-DST\_\-X}!movement.h@{movement.h}}
+\subsubsection[{MV\_\-DST\_\-X}]{\setlength{\rightskip}{0pt plus 5cm}\#define MV\_\-DST\_\-X~168.5}\label{movement_8h_a1385761268ac5edf5c21bc47a6a5f35a}
+\index{movement.h@{movement.h}!MV\_\-DST\_\-Y@{MV\_\-DST\_\-Y}}
+\index{MV\_\-DST\_\-Y@{MV\_\-DST\_\-Y}!movement.h@{movement.h}}
+\subsubsection[{MV\_\-DST\_\-Y}]{\setlength{\rightskip}{0pt plus 5cm}\#define MV\_\-DST\_\-Y~208.5}\label{movement_8h_a675658ea120324b1192c30aff5367ed5}
+
+
+\subsection{Dokumentation der Funktionen}
+\index{movement.h@{movement.h}!MV\_\-action@{MV\_\-action}}
+\index{MV\_\-action@{MV\_\-action}!movement.h@{movement.h}}
+\subsubsection[{MV\_\-action}]{\setlength{\rightskip}{0pt plus 5cm}void MV\_\-action (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-leg} $\ast$const }]{ leg\_\-r, }
+\item[{{\bf DT\_\-leg} $\ast$const }]{ leg\_\-l}
+\end{DoxyParamCaption}
+)}\label{movement_8h_aa8026abe5e5fb51e8c2fedb69e5936ef}
+
+
+Sendet das ACTION-\/Kommando an ein Bein. 
+
+Sendet das ACTION-\/Kommando an alle Servos eines Beines.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em leg\_\-r}]rechtes Bein \item[{\em leg\_\-l}]linkes Bein \end{DoxyParams}
+\index{movement.h@{movement.h}!MV\_\-doInitPosition@{MV\_\-doInitPosition}}
+\index{MV\_\-doInitPosition@{MV\_\-doInitPosition}!movement.h@{movement.h}}
+\subsubsection[{MV\_\-doInitPosition}]{\setlength{\rightskip}{0pt plus 5cm}void MV\_\-doInitPosition (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-leg} $\ast$const }]{ leg\_\-r, }
+\item[{{\bf DT\_\-leg} $\ast$const }]{ leg\_\-l}
+\end{DoxyParamCaption}
+)}\label{movement_8h_a1eaffd06aeb4d0278959856b6423806c}
+
+
+Fährt das rechte und linke Bein in eine Startposition. 
+
+Fährt das rechte und linke Bein in eine Startposition.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em leg\_\-r}]rechtes Bein \item[{\em leg\_\-l}]linkes Bein \end{DoxyParams}
+\index{movement.h@{movement.h}!MV\_\-getPntForCpuSide@{MV\_\-getPntForCpuSide}}
+\index{MV\_\-getPntForCpuSide@{MV\_\-getPntForCpuSide}!movement.h@{movement.h}}
+\subsubsection[{MV\_\-getPntForCpuSide}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-point} MV\_\-getPntForCpuSide (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-point} $\ast$const }]{ p, }
+\item[{const {\bf DT\_\-byte}}]{ cpuId, }
+\item[{const {\bf DT\_\-byte}}]{ side}
+\end{DoxyParamCaption}
+)}\label{movement_8h_a3278ddd0b30fd08935c7646495400656}
+
+
+Rechnet einen lokalen Punkt mit Bezug auf das mittlere Bein in einen globalen Punkt für einen Controller um. 
+
+Rechnet einen lokalen Punkt mit Bezug auf das mittlere Bein in einen globalen Punkt für einen Controller um.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em p}]lokaler Punkt \item[{\em cpuId}]ID des Controllers \item[{\em side}]Seite (Links/Rechts)\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+Globaler Punkt 
+\end{DoxyReturn}
+\index{movement.h@{movement.h}!MV\_\-masterCheckAlive@{MV\_\-masterCheckAlive}}
+\index{MV\_\-masterCheckAlive@{MV\_\-masterCheckAlive}!movement.h@{movement.h}}
+\subsubsection[{MV\_\-masterCheckAlive}]{\setlength{\rightskip}{0pt plus 5cm}void MV\_\-masterCheckAlive (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{movement_8h_acc35a2518c5ae26a34408e28c98fd670}
+
+
+Prüft ob die Slaves alive sind. (Master). 
+
+Prüft blockierend ob die Slaves alive sind. \index{movement.h@{movement.h}!MV\_\-point@{MV\_\-point}}
+\index{MV\_\-point@{MV\_\-point}!movement.h@{movement.h}}
+\subsubsection[{MV\_\-point}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-bool} MV\_\-point (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-leg} $\ast$const }]{ leg, }
+\item[{const {\bf DT\_\-point} $\ast$const }]{ point, }
+\item[{{\bf DT\_\-bool}}]{ isGlobal}
+\end{DoxyParamCaption}
+)}\label{movement_8h_ad541f430eac23065e7271394c9747309}
+
+
+Berechnet Winkel anhand des Punktes für die Servos und versendet diese. 
+
+Berechnet Winkel anhand des Punktes für die Servos und versendet diese.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em leg}]Bein \item[{\em point}]Punkt \item[{\em isGlobal}]Weltkoordinate, wenn true \end{DoxyParams}
+\index{movement.h@{movement.h}!MV\_\-pointAndSpeed@{MV\_\-pointAndSpeed}}
+\index{MV\_\-pointAndSpeed@{MV\_\-pointAndSpeed}!movement.h@{movement.h}}
+\subsubsection[{MV\_\-pointAndSpeed}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-bool} MV\_\-pointAndSpeed (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-leg} $\ast$const }]{ leg, }
+\item[{const {\bf DT\_\-point} $\ast$const }]{ point, }
+\item[{const {\bf DT\_\-double}}]{ speed, }
+\item[{{\bf DT\_\-bool}}]{ isGlobal}
+\end{DoxyParamCaption}
+)}\label{movement_8h_a0ef31663fb6d6dd3588bf622ab07f7cf}
+
+
+Berechnet Winkel anhand des Punktes für die Servos und versendet diese zusammen mit der Anfahrgeschwindigkeit. 
+
+Berechnet Winkel anhand des Punktes für die Servos und versendet diese zusammen mit der Anfahrgeschwindigkeit.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em leg}]Bein \item[{\em point}]Punkt \item[{\em speed}]Anfahrgeschwindigkeit \item[{\em isGlobal}]Weltkoordinate, wenn true \end{DoxyParams}
+\index{movement.h@{movement.h}!MV\_\-slave@{MV\_\-slave}}
+\index{MV\_\-slave@{MV\_\-slave}!movement.h@{movement.h}}
+\subsubsection[{MV\_\-slave}]{\setlength{\rightskip}{0pt plus 5cm}void MV\_\-slave (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-byte}}]{ cpuID, }
+\item[{{\bf DT\_\-leg} $\ast$const }]{ leg\_\-r, }
+\item[{{\bf DT\_\-leg} $\ast$const }]{ leg\_\-l}
+\end{DoxyParamCaption}
+)}\label{movement_8h_ac48c746633443d1e121fff480a0c7777}
+
+
+Standard-\/Methode für einen Slave-\/Controller. 
+
+Standard-\/Methode für einen Slave-\/Controller. Nimmt Befehle eines Masters entgegen und führt die entsprechenden Aktionen aus.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em cpuID}]ID des Controllers auf dem die Methode ausgeführt wird \item[{\em leg\_\-r}]rechtes Bein \item[{\em leg\_\-l}]linkes Bein \end{DoxyParams}
+\index{movement.h@{movement.h}!MV\_\-slaveAngle@{MV\_\-slaveAngle}}
+\index{MV\_\-slaveAngle@{MV\_\-slaveAngle}!movement.h@{movement.h}}
+\subsubsection[{MV\_\-slaveAngle}]{\setlength{\rightskip}{0pt plus 5cm}void MV\_\-slaveAngle (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-leg} $\ast$const }]{ leg\_\-r, }
+\item[{{\bf DT\_\-leg} $\ast$const }]{ leg\_\-l, }
+\item[{const {\bf DT\_\-byte} $\ast$const }]{ result, }
+\item[{{\bf DT\_\-size}}]{ len}
+\end{DoxyParamCaption}
+)}\label{movement_8h_abe2708f9799ab3803ea0946af62cbbef}
+
+
+Führt die benötigten Aktionen für einen empfangenen Winkel aus. (Slave). 
+
+Führt die benötigten Aktionen für einen empfangenen Winkel aus. (Slave)
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em leg\_\-r}]rechtes Bein \item[{\em leg\_\-l}]linkes Bein \item[{\em result}]Anfrage-\/Paket zum Auswerten \item[{\em len}]Länge des Pakets \end{DoxyParams}
+\index{movement.h@{movement.h}!MV\_\-slavePoint@{MV\_\-slavePoint}}
+\index{MV\_\-slavePoint@{MV\_\-slavePoint}!movement.h@{movement.h}}
+\subsubsection[{MV\_\-slavePoint}]{\setlength{\rightskip}{0pt plus 5cm}void MV\_\-slavePoint (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-leg} $\ast$const }]{ leg\_\-r, }
+\item[{{\bf DT\_\-leg} $\ast$const }]{ leg\_\-l, }
+\item[{const {\bf DT\_\-byte} $\ast$const }]{ result, }
+\item[{{\bf DT\_\-size}}]{ len}
+\end{DoxyParamCaption}
+)}\label{movement_8h_a3686114da016dca0b88f481df388c6de}
+
+
+Führt die benötigten Aktionen für einen empfangenen Punkt aus. (Slave). 
+
+Führt die benötigten Aktionen für einen empfangenen Punkt aus. (Slave)
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em leg\_\-r}]rechtes Bein \item[{\em leg\_\-l}]linkes Bein \item[{\em result}]Anfrage-\/Paket zum Auswerten \item[{\em len}]Länge des Pakets \end{DoxyParams}
+\index{movement.h@{movement.h}!MV\_\-slavePointAndSpeed@{MV\_\-slavePointAndSpeed}}
+\index{MV\_\-slavePointAndSpeed@{MV\_\-slavePointAndSpeed}!movement.h@{movement.h}}
+\subsubsection[{MV\_\-slavePointAndSpeed}]{\setlength{\rightskip}{0pt plus 5cm}void MV\_\-slavePointAndSpeed (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-leg} $\ast$const }]{ leg\_\-r, }
+\item[{{\bf DT\_\-leg} $\ast$const }]{ leg\_\-l, }
+\item[{const {\bf DT\_\-byte} $\ast$const }]{ result, }
+\item[{{\bf DT\_\-size}}]{ len}
+\end{DoxyParamCaption}
+)}\label{movement_8h_acee0a902e639ca43bb2da9db2f87edc6}
+
+
+Führt die benötigten Aktionen für einen empfangenen Punkt und Anfahrgeschwindigkeit aus. (Slave). 
+
+Führt die benötigten Aktionen für einen empfangenen Punkt und Anfahrgeschwindigkeit aus. (Slave)
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em leg\_\-r}]rechtes Bein \item[{\em leg\_\-l}]linkes Bein \item[{\em result}]Anfrage-\/Paket zum Auswerten \item[{\em len}]Länge des Pakets \end{DoxyParams}
+\index{movement.h@{movement.h}!MV\_\-slaveStatus@{MV\_\-slaveStatus}}
+\index{MV\_\-slaveStatus@{MV\_\-slaveStatus}!movement.h@{movement.h}}
+\subsubsection[{MV\_\-slaveStatus}]{\setlength{\rightskip}{0pt plus 5cm}void MV\_\-slaveStatus (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-byte} $\ast$const }]{ result, }
+\item[{const {\bf DT\_\-size}}]{ len}
+\end{DoxyParamCaption}
+)}\label{movement_8h_a16d8554e60aab5fb2a51f5b061a11465}
+
+
+Antwortet auf eine Status-\/Anfrage eines Masters. (Slave). 
+
+Antwortet auf eine Status-\/Anfrage eines Masters. (Slave)
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em result}]Anfrage-\/Paket zum Auswerten \item[{\em len}]Länge des Pakets \end{DoxyParams}
+\index{movement.h@{movement.h}!MV\_\-switchLegs@{MV\_\-switchLegs}}
+\index{MV\_\-switchLegs@{MV\_\-switchLegs}!movement.h@{movement.h}}
+\subsubsection[{MV\_\-switchLegs}]{\setlength{\rightskip}{0pt plus 5cm}void MV\_\-switchLegs (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-byte} $\ast$}]{ side, }
+\item[{{\bf DT\_\-byte} $\ast$}]{ master\_\-dwn, }
+\item[{{\bf DT\_\-byte} $\ast$}]{ master\_\-up, }
+\item[{{\bf DT\_\-byte} $\ast$}]{ slave\_\-dwn, }
+\item[{{\bf DT\_\-byte} $\ast$}]{ slave\_\-up}
+\end{DoxyParamCaption}
+)}\label{movement_8h_a21ae562a40daabedac78e90cea07b31e}
+
+
+Wechselt die aktiven und passiven Beine. 
+
+Wechselt die aktiven und passiven Beine (Oben/Unten). Übergebene Variablen können in den jeweiligen Laufalgorithmus ausgewertet werden.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em side}]Aktive Seite (Seite mit Bodenkontakt), mittleres Beinpaar als Referenz \item[{\em master\_\-dwn}]Seite (Links/Rechts) für den Master mit Bodenkontakt \item[{\em master\_\-up}]Seite (Links/Rechts) für den Master ohne Bodenkontakt \item[{\em slave\_\-dwn}]Seite (Links/Rechts) für den Slave mit Bodenkontakt \item[{\em slave\_\-up}]Seite (Links/Rechts) für den Master ohne Bodenkontakt \end{DoxyParams}

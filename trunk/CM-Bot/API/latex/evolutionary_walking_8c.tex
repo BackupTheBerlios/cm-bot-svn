@@ -1,0 +1,259 @@
+\section{evolutionaryWalking.c-\/Dateireferenz}
+\label{evolutionary_walking_8c}\index{evolutionaryWalking.c@{evolutionaryWalking.c}}
+
+
+Testprogramm für Evolutionären Algorithmus zur Startpunktfindung.  
+
+
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include $<$math.h$>$}\par
+{\ttfamily \#include \char`\"{}include/kinematics.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}include/utils.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}include/evolutionaryHelper.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}include/evolutionaryAlgorithm.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}include/dynamixel.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}include/xmega.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}include/communication.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}include/movement.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}include/remote.h\char`\"{}}\par
+\subsection*{Makrodefinitionen}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf TEST\_\-ON}
+\item 
+\#define {\bf OFFSET}~50
+\item 
+\#define {\bf NO\_\-OFFSET}~0
+\end{DoxyCompactItemize}
+\subsection*{Funktionen}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf master} ()
+\item 
+int {\bf main} (void)
+\item 
+void {\bf invertVector} ({\bf DT\_\-vector} $\ast$v)
+\item 
+{\bf DT\_\-point} {\bf copyPoint} (const {\bf DT\_\-point} $\ast$const p)
+\item 
+void {\bf switchLegs} ()
+\item 
+void {\bf initConf} ()
+\item 
+void {\bf TripodGaitMove} ({\bf DT\_\-point} $\ast${\bf pM}, {\bf DT\_\-point} $\ast${\bf pS}, const {\bf DT\_\-double} speed, const {\bf DT\_\-double} offset)
+\item 
+void {\bf init\_\-pMpSpMiddle} ()
+\item 
+void {\bf calculateMovementPoints} ()
+\item 
+void {\bf doStepMove} ({\bf DT\_\-point} $\ast${\bf pM}, {\bf DT\_\-point} $\ast${\bf pS}, const {\bf DT\_\-double} speed)
+\item 
+void {\bf prepareStepMove} ({\bf DT\_\-point} $\ast${\bf pM}, {\bf DT\_\-point} $\ast${\bf pS}, const {\bf DT\_\-double} speed, const {\bf DT\_\-double} offset)
+\item 
+void {\bf doStep} (const {\bf DT\_\-double} speed)
+\item 
+void {\bf evolutionaryCalculation} ({\bf DT\_\-vector} $\ast$v, const {\bf DT\_\-double} speed)
+\item 
+void {\bf waitForButton3} ()
+\end{DoxyCompactItemize}
+\subsection*{Variablen}
+\begin{DoxyCompactItemize}
+\item 
+{\bf DT\_\-leg} {\bf leg\_\-r}
+\item 
+{\bf DT\_\-leg} {\bf leg\_\-l}
+\item 
+{\bf DT\_\-byte} {\bf MasterActive}
+\item 
+{\bf DT\_\-byte} {\bf SlavesActive}
+\item 
+{\bf DT\_\-byte} {\bf MasterInactive}
+\item 
+{\bf DT\_\-byte} {\bf SlavesInactive}
+\item 
+{\bf DT\_\-byte} {\bf cpuID}
+\item 
+{\bf DT\_\-point} {\bf pM}
+\item 
+{\bf DT\_\-point} {\bf pS}
+\item 
+{\bf DT\_\-point} {\bf midM}
+\item 
+{\bf DT\_\-point} {\bf midS}
+\item 
+{\bf DT\_\-point} {\bf isectM}
+\item 
+{\bf DT\_\-point} {\bf isectS}
+\item 
+{\bf DT\_\-point} {\bf pMiddle}
+\end{DoxyCompactItemize}
+
+
+\subsection{Ausführliche Beschreibung}
+Testprogramm für Evolutionären Algorithmus zur Startpunktfindung. 
+
+\subsection{Makro-\/Dokumentation}
+\index{evolutionaryWalking.c@{evolutionaryWalking.c}!NO\_\-OFFSET@{NO\_\-OFFSET}}
+\index{NO\_\-OFFSET@{NO\_\-OFFSET}!evolutionaryWalking.c@{evolutionaryWalking.c}}
+\subsubsection[{NO\_\-OFFSET}]{\setlength{\rightskip}{0pt plus 5cm}\#define NO\_\-OFFSET~0}\label{evolutionary_walking_8c_aa1d2aa206e89cc4340ade4e98561a656}
+\index{evolutionaryWalking.c@{evolutionaryWalking.c}!OFFSET@{OFFSET}}
+\index{OFFSET@{OFFSET}!evolutionaryWalking.c@{evolutionaryWalking.c}}
+\subsubsection[{OFFSET}]{\setlength{\rightskip}{0pt plus 5cm}\#define OFFSET~50}\label{evolutionary_walking_8c_a21005f9f4e2ce7597c5eb4351816d7e2}
+\index{evolutionaryWalking.c@{evolutionaryWalking.c}!TEST\_\-ON@{TEST\_\-ON}}
+\index{TEST\_\-ON@{TEST\_\-ON}!evolutionaryWalking.c@{evolutionaryWalking.c}}
+\subsubsection[{TEST\_\-ON}]{\setlength{\rightskip}{0pt plus 5cm}\#define TEST\_\-ON}\label{evolutionary_walking_8c_afcf1a6e3b093e419da9f3f1d52fe170e}
+
+
+\subsection{Dokumentation der Funktionen}
+\index{evolutionaryWalking.c@{evolutionaryWalking.c}!calculateMovementPoints@{calculateMovementPoints}}
+\index{calculateMovementPoints@{calculateMovementPoints}!evolutionaryWalking.c@{evolutionaryWalking.c}}
+\subsubsection[{calculateMovementPoints}]{\setlength{\rightskip}{0pt plus 5cm}void calculateMovementPoints (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{evolutionary_walking_8c_a197a2386bc618fd648180e85882526bb}
+\index{evolutionaryWalking.c@{evolutionaryWalking.c}!copyPoint@{copyPoint}}
+\index{copyPoint@{copyPoint}!evolutionaryWalking.c@{evolutionaryWalking.c}}
+\subsubsection[{copyPoint}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-point} copyPoint (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-point} $\ast$const }]{ p}
+\end{DoxyParamCaption}
+)}\label{evolutionary_walking_8c_aab13fd2c4cbcbc136562d4f6ca3a4fe6}
+\index{evolutionaryWalking.c@{evolutionaryWalking.c}!doStep@{doStep}}
+\index{doStep@{doStep}!evolutionaryWalking.c@{evolutionaryWalking.c}}
+\subsubsection[{doStep}]{\setlength{\rightskip}{0pt plus 5cm}void doStep (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-double}}]{ speed}
+\end{DoxyParamCaption}
+)}\label{evolutionary_walking_8c_ad7fe1becd6b74ff13ed666600f0a5737}
+\index{evolutionaryWalking.c@{evolutionaryWalking.c}!doStepMove@{doStepMove}}
+\index{doStepMove@{doStepMove}!evolutionaryWalking.c@{evolutionaryWalking.c}}
+\subsubsection[{doStepMove}]{\setlength{\rightskip}{0pt plus 5cm}void doStepMove (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-point} $\ast$}]{ pM, }
+\item[{{\bf DT\_\-point} $\ast$}]{ pS, }
+\item[{const {\bf DT\_\-double}}]{ speed}
+\end{DoxyParamCaption}
+)}\label{evolutionary_walking_8c_a1d2c394d771606b771c06b78c26cda0a}
+\index{evolutionaryWalking.c@{evolutionaryWalking.c}!evolutionaryCalculation@{evolutionaryCalculation}}
+\index{evolutionaryCalculation@{evolutionaryCalculation}!evolutionaryWalking.c@{evolutionaryWalking.c}}
+\subsubsection[{evolutionaryCalculation}]{\setlength{\rightskip}{0pt plus 5cm}void evolutionaryCalculation (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-vector} $\ast$}]{ v, }
+\item[{const {\bf DT\_\-double}}]{ speed}
+\end{DoxyParamCaption}
+)}\label{evolutionary_walking_8c_af31e43912d1c4e1eb131d25b14d94793}
+\index{evolutionaryWalking.c@{evolutionaryWalking.c}!init\_\-pMpSpMiddle@{init\_\-pMpSpMiddle}}
+\index{init\_\-pMpSpMiddle@{init\_\-pMpSpMiddle}!evolutionaryWalking.c@{evolutionaryWalking.c}}
+\subsubsection[{init\_\-pMpSpMiddle}]{\setlength{\rightskip}{0pt plus 5cm}void init\_\-pMpSpMiddle (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{evolutionary_walking_8c_a520dddf08c80dbacba4de85f960a27f2}
+\index{evolutionaryWalking.c@{evolutionaryWalking.c}!initConf@{initConf}}
+\index{initConf@{initConf}!evolutionaryWalking.c@{evolutionaryWalking.c}}
+\subsubsection[{initConf}]{\setlength{\rightskip}{0pt plus 5cm}void initConf (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{evolutionary_walking_8c_a0e7557e7c7ea76adf8003b8220376f31}
+\index{evolutionaryWalking.c@{evolutionaryWalking.c}!invertVector@{invertVector}}
+\index{invertVector@{invertVector}!evolutionaryWalking.c@{evolutionaryWalking.c}}
+\subsubsection[{invertVector}]{\setlength{\rightskip}{0pt plus 5cm}void invertVector (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-vector} $\ast$}]{ v}
+\end{DoxyParamCaption}
+)}\label{evolutionary_walking_8c_a85045e2aa53e1f48435532692a788afd}
+\index{evolutionaryWalking.c@{evolutionaryWalking.c}!main@{main}}
+\index{main@{main}!evolutionaryWalking.c@{evolutionaryWalking.c}}
+\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{evolutionary_walking_8c_a840291bc02cba5474a4cb46a9b9566fe}
+\index{evolutionaryWalking.c@{evolutionaryWalking.c}!master@{master}}
+\index{master@{master}!evolutionaryWalking.c@{evolutionaryWalking.c}}
+\subsubsection[{master}]{\setlength{\rightskip}{0pt plus 5cm}void master (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{evolutionary_walking_8c_a15465d664def1a9a32df6801c394b502}
+\index{evolutionaryWalking.c@{evolutionaryWalking.c}!prepareStepMove@{prepareStepMove}}
+\index{prepareStepMove@{prepareStepMove}!evolutionaryWalking.c@{evolutionaryWalking.c}}
+\subsubsection[{prepareStepMove}]{\setlength{\rightskip}{0pt plus 5cm}void prepareStepMove (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-point} $\ast$}]{ pM, }
+\item[{{\bf DT\_\-point} $\ast$}]{ pS, }
+\item[{const {\bf DT\_\-double}}]{ speed, }
+\item[{const {\bf DT\_\-double}}]{ offset}
+\end{DoxyParamCaption}
+)}\label{evolutionary_walking_8c_a0f4b15e436f2a9f7cc17901cb18b1d35}
+\index{evolutionaryWalking.c@{evolutionaryWalking.c}!switchLegs@{switchLegs}}
+\index{switchLegs@{switchLegs}!evolutionaryWalking.c@{evolutionaryWalking.c}}
+\subsubsection[{switchLegs}]{\setlength{\rightskip}{0pt plus 5cm}void switchLegs (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{evolutionary_walking_8c_adcbb87b449680a4638a1a02445114b5c}
+\index{evolutionaryWalking.c@{evolutionaryWalking.c}!TripodGaitMove@{TripodGaitMove}}
+\index{TripodGaitMove@{TripodGaitMove}!evolutionaryWalking.c@{evolutionaryWalking.c}}
+\subsubsection[{TripodGaitMove}]{\setlength{\rightskip}{0pt plus 5cm}void TripodGaitMove (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-point} $\ast$}]{ pM, }
+\item[{{\bf DT\_\-point} $\ast$}]{ pS, }
+\item[{const {\bf DT\_\-double}}]{ speed, }
+\item[{const {\bf DT\_\-double}}]{ offset}
+\end{DoxyParamCaption}
+)}\label{evolutionary_walking_8c_ae74a219d06bd603f97b27fc835e6f3ca}
+\index{evolutionaryWalking.c@{evolutionaryWalking.c}!waitForButton3@{waitForButton3}}
+\index{waitForButton3@{waitForButton3}!evolutionaryWalking.c@{evolutionaryWalking.c}}
+\subsubsection[{waitForButton3}]{\setlength{\rightskip}{0pt plus 5cm}void waitForButton3 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{evolutionary_walking_8c_a34888a08cff89a1693206992f7cf44f1}
+
+
+\subsection{Variablen-\/Dokumentation}
+\index{evolutionaryWalking.c@{evolutionaryWalking.c}!cpuID@{cpuID}}
+\index{cpuID@{cpuID}!evolutionaryWalking.c@{evolutionaryWalking.c}}
+\subsubsection[{cpuID}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-byte} {\bf cpuID}}\label{evolutionary_walking_8c_a99abda8761e0e5ba1d6f57d64d9a638a}
+\index{evolutionaryWalking.c@{evolutionaryWalking.c}!isectM@{isectM}}
+\index{isectM@{isectM}!evolutionaryWalking.c@{evolutionaryWalking.c}}
+\subsubsection[{isectM}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-point} {\bf isectM}}\label{evolutionary_walking_8c_a288b01ca27929b8fb8e1d850ff835b18}
+\index{evolutionaryWalking.c@{evolutionaryWalking.c}!isectS@{isectS}}
+\index{isectS@{isectS}!evolutionaryWalking.c@{evolutionaryWalking.c}}
+\subsubsection[{isectS}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-point} {\bf isectS}}\label{evolutionary_walking_8c_a9553617a45600dd64fca2c1599a6b9c4}
+\index{evolutionaryWalking.c@{evolutionaryWalking.c}!leg\_\-l@{leg\_\-l}}
+\index{leg\_\-l@{leg\_\-l}!evolutionaryWalking.c@{evolutionaryWalking.c}}
+\subsubsection[{leg\_\-l}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-leg} {\bf leg\_\-l}}\label{evolutionary_walking_8c_a2972348a729a91bbe96bd6cf6d42770e}
+\index{evolutionaryWalking.c@{evolutionaryWalking.c}!leg\_\-r@{leg\_\-r}}
+\index{leg\_\-r@{leg\_\-r}!evolutionaryWalking.c@{evolutionaryWalking.c}}
+\subsubsection[{leg\_\-r}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-leg} {\bf leg\_\-r}}\label{evolutionary_walking_8c_a1e4e90b9a2913586633a9ee6c6c7c3c9}
+\index{evolutionaryWalking.c@{evolutionaryWalking.c}!MasterActive@{MasterActive}}
+\index{MasterActive@{MasterActive}!evolutionaryWalking.c@{evolutionaryWalking.c}}
+\subsubsection[{MasterActive}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-byte} {\bf MasterActive}}\label{evolutionary_walking_8c_a3b4a8ec2ff8a368b69826b9dc2f4564e}
+\index{evolutionaryWalking.c@{evolutionaryWalking.c}!MasterInactive@{MasterInactive}}
+\index{MasterInactive@{MasterInactive}!evolutionaryWalking.c@{evolutionaryWalking.c}}
+\subsubsection[{MasterInactive}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-byte} {\bf MasterInactive}}\label{evolutionary_walking_8c_a4042f00417dba38aef41559077a292bf}
+\index{evolutionaryWalking.c@{evolutionaryWalking.c}!midM@{midM}}
+\index{midM@{midM}!evolutionaryWalking.c@{evolutionaryWalking.c}}
+\subsubsection[{midM}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-point} {\bf midM}}\label{evolutionary_walking_8c_a6d9b8def1a91035bc217822d3db6e6a5}
+\index{evolutionaryWalking.c@{evolutionaryWalking.c}!midS@{midS}}
+\index{midS@{midS}!evolutionaryWalking.c@{evolutionaryWalking.c}}
+\subsubsection[{midS}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-point} {\bf midS}}\label{evolutionary_walking_8c_a00ac67ab013c7352b5e11e76f8d0f604}
+\index{evolutionaryWalking.c@{evolutionaryWalking.c}!pM@{pM}}
+\index{pM@{pM}!evolutionaryWalking.c@{evolutionaryWalking.c}}
+\subsubsection[{pM}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-point} {\bf pM}}\label{evolutionary_walking_8c_a9db49c5955e3eeec47f727a32ba7ab60}
+\index{evolutionaryWalking.c@{evolutionaryWalking.c}!pMiddle@{pMiddle}}
+\index{pMiddle@{pMiddle}!evolutionaryWalking.c@{evolutionaryWalking.c}}
+\subsubsection[{pMiddle}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-point} {\bf pMiddle}}\label{evolutionary_walking_8c_a71c7ab69601f6616eb0a943893800ead}
+\index{evolutionaryWalking.c@{evolutionaryWalking.c}!pS@{pS}}
+\index{pS@{pS}!evolutionaryWalking.c@{evolutionaryWalking.c}}
+\subsubsection[{pS}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-point} {\bf pS}}\label{evolutionary_walking_8c_ae58d44de4e3d60d36b798e0045ea85a0}
+\index{evolutionaryWalking.c@{evolutionaryWalking.c}!SlavesActive@{SlavesActive}}
+\index{SlavesActive@{SlavesActive}!evolutionaryWalking.c@{evolutionaryWalking.c}}
+\subsubsection[{SlavesActive}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-byte} {\bf SlavesActive}}\label{evolutionary_walking_8c_a426829c51bba5bb82e8e04daaff1d3e7}
+\index{evolutionaryWalking.c@{evolutionaryWalking.c}!SlavesInactive@{SlavesInactive}}
+\index{SlavesInactive@{SlavesInactive}!evolutionaryWalking.c@{evolutionaryWalking.c}}
+\subsubsection[{SlavesInactive}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-byte} {\bf SlavesInactive}}\label{evolutionary_walking_8c_a7e82fcdab9964867981027124dd53398}

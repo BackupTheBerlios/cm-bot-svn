@@ -1,0 +1,1438 @@
+\begin{theindex}
+
+  \item {A}
+    \subitem {evolutionaryHelper.c}, 38
+  \item {AB}
+    \subitem {evolutionaryHelper.c}, 38
+  \item {ACT}
+    \subitem {dynamixel.c}, 28
+  \item {act\_\-value}
+    \subitem {DT\_\-servo}, 8
+  \item {ALR\_\-SHUTDWN}
+    \subitem {dynamixel.c}, 28
+  \item {avr\_\-compiler.h}
+    \subitem {AVR\_\-ENTER\_\-CRITICAL\_\-REGION}, 43
+    \subitem {AVR\_\-LEAVE\_\-CRITICAL\_\-REGION}, 43
+    \subitem {F\_\-CPU}, 43
+  \item {AVR\_\-ENTER\_\-CRITICAL\_\-REGION}
+    \subitem {avr\_\-compiler.h}, 43
+  \item {AVR\_\-LEAVE\_\-CRITICAL\_\-REGION}
+    \subitem {avr\_\-compiler.h}, 43
+
+  \indexspace
+
+  \item {B}
+    \subitem {evolutionaryHelper.c}, 38
+  \item {B\_\-1}
+    \subitem {remote.c}, 111
+  \item {B\_\-2}
+    \subitem {remote.c}, 111
+  \item {B\_\-3}
+    \subitem {remote.c}, 111
+  \item {B\_\-4}
+    \subitem {remote.c}, 111
+  \item {B\_\-5}
+    \subitem {remote.c}, 111
+  \item {B\_\-6}
+    \subitem {remote.c}, 111
+  \item {B\_\-D}
+    \subitem {remote.c}, 111
+  \item {B\_\-L}
+    \subitem {remote.c}, 111
+  \item {B\_\-NON\_\-PRESSED}
+    \subitem {remote.c}, 111
+  \item {B\_\-R}
+    \subitem {remote.c}, 111
+  \item {B\_\-U}
+    \subitem {remote.c}, 111
+  \item {BD}
+    \subitem {dynamixel.c}, 28
+  \item {bestSelection}
+    \subitem {evolutionaryAlgorithm.c}, 34
+  \item {bubblesort}
+    \subitem {evolutionaryHelper.c}, 37
+    \subitem {evolutionaryHelper.h}, 68
+  \item {buffer}
+    \subitem {Usart\_\-and\_\-buffer}, 10
+
+  \indexspace
+
+  \item {C}
+    \subitem {evolutionaryHelper.c}, 38
+  \item {calculateMovementPoints}
+    \subitem {evolutionaryWalking.c}, 41
+  \item {CCPWrite}
+    \subitem {clksys\_\-driver.c}, 13
+    \subitem {clksys\_\-driver.h}, 47
+  \item {CD}
+    \subitem {evolutionaryHelper.c}, 38
+  \item {CEA}
+    \subitem {evolutionaryHelper.c}, 38
+  \item {CLKSYS\_\-AutoCalibration\_\-Disable}
+    \subitem {clksys\_\-driver.h}, 46
+  \item {CLKSYS\_\-AutoCalibration\_\-Enable}
+    \subitem {clksys\_\-driver.c}, 13
+    \subitem {clksys\_\-driver.h}, 47
+  \item {CLKSYS\_\-Configuration\_\-Lock}
+    \subitem {clksys\_\-driver.c}, 14
+    \subitem {clksys\_\-driver.h}, 47
+  \item {CLKSYS\_\-Disable}
+    \subitem {clksys\_\-driver.c}, 14
+    \subitem {clksys\_\-driver.h}, 48
+  \item {clksys\_\-driver.c}, 11
+    \subitem {CCPWrite}, 13
+    \subitem {CLKSYS\_\-AutoCalibration\_\-Enable}, 13
+    \subitem {CLKSYS\_\-Configuration\_\-Lock}, 14
+    \subitem {CLKSYS\_\-Disable}, 14
+    \subitem {CLKSYS\_\-Main\_\-ClockSource\_\-Select}, 14
+    \subitem {CLKSYS\_\-PLL\_\-Config}, 14
+    \subitem {CLKSYS\_\-Prescalers\_\-Config}, 15
+    \subitem {CLKSYS\_\-RTC\_\-ClockSource\_\-Enable}, 15
+    \subitem {CLKSYS\_\-XOSC\_\-Config}, 15
+    \subitem {CLKSYS\_\-XOSC\_\-FailureDetection\_\-Enable}, 16
+  \item {clksys\_\-driver.h}
+    \subitem {CCPWrite}, 47
+    \subitem {CLKSYS\_\-AutoCalibration\_\-Disable}, 46
+    \subitem {CLKSYS\_\-AutoCalibration\_\-Enable}, 47
+    \subitem {CLKSYS\_\-Configuration\_\-Lock}, 47
+    \subitem {CLKSYS\_\-Disable}, 48
+    \subitem {CLKSYS\_\-Enable}, 46
+    \subitem {CLKSYS\_\-IsReady}, 46
+    \subitem {CLKSYS\_\-Main\_\-ClockSource\_\-Select}, 48
+    \subitem {CLKSYS\_\-PLL\_\-Config}, 48
+    \subitem {CLKSYS\_\-Prescalers\_\-Config}, 49
+    \subitem {CLKSYS\_\-RTC\_\-ClockSource\_\-Disable}, 47
+    \subitem {CLKSYS\_\-RTC\_\-ClockSource\_\-Enable}, 49
+    \subitem {CLKSYS\_\-XOSC\_\-Config}, 49
+    \subitem {CLKSYS\_\-XOSC\_\-FailureDetection\_\-Enable}, 50
+  \item {CLKSYS\_\-Enable}
+    \subitem {clksys\_\-driver.h}, 46
+  \item {CLKSYS\_\-IsReady}
+    \subitem {clksys\_\-driver.h}, 46
+  \item {CLKSYS\_\-Main\_\-ClockSource\_\-Select}
+    \subitem {clksys\_\-driver.c}, 14
+    \subitem {clksys\_\-driver.h}, 48
+  \item {CLKSYS\_\-PLL\_\-Config}
+    \subitem {clksys\_\-driver.c}, 14
+    \subitem {clksys\_\-driver.h}, 48
+  \item {CLKSYS\_\-Prescalers\_\-Config}
+    \subitem {clksys\_\-driver.c}, 15
+    \subitem {clksys\_\-driver.h}, 49
+  \item {CLKSYS\_\-RTC\_\-ClockSource\_\-Disable}
+    \subitem {clksys\_\-driver.h}, 47
+  \item {CLKSYS\_\-RTC\_\-ClockSource\_\-Enable}
+    \subitem {clksys\_\-driver.c}, 15
+    \subitem {clksys\_\-driver.h}, 49
+  \item {CLKSYS\_\-XOSC\_\-Config}
+    \subitem {clksys\_\-driver.c}, 15
+    \subitem {clksys\_\-driver.h}, 49
+  \item {CLKSYS\_\-XOSC\_\-FailureDetection\_\-Enable}
+    \subitem {clksys\_\-driver.c}, 16
+    \subitem {clksys\_\-driver.h}, 50
+  \item {COM\_\-ACK}
+    \subitem {communication.h}, 53
+  \item {COM\_\-ACTION}
+    \subitem {communication.h}, 53
+  \item {COM\_\-ANGLE}
+    \subitem {communication.h}, 53
+  \item {COM\_\-BRDCAST\_\-ID}
+    \subitem {communication.h}, 53
+  \item {COM\_\-byteArrayToDouble}
+    \subitem {communication.c}, 18
+    \subitem {communication.h}, 53
+  \item {COM\_\-CONF\_\-FOOT}
+    \subitem {communication.h}, 53
+  \item {COM\_\-CONF\_\-GLOB}
+    \subitem {communication.h}, 53
+  \item {COM\_\-CONF\_\-HIP}
+    \subitem {communication.h}, 53
+  \item {COM\_\-CONF\_\-KNEE}
+    \subitem {communication.h}, 53
+  \item {COM\_\-CONF\_\-LEFT}
+    \subitem {communication.h}, 53
+  \item {COM\_\-CONF\_\-RIGHT}
+    \subitem {communication.h}, 53
+  \item {COM\_\-doubleToByteArray}
+    \subitem {communication.c}, 19
+    \subitem {communication.h}, 54
+  \item {COM\_\-ERR\_\-ANGLE\_\-LIMIT}
+    \subitem {communication.h}, 53
+  \item {COM\_\-ERR\_\-DEFAULT\_\-ERROR}
+    \subitem {communication.h}, 53
+  \item {COM\_\-ERR\_\-POINT\_\-OUT\_\-OF\_\-BOUNDS}
+    \subitem {communication.h}, 53
+  \item {COM\_\-getAngleFromPacket}
+    \subitem {communication.c}, 19
+    \subitem {communication.h}, 54
+  \item {COM\_\-getChecksum}
+    \subitem {communication.c}, 19
+  \item {COM\_\-getCpuID}
+    \subitem {communication.c}, 19
+    \subitem {communication.h}, 54
+  \item {COM\_\-getPointFromPacket}
+    \subitem {communication.c}, 20
+    \subitem {communication.h}, 54
+  \item {COM\_\-getSpeedFromPacket}
+    \subitem {communication.c}, 20
+    \subitem {communication.h}, 54
+  \item {COM\_\-IS\_\-ALIVE}
+    \subitem {communication.h}, 53
+  \item {COM\_\-isAlive}
+    \subitem {communication.c}, 20
+    \subitem {communication.h}, 55
+  \item {COM\_\-isFoot}
+    \subitem {communication.c}, 20
+    \subitem {communication.h}, 55
+  \item {COM\_\-isGlobal}
+    \subitem {communication.c}, 21
+    \subitem {communication.h}, 55
+  \item {COM\_\-isHip}
+    \subitem {communication.c}, 21
+    \subitem {communication.h}, 56
+  \item {COM\_\-isKnee}
+    \subitem {communication.c}, 21
+    \subitem {communication.h}, 56
+  \item {COM\_\-isLeftLeg}
+    \subitem {communication.c}, 21
+    \subitem {communication.h}, 56
+  \item {COM\_\-isRightLeg}
+    \subitem {communication.c}, 22
+    \subitem {communication.h}, 56
+  \item {COM\_\-MASTER}
+    \subitem {communication.h}, 53
+  \item {COM\_\-NAK}
+    \subitem {communication.h}, 53
+  \item {COM\_\-NOCPUID}
+    \subitem {communication.h}, 53
+  \item {COM\_\-POINT}
+    \subitem {communication.h}, 53
+  \item {COM\_\-receive}
+    \subitem {communication.c}, 22
+    \subitem {communication.h}, 57
+  \item {COM\_\-requestStatus}
+    \subitem {communication.c}, 22
+    \subitem {communication.h}, 57
+  \item {COM\_\-send}
+    \subitem {communication.c}, 23
+    \subitem {communication.h}, 57
+  \item {COM\_\-sendACK}
+    \subitem {communication.c}, 23
+    \subitem {communication.h}, 58
+  \item {COM\_\-sendAction}
+    \subitem {communication.c}, 23
+    \subitem {communication.h}, 58
+  \item {COM\_\-sendAngle}
+    \subitem {communication.c}, 24
+    \subitem {communication.h}, 58
+  \item {COM\_\-sendNAK}
+    \subitem {communication.c}, 24
+    \subitem {communication.h}, 59
+  \item {COM\_\-sendPoint}
+    \subitem {communication.c}, 24
+    \subitem {communication.h}, 59
+  \item {COM\_\-sendPointAndSpeed}
+    \subitem {communication.c}, 25
+    \subitem {communication.h}, 59
+  \item {COM\_\-SLAVE1B}
+    \subitem {communication.h}, 53
+  \item {COM\_\-SLAVE3F}
+    \subitem {communication.h}, 53
+  \item {COM\_\-SPEED}
+    \subitem {communication.h}, 53
+  \item {COM\_\-START\_\-BYTE}
+    \subitem {communication.c}, 18
+  \item {COM\_\-STATUS}
+    \subitem {communication.h}, 53
+  \item {communication.c}, 16
+    \subitem {COM\_\-byteArrayToDouble}, 18
+    \subitem {COM\_\-doubleToByteArray}, 19
+    \subitem {COM\_\-getAngleFromPacket}, 19
+    \subitem {COM\_\-getChecksum}, 19
+    \subitem {COM\_\-getCpuID}, 19
+    \subitem {COM\_\-getPointFromPacket}, 20
+    \subitem {COM\_\-getSpeedFromPacket}, 20
+    \subitem {COM\_\-isAlive}, 20
+    \subitem {COM\_\-isFoot}, 20
+    \subitem {COM\_\-isGlobal}, 21
+    \subitem {COM\_\-isHip}, 21
+    \subitem {COM\_\-isKnee}, 21
+    \subitem {COM\_\-isLeftLeg}, 21
+    \subitem {COM\_\-isRightLeg}, 22
+    \subitem {COM\_\-receive}, 22
+    \subitem {COM\_\-requestStatus}, 22
+    \subitem {COM\_\-send}, 23
+    \subitem {COM\_\-sendACK}, 23
+    \subitem {COM\_\-sendAction}, 23
+    \subitem {COM\_\-sendAngle}, 24
+    \subitem {COM\_\-sendNAK}, 24
+    \subitem {COM\_\-sendPoint}, 24
+    \subitem {COM\_\-sendPointAndSpeed}, 25
+    \subitem {COM\_\-START\_\-BYTE}, 18
+  \item {communication.h}
+    \subitem {COM\_\-ACK}, 53
+    \subitem {COM\_\-ACTION}, 53
+    \subitem {COM\_\-ANGLE}, 53
+    \subitem {COM\_\-BRDCAST\_\-ID}, 53
+    \subitem {COM\_\-byteArrayToDouble}, 53
+    \subitem {COM\_\-CONF\_\-FOOT}, 53
+    \subitem {COM\_\-CONF\_\-GLOB}, 53
+    \subitem {COM\_\-CONF\_\-HIP}, 53
+    \subitem {COM\_\-CONF\_\-KNEE}, 53
+    \subitem {COM\_\-CONF\_\-LEFT}, 53
+    \subitem {COM\_\-CONF\_\-RIGHT}, 53
+    \subitem {COM\_\-doubleToByteArray}, 54
+    \subitem {COM\_\-ERR\_\-ANGLE\_\-LIMIT}, 53
+    \subitem {COM\_\-ERR\_\-DEFAULT\_\-ERROR}, 53
+    \subitem {COM\_\-ERR\_\-POINT\_\-OUT\_\-OF\_\-BOUNDS}, 53
+    \subitem {COM\_\-getAngleFromPacket}, 54
+    \subitem {COM\_\-getCpuID}, 54
+    \subitem {COM\_\-getPointFromPacket}, 54
+    \subitem {COM\_\-getSpeedFromPacket}, 54
+    \subitem {COM\_\-IS\_\-ALIVE}, 53
+    \subitem {COM\_\-isAlive}, 55
+    \subitem {COM\_\-isFoot}, 55
+    \subitem {COM\_\-isGlobal}, 55
+    \subitem {COM\_\-isHip}, 56
+    \subitem {COM\_\-isKnee}, 56
+    \subitem {COM\_\-isLeftLeg}, 56
+    \subitem {COM\_\-isRightLeg}, 56
+    \subitem {COM\_\-MASTER}, 53
+    \subitem {COM\_\-NAK}, 53
+    \subitem {COM\_\-NOCPUID}, 53
+    \subitem {COM\_\-POINT}, 53
+    \subitem {COM\_\-receive}, 57
+    \subitem {COM\_\-requestStatus}, 57
+    \subitem {COM\_\-send}, 57
+    \subitem {COM\_\-sendACK}, 58
+    \subitem {COM\_\-sendAction}, 58
+    \subitem {COM\_\-sendAngle}, 58
+    \subitem {COM\_\-sendNAK}, 59
+    \subitem {COM\_\-sendPoint}, 59
+    \subitem {COM\_\-sendPointAndSpeed}, 59
+    \subitem {COM\_\-SLAVE1B}, 53
+    \subitem {COM\_\-SLAVE3F}, 53
+    \subitem {COM\_\-SPEED}, 53
+    \subitem {COM\_\-STATUS}, 53
+  \item {copyPoint}
+    \subitem {evolutionaryWalking.c}, 41
+  \item {cpuID}
+    \subitem {evolutionaryWalking.c}, 41
+
+  \indexspace
+
+  \item {D}
+    \subitem {evolutionaryHelper.c}, 38
+  \item {datatypes.h}
+    \subitem {DT\_\-bool}, 62
+    \subitem {DT\_\-byte}, 62
+    \subitem {DT\_\-char}, 62
+    \subitem {DT\_\-cmd}, 62
+    \subitem {DT\_\-double}, 62
+    \subitem {DT\_\-int}, 62
+    \subitem {DT\_\-RESULT\_\-BUFFER\_\-SIZE}, 61
+    \subitem {DT\_\-size}, 62
+    \subitem {DT\_\-type}, 62
+  \item {DEBUG}
+    \subitem {utils.h}, 93
+  \item {DEBUG\_\-BYTE}
+    \subitem {utils.h}, 93
+  \item {DEBUG\_\-ON}
+    \subitem {utils.h}, 93
+  \item {DFB}
+    \subitem {evolutionaryHelper.c}, 38
+  \item {DIST\_\-DZ}
+    \subitem {kinematics.c}, 101
+  \item {DIST\_\-FE}
+    \subitem {kinematics.c}, 101
+  \item {DIST\_\-HK}
+    \subitem {kinematics.c}, 101
+  \item {DIST\_\-KF}
+    \subitem {kinematics.c}, 101
+  \item {DNX\_\-BRDCAST\_\-ID}
+    \subitem {dynamixel.h}, 63
+  \item {DNX\_\-convertAngle}
+    \subitem {dynamixel.c}, 28
+  \item {DNX\_\-correctAngles}
+    \subitem {dynamixel.c}, 29
+  \item {DNX\_\-getAngle}
+    \subitem {dynamixel.c}, 29
+    \subitem {dynamixel.h}, 63
+  \item {DNX\_\-getChecksum}
+    \subitem {dynamixel.c}, 29
+    \subitem {dynamixel.h}, 63
+  \item {DNX\_\-getConnectedIDs}
+    \subitem {dynamixel.c}, 29
+    \subitem {dynamixel.h}, 64
+  \item {DNX\_\-getLed}
+    \subitem {dynamixel.c}, 30
+    \subitem {dynamixel.h}, 64
+  \item {DNX\_\-getSpeed}
+    \subitem {dynamixel.c}, 30
+    \subitem {dynamixel.h}, 64
+  \item {DNX\_\-receive}
+    \subitem {dynamixel.c}, 30
+    \subitem {dynamixel.h}, 64
+  \item {DNX\_\-send}
+    \subitem {dynamixel.c}, 30
+    \subitem {dynamixel.h}, 65
+  \item {DNX\_\-sendAction}
+    \subitem {dynamixel.c}, 31
+    \subitem {dynamixel.h}, 65
+  \item {DNX\_\-setAngle}
+    \subitem {dynamixel.c}, 31
+    \subitem {dynamixel.h}, 65
+  \item {DNX\_\-setAngleAndSpeed}
+    \subitem {dynamixel.c}, 31
+    \subitem {dynamixel.h}, 66
+  \item {DNX\_\-setId}
+    \subitem {dynamixel.c}, 32
+    \subitem {dynamixel.h}, 66
+  \item {DNX\_\-setLed}
+    \subitem {dynamixel.c}, 32
+    \subitem {dynamixel.h}, 66
+  \item {DNX\_\-setSpeed}
+    \subitem {dynamixel.c}, 32
+    \subitem {dynamixel.h}, 66
+  \item {doStep}
+    \subitem {evolutionaryWalking.c}, 41
+  \item {doStepMove}
+    \subitem {evolutionaryWalking.c}, 41
+  \item {dreIntLevel}
+    \subitem {Usart\_\-and\_\-buffer}, 10
+  \item {DT\_\-bool}
+    \subitem {datatypes.h}, 62
+  \item {DT\_\-byte}
+    \subitem {datatypes.h}, 62
+  \item {DT\_\-char}
+    \subitem {datatypes.h}, 62
+  \item {DT\_\-cmd}
+    \subitem {datatypes.h}, 62
+  \item {DT\_\-double}
+    \subitem {datatypes.h}, 62
+  \item {DT\_\-half\_\-circle}, 4
+    \subitem {sqr\_\-r}, 4
+  \item {DT\_\-individuum}, 4
+    \subitem {F}, 5
+    \subitem {G}, 5
+    \subitem {S}, 5
+  \item {DT\_\-int}
+    \subitem {datatypes.h}, 62
+  \item {DT\_\-leg}, 5
+    \subitem {foot}, 5
+    \subitem {hip}, 5
+    \subitem {knee}, 6
+    \subitem {trans}, 6
+  \item {DT\_\-lin\_\-func}, 6
+    \subitem {m}, 6
+    \subitem {n}, 6
+  \item {DT\_\-point}, 7
+    \subitem {x}, 7
+    \subitem {y}, 7
+    \subitem {z}, 7
+  \item {DT\_\-RESULT\_\-BUFFER\_\-SIZE}
+    \subitem {datatypes.h}, 61
+  \item {DT\_\-servo}, 7
+    \subitem {act\_\-value}, 8
+    \subitem {id}, 8
+    \subitem {set\_\-value}, 8
+  \item {DT\_\-size}
+    \subitem {datatypes.h}, 62
+  \item {DT\_\-transformation}, 8
+    \subitem {x}, 8
+    \subitem {y}, 8
+    \subitem {zRotation}, 8
+  \item {DT\_\-type}
+    \subitem {datatypes.h}, 62
+  \item {DT\_\-vector}, 9
+    \subitem {x}, 9
+    \subitem {y}, 9
+  \item {dynamixel.c}, 25
+    \subitem {ACT}, 28
+    \subitem {ALR\_\-SHUTDWN}, 28
+    \subitem {BD}, 28
+    \subitem {DNX\_\-convertAngle}, 28
+    \subitem {DNX\_\-correctAngles}, 29
+    \subitem {DNX\_\-getAngle}, 29
+    \subitem {DNX\_\-getChecksum}, 29
+    \subitem {DNX\_\-getConnectedIDs}, 29
+    \subitem {DNX\_\-getLed}, 30
+    \subitem {DNX\_\-getSpeed}, 30
+    \subitem {DNX\_\-receive}, 30
+    \subitem {DNX\_\-send}, 30
+    \subitem {DNX\_\-sendAction}, 31
+    \subitem {DNX\_\-setAngle}, 31
+    \subitem {DNX\_\-setAngleAndSpeed}, 31
+    \subitem {DNX\_\-setId}, 32
+    \subitem {DNX\_\-setLed}, 32
+    \subitem {DNX\_\-setSpeed}, 32
+    \subitem {GL\_\-POS}, 28
+    \subitem {ID}, 28
+    \subitem {LED}, 28
+    \subitem {MAX\_\-TMP}, 28
+    \subitem {MV\_\-SPEED}, 28
+    \subitem {PING}, 28
+    \subitem {PRT\_\-POS}, 28
+    \subitem {PRT\_\-SPEED}, 28
+    \subitem {PRT\_\-TMP}, 28
+    \subitem {RD\_\-DATA}, 28
+    \subitem {REG\_\-WR}, 28
+    \subitem {RESET}, 28
+    \subitem {START\_\-BYTE}, 28
+    \subitem {STS\_\-RT\_\-LVL}, 28
+    \subitem {SYC\_\-WR}, 28
+    \subitem {WR\_\-DATA}, 28
+  \item {dynamixel.h}
+    \subitem {DNX\_\-BRDCAST\_\-ID}, 63
+    \subitem {DNX\_\-getAngle}, 63
+    \subitem {DNX\_\-getChecksum}, 63
+    \subitem {DNX\_\-getConnectedIDs}, 64
+    \subitem {DNX\_\-getLed}, 64
+    \subitem {DNX\_\-getSpeed}, 64
+    \subitem {DNX\_\-receive}, 64
+    \subitem {DNX\_\-send}, 65
+    \subitem {DNX\_\-sendAction}, 65
+    \subitem {DNX\_\-setAngle}, 65
+    \subitem {DNX\_\-setAngleAndSpeed}, 66
+    \subitem {DNX\_\-setId}, 66
+    \subitem {DNX\_\-setLed}, 66
+    \subitem {DNX\_\-setSpeed}, 66
+
+  \indexspace
+
+  \item {E}
+    \subitem {evolutionaryHelper.c}, 38
+  \item {evolutionaryAlgorithm}
+    \subitem {evolutionaryAlgorithm.c}, 34
+    \subitem {evolutionaryAlgorithm.h}, 67
+  \item {evolutionaryAlgorithm.c}, 32
+    \subitem {bestSelection}, 34
+    \subitem {evolutionaryAlgorithm}, 34
+    \subitem {fitnessproportionalSelection}, 34
+    \subitem {generatePoint}, 34
+    \subitem {generatePopulation}, 34
+    \subitem {getIsectFromIndividuum}, 34
+    \subitem {getPointFromIndividuum}, 34
+    \subitem {getRandomNumber}, 34
+    \subitem {getScores}, 34
+    \subitem {gleichverteilte\_\-reellwertige\_\-mutation}, 34
+    \subitem {mutation}, 34
+    \subitem {printPopulation}, 34
+    \subitem {recombination}, 34
+    \subitem {uniformCrossover}, 34
+    \subitem {X\_\-MAX}, 34
+    \subitem {X\_\-MIN}, 34
+    \subitem {Y\_\-MAX}, 34
+    \subitem {Y\_\-MIN}, 34
+  \item {evolutionaryAlgorithm.h}
+    \subitem {evolutionaryAlgorithm}, 67
+    \subitem {getIsectFromIndividuum}, 67
+    \subitem {getPointFromIndividuum}, 67
+  \item {evolutionaryCalculation}
+    \subitem {evolutionaryWalking.c}, 41
+  \item {evolutionaryHelper.c}, 34
+    \subitem {A}, 38
+    \subitem {AB}, 38
+    \subitem {B}, 38
+    \subitem {bubblesort}, 37
+    \subitem {C}, 38
+    \subitem {CD}, 38
+    \subitem {CEA}, 38
+    \subitem {D}, 38
+    \subitem {DFB}, 38
+    \subitem {E}, 38
+    \subitem {F}, 38
+    \subitem {f\_\-circ}, 37
+    \subitem {f\_\-lin}, 37
+    \subitem {FIRST\_\-VALUE}, 36
+    \subitem {G}, 38
+    \subitem {getDistance}, 37
+    \subitem {getFunctionOfPoints}, 37
+    \subitem {getNearerPoint}, 37
+    \subitem {initEvoAlg}, 37
+    \subitem {initFunctions}, 37
+    \subitem {initPoints}, 37
+    \subitem {isBetweenPoints}, 38
+    \subitem {isectLinCirc}, 38
+    \subitem {isectLinFuncs}, 38
+    \subitem {isInArea}, 38
+    \subitem {isVectorialPoint}, 38
+    \subitem {max}, 38
+    \subitem {min}, 38
+    \subitem {NO\_\-VALUE}, 36
+    \subitem {scorePoint}, 38
+    \subitem {SECOND\_\-VALUE}, 36
+  \item {evolutionaryHelper.h}
+    \subitem {bubblesort}, 68
+    \subitem {getDistance}, 68
+    \subitem {getFunctionOfPoints}, 68
+    \subitem {initEvoAlg}, 68
+    \subitem {isInArea}, 68
+    \subitem {max}, 68
+    \subitem {min}, 68
+    \subitem {scorePoint}, 68
+    \subitem {Z}, 68
+  \item {evolutionaryWalking.c}, 38
+    \subitem {calculateMovementPoints}, 41
+    \subitem {copyPoint}, 41
+    \subitem {cpuID}, 41
+    \subitem {doStep}, 41
+    \subitem {doStepMove}, 41
+    \subitem {evolutionaryCalculation}, 41
+    \subitem {init\_\-pMpSpMiddle}, 41
+    \subitem {initConf}, 41
+    \subitem {invertVector}, 41
+    \subitem {isectM}, 41
+    \subitem {isectS}, 41
+    \subitem {leg\_\-l}, 41
+    \subitem {leg\_\-r}, 41
+    \subitem {main}, 41
+    \subitem {master}, 41
+    \subitem {MasterActive}, 41
+    \subitem {MasterInactive}, 41
+    \subitem {midM}, 41
+    \subitem {midS}, 41
+    \subitem {NO\_\-OFFSET}, 41
+    \subitem {OFFSET}, 41
+    \subitem {pM}, 41
+    \subitem {pMiddle}, 41
+    \subitem {prepareStepMove}, 41
+    \subitem {pS}, 41
+    \subitem {SlavesActive}, 41
+    \subitem {SlavesInactive}, 41
+    \subitem {switchLegs}, 41
+    \subitem {TEST\_\-ON}, 41
+    \subitem {TripodGaitMove}, 41
+    \subitem {waitForButton3}, 41
+
+  \indexspace
+
+  \item {F}
+    \subitem {DT\_\-individuum}, 5
+    \subitem {evolutionaryHelper.c}, 38
+  \item {f\_\-circ}
+    \subitem {evolutionaryHelper.c}, 37
+  \item {F\_\-CPU}
+    \subitem {avr\_\-compiler.h}, 43
+    \subitem {main.c}, 103
+  \item {f\_\-lin}
+    \subitem {evolutionaryHelper.c}, 37
+  \item {FIRST\_\-VALUE}
+    \subitem {evolutionaryHelper.c}, 36
+  \item {fitnessproportionalSelection}
+    \subitem {evolutionaryAlgorithm.c}, 34
+  \item {foot}
+    \subitem {DT\_\-leg}, 5
+
+  \indexspace
+
+  \item {G}
+    \subitem {DT\_\-individuum}, 5
+    \subitem {evolutionaryHelper.c}, 38
+  \item {generatePoint}
+    \subitem {evolutionaryAlgorithm.c}, 34
+  \item {generatePopulation}
+    \subitem {evolutionaryAlgorithm.c}, 34
+  \item {getDistance}
+    \subitem {evolutionaryHelper.c}, 37
+    \subitem {evolutionaryHelper.h}, 68
+  \item {getFunctionOfPoints}
+    \subitem {evolutionaryHelper.c}, 37
+    \subitem {evolutionaryHelper.h}, 68
+  \item {getIsectFromIndividuum}
+    \subitem {evolutionaryAlgorithm.c}, 34
+    \subitem {evolutionaryAlgorithm.h}, 67
+  \item {getNearerPoint}
+    \subitem {evolutionaryHelper.c}, 37
+  \item {getPointFromIndividuum}
+    \subitem {evolutionaryAlgorithm.c}, 34
+    \subitem {evolutionaryAlgorithm.h}, 67
+  \item {getRandomNumber}
+    \subitem {evolutionaryAlgorithm.c}, 34
+  \item {getScores}
+    \subitem {evolutionaryAlgorithm.c}, 34
+  \item {GL\_\-POS}
+    \subitem {dynamixel.c}, 28
+  \item {gleichverteilte\_\-reellwertige\_\-mutation}
+    \subitem {evolutionaryAlgorithm.c}, 34
+
+  \indexspace
+
+  \item {hip}
+    \subitem {DT\_\-leg}, 5
+
+  \indexspace
+
+  \item {ID}
+    \subitem {dynamixel.c}, 28
+  \item {id}
+    \subitem {DT\_\-servo}, 8
+  \item {include/avr\_\-compiler.h}, 41
+  \item {include/clksys\_\-driver.h}, 43
+  \item {include/communication.h}, 50
+  \item {include/datatypes.h}, 60
+  \item {include/dynamixel.h}, 62
+  \item {include/evolutionaryAlgorithm.h}, 67
+  \item {include/evolutionaryHelper.h}, 67
+  \item {include/kinematics.h}, 68
+  \item {include/movement.h}, 70
+  \item {include/remote.h}, 76
+  \item {include/usart\_\-driver.h}, 80
+  \item {include/utils.h}, 92
+  \item {include/xmega.h}, 96
+  \item {init\_\-pMpSpMiddle}
+    \subitem {evolutionaryWalking.c}, 41
+  \item {initConf}
+    \subitem {evolutionaryWalking.c}, 41
+  \item {initEvoAlg}
+    \subitem {evolutionaryHelper.c}, 37
+    \subitem {evolutionaryHelper.h}, 68
+  \item {initFunctions}
+    \subitem {evolutionaryHelper.c}, 37
+  \item {initPoints}
+    \subitem {evolutionaryHelper.c}, 37
+  \item {invertVector}
+    \subitem {evolutionaryWalking.c}, 41
+  \item {isBetweenPoints}
+    \subitem {evolutionaryHelper.c}, 38
+  \item {isectLinCirc}
+    \subitem {evolutionaryHelper.c}, 38
+  \item {isectLinFuncs}
+    \subitem {evolutionaryHelper.c}, 38
+  \item {isectM}
+    \subitem {evolutionaryWalking.c}, 41
+  \item {isectS}
+    \subitem {evolutionaryWalking.c}, 41
+  \item {isInArea}
+    \subitem {evolutionaryHelper.c}, 38
+    \subitem {evolutionaryHelper.h}, 68
+  \item {ISR}
+    \subitem {xmega.c}, 130, 131
+  \item {isVectorialPoint}
+    \subitem {evolutionaryHelper.c}, 38
+
+  \indexspace
+
+  \item {KIN\_\-calcDH}
+    \subitem {kinematics.c}, 102
+    \subitem {kinematics.h}, 69
+  \item {KIN\_\-calcLocalPoint}
+    \subitem {kinematics.c}, 102
+    \subitem {kinematics.h}, 69
+  \item {KIN\_\-calcServos}
+    \subitem {kinematics.c}, 102
+    \subitem {kinematics.h}, 70
+  \item {KIN\_\-COLUMNS}
+    \subitem {kinematics.h}, 69
+  \item {KIN\_\-makeMovement}
+    \subitem {kinematics.h}, 70
+  \item {KIN\_\-ROWS}
+    \subitem {kinematics.h}, 69
+  \item {KIN\_\-setTransMat}
+    \subitem {kinematics.c}, 102
+    \subitem {kinematics.h}, 70
+  \item {kinematics.c}, 100
+    \subitem {DIST\_\-DZ}, 101
+    \subitem {DIST\_\-FE}, 101
+    \subitem {DIST\_\-HK}, 101
+    \subitem {DIST\_\-KF}, 101
+    \subitem {KIN\_\-calcDH}, 102
+    \subitem {KIN\_\-calcLocalPoint}, 102
+    \subitem {KIN\_\-calcServos}, 102
+    \subitem {KIN\_\-setTransMat}, 102
+  \item {kinematics.h}
+    \subitem {KIN\_\-calcDH}, 69
+    \subitem {KIN\_\-calcLocalPoint}, 69
+    \subitem {KIN\_\-calcServos}, 70
+    \subitem {KIN\_\-COLUMNS}, 69
+    \subitem {KIN\_\-makeMovement}, 70
+    \subitem {KIN\_\-ROWS}, 69
+    \subitem {KIN\_\-setTransMat}, 70
+  \item {knee}
+    \subitem {DT\_\-leg}, 6
+
+  \indexspace
+
+  \item {lastPacketLength}
+    \subitem {Usart\_\-and\_\-buffer}, 10
+  \item {LED}
+    \subitem {dynamixel.c}, 28
+  \item {leg\_\-l}
+    \subitem {evolutionaryWalking.c}, 41
+  \item {leg\_\-r}
+    \subitem {evolutionaryWalking.c}, 41
+
+  \indexspace
+
+  \item {m}
+    \subitem {DT\_\-lin\_\-func}, 6
+  \item {main}
+    \subitem {evolutionaryWalking.c}, 41
+  \item {main.c}, 103
+    \subitem {F\_\-CPU}, 103
+    \subitem {TEST\_\-OFF}, 103
+  \item {master}
+    \subitem {evolutionaryWalking.c}, 41
+  \item {MasterActive}
+    \subitem {evolutionaryWalking.c}, 41
+  \item {MasterInactive}
+    \subitem {evolutionaryWalking.c}, 41
+  \item {max}
+    \subitem {evolutionaryHelper.c}, 38
+    \subitem {evolutionaryHelper.h}, 68
+  \item {MAX\_\-TMP}
+    \subitem {dynamixel.c}, 28
+  \item {midM}
+    \subitem {evolutionaryWalking.c}, 41
+  \item {midS}
+    \subitem {evolutionaryWalking.c}, 41
+  \item {min}
+    \subitem {evolutionaryHelper.c}, 38
+    \subitem {evolutionaryHelper.h}, 68
+  \item {movement.c}, 103
+    \subitem {MV\_\-action}, 105
+    \subitem {MV\_\-doInitPosition}, 105
+    \subitem {MV\_\-DST\_\-X}, 105
+    \subitem {MV\_\-getPntForCpuSide}, 105
+    \subitem {MV\_\-masterCheckAlive}, 106
+    \subitem {MV\_\-point}, 106
+    \subitem {MV\_\-pointAndSpeed}, 106
+    \subitem {MV\_\-slave}, 106
+    \subitem {MV\_\-slaveAngle}, 107
+    \subitem {MV\_\-slavePoint}, 107
+    \subitem {MV\_\-slavePointAndSpeed}, 107
+    \subitem {MV\_\-slaveStatus}, 108
+    \subitem {MV\_\-switchLegs}, 108
+  \item {movement.h}
+    \subitem {MV\_\-action}, 72
+    \subitem {MV\_\-doInitPosition}, 72
+    \subitem {MV\_\-DST\_\-X}, 72
+    \subitem {MV\_\-DST\_\-Y}, 72
+    \subitem {MV\_\-getPntForCpuSide}, 72
+    \subitem {MV\_\-masterCheckAlive}, 73
+    \subitem {MV\_\-point}, 73
+    \subitem {MV\_\-pointAndSpeed}, 73
+    \subitem {MV\_\-slave}, 73
+    \subitem {MV\_\-slaveAngle}, 74
+    \subitem {MV\_\-slavePoint}, 74
+    \subitem {MV\_\-slavePointAndSpeed}, 74
+    \subitem {MV\_\-slaveStatus}, 75
+    \subitem {MV\_\-switchLegs}, 75
+  \item {movement4Points.c}, 108
+    \subitem {TEST\_\-OFF}, 109
+  \item {movementMultiPoints.c}, 109
+    \subitem {TEST\_\-OFF}, 109
+  \item {mutation}
+    \subitem {evolutionaryAlgorithm.c}, 34
+  \item {MV\_\-action}
+    \subitem {movement.c}, 105
+    \subitem {movement.h}, 72
+  \item {MV\_\-doInitPosition}
+    \subitem {movement.c}, 105
+    \subitem {movement.h}, 72
+  \item {MV\_\-DST\_\-X}
+    \subitem {movement.c}, 105
+    \subitem {movement.h}, 72
+  \item {MV\_\-DST\_\-Y}
+    \subitem {movement.h}, 72
+  \item {MV\_\-getPntForCpuSide}
+    \subitem {movement.c}, 105
+    \subitem {movement.h}, 72
+  \item {MV\_\-masterCheckAlive}
+    \subitem {movement.c}, 106
+    \subitem {movement.h}, 73
+  \item {MV\_\-point}
+    \subitem {movement.c}, 106
+    \subitem {movement.h}, 73
+  \item {MV\_\-pointAndSpeed}
+    \subitem {movement.c}, 106
+    \subitem {movement.h}, 73
+  \item {MV\_\-slave}
+    \subitem {movement.c}, 106
+    \subitem {movement.h}, 73
+  \item {MV\_\-slaveAngle}
+    \subitem {movement.c}, 107
+    \subitem {movement.h}, 74
+  \item {MV\_\-slavePoint}
+    \subitem {movement.c}, 107
+    \subitem {movement.h}, 74
+  \item {MV\_\-slavePointAndSpeed}
+    \subitem {movement.c}, 107
+    \subitem {movement.h}, 74
+  \item {MV\_\-slaveStatus}
+    \subitem {movement.c}, 108
+    \subitem {movement.h}, 75
+  \item {MV\_\-SPEED}
+    \subitem {dynamixel.c}, 28
+  \item {MV\_\-switchLegs}
+    \subitem {movement.c}, 108
+    \subitem {movement.h}, 75
+
+  \indexspace
+
+  \item {n}
+    \subitem {DT\_\-lin\_\-func}, 6
+  \item {NO\_\-OFFSET}
+    \subitem {evolutionaryWalking.c}, 41
+  \item {NO\_\-VALUE}
+    \subitem {evolutionaryHelper.c}, 36
+
+  \indexspace
+
+  \item {OFFSET}
+    \subitem {evolutionaryWalking.c}, 41
+
+  \indexspace
+
+  \item {PING}
+    \subitem {dynamixel.c}, 28
+  \item {pM}
+    \subitem {evolutionaryWalking.c}, 41
+  \item {pMiddle}
+    \subitem {evolutionaryWalking.c}, 41
+  \item {port}
+    \subitem {Usart\_\-and\_\-buffer}, 10
+  \item {prepareStepMove}
+    \subitem {evolutionaryWalking.c}, 41
+  \item {printPopulation}
+    \subitem {evolutionaryAlgorithm.c}, 34
+  \item {PRT\_\-POS}
+    \subitem {dynamixel.c}, 28
+  \item {PRT\_\-SPEED}
+    \subitem {dynamixel.c}, 28
+  \item {PRT\_\-TMP}
+    \subitem {dynamixel.c}, 28
+  \item {pS}
+    \subitem {evolutionaryWalking.c}, 41
+
+  \indexspace
+
+  \item {RD\_\-DATA}
+    \subitem {dynamixel.c}, 28
+  \item {recombination}
+    \subitem {evolutionaryAlgorithm.c}, 34
+  \item {REG\_\-WR}
+    \subitem {dynamixel.c}, 28
+  \item {remote.c}, 109
+    \subitem {B\_\-1}, 111
+    \subitem {B\_\-2}, 111
+    \subitem {B\_\-3}, 111
+    \subitem {B\_\-4}, 111
+    \subitem {B\_\-5}, 111
+    \subitem {B\_\-6}, 111
+    \subitem {B\_\-D}, 111
+    \subitem {B\_\-L}, 111
+    \subitem {B\_\-NON\_\-PRESSED}, 111
+    \subitem {B\_\-R}, 111
+    \subitem {B\_\-U}, 111
+    \subitem {RMT\_\-getCommand}, 111
+    \subitem {RMT\_\-isButton1Pressed}, 111
+    \subitem {RMT\_\-isButton2Pressed}, 111
+    \subitem {RMT\_\-isButton3Pressed}, 112
+    \subitem {RMT\_\-isButton4Pressed}, 112
+    \subitem {RMT\_\-isButton5Pressed}, 112
+    \subitem {RMT\_\-isButton6Pressed}, 113
+    \subitem {RMT\_\-isDownPressed}, 113
+    \subitem {RMT\_\-isLeftPressed}, 113
+    \subitem {RMT\_\-isRightPressed}, 113
+    \subitem {RMT\_\-isUpPressed}, 114
+    \subitem {RMT\_\-NonPressed}, 114
+    \subitem {RMT\_\-receive}, 114
+  \item {remote.h}
+    \subitem {RMT\_\-getCommand}, 77
+    \subitem {RMT\_\-isButton1Pressed}, 77
+    \subitem {RMT\_\-isButton2Pressed}, 77
+    \subitem {RMT\_\-isButton3Pressed}, 77
+    \subitem {RMT\_\-isButton4Pressed}, 78
+    \subitem {RMT\_\-isButton5Pressed}, 78
+    \subitem {RMT\_\-isButton6Pressed}, 78
+    \subitem {RMT\_\-isDownPressed}, 78
+    \subitem {RMT\_\-isLeftPressed}, 79
+    \subitem {RMT\_\-isRightPressed}, 79
+    \subitem {RMT\_\-isUpPressed}, 79
+    \subitem {RMT\_\-NonPressed}, 80
+    \subitem {RMT\_\-receive}, 80
+  \item {RESET}
+    \subitem {dynamixel.c}, 28
+  \item {RMT\_\-getCommand}
+    \subitem {remote.c}, 111
+    \subitem {remote.h}, 77
+  \item {RMT\_\-isButton1Pressed}
+    \subitem {remote.c}, 111
+    \subitem {remote.h}, 77
+  \item {RMT\_\-isButton2Pressed}
+    \subitem {remote.c}, 111
+    \subitem {remote.h}, 77
+  \item {RMT\_\-isButton3Pressed}
+    \subitem {remote.c}, 112
+    \subitem {remote.h}, 77
+  \item {RMT\_\-isButton4Pressed}
+    \subitem {remote.c}, 112
+    \subitem {remote.h}, 78
+  \item {RMT\_\-isButton5Pressed}
+    \subitem {remote.c}, 112
+    \subitem {remote.h}, 78
+  \item {RMT\_\-isButton6Pressed}
+    \subitem {remote.c}, 113
+    \subitem {remote.h}, 78
+  \item {RMT\_\-isDownPressed}
+    \subitem {remote.c}, 113
+    \subitem {remote.h}, 78
+  \item {RMT\_\-isLeftPressed}
+    \subitem {remote.c}, 113
+    \subitem {remote.h}, 79
+  \item {RMT\_\-isRightPressed}
+    \subitem {remote.c}, 113
+    \subitem {remote.h}, 79
+  \item {RMT\_\-isUpPressed}
+    \subitem {remote.c}, 114
+    \subitem {remote.h}, 79
+  \item {RMT\_\-NonPressed}
+    \subitem {remote.c}, 114
+    \subitem {remote.h}, 80
+  \item {RMT\_\-receive}
+    \subitem {remote.c}, 114
+    \subitem {remote.h}, 80
+  \item {RX}
+    \subitem {USART\_\-Buffer}, 10
+  \item {RX\_\-Head}
+    \subitem {USART\_\-Buffer}, 10
+  \item {RX\_\-Tail}
+    \subitem {USART\_\-Buffer}, 10
+
+  \indexspace
+
+  \item {S}
+    \subitem {DT\_\-individuum}, 5
+  \item {scorePoint}
+    \subitem {evolutionaryHelper.c}, 38
+    \subitem {evolutionaryHelper.h}, 68
+  \item {SECOND\_\-VALUE}
+    \subitem {evolutionaryHelper.c}, 36
+  \item {set\_\-value}
+    \subitem {DT\_\-servo}, 8
+  \item {SlavesActive}
+    \subitem {evolutionaryWalking.c}, 41
+  \item {SlavesInactive}
+    \subitem {evolutionaryWalking.c}, 41
+  \item {sqr\_\-r}
+    \subitem {DT\_\-half\_\-circle}, 4
+  \item {START\_\-BYTE}
+    \subitem {dynamixel.c}, 28
+  \item {STS\_\-RT\_\-LVL}
+    \subitem {dynamixel.c}, 28
+  \item {SWITCH\_\-PRESSED}
+    \subitem {xmega.h}, 98
+  \item {SWITCH\_\-RELEASED}
+    \subitem {xmega.h}, 98
+  \item {switchLegs}
+    \subitem {evolutionaryWalking.c}, 41
+  \item {SWITCHMASK}
+    \subitem {xmega.h}, 98
+  \item {SWITCHPORT}
+    \subitem {xmega.h}, 98
+  \item {SYC\_\-WR}
+    \subitem {dynamixel.c}, 28
+
+  \indexspace
+
+  \item {TEST\_\-OFF}
+    \subitem {main.c}, 103
+    \subitem {movement4Points.c}, 109
+    \subitem {movementMultiPoints.c}, 109
+    \subitem {testArithmetic.c}, 115
+    \subitem {testCom.c}, 115
+    \subitem {testCom2.c}, 116
+    \subitem {testCom3.c}, 116
+    \subitem {testDnx.c}, 116
+    \subitem {testEvolutionaryDistanceWalking.c}, 117
+    \subitem {testKin.c}, 117
+    \subitem {testKin2.c}, 117
+    \subitem {testMovement.c}, 118
+    \subitem {testRemote.c}, 118
+    \subitem {testRingBuffer.c}, 118
+    \subitem {testSpeed.c}, 119
+  \item {TEST\_\-ON}
+    \subitem {evolutionaryWalking.c}, 41
+  \item {testArithmetic.c}, 115
+    \subitem {TEST\_\-OFF}, 115
+  \item {testCom.c}, 115
+    \subitem {TEST\_\-OFF}, 115
+  \item {testCom2.c}, 115
+    \subitem {TEST\_\-OFF}, 116
+  \item {testCom3.c}, 116
+    \subitem {TEST\_\-OFF}, 116
+  \item {testDnx.c}, 116
+    \subitem {TEST\_\-OFF}, 116
+  \item {testEvolutionaryDistanceWalking.c}, 116
+    \subitem {TEST\_\-OFF}, 117
+  \item {testKin.c}, 117
+    \subitem {TEST\_\-OFF}, 117
+  \item {testKin2.c}, 117
+    \subitem {TEST\_\-OFF}, 117
+  \item {testMovement.c}, 117
+    \subitem {TEST\_\-OFF}, 118
+  \item {testRemote.c}, 118
+    \subitem {TEST\_\-OFF}, 118
+  \item {testRingBuffer.c}, 118
+    \subitem {TEST\_\-OFF}, 118
+  \item {testSpeed.c}, 118
+    \subitem {TEST\_\-OFF}, 119
+  \item {trans}
+    \subitem {DT\_\-leg}, 6
+  \item {TripodGaitMove}
+    \subitem {evolutionaryWalking.c}, 41
+  \item {TX}
+    \subitem {USART\_\-Buffer}, 10
+  \item {TX\_\-Head}
+    \subitem {USART\_\-Buffer}, 10
+  \item {TX\_\-Tail}
+    \subitem {USART\_\-Buffer}, 10
+
+  \indexspace
+
+  \item {uniformCrossover}
+    \subitem {evolutionaryAlgorithm.c}, 34
+  \item {usart}
+    \subitem {Usart\_\-and\_\-buffer}, 10
+  \item {Usart\_\-and\_\-buffer}, 9
+    \subitem {buffer}, 10
+    \subitem {dreIntLevel}, 10
+    \subitem {lastPacketLength}, 10
+    \subitem {port}, 10
+    \subitem {usart}, 10
+  \item {USART\_\-Baudrate\_\-Set}
+    \subitem {usart\_\-driver.h}, 84
+  \item {USART\_\-Buffer}, 10
+    \subitem {RX}, 10
+    \subitem {RX\_\-Head}, 10
+    \subitem {RX\_\-Tail}, 10
+    \subitem {TX}, 10
+    \subitem {TX\_\-Head}, 10
+    \subitem {TX\_\-Tail}, 10
+  \item {USART\_\-Buffer\_\-t}
+    \subitem {usart\_\-driver.h}, 88
+  \item {USART\_\-data\_\-t}
+    \subitem {usart\_\-driver.h}, 88
+  \item {USART\_\-DataRegEmpty}
+    \subitem {usart\_\-driver.c}, 121
+    \subitem {usart\_\-driver.h}, 89
+  \item {USART\_\-DreInterruptLevel\_\-Set}
+    \subitem {usart\_\-driver.h}, 85
+  \item {usart\_\-driver.c}, 119
+    \subitem {USART\_\-DataRegEmpty}, 121
+    \subitem {USART\_\-InterruptDriver\_\-DreInterruptLevel\_\-Set}, 
+		121
+    \subitem {USART\_\-InterruptDriver\_\-Initialize}, 121
+    \subitem {USART\_\-NineBits\_\-GetChar}, 122
+    \subitem {USART\_\-NineBits\_\-PutChar}, 122
+    \subitem {USART\_\-RXBuffer\_\-checkPointerDiff}, 122
+    \subitem {USART\_\-RXBuffer\_\-GetByte}, 123
+    \subitem {USART\_\-RXBufferData\_\-Available}, 123
+    \subitem {USART\_\-RXComplete}, 123
+    \subitem {USART\_\-TXBuffer\_\-FreeSpace}, 123
+    \subitem {USART\_\-TXBuffer\_\-PutByte}, 124
+  \item {usart\_\-driver.h}
+    \subitem {USART\_\-Baudrate\_\-Set}, 84
+    \subitem {USART\_\-Buffer\_\-t}, 88
+    \subitem {USART\_\-data\_\-t}, 88
+    \subitem {USART\_\-DataRegEmpty}, 89
+    \subitem {USART\_\-DreInterruptLevel\_\-Set}, 85
+    \subitem {USART\_\-Format\_\-Set}, 85
+    \subitem {USART\_\-GetChar}, 85
+    \subitem {USART\_\-InterruptDriver\_\-DreInterruptLevel\_\-Set}, 89
+    \subitem {USART\_\-InterruptDriver\_\-Initialize}, 89
+    \subitem {USART\_\-IsRXComplete}, 86
+    \subitem {USART\_\-IsTXDataRegisterEmpty}, 86
+    \subitem {USART\_\-NineBits\_\-GetChar}, 89
+    \subitem {USART\_\-NineBits\_\-PutChar}, 90
+    \subitem {USART\_\-PutChar}, 86
+    \subitem {USART\_\-RX\_\-BUFFER\_\-MASK}, 86
+    \subitem {USART\_\-RX\_\-BUFFER\_\-SIZE}, 86
+    \subitem {USART\_\-Rx\_\-Disable}, 86
+    \subitem {USART\_\-Rx\_\-Enable}, 87
+    \subitem {USART\_\-RXBuffer\_\-checkPointerDiff}, 90
+    \subitem {USART\_\-RXBuffer\_\-GetByte}, 90
+    \subitem {USART\_\-RXBufferData\_\-Available}, 91
+    \subitem {USART\_\-RXComplete}, 91
+    \subitem {USART\_\-RxdInterruptLevel\_\-Set}, 87
+    \subitem {USART\_\-SetMode}, 87
+    \subitem {USART\_\-TX\_\-BUFFER\_\-MASK}, 87
+    \subitem {USART\_\-TX\_\-BUFFER\_\-SIZE}, 88
+    \subitem {USART\_\-Tx\_\-Disable}, 88
+    \subitem {USART\_\-Tx\_\-Enable}, 88
+    \subitem {USART\_\-TXBuffer\_\-FreeSpace}, 91
+    \subitem {USART\_\-TXBuffer\_\-PutByte}, 91
+    \subitem {USART\_\-TxdInterruptLevel\_\-Set}, 88
+  \item {USART\_\-Format\_\-Set}
+    \subitem {usart\_\-driver.h}, 85
+  \item {USART\_\-GetChar}
+    \subitem {usart\_\-driver.h}, 85
+  \item {USART\_\-InterruptDriver\_\-DreInterruptLevel\_\-Set}
+    \subitem {usart\_\-driver.c}, 121
+    \subitem {usart\_\-driver.h}, 89
+  \item {USART\_\-InterruptDriver\_\-Initialize}
+    \subitem {usart\_\-driver.c}, 121
+    \subitem {usart\_\-driver.h}, 89
+  \item {USART\_\-IsRXComplete}
+    \subitem {usart\_\-driver.h}, 86
+  \item {USART\_\-IsTXDataRegisterEmpty}
+    \subitem {usart\_\-driver.h}, 86
+  \item {USART\_\-NineBits\_\-GetChar}
+    \subitem {usart\_\-driver.c}, 122
+    \subitem {usart\_\-driver.h}, 89
+  \item {USART\_\-NineBits\_\-PutChar}
+    \subitem {usart\_\-driver.c}, 122
+    \subitem {usart\_\-driver.h}, 90
+  \item {USART\_\-ON}
+    \subitem {utils.c}, 125
+  \item {USART\_\-PutChar}
+    \subitem {usart\_\-driver.h}, 86
+  \item {USART\_\-RX\_\-BUFFER\_\-MASK}
+    \subitem {usart\_\-driver.h}, 86
+  \item {USART\_\-RX\_\-BUFFER\_\-SIZE}
+    \subitem {usart\_\-driver.h}, 86
+  \item {USART\_\-Rx\_\-Disable}
+    \subitem {usart\_\-driver.h}, 86
+  \item {USART\_\-Rx\_\-Enable}
+    \subitem {usart\_\-driver.h}, 87
+  \item {USART\_\-RXBuffer\_\-checkPointerDiff}
+    \subitem {usart\_\-driver.c}, 122
+    \subitem {usart\_\-driver.h}, 90
+  \item {USART\_\-RXBuffer\_\-GetByte}
+    \subitem {usart\_\-driver.c}, 123
+    \subitem {usart\_\-driver.h}, 90
+  \item {USART\_\-RXBufferData\_\-Available}
+    \subitem {usart\_\-driver.c}, 123
+    \subitem {usart\_\-driver.h}, 91
+  \item {USART\_\-RXComplete}
+    \subitem {usart\_\-driver.c}, 123
+    \subitem {usart\_\-driver.h}, 91
+  \item {USART\_\-RxdInterruptLevel\_\-Set}
+    \subitem {usart\_\-driver.h}, 87
+  \item {USART\_\-SetMode}
+    \subitem {usart\_\-driver.h}, 87
+  \item {USART\_\-TX\_\-BUFFER\_\-MASK}
+    \subitem {usart\_\-driver.h}, 87
+  \item {USART\_\-TX\_\-BUFFER\_\-SIZE}
+    \subitem {usart\_\-driver.h}, 88
+  \item {USART\_\-Tx\_\-Disable}
+    \subitem {usart\_\-driver.h}, 88
+  \item {USART\_\-Tx\_\-Enable}
+    \subitem {usart\_\-driver.h}, 88
+  \item {USART\_\-TXBuffer\_\-FreeSpace}
+    \subitem {usart\_\-driver.c}, 123
+    \subitem {usart\_\-driver.h}, 91
+  \item {USART\_\-TXBuffer\_\-PutByte}
+    \subitem {usart\_\-driver.c}, 124
+    \subitem {usart\_\-driver.h}, 91
+  \item {USART\_\-TxdInterruptLevel\_\-Set}
+    \subitem {usart\_\-driver.h}, 88
+  \item {utils.c}, 124
+    \subitem {USART\_\-ON}, 125
+    \subitem {UTL\_\-byteToHexChar}, 126
+    \subitem {UTL\_\-getDegree}, 126
+    \subitem {UTL\_\-getPointOfDH}, 126
+    \subitem {UTL\_\-getRadiant}, 126
+    \subitem {UTL\_\-printDebug}, 127
+    \subitem {UTL\_\-printDebugByte}, 127
+    \subitem {UTL\_\-printLeg}, 127
+    \subitem {UTL\_\-printMatrix}, 127
+    \subitem {UTL\_\-printPoint}, 127
+    \subitem {UTL\_\-wait}, 128
+  \item {utils.h}
+    \subitem {DEBUG}, 93
+    \subitem {DEBUG\_\-BYTE}, 93
+    \subitem {DEBUG\_\-ON}, 93
+    \subitem {UTL\_\-byteToHexChar}, 93
+    \subitem {UTL\_\-DEG}, 93
+    \subitem {UTL\_\-getDegree}, 93
+    \subitem {UTL\_\-getPointOfDH}, 94
+    \subitem {UTL\_\-getRadiant}, 94
+    \subitem {UTL\_\-printDebug}, 94
+    \subitem {UTL\_\-printDebugByte}, 94
+    \subitem {UTL\_\-printLeg}, 95
+    \subitem {UTL\_\-printMatrix}, 95
+    \subitem {UTL\_\-printPoint}, 95
+    \subitem {UTL\_\-RAD}, 93
+    \subitem {UTL\_\-wait}, 95
+  \item {UTL\_\-byteToHexChar}
+    \subitem {utils.c}, 126
+    \subitem {utils.h}, 93
+  \item {UTL\_\-DEG}
+    \subitem {utils.h}, 93
+  \item {UTL\_\-getDegree}
+    \subitem {utils.c}, 126
+    \subitem {utils.h}, 93
+  \item {UTL\_\-getPointOfDH}
+    \subitem {utils.c}, 126
+    \subitem {utils.h}, 94
+  \item {UTL\_\-getRadiant}
+    \subitem {utils.c}, 126
+    \subitem {utils.h}, 94
+  \item {UTL\_\-printDebug}
+    \subitem {utils.c}, 127
+    \subitem {utils.h}, 94
+  \item {UTL\_\-printDebugByte}
+    \subitem {utils.c}, 127
+    \subitem {utils.h}, 94
+  \item {UTL\_\-printLeg}
+    \subitem {utils.c}, 127
+    \subitem {utils.h}, 95
+  \item {UTL\_\-printMatrix}
+    \subitem {utils.c}, 127
+    \subitem {utils.h}, 95
+  \item {UTL\_\-printPoint}
+    \subitem {utils.c}, 127
+    \subitem {utils.h}, 95
+  \item {UTL\_\-RAD}
+    \subitem {utils.h}, 93
+  \item {UTL\_\-wait}
+    \subitem {utils.c}, 128
+    \subitem {utils.h}, 95
+
+  \indexspace
+
+  \item {waitForButton3}
+    \subitem {evolutionaryWalking.c}, 41
+  \item {WR\_\-DATA}
+    \subitem {dynamixel.c}, 28
+
+  \indexspace
+
+  \item {x}
+    \subitem {DT\_\-point}, 7
+    \subitem {DT\_\-transformation}, 8
+    \subitem {DT\_\-vector}, 9
+  \item {X\_\-MAX}
+    \subitem {evolutionaryAlgorithm.c}, 34
+  \item {X\_\-MIN}
+    \subitem {evolutionaryAlgorithm.c}, 34
+  \item {XM\_\-com\_\-data1}
+    \subitem {xmega.h}, 100
+  \item {XM\_\-com\_\-data3}
+    \subitem {xmega.h}, 100
+  \item {XM\_\-debug\_\-data}
+    \subitem {xmega.h}, 100
+  \item {XM\_\-init\_\-com}
+    \subitem {xmega.c}, 131
+    \subitem {xmega.h}, 99
+  \item {XM\_\-init\_\-cpu}
+    \subitem {xmega.c}, 131
+    \subitem {xmega.h}, 99
+  \item {XM\_\-init\_\-dnx}
+    \subitem {xmega.c}, 131
+    \subitem {xmega.h}, 99
+  \item {XM\_\-init\_\-remote}
+    \subitem {xmega.c}, 131
+    \subitem {xmega.h}, 99
+  \item {XM\_\-LED\_\-MASK}
+    \subitem {xmega.h}, 98
+  \item {XM\_\-LED\_\-OFF}
+    \subitem {xmega.h}, 98
+  \item {XM\_\-LED\_\-ON}
+    \subitem {xmega.h}, 98
+  \item {XM\_\-LED\_\-TGL}
+    \subitem {xmega.h}, 98
+  \item {XM\_\-OE\_\-MASK}
+    \subitem {xmega.h}, 98
+  \item {XM\_\-PORT\_\-COM1}
+    \subitem {xmega.h}, 98
+  \item {XM\_\-PORT\_\-COM3}
+    \subitem {xmega.h}, 98
+  \item {XM\_\-PORT\_\-DEBUG}
+    \subitem {xmega.h}, 98
+  \item {XM\_\-PORT\_\-LED}
+    \subitem {xmega.h}, 98
+  \item {XM\_\-PORT\_\-REMOTE}
+    \subitem {xmega.h}, 98
+  \item {XM\_\-PORT\_\-SERVO\_\-L}
+    \subitem {xmega.h}, 98
+  \item {XM\_\-PORT\_\-SERVO\_\-R}
+    \subitem {xmega.h}, 98
+  \item {XM\_\-remote\_\-data}
+    \subitem {xmega.h}, 100
+  \item {XM\_\-servo\_\-data\_\-L}
+    \subitem {xmega.h}, 100
+  \item {XM\_\-servo\_\-data\_\-R}
+    \subitem {xmega.h}, 100
+  \item {XM\_\-USART\_\-COM1}
+    \subitem {xmega.h}, 98
+  \item {XM\_\-USART\_\-COM3}
+    \subitem {xmega.h}, 98
+  \item {XM\_\-USART\_\-DEBUG}
+    \subitem {xmega.h}, 98
+  \item {XM\_\-USART\_\-FAILURE}
+    \subitem {xmega.h}, 98
+  \item {XM\_\-USART\_\-REMOTE}
+    \subitem {xmega.h}, 98
+  \item {XM\_\-USART\_\-send}
+    \subitem {xmega.c}, 131
+    \subitem {xmega.h}, 99
+  \item {XM\_\-USART\_\-SERVO\_\-L}
+    \subitem {xmega.h}, 99
+  \item {XM\_\-USART\_\-SERVO\_\-R}
+    \subitem {xmega.h}, 99
+  \item {xmega.c}, 128
+    \subitem {ISR}, 130, 131
+    \subitem {XM\_\-init\_\-com}, 131
+    \subitem {XM\_\-init\_\-cpu}, 131
+    \subitem {XM\_\-init\_\-dnx}, 131
+    \subitem {XM\_\-init\_\-remote}, 131
+    \subitem {XM\_\-USART\_\-send}, 131
+  \item {xmega.h}
+    \subitem {SWITCH\_\-PRESSED}, 98
+    \subitem {SWITCH\_\-RELEASED}, 98
+    \subitem {SWITCHMASK}, 98
+    \subitem {SWITCHPORT}, 98
+    \subitem {XM\_\-com\_\-data1}, 100
+    \subitem {XM\_\-com\_\-data3}, 100
+    \subitem {XM\_\-debug\_\-data}, 100
+    \subitem {XM\_\-init\_\-com}, 99
+    \subitem {XM\_\-init\_\-cpu}, 99
+    \subitem {XM\_\-init\_\-dnx}, 99
+    \subitem {XM\_\-init\_\-remote}, 99
+    \subitem {XM\_\-LED\_\-MASK}, 98
+    \subitem {XM\_\-LED\_\-OFF}, 98
+    \subitem {XM\_\-LED\_\-ON}, 98
+    \subitem {XM\_\-LED\_\-TGL}, 98
+    \subitem {XM\_\-OE\_\-MASK}, 98
+    \subitem {XM\_\-PORT\_\-COM1}, 98
+    \subitem {XM\_\-PORT\_\-COM3}, 98
+    \subitem {XM\_\-PORT\_\-DEBUG}, 98
+    \subitem {XM\_\-PORT\_\-LED}, 98
+    \subitem {XM\_\-PORT\_\-REMOTE}, 98
+    \subitem {XM\_\-PORT\_\-SERVO\_\-L}, 98
+    \subitem {XM\_\-PORT\_\-SERVO\_\-R}, 98
+    \subitem {XM\_\-remote\_\-data}, 100
+    \subitem {XM\_\-servo\_\-data\_\-L}, 100
+    \subitem {XM\_\-servo\_\-data\_\-R}, 100
+    \subitem {XM\_\-USART\_\-COM1}, 98
+    \subitem {XM\_\-USART\_\-COM3}, 98
+    \subitem {XM\_\-USART\_\-DEBUG}, 98
+    \subitem {XM\_\-USART\_\-FAILURE}, 98
+    \subitem {XM\_\-USART\_\-REMOTE}, 98
+    \subitem {XM\_\-USART\_\-send}, 99
+    \subitem {XM\_\-USART\_\-SERVO\_\-L}, 99
+    \subitem {XM\_\-USART\_\-SERVO\_\-R}, 99
+
+  \indexspace
+
+  \item {y}
+    \subitem {DT\_\-point}, 7
+    \subitem {DT\_\-transformation}, 8
+    \subitem {DT\_\-vector}, 9
+  \item {Y\_\-MAX}
+    \subitem {evolutionaryAlgorithm.c}, 34
+  \item {Y\_\-MIN}
+    \subitem {evolutionaryAlgorithm.c}, 34
+
+  \indexspace
+
+  \item {Z}
+    \subitem {evolutionaryHelper.h}, 68
+  \item {z}
+    \subitem {DT\_\-point}, 7
+  \item {zRotation}
+    \subitem {DT\_\-transformation}, 8
+
+\end{theindex}

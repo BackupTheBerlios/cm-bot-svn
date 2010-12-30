@@ -1,0 +1,662 @@
+\select@language {ngerman}
+\contentsline {chapter}{\numberline {1}Datenstruktur-\/Verzeichnis}{1}
+\contentsline {section}{\numberline {1.1}Datenstrukturen}{1}
+\contentsline {chapter}{\numberline {2}Datei-\/Verzeichnis}{2}
+\contentsline {section}{\numberline {2.1}Auflistung der Dateien}{2}
+\contentsline {chapter}{\numberline {3}Datenstruktur-\/Dokumentation}{4}
+\contentsline {section}{\numberline {3.1}DT\_\discretionary {-}{}{}half\_\discretionary {-}{}{}circle Strukturreferenz}{4}
+\contentsline {subsection}{\numberline {3.1.1}Ausf\IeC {\"u}hrliche Beschreibung}{4}
+\contentsline {subsection}{\numberline {3.1.2}Dokumentation der Datenelemente}{4}
+\contentsline {subsubsection}{\numberline {3.1.2.1}sqr\_\discretionary {-}{}{}r}{4}
+\contentsline {section}{\numberline {3.2}DT\_\discretionary {-}{}{}individuum Strukturreferenz}{4}
+\contentsline {subsection}{\numberline {3.2.1}Ausf\IeC {\"u}hrliche Beschreibung}{5}
+\contentsline {subsection}{\numberline {3.2.2}Dokumentation der Datenelemente}{5}
+\contentsline {subsubsection}{\numberline {3.2.2.1}F}{5}
+\contentsline {subsubsection}{\numberline {3.2.2.2}G}{5}
+\contentsline {subsubsection}{\numberline {3.2.2.3}S}{5}
+\contentsline {section}{\numberline {3.3}DT\_\discretionary {-}{}{}leg Strukturreferenz}{5}
+\contentsline {subsection}{\numberline {3.3.1}Ausf\IeC {\"u}hrliche Beschreibung}{5}
+\contentsline {subsection}{\numberline {3.3.2}Dokumentation der Datenelemente}{5}
+\contentsline {subsubsection}{\numberline {3.3.2.1}foot}{5}
+\contentsline {subsubsection}{\numberline {3.3.2.2}hip}{6}
+\contentsline {subsubsection}{\numberline {3.3.2.3}knee}{6}
+\contentsline {subsubsection}{\numberline {3.3.2.4}trans}{6}
+\contentsline {section}{\numberline {3.4}DT\_\discretionary {-}{}{}lin\_\discretionary {-}{}{}func Strukturreferenz}{6}
+\contentsline {subsection}{\numberline {3.4.1}Ausf\IeC {\"u}hrliche Beschreibung}{6}
+\contentsline {subsection}{\numberline {3.4.2}Dokumentation der Datenelemente}{6}
+\contentsline {subsubsection}{\numberline {3.4.2.1}m}{6}
+\contentsline {subsubsection}{\numberline {3.4.2.2}n}{6}
+\contentsline {section}{\numberline {3.5}DT\_\discretionary {-}{}{}point Strukturreferenz}{7}
+\contentsline {subsection}{\numberline {3.5.1}Ausf\IeC {\"u}hrliche Beschreibung}{7}
+\contentsline {subsection}{\numberline {3.5.2}Dokumentation der Datenelemente}{7}
+\contentsline {subsubsection}{\numberline {3.5.2.1}x}{7}
+\contentsline {subsubsection}{\numberline {3.5.2.2}y}{7}
+\contentsline {subsubsection}{\numberline {3.5.2.3}z}{7}
+\contentsline {section}{\numberline {3.6}DT\_\discretionary {-}{}{}servo Strukturreferenz}{7}
+\contentsline {subsection}{\numberline {3.6.1}Ausf\IeC {\"u}hrliche Beschreibung}{7}
+\contentsline {subsection}{\numberline {3.6.2}Dokumentation der Datenelemente}{8}
+\contentsline {subsubsection}{\numberline {3.6.2.1}act\_\discretionary {-}{}{}value}{8}
+\contentsline {subsubsection}{\numberline {3.6.2.2}id}{8}
+\contentsline {subsubsection}{\numberline {3.6.2.3}set\_\discretionary {-}{}{}value}{8}
+\contentsline {section}{\numberline {3.7}DT\_\discretionary {-}{}{}transformation Strukturreferenz}{8}
+\contentsline {subsection}{\numberline {3.7.1}Ausf\IeC {\"u}hrliche Beschreibung}{8}
+\contentsline {subsection}{\numberline {3.7.2}Dokumentation der Datenelemente}{8}
+\contentsline {subsubsection}{\numberline {3.7.2.1}x}{8}
+\contentsline {subsubsection}{\numberline {3.7.2.2}y}{8}
+\contentsline {subsubsection}{\numberline {3.7.2.3}zRotation}{8}
+\contentsline {section}{\numberline {3.8}DT\_\discretionary {-}{}{}vector Strukturreferenz}{9}
+\contentsline {subsection}{\numberline {3.8.1}Ausf\IeC {\"u}hrliche Beschreibung}{9}
+\contentsline {subsection}{\numberline {3.8.2}Dokumentation der Datenelemente}{9}
+\contentsline {subsubsection}{\numberline {3.8.2.1}x}{9}
+\contentsline {subsubsection}{\numberline {3.8.2.2}y}{9}
+\contentsline {section}{\numberline {3.9}Usart\_\discretionary {-}{}{}and\_\discretionary {-}{}{}buffer Strukturreferenz}{9}
+\contentsline {subsection}{\numberline {3.9.1}Ausf\IeC {\"u}hrliche Beschreibung}{9}
+\contentsline {subsection}{\numberline {3.9.2}Dokumentation der Datenelemente}{10}
+\contentsline {subsubsection}{\numberline {3.9.2.1}buffer}{10}
+\contentsline {subsubsection}{\numberline {3.9.2.2}dreIntLevel}{10}
+\contentsline {subsubsection}{\numberline {3.9.2.3}lastPacketLength}{10}
+\contentsline {subsubsection}{\numberline {3.9.2.4}port}{10}
+\contentsline {subsubsection}{\numberline {3.9.2.5}usart}{10}
+\contentsline {section}{\numberline {3.10}USART\_\discretionary {-}{}{}Buffer Strukturreferenz}{10}
+\contentsline {subsection}{\numberline {3.10.1}Dokumentation der Datenelemente}{10}
+\contentsline {subsubsection}{\numberline {3.10.1.1}RX}{10}
+\contentsline {subsubsection}{\numberline {3.10.1.2}RX\_\discretionary {-}{}{}Head}{10}
+\contentsline {subsubsection}{\numberline {3.10.1.3}RX\_\discretionary {-}{}{}Tail}{10}
+\contentsline {subsubsection}{\numberline {3.10.1.4}TX}{10}
+\contentsline {subsubsection}{\numberline {3.10.1.5}TX\_\discretionary {-}{}{}Head}{10}
+\contentsline {subsubsection}{\numberline {3.10.1.6}TX\_\discretionary {-}{}{}Tail}{10}
+\contentsline {chapter}{\numberline {4}Datei-\/Dokumentation}{11}
+\contentsline {section}{\numberline {4.1}clksys\_\discretionary {-}{}{}driver.c-\/Dateireferenz}{11}
+\contentsline {subsection}{\numberline {4.1.1}Ausf\IeC {\"u}hrliche Beschreibung}{12}
+\contentsline {subsection}{\numberline {4.1.2}Dokumentation der Funktionen}{13}
+\contentsline {subsubsection}{\numberline {4.1.2.1}CCPWrite}{13}
+\contentsline {subsubsection}{\numberline {4.1.2.2}CLKSYS\_\discretionary {-}{}{}AutoCalibration\_\discretionary {-}{}{}Enable}{13}
+\contentsline {subsubsection}{\numberline {4.1.2.3}CLKSYS\_\discretionary {-}{}{}Configuration\_\discretionary {-}{}{}Lock}{14}
+\contentsline {subsubsection}{\numberline {4.1.2.4}CLKSYS\_\discretionary {-}{}{}Disable}{14}
+\contentsline {subsubsection}{\numberline {4.1.2.5}CLKSYS\_\discretionary {-}{}{}Main\_\discretionary {-}{}{}ClockSource\_\discretionary {-}{}{}Select}{14}
+\contentsline {subsubsection}{\numberline {4.1.2.6}CLKSYS\_\discretionary {-}{}{}PLL\_\discretionary {-}{}{}Config}{15}
+\contentsline {subsubsection}{\numberline {4.1.2.7}CLKSYS\_\discretionary {-}{}{}Prescalers\_\discretionary {-}{}{}Config}{15}
+\contentsline {subsubsection}{\numberline {4.1.2.8}CLKSYS\_\discretionary {-}{}{}RTC\_\discretionary {-}{}{}ClockSource\_\discretionary {-}{}{}Enable}{15}
+\contentsline {subsubsection}{\numberline {4.1.2.9}CLKSYS\_\discretionary {-}{}{}XOSC\_\discretionary {-}{}{}Config}{16}
+\contentsline {subsubsection}{\numberline {4.1.2.10}CLKSYS\_\discretionary {-}{}{}XOSC\_\discretionary {-}{}{}FailureDetection\_\discretionary {-}{}{}Enable}{16}
+\contentsline {section}{\numberline {4.2}communication.c-\/Dateireferenz}{16}
+\contentsline {subsection}{\numberline {4.2.1}Ausf\IeC {\"u}hrliche Beschreibung}{18}
+\contentsline {subsection}{\numberline {4.2.2}Makro-\/Dokumentation}{18}
+\contentsline {subsubsection}{\numberline {4.2.2.1}COM\_\discretionary {-}{}{}START\_\discretionary {-}{}{}BYTE}{18}
+\contentsline {subsection}{\numberline {4.2.3}Dokumentation der Funktionen}{18}
+\contentsline {subsubsection}{\numberline {4.2.3.1}COM\_\discretionary {-}{}{}byteArrayToDouble}{18}
+\contentsline {subsubsection}{\numberline {4.2.3.2}COM\_\discretionary {-}{}{}doubleToByteArray}{19}
+\contentsline {subsubsection}{\numberline {4.2.3.3}COM\_\discretionary {-}{}{}getAngleFromPacket}{19}
+\contentsline {subsubsection}{\numberline {4.2.3.4}COM\_\discretionary {-}{}{}getChecksum}{19}
+\contentsline {subsubsection}{\numberline {4.2.3.5}COM\_\discretionary {-}{}{}getCpuID}{20}
+\contentsline {subsubsection}{\numberline {4.2.3.6}COM\_\discretionary {-}{}{}getPointFromPacket}{20}
+\contentsline {subsubsection}{\numberline {4.2.3.7}COM\_\discretionary {-}{}{}getSpeedFromPacket}{20}
+\contentsline {subsubsection}{\numberline {4.2.3.8}COM\_\discretionary {-}{}{}isAlive}{20}
+\contentsline {subsubsection}{\numberline {4.2.3.9}COM\_\discretionary {-}{}{}isFoot}{20}
+\contentsline {subsubsection}{\numberline {4.2.3.10}COM\_\discretionary {-}{}{}isGlobal}{21}
+\contentsline {subsubsection}{\numberline {4.2.3.11}COM\_\discretionary {-}{}{}isHip}{21}
+\contentsline {subsubsection}{\numberline {4.2.3.12}COM\_\discretionary {-}{}{}isKnee}{21}
+\contentsline {subsubsection}{\numberline {4.2.3.13}COM\_\discretionary {-}{}{}isLeftLeg}{22}
+\contentsline {subsubsection}{\numberline {4.2.3.14}COM\_\discretionary {-}{}{}isRightLeg}{22}
+\contentsline {subsubsection}{\numberline {4.2.3.15}COM\_\discretionary {-}{}{}receive}{22}
+\contentsline {subsubsection}{\numberline {4.2.3.16}COM\_\discretionary {-}{}{}requestStatus}{23}
+\contentsline {subsubsection}{\numberline {4.2.3.17}COM\_\discretionary {-}{}{}send}{23}
+\contentsline {subsubsection}{\numberline {4.2.3.18}COM\_\discretionary {-}{}{}sendACK}{23}
+\contentsline {subsubsection}{\numberline {4.2.3.19}COM\_\discretionary {-}{}{}sendAction}{24}
+\contentsline {subsubsection}{\numberline {4.2.3.20}COM\_\discretionary {-}{}{}sendAngle}{24}
+\contentsline {subsubsection}{\numberline {4.2.3.21}COM\_\discretionary {-}{}{}sendNAK}{24}
+\contentsline {subsubsection}{\numberline {4.2.3.22}COM\_\discretionary {-}{}{}sendPoint}{24}
+\contentsline {subsubsection}{\numberline {4.2.3.23}COM\_\discretionary {-}{}{}sendPointAndSpeed}{25}
+\contentsline {section}{\numberline {4.3}dynamixel.c-\/Dateireferenz}{25}
+\contentsline {subsection}{\numberline {4.3.1}Ausf\IeC {\"u}hrliche Beschreibung}{27}
+\contentsline {subsection}{\numberline {4.3.2}Makro-\/Dokumentation}{28}
+\contentsline {subsubsection}{\numberline {4.3.2.1}ACT}{28}
+\contentsline {subsubsection}{\numberline {4.3.2.2}ALR\_\discretionary {-}{}{}SHUTDWN}{28}
+\contentsline {subsubsection}{\numberline {4.3.2.3}BD}{28}
+\contentsline {subsubsection}{\numberline {4.3.2.4}GL\_\discretionary {-}{}{}POS}{28}
+\contentsline {subsubsection}{\numberline {4.3.2.5}ID}{28}
+\contentsline {subsubsection}{\numberline {4.3.2.6}LED}{28}
+\contentsline {subsubsection}{\numberline {4.3.2.7}MAX\_\discretionary {-}{}{}TMP}{28}
+\contentsline {subsubsection}{\numberline {4.3.2.8}MV\_\discretionary {-}{}{}SPEED}{28}
+\contentsline {subsubsection}{\numberline {4.3.2.9}PING}{28}
+\contentsline {subsubsection}{\numberline {4.3.2.10}PRT\_\discretionary {-}{}{}POS}{28}
+\contentsline {subsubsection}{\numberline {4.3.2.11}PRT\_\discretionary {-}{}{}SPEED}{28}
+\contentsline {subsubsection}{\numberline {4.3.2.12}PRT\_\discretionary {-}{}{}TMP}{28}
+\contentsline {subsubsection}{\numberline {4.3.2.13}RD\_\discretionary {-}{}{}DATA}{28}
+\contentsline {subsubsection}{\numberline {4.3.2.14}REG\_\discretionary {-}{}{}WR}{28}
+\contentsline {subsubsection}{\numberline {4.3.2.15}RESET}{28}
+\contentsline {subsubsection}{\numberline {4.3.2.16}START\_\discretionary {-}{}{}BYTE}{28}
+\contentsline {subsubsection}{\numberline {4.3.2.17}STS\_\discretionary {-}{}{}RT\_\discretionary {-}{}{}LVL}{28}
+\contentsline {subsubsection}{\numberline {4.3.2.18}SYC\_\discretionary {-}{}{}WR}{28}
+\contentsline {subsubsection}{\numberline {4.3.2.19}WR\_\discretionary {-}{}{}DATA}{28}
+\contentsline {subsection}{\numberline {4.3.3}Dokumentation der Funktionen}{28}
+\contentsline {subsubsection}{\numberline {4.3.3.1}DNX\_\discretionary {-}{}{}convertAngle}{28}
+\contentsline {subsubsection}{\numberline {4.3.3.2}DNX\_\discretionary {-}{}{}correctAngles}{29}
+\contentsline {subsubsection}{\numberline {4.3.3.3}DNX\_\discretionary {-}{}{}getAngle}{29}
+\contentsline {subsubsection}{\numberline {4.3.3.4}DNX\_\discretionary {-}{}{}getChecksum}{29}
+\contentsline {subsubsection}{\numberline {4.3.3.5}DNX\_\discretionary {-}{}{}getConnectedIDs}{30}
+\contentsline {subsubsection}{\numberline {4.3.3.6}DNX\_\discretionary {-}{}{}getLed}{30}
+\contentsline {subsubsection}{\numberline {4.3.3.7}DNX\_\discretionary {-}{}{}getSpeed}{30}
+\contentsline {subsubsection}{\numberline {4.3.3.8}DNX\_\discretionary {-}{}{}receive}{30}
+\contentsline {subsubsection}{\numberline {4.3.3.9}DNX\_\discretionary {-}{}{}send}{31}
+\contentsline {subsubsection}{\numberline {4.3.3.10}DNX\_\discretionary {-}{}{}sendAction}{31}
+\contentsline {subsubsection}{\numberline {4.3.3.11}DNX\_\discretionary {-}{}{}setAngle}{31}
+\contentsline {subsubsection}{\numberline {4.3.3.12}DNX\_\discretionary {-}{}{}setAngleAndSpeed}{31}
+\contentsline {subsubsection}{\numberline {4.3.3.13}DNX\_\discretionary {-}{}{}setId}{32}
+\contentsline {subsubsection}{\numberline {4.3.3.14}DNX\_\discretionary {-}{}{}setLed}{32}
+\contentsline {subsubsection}{\numberline {4.3.3.15}DNX\_\discretionary {-}{}{}setSpeed}{32}
+\contentsline {section}{\numberline {4.4}evolutionaryAlgorithm.c-\/Dateireferenz}{32}
+\contentsline {subsection}{\numberline {4.4.1}Ausf\IeC {\"u}hrliche Beschreibung}{33}
+\contentsline {subsection}{\numberline {4.4.2}Makro-\/Dokumentation}{34}
+\contentsline {subsubsection}{\numberline {4.4.2.1}X\_\discretionary {-}{}{}MAX}{34}
+\contentsline {subsubsection}{\numberline {4.4.2.2}X\_\discretionary {-}{}{}MIN}{34}
+\contentsline {subsubsection}{\numberline {4.4.2.3}Y\_\discretionary {-}{}{}MAX}{34}
+\contentsline {subsubsection}{\numberline {4.4.2.4}Y\_\discretionary {-}{}{}MIN}{34}
+\contentsline {subsection}{\numberline {4.4.3}Dokumentation der Funktionen}{34}
+\contentsline {subsubsection}{\numberline {4.4.3.1}bestSelection}{34}
+\contentsline {subsubsection}{\numberline {4.4.3.2}evolutionaryAlgorithm}{34}
+\contentsline {subsubsection}{\numberline {4.4.3.3}fitnessproportionalSelection}{34}
+\contentsline {subsubsection}{\numberline {4.4.3.4}generatePoint}{34}
+\contentsline {subsubsection}{\numberline {4.4.3.5}generatePopulation}{34}
+\contentsline {subsubsection}{\numberline {4.4.3.6}getIsectFromIndividuum}{34}
+\contentsline {subsubsection}{\numberline {4.4.3.7}getPointFromIndividuum}{34}
+\contentsline {subsubsection}{\numberline {4.4.3.8}getRandomNumber}{34}
+\contentsline {subsubsection}{\numberline {4.4.3.9}getScores}{34}
+\contentsline {subsubsection}{\numberline {4.4.3.10}gleichverteilte\_\discretionary {-}{}{}reellwertige\_\discretionary {-}{}{}mutation}{34}
+\contentsline {subsubsection}{\numberline {4.4.3.11}mutation}{34}
+\contentsline {subsubsection}{\numberline {4.4.3.12}printPopulation}{34}
+\contentsline {subsubsection}{\numberline {4.4.3.13}recombination}{34}
+\contentsline {subsubsection}{\numberline {4.4.3.14}uniformCrossover}{34}
+\contentsline {section}{\numberline {4.5}evolutionaryHelper.c-\/Dateireferenz}{34}
+\contentsline {subsection}{\numberline {4.5.1}Ausf\IeC {\"u}hrliche Beschreibung}{36}
+\contentsline {subsection}{\numberline {4.5.2}Makro-\/Dokumentation}{36}
+\contentsline {subsubsection}{\numberline {4.5.2.1}FIRST\_\discretionary {-}{}{}VALUE}{36}
+\contentsline {subsubsection}{\numberline {4.5.2.2}NO\_\discretionary {-}{}{}VALUE}{36}
+\contentsline {subsubsection}{\numberline {4.5.2.3}SECOND\_\discretionary {-}{}{}VALUE}{36}
+\contentsline {subsection}{\numberline {4.5.3}Dokumentation der Funktionen}{37}
+\contentsline {subsubsection}{\numberline {4.5.3.1}bubblesort}{37}
+\contentsline {subsubsection}{\numberline {4.5.3.2}f\_\discretionary {-}{}{}circ}{37}
+\contentsline {subsubsection}{\numberline {4.5.3.3}f\_\discretionary {-}{}{}lin}{37}
+\contentsline {subsubsection}{\numberline {4.5.3.4}getDistance}{37}
+\contentsline {subsubsection}{\numberline {4.5.3.5}getFunctionOfPoints}{37}
+\contentsline {subsubsection}{\numberline {4.5.3.6}getNearerPoint}{37}
+\contentsline {subsubsection}{\numberline {4.5.3.7}initEvoAlg}{37}
+\contentsline {subsubsection}{\numberline {4.5.3.8}initFunctions}{37}
+\contentsline {subsubsection}{\numberline {4.5.3.9}initPoints}{38}
+\contentsline {subsubsection}{\numberline {4.5.3.10}isBetweenPoints}{38}
+\contentsline {subsubsection}{\numberline {4.5.3.11}isectLinCirc}{38}
+\contentsline {subsubsection}{\numberline {4.5.3.12}isectLinFuncs}{38}
+\contentsline {subsubsection}{\numberline {4.5.3.13}isInArea}{38}
+\contentsline {subsubsection}{\numberline {4.5.3.14}isVectorialPoint}{38}
+\contentsline {subsubsection}{\numberline {4.5.3.15}max}{38}
+\contentsline {subsubsection}{\numberline {4.5.3.16}min}{38}
+\contentsline {subsubsection}{\numberline {4.5.3.17}scorePoint}{38}
+\contentsline {subsection}{\numberline {4.5.4}Variablen-\/Dokumentation}{38}
+\contentsline {subsubsection}{\numberline {4.5.4.1}A}{38}
+\contentsline {subsubsection}{\numberline {4.5.4.2}AB}{38}
+\contentsline {subsubsection}{\numberline {4.5.4.3}B}{38}
+\contentsline {subsubsection}{\numberline {4.5.4.4}C}{38}
+\contentsline {subsubsection}{\numberline {4.5.4.5}CD}{38}
+\contentsline {subsubsection}{\numberline {4.5.4.6}CEA}{38}
+\contentsline {subsubsection}{\numberline {4.5.4.7}D}{38}
+\contentsline {subsubsection}{\numberline {4.5.4.8}DFB}{38}
+\contentsline {subsubsection}{\numberline {4.5.4.9}E}{38}
+\contentsline {subsubsection}{\numberline {4.5.4.10}F}{38}
+\contentsline {subsubsection}{\numberline {4.5.4.11}G}{38}
+\contentsline {section}{\numberline {4.6}evolutionaryWalking.c-\/Dateireferenz}{38}
+\contentsline {subsection}{\numberline {4.6.1}Ausf\IeC {\"u}hrliche Beschreibung}{40}
+\contentsline {subsection}{\numberline {4.6.2}Makro-\/Dokumentation}{41}
+\contentsline {subsubsection}{\numberline {4.6.2.1}NO\_\discretionary {-}{}{}OFFSET}{41}
+\contentsline {subsubsection}{\numberline {4.6.2.2}OFFSET}{41}
+\contentsline {subsubsection}{\numberline {4.6.2.3}TEST\_\discretionary {-}{}{}ON}{41}
+\contentsline {subsection}{\numberline {4.6.3}Dokumentation der Funktionen}{41}
+\contentsline {subsubsection}{\numberline {4.6.3.1}calculateMovementPoints}{41}
+\contentsline {subsubsection}{\numberline {4.6.3.2}copyPoint}{41}
+\contentsline {subsubsection}{\numberline {4.6.3.3}doStep}{41}
+\contentsline {subsubsection}{\numberline {4.6.3.4}doStepMove}{41}
+\contentsline {subsubsection}{\numberline {4.6.3.5}evolutionaryCalculation}{41}
+\contentsline {subsubsection}{\numberline {4.6.3.6}init\_\discretionary {-}{}{}pMpSpMiddle}{41}
+\contentsline {subsubsection}{\numberline {4.6.3.7}initConf}{41}
+\contentsline {subsubsection}{\numberline {4.6.3.8}invertVector}{41}
+\contentsline {subsubsection}{\numberline {4.6.3.9}main}{41}
+\contentsline {subsubsection}{\numberline {4.6.3.10}master}{41}
+\contentsline {subsubsection}{\numberline {4.6.3.11}prepareStepMove}{41}
+\contentsline {subsubsection}{\numberline {4.6.3.12}switchLegs}{41}
+\contentsline {subsubsection}{\numberline {4.6.3.13}TripodGaitMove}{41}
+\contentsline {subsubsection}{\numberline {4.6.3.14}waitForButton3}{41}
+\contentsline {subsection}{\numberline {4.6.4}Variablen-\/Dokumentation}{41}
+\contentsline {subsubsection}{\numberline {4.6.4.1}cpuID}{41}
+\contentsline {subsubsection}{\numberline {4.6.4.2}isectM}{41}
+\contentsline {subsubsection}{\numberline {4.6.4.3}isectS}{41}
+\contentsline {subsubsection}{\numberline {4.6.4.4}leg\_\discretionary {-}{}{}l}{41}
+\contentsline {subsubsection}{\numberline {4.6.4.5}leg\_\discretionary {-}{}{}r}{41}
+\contentsline {subsubsection}{\numberline {4.6.4.6}MasterActive}{41}
+\contentsline {subsubsection}{\numberline {4.6.4.7}MasterInactive}{41}
+\contentsline {subsubsection}{\numberline {4.6.4.8}midM}{41}
+\contentsline {subsubsection}{\numberline {4.6.4.9}midS}{41}
+\contentsline {subsubsection}{\numberline {4.6.4.10}pM}{41}
+\contentsline {subsubsection}{\numberline {4.6.4.11}pMiddle}{41}
+\contentsline {subsubsection}{\numberline {4.6.4.12}pS}{41}
+\contentsline {subsubsection}{\numberline {4.6.4.13}SlavesActive}{41}
+\contentsline {subsubsection}{\numberline {4.6.4.14}SlavesInactive}{41}
+\contentsline {section}{\numberline {4.7}include/avr\_\discretionary {-}{}{}compiler.h-\/Dateireferenz}{41}
+\contentsline {subsection}{\numberline {4.7.1}Ausf\IeC {\"u}hrliche Beschreibung}{42}
+\contentsline {subsection}{\numberline {4.7.2}Makro-\/Dokumentation}{43}
+\contentsline {subsubsection}{\numberline {4.7.2.1}AVR\_\discretionary {-}{}{}ENTER\_\discretionary {-}{}{}CRITICAL\_\discretionary {-}{}{}REGION}{43}
+\contentsline {subsubsection}{\numberline {4.7.2.2}AVR\_\discretionary {-}{}{}LEAVE\_\discretionary {-}{}{}CRITICAL\_\discretionary {-}{}{}REGION}{43}
+\contentsline {subsubsection}{\numberline {4.7.2.3}F\_\discretionary {-}{}{}CPU}{43}
+\contentsline {section}{\numberline {4.8}include/clksys\_\discretionary {-}{}{}driver.h-\/Dateireferenz}{43}
+\contentsline {subsection}{\numberline {4.8.1}Ausf\IeC {\"u}hrliche Beschreibung}{45}
+\contentsline {subsection}{\numberline {4.8.2}Makro-\/Dokumentation}{46}
+\contentsline {subsubsection}{\numberline {4.8.2.1}CLKSYS\_\discretionary {-}{}{}AutoCalibration\_\discretionary {-}{}{}Disable}{46}
+\contentsline {subsubsection}{\numberline {4.8.2.2}CLKSYS\_\discretionary {-}{}{}Enable}{46}
+\contentsline {subsubsection}{\numberline {4.8.2.3}CLKSYS\_\discretionary {-}{}{}IsReady}{46}
+\contentsline {subsubsection}{\numberline {4.8.2.4}CLKSYS\_\discretionary {-}{}{}RTC\_\discretionary {-}{}{}ClockSource\_\discretionary {-}{}{}Disable}{47}
+\contentsline {subsection}{\numberline {4.8.3}Dokumentation der Funktionen}{47}
+\contentsline {subsubsection}{\numberline {4.8.3.1}CCPWrite}{47}
+\contentsline {subsubsection}{\numberline {4.8.3.2}CLKSYS\_\discretionary {-}{}{}AutoCalibration\_\discretionary {-}{}{}Enable}{47}
+\contentsline {subsubsection}{\numberline {4.8.3.3}CLKSYS\_\discretionary {-}{}{}Configuration\_\discretionary {-}{}{}Lock}{48}
+\contentsline {subsubsection}{\numberline {4.8.3.4}CLKSYS\_\discretionary {-}{}{}Disable}{48}
+\contentsline {subsubsection}{\numberline {4.8.3.5}CLKSYS\_\discretionary {-}{}{}Main\_\discretionary {-}{}{}ClockSource\_\discretionary {-}{}{}Select}{48}
+\contentsline {subsubsection}{\numberline {4.8.3.6}CLKSYS\_\discretionary {-}{}{}PLL\_\discretionary {-}{}{}Config}{48}
+\contentsline {subsubsection}{\numberline {4.8.3.7}CLKSYS\_\discretionary {-}{}{}Prescalers\_\discretionary {-}{}{}Config}{49}
+\contentsline {subsubsection}{\numberline {4.8.3.8}CLKSYS\_\discretionary {-}{}{}RTC\_\discretionary {-}{}{}ClockSource\_\discretionary {-}{}{}Enable}{49}
+\contentsline {subsubsection}{\numberline {4.8.3.9}CLKSYS\_\discretionary {-}{}{}XOSC\_\discretionary {-}{}{}Config}{49}
+\contentsline {subsubsection}{\numberline {4.8.3.10}CLKSYS\_\discretionary {-}{}{}XOSC\_\discretionary {-}{}{}FailureDetection\_\discretionary {-}{}{}Enable}{50}
+\contentsline {section}{\numberline {4.9}include/communication.h-\/Dateireferenz}{50}
+\contentsline {subsection}{\numberline {4.9.1}Ausf\IeC {\"u}hrliche Beschreibung}{52}
+\contentsline {subsection}{\numberline {4.9.2}Makro-\/Dokumentation}{53}
+\contentsline {subsubsection}{\numberline {4.9.2.1}COM\_\discretionary {-}{}{}ACK}{53}
+\contentsline {subsubsection}{\numberline {4.9.2.2}COM\_\discretionary {-}{}{}ACTION}{53}
+\contentsline {subsubsection}{\numberline {4.9.2.3}COM\_\discretionary {-}{}{}ANGLE}{53}
+\contentsline {subsubsection}{\numberline {4.9.2.4}COM\_\discretionary {-}{}{}BRDCAST\_\discretionary {-}{}{}ID}{53}
+\contentsline {subsubsection}{\numberline {4.9.2.5}COM\_\discretionary {-}{}{}CONF\_\discretionary {-}{}{}FOOT}{53}
+\contentsline {subsubsection}{\numberline {4.9.2.6}COM\_\discretionary {-}{}{}CONF\_\discretionary {-}{}{}GLOB}{53}
+\contentsline {subsubsection}{\numberline {4.9.2.7}COM\_\discretionary {-}{}{}CONF\_\discretionary {-}{}{}HIP}{53}
+\contentsline {subsubsection}{\numberline {4.9.2.8}COM\_\discretionary {-}{}{}CONF\_\discretionary {-}{}{}KNEE}{53}
+\contentsline {subsubsection}{\numberline {4.9.2.9}COM\_\discretionary {-}{}{}CONF\_\discretionary {-}{}{}LEFT}{53}
+\contentsline {subsubsection}{\numberline {4.9.2.10}COM\_\discretionary {-}{}{}CONF\_\discretionary {-}{}{}RIGHT}{53}
+\contentsline {subsubsection}{\numberline {4.9.2.11}COM\_\discretionary {-}{}{}ERR\_\discretionary {-}{}{}ANGLE\_\discretionary {-}{}{}LIMIT}{53}
+\contentsline {subsubsection}{\numberline {4.9.2.12}COM\_\discretionary {-}{}{}ERR\_\discretionary {-}{}{}DEFAULT\_\discretionary {-}{}{}ERROR}{53}
+\contentsline {subsubsection}{\numberline {4.9.2.13}COM\_\discretionary {-}{}{}ERR\_\discretionary {-}{}{}POINT\_\discretionary {-}{}{}OUT\_\discretionary {-}{}{}OF\_\discretionary {-}{}{}BOUNDS}{53}
+\contentsline {subsubsection}{\numberline {4.9.2.14}COM\_\discretionary {-}{}{}IS\_\discretionary {-}{}{}ALIVE}{53}
+\contentsline {subsubsection}{\numberline {4.9.2.15}COM\_\discretionary {-}{}{}MASTER}{53}
+\contentsline {subsubsection}{\numberline {4.9.2.16}COM\_\discretionary {-}{}{}NAK}{53}
+\contentsline {subsubsection}{\numberline {4.9.2.17}COM\_\discretionary {-}{}{}NOCPUID}{53}
+\contentsline {subsubsection}{\numberline {4.9.2.18}COM\_\discretionary {-}{}{}POINT}{53}
+\contentsline {subsubsection}{\numberline {4.9.2.19}COM\_\discretionary {-}{}{}SLAVE1B}{53}
+\contentsline {subsubsection}{\numberline {4.9.2.20}COM\_\discretionary {-}{}{}SLAVE3F}{53}
+\contentsline {subsubsection}{\numberline {4.9.2.21}COM\_\discretionary {-}{}{}SPEED}{53}
+\contentsline {subsubsection}{\numberline {4.9.2.22}COM\_\discretionary {-}{}{}STATUS}{53}
+\contentsline {subsection}{\numberline {4.9.3}Dokumentation der Funktionen}{53}
+\contentsline {subsubsection}{\numberline {4.9.3.1}COM\_\discretionary {-}{}{}byteArrayToDouble}{53}
+\contentsline {subsubsection}{\numberline {4.9.3.2}COM\_\discretionary {-}{}{}doubleToByteArray}{54}
+\contentsline {subsubsection}{\numberline {4.9.3.3}COM\_\discretionary {-}{}{}getAngleFromPacket}{54}
+\contentsline {subsubsection}{\numberline {4.9.3.4}COM\_\discretionary {-}{}{}getCpuID}{54}
+\contentsline {subsubsection}{\numberline {4.9.3.5}COM\_\discretionary {-}{}{}getPointFromPacket}{54}
+\contentsline {subsubsection}{\numberline {4.9.3.6}COM\_\discretionary {-}{}{}getSpeedFromPacket}{55}
+\contentsline {subsubsection}{\numberline {4.9.3.7}COM\_\discretionary {-}{}{}isAlive}{55}
+\contentsline {subsubsection}{\numberline {4.9.3.8}COM\_\discretionary {-}{}{}isFoot}{55}
+\contentsline {subsubsection}{\numberline {4.9.3.9}COM\_\discretionary {-}{}{}isGlobal}{55}
+\contentsline {subsubsection}{\numberline {4.9.3.10}COM\_\discretionary {-}{}{}isHip}{56}
+\contentsline {subsubsection}{\numberline {4.9.3.11}COM\_\discretionary {-}{}{}isKnee}{56}
+\contentsline {subsubsection}{\numberline {4.9.3.12}COM\_\discretionary {-}{}{}isLeftLeg}{56}
+\contentsline {subsubsection}{\numberline {4.9.3.13}COM\_\discretionary {-}{}{}isRightLeg}{57}
+\contentsline {subsubsection}{\numberline {4.9.3.14}COM\_\discretionary {-}{}{}receive}{57}
+\contentsline {subsubsection}{\numberline {4.9.3.15}COM\_\discretionary {-}{}{}requestStatus}{57}
+\contentsline {subsubsection}{\numberline {4.9.3.16}COM\_\discretionary {-}{}{}send}{58}
+\contentsline {subsubsection}{\numberline {4.9.3.17}COM\_\discretionary {-}{}{}sendACK}{58}
+\contentsline {subsubsection}{\numberline {4.9.3.18}COM\_\discretionary {-}{}{}sendAction}{58}
+\contentsline {subsubsection}{\numberline {4.9.3.19}COM\_\discretionary {-}{}{}sendAngle}{58}
+\contentsline {subsubsection}{\numberline {4.9.3.20}COM\_\discretionary {-}{}{}sendNAK}{59}
+\contentsline {subsubsection}{\numberline {4.9.3.21}COM\_\discretionary {-}{}{}sendPoint}{59}
+\contentsline {subsubsection}{\numberline {4.9.3.22}COM\_\discretionary {-}{}{}sendPointAndSpeed}{59}
+\contentsline {section}{\numberline {4.10}include/datatypes.h-\/Dateireferenz}{60}
+\contentsline {subsection}{\numberline {4.10.1}Ausf\IeC {\"u}hrliche Beschreibung}{61}
+\contentsline {subsection}{\numberline {4.10.2}Makro-\/Dokumentation}{61}
+\contentsline {subsubsection}{\numberline {4.10.2.1}DT\_\discretionary {-}{}{}RESULT\_\discretionary {-}{}{}BUFFER\_\discretionary {-}{}{}SIZE}{61}
+\contentsline {subsection}{\numberline {4.10.3}Dokumentation der benutzerdefinierten Typen}{62}
+\contentsline {subsubsection}{\numberline {4.10.3.1}DT\_\discretionary {-}{}{}bool}{62}
+\contentsline {subsubsection}{\numberline {4.10.3.2}DT\_\discretionary {-}{}{}byte}{62}
+\contentsline {subsubsection}{\numberline {4.10.3.3}DT\_\discretionary {-}{}{}char}{62}
+\contentsline {subsubsection}{\numberline {4.10.3.4}DT\_\discretionary {-}{}{}cmd}{62}
+\contentsline {subsubsection}{\numberline {4.10.3.5}DT\_\discretionary {-}{}{}double}{62}
+\contentsline {subsubsection}{\numberline {4.10.3.6}DT\_\discretionary {-}{}{}int}{62}
+\contentsline {subsubsection}{\numberline {4.10.3.7}DT\_\discretionary {-}{}{}size}{62}
+\contentsline {subsubsection}{\numberline {4.10.3.8}DT\_\discretionary {-}{}{}type}{62}
+\contentsline {section}{\numberline {4.11}include/dynamixel.h-\/Dateireferenz}{62}
+\contentsline {subsection}{\numberline {4.11.1}Ausf\IeC {\"u}hrliche Beschreibung}{63}
+\contentsline {subsection}{\numberline {4.11.2}Makro-\/Dokumentation}{63}
+\contentsline {subsubsection}{\numberline {4.11.2.1}DNX\_\discretionary {-}{}{}BRDCAST\_\discretionary {-}{}{}ID}{63}
+\contentsline {subsection}{\numberline {4.11.3}Dokumentation der Funktionen}{63}
+\contentsline {subsubsection}{\numberline {4.11.3.1}DNX\_\discretionary {-}{}{}getAngle}{63}
+\contentsline {subsubsection}{\numberline {4.11.3.2}DNX\_\discretionary {-}{}{}getChecksum}{64}
+\contentsline {subsubsection}{\numberline {4.11.3.3}DNX\_\discretionary {-}{}{}getConnectedIDs}{64}
+\contentsline {subsubsection}{\numberline {4.11.3.4}DNX\_\discretionary {-}{}{}getLed}{64}
+\contentsline {subsubsection}{\numberline {4.11.3.5}DNX\_\discretionary {-}{}{}getSpeed}{64}
+\contentsline {subsubsection}{\numberline {4.11.3.6}DNX\_\discretionary {-}{}{}receive}{65}
+\contentsline {subsubsection}{\numberline {4.11.3.7}DNX\_\discretionary {-}{}{}send}{65}
+\contentsline {subsubsection}{\numberline {4.11.3.8}DNX\_\discretionary {-}{}{}sendAction}{65}
+\contentsline {subsubsection}{\numberline {4.11.3.9}DNX\_\discretionary {-}{}{}setAngle}{66}
+\contentsline {subsubsection}{\numberline {4.11.3.10}DNX\_\discretionary {-}{}{}setAngleAndSpeed}{66}
+\contentsline {subsubsection}{\numberline {4.11.3.11}DNX\_\discretionary {-}{}{}setId}{66}
+\contentsline {subsubsection}{\numberline {4.11.3.12}DNX\_\discretionary {-}{}{}setLed}{66}
+\contentsline {subsubsection}{\numberline {4.11.3.13}DNX\_\discretionary {-}{}{}setSpeed}{67}
+\contentsline {section}{\numberline {4.12}include/evolutionaryAlgorithm.h-\/Dateireferenz}{67}
+\contentsline {subsection}{\numberline {4.12.1}Ausf\IeC {\"u}hrliche Beschreibung}{67}
+\contentsline {subsection}{\numberline {4.12.2}Dokumentation der Funktionen}{67}
+\contentsline {subsubsection}{\numberline {4.12.2.1}evolutionaryAlgorithm}{67}
+\contentsline {subsubsection}{\numberline {4.12.2.2}getIsectFromIndividuum}{67}
+\contentsline {subsubsection}{\numberline {4.12.2.3}getPointFromIndividuum}{67}
+\contentsline {section}{\numberline {4.13}include/evolutionaryHelper.h-\/Dateireferenz}{67}
+\contentsline {subsection}{\numberline {4.13.1}Ausf\IeC {\"u}hrliche Beschreibung}{68}
+\contentsline {subsection}{\numberline {4.13.2}Makro-\/Dokumentation}{68}
+\contentsline {subsubsection}{\numberline {4.13.2.1}Z}{68}
+\contentsline {subsection}{\numberline {4.13.3}Dokumentation der Funktionen}{68}
+\contentsline {subsubsection}{\numberline {4.13.3.1}bubblesort}{68}
+\contentsline {subsubsection}{\numberline {4.13.3.2}getDistance}{68}
+\contentsline {subsubsection}{\numberline {4.13.3.3}getFunctionOfPoints}{68}
+\contentsline {subsubsection}{\numberline {4.13.3.4}initEvoAlg}{68}
+\contentsline {subsubsection}{\numberline {4.13.3.5}isInArea}{68}
+\contentsline {subsubsection}{\numberline {4.13.3.6}max}{68}
+\contentsline {subsubsection}{\numberline {4.13.3.7}min}{68}
+\contentsline {subsubsection}{\numberline {4.13.3.8}scorePoint}{68}
+\contentsline {section}{\numberline {4.14}include/kinematics.h-\/Dateireferenz}{68}
+\contentsline {subsection}{\numberline {4.14.1}Ausf\IeC {\"u}hrliche Beschreibung}{69}
+\contentsline {subsection}{\numberline {4.14.2}Makro-\/Dokumentation}{69}
+\contentsline {subsubsection}{\numberline {4.14.2.1}KIN\_\discretionary {-}{}{}COLUMNS}{69}
+\contentsline {subsubsection}{\numberline {4.14.2.2}KIN\_\discretionary {-}{}{}ROWS}{69}
+\contentsline {subsection}{\numberline {4.14.3}Dokumentation der Funktionen}{69}
+\contentsline {subsubsection}{\numberline {4.14.3.1}KIN\_\discretionary {-}{}{}calcDH}{69}
+\contentsline {subsubsection}{\numberline {4.14.3.2}KIN\_\discretionary {-}{}{}calcLocalPoint}{70}
+\contentsline {subsubsection}{\numberline {4.14.3.3}KIN\_\discretionary {-}{}{}calcServos}{70}
+\contentsline {subsubsection}{\numberline {4.14.3.4}KIN\_\discretionary {-}{}{}makeMovement}{70}
+\contentsline {subsubsection}{\numberline {4.14.3.5}KIN\_\discretionary {-}{}{}setTransMat}{70}
+\contentsline {section}{\numberline {4.15}include/movement.h-\/Dateireferenz}{70}
+\contentsline {subsection}{\numberline {4.15.1}Ausf\IeC {\"u}hrliche Beschreibung}{72}
+\contentsline {subsection}{\numberline {4.15.2}Makro-\/Dokumentation}{72}
+\contentsline {subsubsection}{\numberline {4.15.2.1}MV\_\discretionary {-}{}{}DST\_\discretionary {-}{}{}X}{72}
+\contentsline {subsubsection}{\numberline {4.15.2.2}MV\_\discretionary {-}{}{}DST\_\discretionary {-}{}{}Y}{72}
+\contentsline {subsection}{\numberline {4.15.3}Dokumentation der Funktionen}{72}
+\contentsline {subsubsection}{\numberline {4.15.3.1}MV\_\discretionary {-}{}{}action}{72}
+\contentsline {subsubsection}{\numberline {4.15.3.2}MV\_\discretionary {-}{}{}doInitPosition}{72}
+\contentsline {subsubsection}{\numberline {4.15.3.3}MV\_\discretionary {-}{}{}getPntForCpuSide}{72}
+\contentsline {subsubsection}{\numberline {4.15.3.4}MV\_\discretionary {-}{}{}masterCheckAlive}{73}
+\contentsline {subsubsection}{\numberline {4.15.3.5}MV\_\discretionary {-}{}{}point}{73}
+\contentsline {subsubsection}{\numberline {4.15.3.6}MV\_\discretionary {-}{}{}pointAndSpeed}{73}
+\contentsline {subsubsection}{\numberline {4.15.3.7}MV\_\discretionary {-}{}{}slave}{74}
+\contentsline {subsubsection}{\numberline {4.15.3.8}MV\_\discretionary {-}{}{}slaveAngle}{74}
+\contentsline {subsubsection}{\numberline {4.15.3.9}MV\_\discretionary {-}{}{}slavePoint}{74}
+\contentsline {subsubsection}{\numberline {4.15.3.10}MV\_\discretionary {-}{}{}slavePointAndSpeed}{75}
+\contentsline {subsubsection}{\numberline {4.15.3.11}MV\_\discretionary {-}{}{}slaveStatus}{75}
+\contentsline {subsubsection}{\numberline {4.15.3.12}MV\_\discretionary {-}{}{}switchLegs}{75}
+\contentsline {section}{\numberline {4.16}include/remote.h-\/Dateireferenz}{76}
+\contentsline {subsection}{\numberline {4.16.1}Ausf\IeC {\"u}hrliche Beschreibung}{77}
+\contentsline {subsection}{\numberline {4.16.2}Dokumentation der Funktionen}{77}
+\contentsline {subsubsection}{\numberline {4.16.2.1}RMT\_\discretionary {-}{}{}getCommand}{77}
+\contentsline {subsubsection}{\numberline {4.16.2.2}RMT\_\discretionary {-}{}{}isButton1Pressed}{77}
+\contentsline {subsubsection}{\numberline {4.16.2.3}RMT\_\discretionary {-}{}{}isButton2Pressed}{77}
+\contentsline {subsubsection}{\numberline {4.16.2.4}RMT\_\discretionary {-}{}{}isButton3Pressed}{77}
+\contentsline {subsubsection}{\numberline {4.16.2.5}RMT\_\discretionary {-}{}{}isButton4Pressed}{78}
+\contentsline {subsubsection}{\numberline {4.16.2.6}RMT\_\discretionary {-}{}{}isButton5Pressed}{78}
+\contentsline {subsubsection}{\numberline {4.16.2.7}RMT\_\discretionary {-}{}{}isButton6Pressed}{78}
+\contentsline {subsubsection}{\numberline {4.16.2.8}RMT\_\discretionary {-}{}{}isDownPressed}{79}
+\contentsline {subsubsection}{\numberline {4.16.2.9}RMT\_\discretionary {-}{}{}isLeftPressed}{79}
+\contentsline {subsubsection}{\numberline {4.16.2.10}RMT\_\discretionary {-}{}{}isRightPressed}{79}
+\contentsline {subsubsection}{\numberline {4.16.2.11}RMT\_\discretionary {-}{}{}isUpPressed}{79}
+\contentsline {subsubsection}{\numberline {4.16.2.12}RMT\_\discretionary {-}{}{}NonPressed}{80}
+\contentsline {subsubsection}{\numberline {4.16.2.13}RMT\_\discretionary {-}{}{}receive}{80}
+\contentsline {section}{\numberline {4.17}include/usart\_\discretionary {-}{}{}driver.h-\/Dateireferenz}{80}
+\contentsline {subsection}{\numberline {4.17.1}Ausf\IeC {\"u}hrliche Beschreibung}{83}
+\contentsline {subsection}{\numberline {4.17.2}Makro-\/Dokumentation}{84}
+\contentsline {subsubsection}{\numberline {4.17.2.1}USART\_\discretionary {-}{}{}Baudrate\_\discretionary {-}{}{}Set}{84}
+\contentsline {subsubsection}{\numberline {4.17.2.2}USART\_\discretionary {-}{}{}DreInterruptLevel\_\discretionary {-}{}{}Set}{85}
+\contentsline {subsubsection}{\numberline {4.17.2.3}USART\_\discretionary {-}{}{}Format\_\discretionary {-}{}{}Set}{85}
+\contentsline {subsubsection}{\numberline {4.17.2.4}USART\_\discretionary {-}{}{}GetChar}{85}
+\contentsline {subsubsection}{\numberline {4.17.2.5}USART\_\discretionary {-}{}{}IsRXComplete}{86}
+\contentsline {subsubsection}{\numberline {4.17.2.6}USART\_\discretionary {-}{}{}IsTXDataRegisterEmpty}{86}
+\contentsline {subsubsection}{\numberline {4.17.2.7}USART\_\discretionary {-}{}{}PutChar}{86}
+\contentsline {subsubsection}{\numberline {4.17.2.8}USART\_\discretionary {-}{}{}RX\_\discretionary {-}{}{}BUFFER\_\discretionary {-}{}{}MASK}{86}
+\contentsline {subsubsection}{\numberline {4.17.2.9}USART\_\discretionary {-}{}{}RX\_\discretionary {-}{}{}BUFFER\_\discretionary {-}{}{}SIZE}{86}
+\contentsline {subsubsection}{\numberline {4.17.2.10}USART\_\discretionary {-}{}{}Rx\_\discretionary {-}{}{}Disable}{86}
+\contentsline {subsubsection}{\numberline {4.17.2.11}USART\_\discretionary {-}{}{}Rx\_\discretionary {-}{}{}Enable}{87}
+\contentsline {subsubsection}{\numberline {4.17.2.12}USART\_\discretionary {-}{}{}RxdInterruptLevel\_\discretionary {-}{}{}Set}{87}
+\contentsline {subsubsection}{\numberline {4.17.2.13}USART\_\discretionary {-}{}{}SetMode}{87}
+\contentsline {subsubsection}{\numberline {4.17.2.14}USART\_\discretionary {-}{}{}TX\_\discretionary {-}{}{}BUFFER\_\discretionary {-}{}{}MASK}{88}
+\contentsline {subsubsection}{\numberline {4.17.2.15}USART\_\discretionary {-}{}{}TX\_\discretionary {-}{}{}BUFFER\_\discretionary {-}{}{}SIZE}{88}
+\contentsline {subsubsection}{\numberline {4.17.2.16}USART\_\discretionary {-}{}{}Tx\_\discretionary {-}{}{}Disable}{88}
+\contentsline {subsubsection}{\numberline {4.17.2.17}USART\_\discretionary {-}{}{}Tx\_\discretionary {-}{}{}Enable}{88}
+\contentsline {subsubsection}{\numberline {4.17.2.18}USART\_\discretionary {-}{}{}TxdInterruptLevel\_\discretionary {-}{}{}Set}{88}
+\contentsline {subsection}{\numberline {4.17.3}Dokumentation der benutzerdefinierten Typen}{88}
+\contentsline {subsubsection}{\numberline {4.17.3.1}USART\_\discretionary {-}{}{}Buffer\_\discretionary {-}{}{}t}{88}
+\contentsline {subsubsection}{\numberline {4.17.3.2}USART\_\discretionary {-}{}{}data\_\discretionary {-}{}{}t}{88}
+\contentsline {subsection}{\numberline {4.17.4}Dokumentation der Funktionen}{89}
+\contentsline {subsubsection}{\numberline {4.17.4.1}USART\_\discretionary {-}{}{}DataRegEmpty}{89}
+\contentsline {subsubsection}{\numberline {4.17.4.2}USART\_\discretionary {-}{}{}InterruptDriver\_\discretionary {-}{}{}DreInterruptLevel\_\discretionary {-}{}{}Set}{89}
+\contentsline {subsubsection}{\numberline {4.17.4.3}USART\_\discretionary {-}{}{}InterruptDriver\_\discretionary {-}{}{}Initialize}{89}
+\contentsline {subsubsection}{\numberline {4.17.4.4}USART\_\discretionary {-}{}{}NineBits\_\discretionary {-}{}{}GetChar}{90}
+\contentsline {subsubsection}{\numberline {4.17.4.5}USART\_\discretionary {-}{}{}NineBits\_\discretionary {-}{}{}PutChar}{90}
+\contentsline {subsubsection}{\numberline {4.17.4.6}USART\_\discretionary {-}{}{}RXBuffer\_\discretionary {-}{}{}checkPointerDiff}{90}
+\contentsline {subsubsection}{\numberline {4.17.4.7}USART\_\discretionary {-}{}{}RXBuffer\_\discretionary {-}{}{}GetByte}{90}
+\contentsline {subsubsection}{\numberline {4.17.4.8}USART\_\discretionary {-}{}{}RXBufferData\_\discretionary {-}{}{}Available}{91}
+\contentsline {subsubsection}{\numberline {4.17.4.9}USART\_\discretionary {-}{}{}RXComplete}{91}
+\contentsline {subsubsection}{\numberline {4.17.4.10}USART\_\discretionary {-}{}{}TXBuffer\_\discretionary {-}{}{}FreeSpace}{91}
+\contentsline {subsubsection}{\numberline {4.17.4.11}USART\_\discretionary {-}{}{}TXBuffer\_\discretionary {-}{}{}PutByte}{92}
+\contentsline {section}{\numberline {4.18}include/utils.h-\/Dateireferenz}{92}
+\contentsline {subsection}{\numberline {4.18.1}Ausf\IeC {\"u}hrliche Beschreibung}{93}
+\contentsline {subsection}{\numberline {4.18.2}Makro-\/Dokumentation}{93}
+\contentsline {subsubsection}{\numberline {4.18.2.1}DEBUG}{93}
+\contentsline {subsubsection}{\numberline {4.18.2.2}DEBUG\_\discretionary {-}{}{}BYTE}{93}
+\contentsline {subsubsection}{\numberline {4.18.2.3}DEBUG\_\discretionary {-}{}{}ON}{93}
+\contentsline {subsubsection}{\numberline {4.18.2.4}UTL\_\discretionary {-}{}{}DEG}{93}
+\contentsline {subsubsection}{\numberline {4.18.2.5}UTL\_\discretionary {-}{}{}RAD}{93}
+\contentsline {subsection}{\numberline {4.18.3}Dokumentation der Funktionen}{93}
+\contentsline {subsubsection}{\numberline {4.18.3.1}UTL\_\discretionary {-}{}{}byteToHexChar}{93}
+\contentsline {subsubsection}{\numberline {4.18.3.2}UTL\_\discretionary {-}{}{}getDegree}{94}
+\contentsline {subsubsection}{\numberline {4.18.3.3}UTL\_\discretionary {-}{}{}getPointOfDH}{94}
+\contentsline {subsubsection}{\numberline {4.18.3.4}UTL\_\discretionary {-}{}{}getRadiant}{94}
+\contentsline {subsubsection}{\numberline {4.18.3.5}UTL\_\discretionary {-}{}{}printDebug}{94}
+\contentsline {subsubsection}{\numberline {4.18.3.6}UTL\_\discretionary {-}{}{}printDebugByte}{95}
+\contentsline {subsubsection}{\numberline {4.18.3.7}UTL\_\discretionary {-}{}{}printLeg}{95}
+\contentsline {subsubsection}{\numberline {4.18.3.8}UTL\_\discretionary {-}{}{}printMatrix}{95}
+\contentsline {subsubsection}{\numberline {4.18.3.9}UTL\_\discretionary {-}{}{}printPoint}{95}
+\contentsline {subsubsection}{\numberline {4.18.3.10}UTL\_\discretionary {-}{}{}wait}{95}
+\contentsline {section}{\numberline {4.19}include/xmega.h-\/Dateireferenz}{96}
+\contentsline {subsection}{\numberline {4.19.1}Ausf\IeC {\"u}hrliche Beschreibung}{97}
+\contentsline {subsection}{\numberline {4.19.2}Makro-\/Dokumentation}{98}
+\contentsline {subsubsection}{\numberline {4.19.2.1}SWITCH\_\discretionary {-}{}{}PRESSED}{98}
+\contentsline {subsubsection}{\numberline {4.19.2.2}SWITCH\_\discretionary {-}{}{}RELEASED}{98}
+\contentsline {subsubsection}{\numberline {4.19.2.3}SWITCHMASK}{98}
+\contentsline {subsubsection}{\numberline {4.19.2.4}SWITCHPORT}{98}
+\contentsline {subsubsection}{\numberline {4.19.2.5}XM\_\discretionary {-}{}{}LED\_\discretionary {-}{}{}MASK}{98}
+\contentsline {subsubsection}{\numberline {4.19.2.6}XM\_\discretionary {-}{}{}LED\_\discretionary {-}{}{}OFF}{98}
+\contentsline {subsubsection}{\numberline {4.19.2.7}XM\_\discretionary {-}{}{}LED\_\discretionary {-}{}{}ON}{98}
+\contentsline {subsubsection}{\numberline {4.19.2.8}XM\_\discretionary {-}{}{}LED\_\discretionary {-}{}{}TGL}{98}
+\contentsline {subsubsection}{\numberline {4.19.2.9}XM\_\discretionary {-}{}{}OE\_\discretionary {-}{}{}MASK}{98}
+\contentsline {subsubsection}{\numberline {4.19.2.10}XM\_\discretionary {-}{}{}PORT\_\discretionary {-}{}{}COM1}{98}
+\contentsline {subsubsection}{\numberline {4.19.2.11}XM\_\discretionary {-}{}{}PORT\_\discretionary {-}{}{}COM3}{98}
+\contentsline {subsubsection}{\numberline {4.19.2.12}XM\_\discretionary {-}{}{}PORT\_\discretionary {-}{}{}DEBUG}{98}
+\contentsline {subsubsection}{\numberline {4.19.2.13}XM\_\discretionary {-}{}{}PORT\_\discretionary {-}{}{}LED}{98}
+\contentsline {subsubsection}{\numberline {4.19.2.14}XM\_\discretionary {-}{}{}PORT\_\discretionary {-}{}{}REMOTE}{98}
+\contentsline {subsubsection}{\numberline {4.19.2.15}XM\_\discretionary {-}{}{}PORT\_\discretionary {-}{}{}SERVO\_\discretionary {-}{}{}L}{98}
+\contentsline {subsubsection}{\numberline {4.19.2.16}XM\_\discretionary {-}{}{}PORT\_\discretionary {-}{}{}SERVO\_\discretionary {-}{}{}R}{98}
+\contentsline {subsubsection}{\numberline {4.19.2.17}XM\_\discretionary {-}{}{}USART\_\discretionary {-}{}{}COM1}{98}
+\contentsline {subsubsection}{\numberline {4.19.2.18}XM\_\discretionary {-}{}{}USART\_\discretionary {-}{}{}COM3}{98}
+\contentsline {subsubsection}{\numberline {4.19.2.19}XM\_\discretionary {-}{}{}USART\_\discretionary {-}{}{}DEBUG}{98}
+\contentsline {subsubsection}{\numberline {4.19.2.20}XM\_\discretionary {-}{}{}USART\_\discretionary {-}{}{}FAILURE}{98}
+\contentsline {subsubsection}{\numberline {4.19.2.21}XM\_\discretionary {-}{}{}USART\_\discretionary {-}{}{}REMOTE}{99}
+\contentsline {subsubsection}{\numberline {4.19.2.22}XM\_\discretionary {-}{}{}USART\_\discretionary {-}{}{}SERVO\_\discretionary {-}{}{}L}{99}
+\contentsline {subsubsection}{\numberline {4.19.2.23}XM\_\discretionary {-}{}{}USART\_\discretionary {-}{}{}SERVO\_\discretionary {-}{}{}R}{99}
+\contentsline {subsection}{\numberline {4.19.3}Dokumentation der Funktionen}{99}
+\contentsline {subsubsection}{\numberline {4.19.3.1}XM\_\discretionary {-}{}{}init\_\discretionary {-}{}{}com}{99}
+\contentsline {subsubsection}{\numberline {4.19.3.2}XM\_\discretionary {-}{}{}init\_\discretionary {-}{}{}cpu}{99}
+\contentsline {subsubsection}{\numberline {4.19.3.3}XM\_\discretionary {-}{}{}init\_\discretionary {-}{}{}dnx}{99}
+\contentsline {subsubsection}{\numberline {4.19.3.4}XM\_\discretionary {-}{}{}init\_\discretionary {-}{}{}remote}{99}
+\contentsline {subsubsection}{\numberline {4.19.3.5}XM\_\discretionary {-}{}{}USART\_\discretionary {-}{}{}send}{99}
+\contentsline {subsection}{\numberline {4.19.4}Variablen-\/Dokumentation}{100}
+\contentsline {subsubsection}{\numberline {4.19.4.1}XM\_\discretionary {-}{}{}com\_\discretionary {-}{}{}data1}{100}
+\contentsline {subsubsection}{\numberline {4.19.4.2}XM\_\discretionary {-}{}{}com\_\discretionary {-}{}{}data3}{100}
+\contentsline {subsubsection}{\numberline {4.19.4.3}XM\_\discretionary {-}{}{}debug\_\discretionary {-}{}{}data}{100}
+\contentsline {subsubsection}{\numberline {4.19.4.4}XM\_\discretionary {-}{}{}remote\_\discretionary {-}{}{}data}{100}
+\contentsline {subsubsection}{\numberline {4.19.4.5}XM\_\discretionary {-}{}{}servo\_\discretionary {-}{}{}data\_\discretionary {-}{}{}L}{100}
+\contentsline {subsubsection}{\numberline {4.19.4.6}XM\_\discretionary {-}{}{}servo\_\discretionary {-}{}{}data\_\discretionary {-}{}{}R}{100}
+\contentsline {section}{\numberline {4.20}kinematics.c-\/Dateireferenz}{100}
+\contentsline {subsection}{\numberline {4.20.1}Ausf\IeC {\"u}hrliche Beschreibung}{101}
+\contentsline {subsection}{\numberline {4.20.2}Makro-\/Dokumentation}{101}
+\contentsline {subsubsection}{\numberline {4.20.2.1}DIST\_\discretionary {-}{}{}DZ}{101}
+\contentsline {subsubsection}{\numberline {4.20.2.2}DIST\_\discretionary {-}{}{}FE}{101}
+\contentsline {subsubsection}{\numberline {4.20.2.3}DIST\_\discretionary {-}{}{}HK}{101}
+\contentsline {subsubsection}{\numberline {4.20.2.4}DIST\_\discretionary {-}{}{}KF}{102}
+\contentsline {subsection}{\numberline {4.20.3}Dokumentation der Funktionen}{102}
+\contentsline {subsubsection}{\numberline {4.20.3.1}KIN\_\discretionary {-}{}{}calcDH}{102}
+\contentsline {subsubsection}{\numberline {4.20.3.2}KIN\_\discretionary {-}{}{}calcLocalPoint}{102}
+\contentsline {subsubsection}{\numberline {4.20.3.3}KIN\_\discretionary {-}{}{}calcServos}{102}
+\contentsline {subsubsection}{\numberline {4.20.3.4}KIN\_\discretionary {-}{}{}setTransMat}{103}
+\contentsline {section}{\numberline {4.21}main.c-\/Dateireferenz}{103}
+\contentsline {subsection}{\numberline {4.21.1}Makro-\/Dokumentation}{103}
+\contentsline {subsubsection}{\numberline {4.21.1.1}F\_\discretionary {-}{}{}CPU}{103}
+\contentsline {subsubsection}{\numberline {4.21.1.2}TEST\_\discretionary {-}{}{}OFF}{103}
+\contentsline {section}{\numberline {4.22}movement.c-\/Dateireferenz}{103}
+\contentsline {subsection}{\numberline {4.22.1}Ausf\IeC {\"u}hrliche Beschreibung}{105}
+\contentsline {subsection}{\numberline {4.22.2}Makro-\/Dokumentation}{105}
+\contentsline {subsubsection}{\numberline {4.22.2.1}MV\_\discretionary {-}{}{}DST\_\discretionary {-}{}{}X}{105}
+\contentsline {subsection}{\numberline {4.22.3}Dokumentation der Funktionen}{105}
+\contentsline {subsubsection}{\numberline {4.22.3.1}MV\_\discretionary {-}{}{}action}{105}
+\contentsline {subsubsection}{\numberline {4.22.3.2}MV\_\discretionary {-}{}{}doInitPosition}{105}
+\contentsline {subsubsection}{\numberline {4.22.3.3}MV\_\discretionary {-}{}{}getPntForCpuSide}{105}
+\contentsline {subsubsection}{\numberline {4.22.3.4}MV\_\discretionary {-}{}{}masterCheckAlive}{106}
+\contentsline {subsubsection}{\numberline {4.22.3.5}MV\_\discretionary {-}{}{}point}{106}
+\contentsline {subsubsection}{\numberline {4.22.3.6}MV\_\discretionary {-}{}{}pointAndSpeed}{106}
+\contentsline {subsubsection}{\numberline {4.22.3.7}MV\_\discretionary {-}{}{}slave}{106}
+\contentsline {subsubsection}{\numberline {4.22.3.8}MV\_\discretionary {-}{}{}slaveAngle}{107}
+\contentsline {subsubsection}{\numberline {4.22.3.9}MV\_\discretionary {-}{}{}slavePoint}{107}
+\contentsline {subsubsection}{\numberline {4.22.3.10}MV\_\discretionary {-}{}{}slavePointAndSpeed}{107}
+\contentsline {subsubsection}{\numberline {4.22.3.11}MV\_\discretionary {-}{}{}slaveStatus}{108}
+\contentsline {subsubsection}{\numberline {4.22.3.12}MV\_\discretionary {-}{}{}switchLegs}{108}
+\contentsline {section}{\numberline {4.23}movement4Points.c-\/Dateireferenz}{108}
+\contentsline {subsection}{\numberline {4.23.1}Ausf\IeC {\"u}hrliche Beschreibung}{108}
+\contentsline {subsection}{\numberline {4.23.2}Makro-\/Dokumentation}{109}
+\contentsline {subsubsection}{\numberline {4.23.2.1}TEST\_\discretionary {-}{}{}OFF}{109}
+\contentsline {section}{\numberline {4.24}movementMultiPoints.c-\/Dateireferenz}{109}
+\contentsline {subsection}{\numberline {4.24.1}Ausf\IeC {\"u}hrliche Beschreibung}{109}
+\contentsline {subsection}{\numberline {4.24.2}Makro-\/Dokumentation}{109}
+\contentsline {subsubsection}{\numberline {4.24.2.1}TEST\_\discretionary {-}{}{}OFF}{109}
+\contentsline {section}{\numberline {4.25}remote.c-\/Dateireferenz}{109}
+\contentsline {subsection}{\numberline {4.25.1}Ausf\IeC {\"u}hrliche Beschreibung}{110}
+\contentsline {subsection}{\numberline {4.25.2}Makro-\/Dokumentation}{111}
+\contentsline {subsubsection}{\numberline {4.25.2.1}B\_\discretionary {-}{}{}1}{111}
+\contentsline {subsubsection}{\numberline {4.25.2.2}B\_\discretionary {-}{}{}2}{111}
+\contentsline {subsubsection}{\numberline {4.25.2.3}B\_\discretionary {-}{}{}3}{111}
+\contentsline {subsubsection}{\numberline {4.25.2.4}B\_\discretionary {-}{}{}4}{111}
+\contentsline {subsubsection}{\numberline {4.25.2.5}B\_\discretionary {-}{}{}5}{111}
+\contentsline {subsubsection}{\numberline {4.25.2.6}B\_\discretionary {-}{}{}6}{111}
+\contentsline {subsubsection}{\numberline {4.25.2.7}B\_\discretionary {-}{}{}D}{111}
+\contentsline {subsubsection}{\numberline {4.25.2.8}B\_\discretionary {-}{}{}L}{111}
+\contentsline {subsubsection}{\numberline {4.25.2.9}B\_\discretionary {-}{}{}NON\_\discretionary {-}{}{}PRESSED}{111}
+\contentsline {subsubsection}{\numberline {4.25.2.10}B\_\discretionary {-}{}{}R}{111}
+\contentsline {subsubsection}{\numberline {4.25.2.11}B\_\discretionary {-}{}{}U}{111}
+\contentsline {subsection}{\numberline {4.25.3}Dokumentation der Funktionen}{111}
+\contentsline {subsubsection}{\numberline {4.25.3.1}RMT\_\discretionary {-}{}{}getCommand}{111}
+\contentsline {subsubsection}{\numberline {4.25.3.2}RMT\_\discretionary {-}{}{}isButton1Pressed}{111}
+\contentsline {subsubsection}{\numberline {4.25.3.3}RMT\_\discretionary {-}{}{}isButton2Pressed}{112}
+\contentsline {subsubsection}{\numberline {4.25.3.4}RMT\_\discretionary {-}{}{}isButton3Pressed}{112}
+\contentsline {subsubsection}{\numberline {4.25.3.5}RMT\_\discretionary {-}{}{}isButton4Pressed}{112}
+\contentsline {subsubsection}{\numberline {4.25.3.6}RMT\_\discretionary {-}{}{}isButton5Pressed}{112}
+\contentsline {subsubsection}{\numberline {4.25.3.7}RMT\_\discretionary {-}{}{}isButton6Pressed}{113}
+\contentsline {subsubsection}{\numberline {4.25.3.8}RMT\_\discretionary {-}{}{}isDownPressed}{113}
+\contentsline {subsubsection}{\numberline {4.25.3.9}RMT\_\discretionary {-}{}{}isLeftPressed}{113}
+\contentsline {subsubsection}{\numberline {4.25.3.10}RMT\_\discretionary {-}{}{}isRightPressed}{114}
+\contentsline {subsubsection}{\numberline {4.25.3.11}RMT\_\discretionary {-}{}{}isUpPressed}{114}
+\contentsline {subsubsection}{\numberline {4.25.3.12}RMT\_\discretionary {-}{}{}NonPressed}{114}
+\contentsline {subsubsection}{\numberline {4.25.3.13}RMT\_\discretionary {-}{}{}receive}{114}
+\contentsline {section}{\numberline {4.26}testArithmetic.c-\/Dateireferenz}{115}
+\contentsline {subsection}{\numberline {4.26.1}Makro-\/Dokumentation}{115}
+\contentsline {subsubsection}{\numberline {4.26.1.1}TEST\_\discretionary {-}{}{}OFF}{115}
+\contentsline {section}{\numberline {4.27}testCom.c-\/Dateireferenz}{115}
+\contentsline {subsection}{\numberline {4.27.1}Ausf\IeC {\"u}hrliche Beschreibung}{115}
+\contentsline {subsection}{\numberline {4.27.2}Makro-\/Dokumentation}{115}
+\contentsline {subsubsection}{\numberline {4.27.2.1}TEST\_\discretionary {-}{}{}OFF}{115}
+\contentsline {section}{\numberline {4.28}testCom2.c-\/Dateireferenz}{115}
+\contentsline {subsection}{\numberline {4.28.1}Makro-\/Dokumentation}{116}
+\contentsline {subsubsection}{\numberline {4.28.1.1}TEST\_\discretionary {-}{}{}OFF}{116}
+\contentsline {section}{\numberline {4.29}testCom3.c-\/Dateireferenz}{116}
+\contentsline {subsection}{\numberline {4.29.1}Makro-\/Dokumentation}{116}
+\contentsline {subsubsection}{\numberline {4.29.1.1}TEST\_\discretionary {-}{}{}OFF}{116}
+\contentsline {section}{\numberline {4.30}testDnx.c-\/Dateireferenz}{116}
+\contentsline {subsection}{\numberline {4.30.1}Ausf\IeC {\"u}hrliche Beschreibung}{116}
+\contentsline {subsection}{\numberline {4.30.2}Makro-\/Dokumentation}{116}
+\contentsline {subsubsection}{\numberline {4.30.2.1}TEST\_\discretionary {-}{}{}OFF}{116}
+\contentsline {section}{\numberline {4.31}testEvolutionaryDistanceWalking.c-\/Dateireferenz}{116}
+\contentsline {subsection}{\numberline {4.31.1}Makro-\/Dokumentation}{117}
+\contentsline {subsubsection}{\numberline {4.31.1.1}TEST\_\discretionary {-}{}{}OFF}{117}
+\contentsline {section}{\numberline {4.32}testKin.c-\/Dateireferenz}{117}
+\contentsline {subsection}{\numberline {4.32.1}Ausf\IeC {\"u}hrliche Beschreibung}{117}
+\contentsline {subsection}{\numberline {4.32.2}Makro-\/Dokumentation}{117}
+\contentsline {subsubsection}{\numberline {4.32.2.1}TEST\_\discretionary {-}{}{}OFF}{117}
+\contentsline {section}{\numberline {4.33}testKin2.c-\/Dateireferenz}{117}
+\contentsline {subsection}{\numberline {4.33.1}Makro-\/Dokumentation}{117}
+\contentsline {subsubsection}{\numberline {4.33.1.1}TEST\_\discretionary {-}{}{}OFF}{117}
+\contentsline {section}{\numberline {4.34}testMovement.c-\/Dateireferenz}{117}
+\contentsline {subsection}{\numberline {4.34.1}Makro-\/Dokumentation}{118}
+\contentsline {subsubsection}{\numberline {4.34.1.1}TEST\_\discretionary {-}{}{}OFF}{118}
+\contentsline {section}{\numberline {4.35}testRemote.c-\/Dateireferenz}{118}
+\contentsline {subsection}{\numberline {4.35.1}Makro-\/Dokumentation}{118}
+\contentsline {subsubsection}{\numberline {4.35.1.1}TEST\_\discretionary {-}{}{}OFF}{118}
+\contentsline {section}{\numberline {4.36}testRingBuffer.c-\/Dateireferenz}{118}
+\contentsline {subsection}{\numberline {4.36.1}Ausf\IeC {\"u}hrliche Beschreibung}{118}
+\contentsline {subsection}{\numberline {4.36.2}Makro-\/Dokumentation}{118}
+\contentsline {subsubsection}{\numberline {4.36.2.1}TEST\_\discretionary {-}{}{}OFF}{118}
+\contentsline {section}{\numberline {4.37}testSpeed.c-\/Dateireferenz}{118}
+\contentsline {subsection}{\numberline {4.37.1}Ausf\IeC {\"u}hrliche Beschreibung}{118}
+\contentsline {subsection}{\numberline {4.37.2}Makro-\/Dokumentation}{119}
+\contentsline {subsubsection}{\numberline {4.37.2.1}TEST\_\discretionary {-}{}{}OFF}{119}
+\contentsline {section}{\numberline {4.38}usart\_\discretionary {-}{}{}driver.c-\/Dateireferenz}{119}
+\contentsline {subsection}{\numberline {4.38.1}Ausf\IeC {\"u}hrliche Beschreibung}{120}
+\contentsline {subsection}{\numberline {4.38.2}Dokumentation der Funktionen}{121}
+\contentsline {subsubsection}{\numberline {4.38.2.1}USART\_\discretionary {-}{}{}DataRegEmpty}{121}
+\contentsline {subsubsection}{\numberline {4.38.2.2}USART\_\discretionary {-}{}{}InterruptDriver\_\discretionary {-}{}{}DreInterruptLevel\_\discretionary {-}{}{}Set}{121}
+\contentsline {subsubsection}{\numberline {4.38.2.3}USART\_\discretionary {-}{}{}InterruptDriver\_\discretionary {-}{}{}Initialize}{122}
+\contentsline {subsubsection}{\numberline {4.38.2.4}USART\_\discretionary {-}{}{}NineBits\_\discretionary {-}{}{}GetChar}{122}
+\contentsline {subsubsection}{\numberline {4.38.2.5}USART\_\discretionary {-}{}{}NineBits\_\discretionary {-}{}{}PutChar}{122}
+\contentsline {subsubsection}{\numberline {4.38.2.6}USART\_\discretionary {-}{}{}RXBuffer\_\discretionary {-}{}{}checkPointerDiff}{122}
+\contentsline {subsubsection}{\numberline {4.38.2.7}USART\_\discretionary {-}{}{}RXBuffer\_\discretionary {-}{}{}GetByte}{123}
+\contentsline {subsubsection}{\numberline {4.38.2.8}USART\_\discretionary {-}{}{}RXBufferData\_\discretionary {-}{}{}Available}{123}
+\contentsline {subsubsection}{\numberline {4.38.2.9}USART\_\discretionary {-}{}{}RXComplete}{123}
+\contentsline {subsubsection}{\numberline {4.38.2.10}USART\_\discretionary {-}{}{}TXBuffer\_\discretionary {-}{}{}FreeSpace}{124}
+\contentsline {subsubsection}{\numberline {4.38.2.11}USART\_\discretionary {-}{}{}TXBuffer\_\discretionary {-}{}{}PutByte}{124}
+\contentsline {section}{\numberline {4.39}utils.c-\/Dateireferenz}{124}
+\contentsline {subsection}{\numberline {4.39.1}Ausf\IeC {\"u}hrliche Beschreibung}{125}
+\contentsline {subsection}{\numberline {4.39.2}Makro-\/Dokumentation}{125}
+\contentsline {subsubsection}{\numberline {4.39.2.1}USART\_\discretionary {-}{}{}ON}{125}
+\contentsline {subsection}{\numberline {4.39.3}Dokumentation der Funktionen}{126}
+\contentsline {subsubsection}{\numberline {4.39.3.1}UTL\_\discretionary {-}{}{}byteToHexChar}{126}
+\contentsline {subsubsection}{\numberline {4.39.3.2}UTL\_\discretionary {-}{}{}getDegree}{126}
+\contentsline {subsubsection}{\numberline {4.39.3.3}UTL\_\discretionary {-}{}{}getPointOfDH}{126}
+\contentsline {subsubsection}{\numberline {4.39.3.4}UTL\_\discretionary {-}{}{}getRadiant}{126}
+\contentsline {subsubsection}{\numberline {4.39.3.5}UTL\_\discretionary {-}{}{}printDebug}{127}
+\contentsline {subsubsection}{\numberline {4.39.3.6}UTL\_\discretionary {-}{}{}printDebugByte}{127}
+\contentsline {subsubsection}{\numberline {4.39.3.7}UTL\_\discretionary {-}{}{}printLeg}{127}
+\contentsline {subsubsection}{\numberline {4.39.3.8}UTL\_\discretionary {-}{}{}printMatrix}{127}
+\contentsline {subsubsection}{\numberline {4.39.3.9}UTL\_\discretionary {-}{}{}printPoint}{128}
+\contentsline {subsubsection}{\numberline {4.39.3.10}UTL\_\discretionary {-}{}{}wait}{128}
+\contentsline {section}{\numberline {4.40}xmega.c-\/Dateireferenz}{128}
+\contentsline {subsection}{\numberline {4.40.1}Ausf\IeC {\"u}hrliche Beschreibung}{130}
+\contentsline {subsection}{\numberline {4.40.2}Dokumentation der Funktionen}{130}
+\contentsline {subsubsection}{\numberline {4.40.2.1}ISR}{130}
+\contentsline {subsubsection}{\numberline {4.40.2.2}ISR}{130}
+\contentsline {subsubsection}{\numberline {4.40.2.3}ISR}{130}
+\contentsline {subsubsection}{\numberline {4.40.2.4}ISR}{130}
+\contentsline {subsubsection}{\numberline {4.40.2.5}ISR}{130}
+\contentsline {subsubsection}{\numberline {4.40.2.6}ISR}{130}
+\contentsline {subsubsection}{\numberline {4.40.2.7}ISR}{130}
+\contentsline {subsubsection}{\numberline {4.40.2.8}ISR}{130}
+\contentsline {subsubsection}{\numberline {4.40.2.9}ISR}{130}
+\contentsline {subsubsection}{\numberline {4.40.2.10}ISR}{131}
+\contentsline {subsubsection}{\numberline {4.40.2.11}ISR}{131}
+\contentsline {subsubsection}{\numberline {4.40.2.12}ISR}{131}
+\contentsline {subsubsection}{\numberline {4.40.2.13}ISR}{131}
+\contentsline {subsubsection}{\numberline {4.40.2.14}XM\_\discretionary {-}{}{}init\_\discretionary {-}{}{}com}{131}
+\contentsline {subsubsection}{\numberline {4.40.2.15}XM\_\discretionary {-}{}{}init\_\discretionary {-}{}{}cpu}{131}
+\contentsline {subsubsection}{\numberline {4.40.2.16}XM\_\discretionary {-}{}{}init\_\discretionary {-}{}{}dnx}{131}
+\contentsline {subsubsection}{\numberline {4.40.2.17}XM\_\discretionary {-}{}{}init\_\discretionary {-}{}{}remote}{131}
+\contentsline {subsubsection}{\numberline {4.40.2.18}XM\_\discretionary {-}{}{}USART\_\discretionary {-}{}{}send}{131}

@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>CM-Bot_API: include/evolutionaryAlgorithm.h Quellcode</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javaScript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body onload='searchBox.OnSelectItem(0);'>
+<!-- Erzeugt von Doxygen 1.7.1 -->
+<script type="text/javascript"><!--
+var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
+--></script>
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+      <li id="searchli">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Suchen" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Auflistung&nbsp;der&nbsp;Dateien</span></a></li>
+      <li><a href="globals.html"><span>Datei-Elemente</span></a></li>
+    </ul>
+  </div>
+<div class="header">
+  <div class="headertitle">
+<h1>include/evolutionaryAlgorithm.h</h1>  </div>
+</div>
+<div class="contents">
+<a href="evolutionary_algorithm_8h.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
+<a name="l00010"></a>00010 <span class="preprocessor">#include &quot;<a class="code" href="datatypes_8h.html" title="Abstrahiert Datentypen.">datatypes.h</a>&quot;</span>
+<a name="l00011"></a>00011 
+<a name="l00012"></a>00012 <a class="code" href="struct_d_t__individuum.html" title="Datenstruktur für ein Individuum des Evolutionären Algorithmus zur Startpunktfindung.">DT_individuum</a> <a class="code" href="evolutionary_algorithm_8c.html#a3f5a68de5ba37d402963dba47233fe14">evolutionaryAlgorithm</a>(<span class="keyword">const</span> <a class="code" href="datatypes_8h.html#a6ae9a32229cf3ddd0996e852782f7ca4">DT_int</a> popsize, <span class="keyword">const</span> <a class="code" href="datatypes_8h.html#a6ae9a32229cf3ddd0996e852782f7ca4">DT_int</a> generations, <a class="code" href="struct_d_t__vector.html" title="Datenstruktur zur Speicherung eines Vektors.">DT_vector</a>* <span class="keyword">const</span>);
+<a name="l00013"></a>00013 <a class="code" href="struct_d_t__point.html" title="Datenstruktur zur Speicherung karthesischer Koordinaten.">DT_point</a> <a class="code" href="evolutionary_algorithm_8c.html#ac1c070b0c03b21429e96e0951118d4c7">getPointFromIndividuum</a>(<a class="code" href="struct_d_t__individuum.html" title="Datenstruktur für ein Individuum des Evolutionären Algorithmus zur Startpunktfindung.">DT_individuum</a> *);
+<a name="l00014"></a>00014 <a class="code" href="struct_d_t__point.html" title="Datenstruktur zur Speicherung karthesischer Koordinaten.">DT_point</a> <a class="code" href="evolutionary_algorithm_8c.html#ae78dcc49d9d85fb71bf70e58ff3ed4e7">getIsectFromIndividuum</a>(<a class="code" href="struct_d_t__individuum.html" title="Datenstruktur für ein Individuum des Evolutionären Algorithmus zur Startpunktfindung.">DT_individuum</a> *);
+</pre></div></div>
+</div>
+<!--- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&nbsp;</span>Alle</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&nbsp;</span>Datenstrukturen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&nbsp;</span>Dateien</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&nbsp;</span>Funktionen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&nbsp;</span>Variablen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&nbsp;</span>Typdefinitionen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&nbsp;</span>Makrodefinitionen</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<hr class="footer"/><address class="footer"><small>Erzeugt am Thu Dec 30 2010 16:08:55 für CM-Bot_API von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
+</body>
+</html>

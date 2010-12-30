@@ -1,0 +1,50 @@
+\section{Usart\_\-and\_\-buffer Strukturreferenz}
+\label{struct_usart__and__buffer}\index{Usart\_\-and\_\-buffer@{Usart\_\-and\_\-buffer}}
+
+
+Struct used when interrupt driven driver is used.  
+
+
+
+
+{\ttfamily \#include $<$usart\_\-driver.h$>$}
+
+\subsection*{Datenfelder}
+\begin{DoxyCompactItemize}
+\item 
+USART\_\-t $\ast$ {\bf usart}
+\item 
+USART\_\-DREINTLVL\_\-t {\bf dreIntLevel}
+\item 
+{\bf USART\_\-Buffer\_\-t} {\bf buffer}
+\item 
+{\bf DT\_\-byte} {\bf lastPacketLength}
+\item 
+PORT\_\-t $\ast$ {\bf port}
+\end{DoxyCompactItemize}
+
+
+\subsection{Ausführliche Beschreibung}
+Struct used when interrupt driven driver is used. Struct containing pointer to a usart, a buffer and a location to store Data register interrupt level temporary. 
+
+\subsection{Dokumentation der Datenelemente}
+\index{Usart\_\-and\_\-buffer@{Usart\_\-and\_\-buffer}!buffer@{buffer}}
+\index{buffer@{buffer}!Usart_and_buffer@{Usart\_\-and\_\-buffer}}
+\subsubsection[{buffer}]{\setlength{\rightskip}{0pt plus 5cm}{\bf USART\_\-Buffer\_\-t} {\bf Usart\_\-and\_\-buffer::buffer}}\label{struct_usart__and__buffer_a62b4ab16cc049ca516d6ff9febddcc6c}
+\index{Usart\_\-and\_\-buffer@{Usart\_\-and\_\-buffer}!dreIntLevel@{dreIntLevel}}
+\index{dreIntLevel@{dreIntLevel}!Usart_and_buffer@{Usart\_\-and\_\-buffer}}
+\subsubsection[{dreIntLevel}]{\setlength{\rightskip}{0pt plus 5cm}USART\_\-DREINTLVL\_\-t {\bf Usart\_\-and\_\-buffer::dreIntLevel}}\label{struct_usart__and__buffer_a1b9cf50ec2a8f1b6190860c67faa1ebc}
+\index{Usart\_\-and\_\-buffer@{Usart\_\-and\_\-buffer}!lastPacketLength@{lastPacketLength}}
+\index{lastPacketLength@{lastPacketLength}!Usart_and_buffer@{Usart\_\-and\_\-buffer}}
+\subsubsection[{lastPacketLength}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-byte} {\bf Usart\_\-and\_\-buffer::lastPacketLength}}\label{struct_usart__and__buffer_aae7f08fec7179020a64f88f37ae702e4}
+\index{Usart\_\-and\_\-buffer@{Usart\_\-and\_\-buffer}!port@{port}}
+\index{port@{port}!Usart_and_buffer@{Usart\_\-and\_\-buffer}}
+\subsubsection[{port}]{\setlength{\rightskip}{0pt plus 5cm}PORT\_\-t$\ast$ {\bf Usart\_\-and\_\-buffer::port}}\label{struct_usart__and__buffer_a2b5afe7ca3c4e5e7868c3612715eb0ea}
+\index{Usart\_\-and\_\-buffer@{Usart\_\-and\_\-buffer}!usart@{usart}}
+\index{usart@{usart}!Usart_and_buffer@{Usart\_\-and\_\-buffer}}
+\subsubsection[{usart}]{\setlength{\rightskip}{0pt plus 5cm}USART\_\-t$\ast$ {\bf Usart\_\-and\_\-buffer::usart}}\label{struct_usart__and__buffer_a278d0069e61a75fa9cde6b1149c35808}
+
+
+Die Dokumentation für diese Struktur wurde erzeugt aufgrund der Datei:\begin{DoxyCompactItemize}
+\item 
+include/{\bf usart\_\-driver.h}\end{DoxyCompactItemize}

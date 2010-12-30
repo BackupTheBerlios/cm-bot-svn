@@ -1,0 +1,503 @@
+\section{communication.c-\/Dateireferenz}
+\label{communication_8c}\index{communication.c@{communication.c}}
+
+
+Methoden zur Kommunikation der CPUs.  
+
+
+{\ttfamily \#include \char`\"{}include/communication.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}include/utils.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}include/xmega.h\char`\"{}}\par
+\subsection*{Makrodefinitionen}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf COM\_\-START\_\-BYTE}~0xFF
+\end{DoxyCompactItemize}
+\subsection*{Funktionen}
+\begin{DoxyCompactItemize}
+\item 
+{\bf DT\_\-byte} {\bf COM\_\-getChecksum} (const {\bf DT\_\-byte} $\ast$const packet, {\bf DT\_\-size} l)
+\begin{DoxyCompactList}\small\item\em Berechnet die Checksum. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-byte} {\bf COM\_\-getCpuID} (const {\bf DT\_\-leg} $\ast$const {\bf leg\_\-l})
+\item 
+{\bf DT\_\-byte} {\bf COM\_\-receive} ({\bf USART\_\-data\_\-t} $\ast$const usart\_\-data, {\bf DT\_\-byte} $\ast$const dest)
+\begin{DoxyCompactList}\small\item\em USART-\/Empfangsmethode für Prozessorkommunikation. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-byte} {\bf COM\_\-send} ({\bf DT\_\-byte} $\ast$const packet, {\bf DT\_\-size} l, {\bf DT\_\-byte} $\ast$const result, {\bf DT\_\-bool} hasResponse)
+\begin{DoxyCompactList}\small\item\em Versenden von Daten an anderen Controller. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-size} {\bf COM\_\-requestStatus} ({\bf DT\_\-byte} {\bf cpuID}, {\bf DT\_\-byte} param, {\bf DT\_\-byte} $\ast$const result)
+\begin{DoxyCompactList}\small\item\em Ruft den Status eines Controllers ab. \item\end{DoxyCompactList}\item 
+void {\bf COM\_\-doubleToByteArray} (const {\bf DT\_\-double} value, {\bf DT\_\-byte} $\ast$const array)
+\begin{DoxyCompactList}\small\item\em Konvertiert einen Double-\/Wert in ein Byte-\/Array. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-double} {\bf COM\_\-byteArrayToDouble} (const {\bf DT\_\-byte} $\ast$const array)
+\begin{DoxyCompactList}\small\item\em Konvertiert ein Byte-\/Array zu einem Double-\/Wert. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-bool} {\bf COM\_\-isRightLeg} (const {\bf DT\_\-byte} $\ast$const result)
+\begin{DoxyCompactList}\small\item\em Prüft ob Flag für rechtes Bein gesetzt ist. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-bool} {\bf COM\_\-isLeftLeg} (const {\bf DT\_\-byte} $\ast$const result)
+\begin{DoxyCompactList}\small\item\em Prüft ob Flag für linkes Bein gesetzt ist. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-bool} {\bf COM\_\-isGlobal} (const {\bf DT\_\-byte} $\ast$const result)
+\begin{DoxyCompactList}\small\item\em Prüft ob Flag für globalen Punkt gesetzt ist. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-bool} {\bf COM\_\-isHip} (const {\bf DT\_\-byte} $\ast$const result)
+\begin{DoxyCompactList}\small\item\em Prüft ob Flag für Hüftgelenk gesetzt ist. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-bool} {\bf COM\_\-isKnee} (const {\bf DT\_\-byte} $\ast$const result)
+\begin{DoxyCompactList}\small\item\em Prüft ob Flag für Kniegelenk gesetzt ist. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-bool} {\bf COM\_\-isFoot} (const {\bf DT\_\-byte} $\ast$const result)
+\begin{DoxyCompactList}\small\item\em Prüft ob Flag für Fußgelenk gesetzt ist. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-bool} {\bf COM\_\-sendPoint} ({\bf DT\_\-byte} {\bf cpuID}, const {\bf DT\_\-point} $\ast$const point, const {\bf DT\_\-byte} config)
+\begin{DoxyCompactList}\small\item\em Sendet einen Punkt an einen Controller. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-bool} {\bf COM\_\-sendPointAndSpeed} ({\bf DT\_\-byte} {\bf cpuID}, const {\bf DT\_\-point} $\ast$const point, const {\bf DT\_\-double} speed, const {\bf DT\_\-byte} config)
+\begin{DoxyCompactList}\small\item\em Sendet einen Punkt und Anfahrgeschwindigkeit an einen Controller. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-point} {\bf COM\_\-getPointFromPacket} (const {\bf DT\_\-byte} $\ast$const result)
+\begin{DoxyCompactList}\small\item\em Ermittelt aus einem Packet den Punkt. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-double} {\bf COM\_\-getSpeedFromPacket} (const {\bf DT\_\-byte} $\ast$const result)
+\begin{DoxyCompactList}\small\item\em Ermittelt aus einem Packet die Anfahrgeschwindigkeit. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-bool} {\bf COM\_\-sendAngle} ({\bf DT\_\-byte} {\bf cpuID}, const {\bf DT\_\-double} angle, const {\bf DT\_\-byte} config)
+\begin{DoxyCompactList}\small\item\em Sendet einen Winkel an einen Controller. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-double} {\bf COM\_\-getAngleFromPacket} (const {\bf DT\_\-byte} $\ast$const result)
+\begin{DoxyCompactList}\small\item\em Ermittelt aus einem Packet den Winkel. \item\end{DoxyCompactList}\item 
+void {\bf COM\_\-sendAction} ({\bf DT\_\-byte} {\bf cpuID})
+\begin{DoxyCompactList}\small\item\em Sendet das ACTION-\/Kommando an einen Controller. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-bool} {\bf COM\_\-isAlive} ({\bf DT\_\-byte} {\bf cpuID})
+\begin{DoxyCompactList}\small\item\em Sendet eine isAlive-\/Anfrage an einen Controller. \item\end{DoxyCompactList}\item 
+void {\bf COM\_\-sendACK} ({\bf DT\_\-byte} {\bf cpuID})
+\begin{DoxyCompactList}\small\item\em Sendet ein ACK an einen Controller. \item\end{DoxyCompactList}\item 
+void {\bf COM\_\-sendNAK} ({\bf DT\_\-byte} {\bf cpuID}, {\bf DT\_\-byte} errCode)
+\begin{DoxyCompactList}\small\item\em Sendet ein NAK an einen Controller. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Ausführliche Beschreibung}
+Methoden zur Kommunikation der CPUs. 
+
+\subsection{Makro-\/Dokumentation}
+\index{communication.c@{communication.c}!COM\_\-START\_\-BYTE@{COM\_\-START\_\-BYTE}}
+\index{COM\_\-START\_\-BYTE@{COM\_\-START\_\-BYTE}!communication.c@{communication.c}}
+\subsubsection[{COM\_\-START\_\-BYTE}]{\setlength{\rightskip}{0pt plus 5cm}\#define COM\_\-START\_\-BYTE~0xFF}\label{communication_8c_a114619e381023d4d074f89b994334969}
+
+
+\subsection{Dokumentation der Funktionen}
+\index{communication.c@{communication.c}!COM\_\-byteArrayToDouble@{COM\_\-byteArrayToDouble}}
+\index{COM\_\-byteArrayToDouble@{COM\_\-byteArrayToDouble}!communication.c@{communication.c}}
+\subsubsection[{COM\_\-byteArrayToDouble}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-double} COM\_\-byteArrayToDouble (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-byte} $\ast$const }]{ array}
+\end{DoxyParamCaption}
+)}\label{communication_8c_a923299741f6f5f7d079bce3e71c2f781}
+
+
+Konvertiert ein Byte-\/Array zu einem Double-\/Wert. 
+
+Konvertiert ein Byte-\/Array zu einem Double-\/Wert.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em array}]Byte-\/Array mit Double-\/Wert\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+Double-\/Wert 
+\end{DoxyReturn}
+\index{communication.c@{communication.c}!COM\_\-doubleToByteArray@{COM\_\-doubleToByteArray}}
+\index{COM\_\-doubleToByteArray@{COM\_\-doubleToByteArray}!communication.c@{communication.c}}
+\subsubsection[{COM\_\-doubleToByteArray}]{\setlength{\rightskip}{0pt plus 5cm}void COM\_\-doubleToByteArray (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-double}}]{ value, }
+\item[{{\bf DT\_\-byte} $\ast$const }]{ array}
+\end{DoxyParamCaption}
+)}\label{communication_8c_a24fad04bfe57561b5be156172fd8c2e5}
+
+
+Konvertiert einen Double-\/Wert in ein Byte-\/Array. 
+
+Konvertiert einen Double-\/Wert in ein Byte-\/Array.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em value}]Double-\/Wert \item[{\em array}]Zielfeld \end{DoxyParams}
+\index{communication.c@{communication.c}!COM\_\-getAngleFromPacket@{COM\_\-getAngleFromPacket}}
+\index{COM\_\-getAngleFromPacket@{COM\_\-getAngleFromPacket}!communication.c@{communication.c}}
+\subsubsection[{COM\_\-getAngleFromPacket}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-double} COM\_\-getAngleFromPacket (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-byte} $\ast$const }]{ result}
+\end{DoxyParamCaption}
+)}\label{communication_8c_ab34544b8788ad4af48ee41d5d7c5a952}
+
+
+Ermittelt aus einem Packet den Winkel. 
+
+Ermittelt aus einem Packet den Winkel.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em result}]Zu prüfendes Packet\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+Winkel 
+\end{DoxyReturn}
+\index{communication.c@{communication.c}!COM\_\-getChecksum@{COM\_\-getChecksum}}
+\index{COM\_\-getChecksum@{COM\_\-getChecksum}!communication.c@{communication.c}}
+\subsubsection[{COM\_\-getChecksum}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-byte} COM\_\-getChecksum (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-byte} $\ast$const }]{ packet, }
+\item[{{\bf DT\_\-size}}]{ l}
+\end{DoxyParamCaption}
+)}\label{communication_8c_aa7f0a91a4a11ec1477fff31c26fa05d9}
+
+
+Berechnet die Checksum. 
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em packet}]Paket \item[{\em l}]Größe des pakets\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+Checksum 
+\end{DoxyReturn}
+\index{communication.c@{communication.c}!COM\_\-getCpuID@{COM\_\-getCpuID}}
+\index{COM\_\-getCpuID@{COM\_\-getCpuID}!communication.c@{communication.c}}
+\subsubsection[{COM\_\-getCpuID}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-byte} COM\_\-getCpuID (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-leg} $\ast$const }]{ leg\_\-l}
+\end{DoxyParamCaption}
+)}\label{communication_8c_aa66979d16af2cafc0adb24e3fe190253}
+\index{communication.c@{communication.c}!COM\_\-getPointFromPacket@{COM\_\-getPointFromPacket}}
+\index{COM\_\-getPointFromPacket@{COM\_\-getPointFromPacket}!communication.c@{communication.c}}
+\subsubsection[{COM\_\-getPointFromPacket}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-point} COM\_\-getPointFromPacket (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-byte} $\ast$const }]{ result}
+\end{DoxyParamCaption}
+)}\label{communication_8c_a46f1066278d3d0ecfae33eade46a46a5}
+
+
+Ermittelt aus einem Packet den Punkt. 
+
+Ermittelt aus einem Packet den Punkt.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em result}]Zu prüfendes Packet\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+Point 
+\end{DoxyReturn}
+\index{communication.c@{communication.c}!COM\_\-getSpeedFromPacket@{COM\_\-getSpeedFromPacket}}
+\index{COM\_\-getSpeedFromPacket@{COM\_\-getSpeedFromPacket}!communication.c@{communication.c}}
+\subsubsection[{COM\_\-getSpeedFromPacket}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-double} COM\_\-getSpeedFromPacket (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-byte} $\ast$const }]{ result}
+\end{DoxyParamCaption}
+)}\label{communication_8c_a07c7db41dde4d409c0c8add6c7d90011}
+
+
+Ermittelt aus einem Packet die Anfahrgeschwindigkeit. 
+
+Ermittelt aus einem Packet die Anfahrgeschwindigkeit.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em result}]Zu prüfendes Packet\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+Anfahrgeschwindigkeit 
+\end{DoxyReturn}
+\index{communication.c@{communication.c}!COM\_\-isAlive@{COM\_\-isAlive}}
+\index{COM\_\-isAlive@{COM\_\-isAlive}!communication.c@{communication.c}}
+\subsubsection[{COM\_\-isAlive}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-bool} COM\_\-isAlive (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-byte}}]{ cpuID}
+\end{DoxyParamCaption}
+)}\label{communication_8c_a7c42a072f256ca35cebf3e125d4183a1}
+
+
+Sendet eine isAlive-\/Anfrage an einen Controller. 
+
+Sendet eine isAlive-\/Anfrage an einen Controller.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em cpuID}]ID des Controllers\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+true, wenn Alive 
+\end{DoxyReturn}
+\index{communication.c@{communication.c}!COM\_\-isFoot@{COM\_\-isFoot}}
+\index{COM\_\-isFoot@{COM\_\-isFoot}!communication.c@{communication.c}}
+\subsubsection[{COM\_\-isFoot}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-bool} COM\_\-isFoot (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-byte} $\ast$const }]{ result}
+\end{DoxyParamCaption}
+)}\label{communication_8c_a826f5b8b66540b709c4148ce676e8a9b}
+
+
+Prüft ob Flag für Fußgelenk gesetzt ist. 
+
+Prüft ob Flag für Fußgelenk gesetzt ist.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em result}]Zu prüfendes Packet\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+true, wenn Flag gesetzt 
+\end{DoxyReturn}
+\index{communication.c@{communication.c}!COM\_\-isGlobal@{COM\_\-isGlobal}}
+\index{COM\_\-isGlobal@{COM\_\-isGlobal}!communication.c@{communication.c}}
+\subsubsection[{COM\_\-isGlobal}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-bool} COM\_\-isGlobal (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-byte} $\ast$const }]{ result}
+\end{DoxyParamCaption}
+)}\label{communication_8c_ae9aa4d4dd7e0e522707ff71bee19c481}
+
+
+Prüft ob Flag für globalen Punkt gesetzt ist. 
+
+Prüft ob Flag für globalen Punkt gesetzt ist.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em result}]Zu prüfendes Packet\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+true, wenn Flag gesetzt 
+\end{DoxyReturn}
+\index{communication.c@{communication.c}!COM\_\-isHip@{COM\_\-isHip}}
+\index{COM\_\-isHip@{COM\_\-isHip}!communication.c@{communication.c}}
+\subsubsection[{COM\_\-isHip}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-bool} COM\_\-isHip (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-byte} $\ast$const }]{ result}
+\end{DoxyParamCaption}
+)}\label{communication_8c_a7624ed8951e28b18d3c47541f8d3351c}
+
+
+Prüft ob Flag für Hüftgelenk gesetzt ist. 
+
+Prüft ob Flag für Hüftgelenk gesetzt ist.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em result}]Zu prüfendes Packet\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+true, wenn Flag gesetzt 
+\end{DoxyReturn}
+\index{communication.c@{communication.c}!COM\_\-isKnee@{COM\_\-isKnee}}
+\index{COM\_\-isKnee@{COM\_\-isKnee}!communication.c@{communication.c}}
+\subsubsection[{COM\_\-isKnee}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-bool} COM\_\-isKnee (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-byte} $\ast$const }]{ result}
+\end{DoxyParamCaption}
+)}\label{communication_8c_add66380ff6723f55b7f2e6bc948110f2}
+
+
+Prüft ob Flag für Kniegelenk gesetzt ist. 
+
+Prüft ob Flag für Kniegelenk gesetzt ist.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em result}]Zu prüfendes Packet\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+true, wenn Flag gesetzt 
+\end{DoxyReturn}
+\index{communication.c@{communication.c}!COM\_\-isLeftLeg@{COM\_\-isLeftLeg}}
+\index{COM\_\-isLeftLeg@{COM\_\-isLeftLeg}!communication.c@{communication.c}}
+\subsubsection[{COM\_\-isLeftLeg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-bool} COM\_\-isLeftLeg (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-byte} $\ast$const }]{ result}
+\end{DoxyParamCaption}
+)}\label{communication_8c_a7e9912aaebc58e320903a15b6e7085cf}
+
+
+Prüft ob Flag für linkes Bein gesetzt ist. 
+
+Prüft ob Flag für linkes Bein gesetzt ist.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em result}]Zu prüfendes Packet\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+true, wenn Flag gesetzt 
+\end{DoxyReturn}
+\index{communication.c@{communication.c}!COM\_\-isRightLeg@{COM\_\-isRightLeg}}
+\index{COM\_\-isRightLeg@{COM\_\-isRightLeg}!communication.c@{communication.c}}
+\subsubsection[{COM\_\-isRightLeg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-bool} COM\_\-isRightLeg (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-byte} $\ast$const }]{ result}
+\end{DoxyParamCaption}
+)}\label{communication_8c_a5b72a894c6f24fbb368324dbddff9ac9}
+
+
+Prüft ob Flag für rechtes Bein gesetzt ist. 
+
+Prüft ob Flag für rechtes Bein gesetzt ist.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em result}]Zu prüfendes Packet\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+true, wenn Flag gesetzt 
+\end{DoxyReturn}
+\index{communication.c@{communication.c}!COM\_\-receive@{COM\_\-receive}}
+\index{COM\_\-receive@{COM\_\-receive}!communication.c@{communication.c}}
+\subsubsection[{COM\_\-receive}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-byte} COM\_\-receive (
+\begin{DoxyParamCaption}
+\item[{{\bf USART\_\-data\_\-t} $\ast$const }]{ usart\_\-data, }
+\item[{{\bf DT\_\-byte} $\ast$const }]{ dest}
+\end{DoxyParamCaption}
+)}\label{communication_8c_a16d4bea86723a7eb718e973e942b8a70}
+
+
+USART-\/Empfangsmethode für Prozessorkommunikation. 
+
+Diese Methode liest den jeweiligen USART-\/Buffer aus und prüft, ob ein vollständiges Paket gemäß des Communication-\/Protokoll empfangen wurde.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em usart\_\-data}]USART-\/Datenstruktur \item[{\em dest}]Byte-\/Array für Antwort-\/Paket\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+Länge des Antwortpakets 
+\end{DoxyReturn}
+\index{communication.c@{communication.c}!COM\_\-requestStatus@{COM\_\-requestStatus}}
+\index{COM\_\-requestStatus@{COM\_\-requestStatus}!communication.c@{communication.c}}
+\subsubsection[{COM\_\-requestStatus}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-size} COM\_\-requestStatus (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-byte}}]{ cpuID, }
+\item[{{\bf DT\_\-byte}}]{ param, }
+\item[{{\bf DT\_\-byte} $\ast$const }]{ result}
+\end{DoxyParamCaption}
+)}\label{communication_8c_ae0d01c1e8959cb009a35a99e6381b755}
+
+
+Ruft den Status eines Controllers ab. 
+
+Ruft den Status eines Controllers ab. Broadcast nicht möglich!
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em cpuID}]ID des Controllers \item[{\em param}]Parameter \item[{\em result}]Zielfeld für Antowort\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+Größe der empfangenen Antwort 
+\end{DoxyReturn}
+\index{communication.c@{communication.c}!COM\_\-send@{COM\_\-send}}
+\index{COM\_\-send@{COM\_\-send}!communication.c@{communication.c}}
+\subsubsection[{COM\_\-send}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-byte} COM\_\-send (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-byte} $\ast$const }]{ packet, }
+\item[{{\bf DT\_\-size}}]{ l, }
+\item[{{\bf DT\_\-byte} $\ast$const }]{ result, }
+\item[{{\bf DT\_\-bool}}]{ hasResponse}
+\end{DoxyParamCaption}
+)}\label{communication_8c_a8b51f3cc6aa754c321408f030fec6de5}
+
+
+Versenden von Daten an anderen Controller. 
+
+Blockierendes Senden mit gleichzeitigem Empfangen der Antwort.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em packet}]Zuversendendes Paket \item[{\em l}]Größe des Pakets \item[{\em result}]Zielfeld für Antowort \item[{\em hasResponse}]Wartet auf eine Antwort, wenn true\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+Größe der empfangenen Antwort 
+\end{DoxyReturn}
+\index{communication.c@{communication.c}!COM\_\-sendACK@{COM\_\-sendACK}}
+\index{COM\_\-sendACK@{COM\_\-sendACK}!communication.c@{communication.c}}
+\subsubsection[{COM\_\-sendACK}]{\setlength{\rightskip}{0pt plus 5cm}void COM\_\-sendACK (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-byte}}]{ cpuID}
+\end{DoxyParamCaption}
+)}\label{communication_8c_a5113fbea2a40c856e20d903510dd198d}
+
+
+Sendet ein ACK an einen Controller. 
+
+Sendet ein ACK an einen Controller.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em cpuID}]ID des Controllers \end{DoxyParams}
+\index{communication.c@{communication.c}!COM\_\-sendAction@{COM\_\-sendAction}}
+\index{COM\_\-sendAction@{COM\_\-sendAction}!communication.c@{communication.c}}
+\subsubsection[{COM\_\-sendAction}]{\setlength{\rightskip}{0pt plus 5cm}void COM\_\-sendAction (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-byte}}]{ cpuID}
+\end{DoxyParamCaption}
+)}\label{communication_8c_acc627191229a110eb02523d0ea9937d4}
+
+
+Sendet das ACTION-\/Kommando an einen Controller. 
+
+Sendet das ACTION-\/Kommando an einen Controller.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em cpuID}]ID des Controllers \end{DoxyParams}
+\index{communication.c@{communication.c}!COM\_\-sendAngle@{COM\_\-sendAngle}}
+\index{COM\_\-sendAngle@{COM\_\-sendAngle}!communication.c@{communication.c}}
+\subsubsection[{COM\_\-sendAngle}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-bool} COM\_\-sendAngle (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-byte}}]{ cpuID, }
+\item[{const {\bf DT\_\-double}}]{ angle, }
+\item[{const {\bf DT\_\-byte}}]{ config}
+\end{DoxyParamCaption}
+)}\label{communication_8c_ae0d52a56170b88b07f7ed92a9bbdbeb5}
+
+
+Sendet einen Winkel an einen Controller. 
+
+Sendet einen Winkel an einen Controller.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em cpuID}]ID des Controllers \item[{\em angle}]Zuversendender Winkel \item[{\em config}]Parameter, z.B. global, left, right ...\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+false, wenn Fehler 
+\end{DoxyReturn}
+\index{communication.c@{communication.c}!COM\_\-sendNAK@{COM\_\-sendNAK}}
+\index{COM\_\-sendNAK@{COM\_\-sendNAK}!communication.c@{communication.c}}
+\subsubsection[{COM\_\-sendNAK}]{\setlength{\rightskip}{0pt plus 5cm}void COM\_\-sendNAK (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-byte}}]{ cpuID, }
+\item[{{\bf DT\_\-byte}}]{ errCode}
+\end{DoxyParamCaption}
+)}\label{communication_8c_ab8981259c34906befd701fcd51cdd71d}
+
+
+Sendet ein NAK an einen Controller. 
+
+Sendet ein NAK an einen Controller.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em cpuID}]ID des Controllers \item[{\em errCode}]Fehlercode \end{DoxyParams}
+\index{communication.c@{communication.c}!COM\_\-sendPoint@{COM\_\-sendPoint}}
+\index{COM\_\-sendPoint@{COM\_\-sendPoint}!communication.c@{communication.c}}
+\subsubsection[{COM\_\-sendPoint}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-bool} COM\_\-sendPoint (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-byte}}]{ cpuID, }
+\item[{const {\bf DT\_\-point} $\ast$const }]{ point, }
+\item[{const {\bf DT\_\-byte}}]{ config}
+\end{DoxyParamCaption}
+)}\label{communication_8c_afc6ce4ffa425fe43c861b6278b3790e9}
+
+
+Sendet einen Punkt an einen Controller. 
+
+Sendet einen Punkt an einen Controller.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em cpuID}]ID des Controllers \item[{\em point}]Zuversendender Punkt \item[{\em config}]Parameter, z.B. global, left, right ...\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+false, wenn Fehler 
+\end{DoxyReturn}
+\index{communication.c@{communication.c}!COM\_\-sendPointAndSpeed@{COM\_\-sendPointAndSpeed}}
+\index{COM\_\-sendPointAndSpeed@{COM\_\-sendPointAndSpeed}!communication.c@{communication.c}}
+\subsubsection[{COM\_\-sendPointAndSpeed}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-bool} COM\_\-sendPointAndSpeed (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-byte}}]{ cpuID, }
+\item[{const {\bf DT\_\-point} $\ast$const }]{ point, }
+\item[{const {\bf DT\_\-double}}]{ speed, }
+\item[{const {\bf DT\_\-byte}}]{ config}
+\end{DoxyParamCaption}
+)}\label{communication_8c_a319ea1f372e0b9852d6db9d187a34167}
+
+
+Sendet einen Punkt und Anfahrgeschwindigkeit an einen Controller. 
+
+Sendet einen Punkt und Anfahrgeschwindigkeit zusammen in einem Packet an einen Controller.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em cpuID}]ID des Controllers \item[{\em point}]Zuversendender Punkt \item[{\em speed}]Anfahrgeschwindigkeit \item[{\em config}]Parameter, z.B. global, left, right ...\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+false, wenn Fehler 
+\end{DoxyReturn}

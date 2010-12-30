@@ -1,0 +1,253 @@
+\section{include/xmega.h-\/Dateireferenz}
+\label{xmega_8h}\index{include/xmega.h@{include/xmega.h}}
+
+
+Spezifische Funktionen für den Mikrocontroller ATXmega128A1.  
+
+
+{\ttfamily \#include \char`\"{}usart\_\-driver.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}datatypes.h\char`\"{}}\par
+\subsection*{Makrodefinitionen}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf XM\_\-PORT\_\-SERVO\_\-L}~PORTC
+\item 
+\#define {\bf XM\_\-PORT\_\-SERVO\_\-R}~PORTD
+\item 
+\#define {\bf XM\_\-PORT\_\-COM1}~PORTD
+\item 
+\#define {\bf XM\_\-PORT\_\-COM3}~PORTE
+\item 
+\#define {\bf XM\_\-PORT\_\-REMOTE}~PORTE
+\item 
+\#define {\bf XM\_\-PORT\_\-DEBUG}~PORTF
+\item 
+\#define {\bf XM\_\-USART\_\-SERVO\_\-L}~USARTC0
+\item 
+\#define {\bf XM\_\-USART\_\-SERVO\_\-R}~USARTD0
+\item 
+\#define {\bf XM\_\-USART\_\-COM1}~USARTD1
+\item 
+\#define {\bf XM\_\-USART\_\-COM3}~USARTE0
+\item 
+\#define {\bf XM\_\-USART\_\-REMOTE}~USARTE1
+\item 
+\#define {\bf XM\_\-USART\_\-DEBUG}~USARTF0
+\item 
+\#define {\bf XM\_\-PORT\_\-LED}~PORTQ
+\item 
+\#define {\bf XM\_\-LED\_\-MASK}~(1$<$$<$PIN3)
+\item 
+\#define {\bf XM\_\-LED\_\-ON}~XM\_\-PORT\_\-LED.OUTCLR = XM\_\-LED\_\-MASK;
+\item 
+\#define {\bf XM\_\-LED\_\-OFF}~XM\_\-PORT\_\-LED.OUTSET = XM\_\-LED\_\-MASK;
+\item 
+\#define {\bf XM\_\-LED\_\-TGL}~XM\_\-PORT\_\-LED.OUTTGL = XM\_\-LED\_\-MASK;
+\item 
+\#define {\bf SWITCHPORT}~PORTQ
+\item 
+\#define {\bf SWITCHMASK}~(1$<$$<$PIN2)
+\item 
+\#define {\bf SWITCH\_\-PRESSED}~(SWITCHPORT.IN\&SWITCHMASK)!=SWITCHMASK
+\item 
+\#define {\bf SWITCH\_\-RELEASED}~(SWITCHPORT.IN\&SWITCHMASK)==SWITCHMASK
+\item 
+\#define {\bf XM\_\-OE\_\-MASK}~(1$<$$<$PIN0)
+\item 
+\#define {\bf XM\_\-USART\_\-FAILURE}~0xFF
+\end{DoxyCompactItemize}
+\subsection*{Funktionen}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf XM\_\-init\_\-cpu} ()
+\begin{DoxyCompactList}\small\item\em Initialisierung der CPU. \item\end{DoxyCompactList}\item 
+void {\bf XM\_\-init\_\-remote} ()
+\begin{DoxyCompactList}\small\item\em Initialisiert den Zigbee-\/Fernsteuerung. \item\end{DoxyCompactList}\item 
+void {\bf XM\_\-init\_\-dnx} ()
+\begin{DoxyCompactList}\small\item\em Initialisiert die Servo-\/USARTs. \item\end{DoxyCompactList}\item 
+void {\bf XM\_\-init\_\-com} ({\bf DT\_\-byte})
+\begin{DoxyCompactList}\small\item\em Initialisiert USARTs für die CPU-\/Kommunikation. \item\end{DoxyCompactList}\item 
+void {\bf XM\_\-USART\_\-send} ({\bf USART\_\-data\_\-t} $\ast$const, const {\bf DT\_\-byte} $\ast$const, {\bf DT\_\-size})
+\begin{DoxyCompactList}\small\item\em USART-\/Sendemethode. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variablen}
+\begin{DoxyCompactItemize}
+\item 
+{\bf USART\_\-data\_\-t} {\bf XM\_\-servo\_\-data\_\-L}
+\item 
+{\bf USART\_\-data\_\-t} {\bf XM\_\-servo\_\-data\_\-R}
+\item 
+{\bf USART\_\-data\_\-t} {\bf XM\_\-debug\_\-data}
+\item 
+{\bf USART\_\-data\_\-t} {\bf XM\_\-remote\_\-data}
+\item 
+{\bf USART\_\-data\_\-t} {\bf XM\_\-com\_\-data1}
+\item 
+{\bf USART\_\-data\_\-t} {\bf XM\_\-com\_\-data3}
+\end{DoxyCompactItemize}
+
+
+\subsection{Ausführliche Beschreibung}
+Spezifische Funktionen für den Mikrocontroller ATXmega128A1. 
+
+\subsection{Makro-\/Dokumentation}
+\index{xmega.h@{xmega.h}!SWITCH\_\-PRESSED@{SWITCH\_\-PRESSED}}
+\index{SWITCH\_\-PRESSED@{SWITCH\_\-PRESSED}!xmega.h@{xmega.h}}
+\subsubsection[{SWITCH\_\-PRESSED}]{\setlength{\rightskip}{0pt plus 5cm}\#define SWITCH\_\-PRESSED~(SWITCHPORT.IN\&SWITCHMASK)!=SWITCHMASK}\label{xmega_8h_aee0a92534030b96677d5c5f9740dd5d8}
+\index{xmega.h@{xmega.h}!SWITCH\_\-RELEASED@{SWITCH\_\-RELEASED}}
+\index{SWITCH\_\-RELEASED@{SWITCH\_\-RELEASED}!xmega.h@{xmega.h}}
+\subsubsection[{SWITCH\_\-RELEASED}]{\setlength{\rightskip}{0pt plus 5cm}\#define SWITCH\_\-RELEASED~(SWITCHPORT.IN\&SWITCHMASK)==SWITCHMASK}\label{xmega_8h_a504feaf326beca68d69242b30efb5da6}
+\index{xmega.h@{xmega.h}!SWITCHMASK@{SWITCHMASK}}
+\index{SWITCHMASK@{SWITCHMASK}!xmega.h@{xmega.h}}
+\subsubsection[{SWITCHMASK}]{\setlength{\rightskip}{0pt plus 5cm}\#define SWITCHMASK~(1$<$$<$PIN2)}\label{xmega_8h_ab26d18f5aaff71dabdeb84cb0bf7b043}
+\index{xmega.h@{xmega.h}!SWITCHPORT@{SWITCHPORT}}
+\index{SWITCHPORT@{SWITCHPORT}!xmega.h@{xmega.h}}
+\subsubsection[{SWITCHPORT}]{\setlength{\rightskip}{0pt plus 5cm}\#define SWITCHPORT~PORTQ}\label{xmega_8h_aad3acfe151d9c0f1186ea6978f5e48d5}
+\index{xmega.h@{xmega.h}!XM\_\-LED\_\-MASK@{XM\_\-LED\_\-MASK}}
+\index{XM\_\-LED\_\-MASK@{XM\_\-LED\_\-MASK}!xmega.h@{xmega.h}}
+\subsubsection[{XM\_\-LED\_\-MASK}]{\setlength{\rightskip}{0pt plus 5cm}\#define XM\_\-LED\_\-MASK~(1$<$$<$PIN3)}\label{xmega_8h_a1c1ad2e1dbf9a092d012b2feaa0963bc}
+\index{xmega.h@{xmega.h}!XM\_\-LED\_\-OFF@{XM\_\-LED\_\-OFF}}
+\index{XM\_\-LED\_\-OFF@{XM\_\-LED\_\-OFF}!xmega.h@{xmega.h}}
+\subsubsection[{XM\_\-LED\_\-OFF}]{\setlength{\rightskip}{0pt plus 5cm}\#define XM\_\-LED\_\-OFF~XM\_\-PORT\_\-LED.OUTSET = XM\_\-LED\_\-MASK;}\label{xmega_8h_a90c73a24ade345ecb0fca2f3f0f8a783}
+\index{xmega.h@{xmega.h}!XM\_\-LED\_\-ON@{XM\_\-LED\_\-ON}}
+\index{XM\_\-LED\_\-ON@{XM\_\-LED\_\-ON}!xmega.h@{xmega.h}}
+\subsubsection[{XM\_\-LED\_\-ON}]{\setlength{\rightskip}{0pt plus 5cm}\#define XM\_\-LED\_\-ON~XM\_\-PORT\_\-LED.OUTCLR = XM\_\-LED\_\-MASK;}\label{xmega_8h_ae99c18dca4927c72f82e4325d52c59f5}
+\index{xmega.h@{xmega.h}!XM\_\-LED\_\-TGL@{XM\_\-LED\_\-TGL}}
+\index{XM\_\-LED\_\-TGL@{XM\_\-LED\_\-TGL}!xmega.h@{xmega.h}}
+\subsubsection[{XM\_\-LED\_\-TGL}]{\setlength{\rightskip}{0pt plus 5cm}\#define XM\_\-LED\_\-TGL~XM\_\-PORT\_\-LED.OUTTGL = XM\_\-LED\_\-MASK;}\label{xmega_8h_a134fc55036cd469f321f9a7eda5e7dfc}
+\index{xmega.h@{xmega.h}!XM\_\-OE\_\-MASK@{XM\_\-OE\_\-MASK}}
+\index{XM\_\-OE\_\-MASK@{XM\_\-OE\_\-MASK}!xmega.h@{xmega.h}}
+\subsubsection[{XM\_\-OE\_\-MASK}]{\setlength{\rightskip}{0pt plus 5cm}\#define XM\_\-OE\_\-MASK~(1$<$$<$PIN0)}\label{xmega_8h_aeb5ecea146221a9a107c71f3bba7c118}
+\index{xmega.h@{xmega.h}!XM\_\-PORT\_\-COM1@{XM\_\-PORT\_\-COM1}}
+\index{XM\_\-PORT\_\-COM1@{XM\_\-PORT\_\-COM1}!xmega.h@{xmega.h}}
+\subsubsection[{XM\_\-PORT\_\-COM1}]{\setlength{\rightskip}{0pt plus 5cm}\#define XM\_\-PORT\_\-COM1~PORTD}\label{xmega_8h_a68407704c11cff2e10fa72f71ad40474}
+\index{xmega.h@{xmega.h}!XM\_\-PORT\_\-COM3@{XM\_\-PORT\_\-COM3}}
+\index{XM\_\-PORT\_\-COM3@{XM\_\-PORT\_\-COM3}!xmega.h@{xmega.h}}
+\subsubsection[{XM\_\-PORT\_\-COM3}]{\setlength{\rightskip}{0pt plus 5cm}\#define XM\_\-PORT\_\-COM3~PORTE}\label{xmega_8h_a26708d197e9a744a3b025272ebcd6854}
+\index{xmega.h@{xmega.h}!XM\_\-PORT\_\-DEBUG@{XM\_\-PORT\_\-DEBUG}}
+\index{XM\_\-PORT\_\-DEBUG@{XM\_\-PORT\_\-DEBUG}!xmega.h@{xmega.h}}
+\subsubsection[{XM\_\-PORT\_\-DEBUG}]{\setlength{\rightskip}{0pt plus 5cm}\#define XM\_\-PORT\_\-DEBUG~PORTF}\label{xmega_8h_a6a4a3610e507d6b2a56a13fda08a8cbe}
+\index{xmega.h@{xmega.h}!XM\_\-PORT\_\-LED@{XM\_\-PORT\_\-LED}}
+\index{XM\_\-PORT\_\-LED@{XM\_\-PORT\_\-LED}!xmega.h@{xmega.h}}
+\subsubsection[{XM\_\-PORT\_\-LED}]{\setlength{\rightskip}{0pt plus 5cm}\#define XM\_\-PORT\_\-LED~PORTQ}\label{xmega_8h_abf90d7ecd052e44d8624a98263551ab8}
+\index{xmega.h@{xmega.h}!XM\_\-PORT\_\-REMOTE@{XM\_\-PORT\_\-REMOTE}}
+\index{XM\_\-PORT\_\-REMOTE@{XM\_\-PORT\_\-REMOTE}!xmega.h@{xmega.h}}
+\subsubsection[{XM\_\-PORT\_\-REMOTE}]{\setlength{\rightskip}{0pt plus 5cm}\#define XM\_\-PORT\_\-REMOTE~PORTE}\label{xmega_8h_a340f59ed62feda705630de53ee0259f5}
+\index{xmega.h@{xmega.h}!XM\_\-PORT\_\-SERVO\_\-L@{XM\_\-PORT\_\-SERVO\_\-L}}
+\index{XM\_\-PORT\_\-SERVO\_\-L@{XM\_\-PORT\_\-SERVO\_\-L}!xmega.h@{xmega.h}}
+\subsubsection[{XM\_\-PORT\_\-SERVO\_\-L}]{\setlength{\rightskip}{0pt plus 5cm}\#define XM\_\-PORT\_\-SERVO\_\-L~PORTC}\label{xmega_8h_ad362da595b299d341b4cabb7af8b9987}
+\index{xmega.h@{xmega.h}!XM\_\-PORT\_\-SERVO\_\-R@{XM\_\-PORT\_\-SERVO\_\-R}}
+\index{XM\_\-PORT\_\-SERVO\_\-R@{XM\_\-PORT\_\-SERVO\_\-R}!xmega.h@{xmega.h}}
+\subsubsection[{XM\_\-PORT\_\-SERVO\_\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define XM\_\-PORT\_\-SERVO\_\-R~PORTD}\label{xmega_8h_a0b3aea9a60b2fffba0e380e37100f6e7}
+\index{xmega.h@{xmega.h}!XM\_\-USART\_\-COM1@{XM\_\-USART\_\-COM1}}
+\index{XM\_\-USART\_\-COM1@{XM\_\-USART\_\-COM1}!xmega.h@{xmega.h}}
+\subsubsection[{XM\_\-USART\_\-COM1}]{\setlength{\rightskip}{0pt plus 5cm}\#define XM\_\-USART\_\-COM1~USARTD1}\label{xmega_8h_a590180cc0351df72d87e06f8d77964c6}
+\index{xmega.h@{xmega.h}!XM\_\-USART\_\-COM3@{XM\_\-USART\_\-COM3}}
+\index{XM\_\-USART\_\-COM3@{XM\_\-USART\_\-COM3}!xmega.h@{xmega.h}}
+\subsubsection[{XM\_\-USART\_\-COM3}]{\setlength{\rightskip}{0pt plus 5cm}\#define XM\_\-USART\_\-COM3~USARTE0}\label{xmega_8h_ae27487ff216c72d7621c3796d6f8f4e9}
+\index{xmega.h@{xmega.h}!XM\_\-USART\_\-DEBUG@{XM\_\-USART\_\-DEBUG}}
+\index{XM\_\-USART\_\-DEBUG@{XM\_\-USART\_\-DEBUG}!xmega.h@{xmega.h}}
+\subsubsection[{XM\_\-USART\_\-DEBUG}]{\setlength{\rightskip}{0pt plus 5cm}\#define XM\_\-USART\_\-DEBUG~USARTF0}\label{xmega_8h_a5180a5d09cf4f92933b85c3f2c3b9617}
+\index{xmega.h@{xmega.h}!XM\_\-USART\_\-FAILURE@{XM\_\-USART\_\-FAILURE}}
+\index{XM\_\-USART\_\-FAILURE@{XM\_\-USART\_\-FAILURE}!xmega.h@{xmega.h}}
+\subsubsection[{XM\_\-USART\_\-FAILURE}]{\setlength{\rightskip}{0pt plus 5cm}\#define XM\_\-USART\_\-FAILURE~0xFF}\label{xmega_8h_a5dafed7d07d40c1e98045426df1db68d}
+signalisiert Fehler beim Empfangen \index{xmega.h@{xmega.h}!XM\_\-USART\_\-REMOTE@{XM\_\-USART\_\-REMOTE}}
+\index{XM\_\-USART\_\-REMOTE@{XM\_\-USART\_\-REMOTE}!xmega.h@{xmega.h}}
+\subsubsection[{XM\_\-USART\_\-REMOTE}]{\setlength{\rightskip}{0pt plus 5cm}\#define XM\_\-USART\_\-REMOTE~USARTE1}\label{xmega_8h_a757d1842c7b8c1bacfaaf0c8f299375a}
+\index{xmega.h@{xmega.h}!XM\_\-USART\_\-SERVO\_\-L@{XM\_\-USART\_\-SERVO\_\-L}}
+\index{XM\_\-USART\_\-SERVO\_\-L@{XM\_\-USART\_\-SERVO\_\-L}!xmega.h@{xmega.h}}
+\subsubsection[{XM\_\-USART\_\-SERVO\_\-L}]{\setlength{\rightskip}{0pt plus 5cm}\#define XM\_\-USART\_\-SERVO\_\-L~USARTC0}\label{xmega_8h_aa3de185f10bc5a4ed7d9d6252fe3a85f}
+\index{xmega.h@{xmega.h}!XM\_\-USART\_\-SERVO\_\-R@{XM\_\-USART\_\-SERVO\_\-R}}
+\index{XM\_\-USART\_\-SERVO\_\-R@{XM\_\-USART\_\-SERVO\_\-R}!xmega.h@{xmega.h}}
+\subsubsection[{XM\_\-USART\_\-SERVO\_\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define XM\_\-USART\_\-SERVO\_\-R~USARTD0}\label{xmega_8h_aef0e8a70290c447aab1779b2dbe1fc22}
+
+
+\subsection{Dokumentation der Funktionen}
+\index{xmega.h@{xmega.h}!XM\_\-init\_\-com@{XM\_\-init\_\-com}}
+\index{XM\_\-init\_\-com@{XM\_\-init\_\-com}!xmega.h@{xmega.h}}
+\subsubsection[{XM\_\-init\_\-com}]{\setlength{\rightskip}{0pt plus 5cm}void XM\_\-init\_\-com (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-byte}}]{ cpuID}
+\end{DoxyParamCaption}
+)}\label{xmega_8h_a636d409225eb0630a4a4dc566ed836da}
+
+
+Initialisiert USARTs für die CPU-\/Kommunikation. 
+
+ID des Controllers wird aufgrund des Hardwaredefekts für die Master-\/Slave-\/Kommunikation benötigt.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em cpuID}]ID des Controllers \end{DoxyParams}
+\index{xmega.h@{xmega.h}!XM\_\-init\_\-cpu@{XM\_\-init\_\-cpu}}
+\index{XM\_\-init\_\-cpu@{XM\_\-init\_\-cpu}!xmega.h@{xmega.h}}
+\subsubsection[{XM\_\-init\_\-cpu}]{\setlength{\rightskip}{0pt plus 5cm}void XM\_\-init\_\-cpu (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{xmega_8h_a98a15c8d66c596f3a8b68a4a51993303}
+
+
+Initialisierung der CPU. 
+
+\index{xmega.h@{xmega.h}!XM\_\-init\_\-dnx@{XM\_\-init\_\-dnx}}
+\index{XM\_\-init\_\-dnx@{XM\_\-init\_\-dnx}!xmega.h@{xmega.h}}
+\subsubsection[{XM\_\-init\_\-dnx}]{\setlength{\rightskip}{0pt plus 5cm}void XM\_\-init\_\-dnx (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{xmega_8h_a1fe0df275acdbec5eec5b8db8d79f8c8}
+
+
+Initialisiert die Servo-\/USARTs. 
+
+\index{xmega.h@{xmega.h}!XM\_\-init\_\-remote@{XM\_\-init\_\-remote}}
+\index{XM\_\-init\_\-remote@{XM\_\-init\_\-remote}!xmega.h@{xmega.h}}
+\subsubsection[{XM\_\-init\_\-remote}]{\setlength{\rightskip}{0pt plus 5cm}void XM\_\-init\_\-remote (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{xmega_8h_aad8f6f8cebefbede86e0d036daf28045}
+
+
+Initialisiert den Zigbee-\/Fernsteuerung. 
+
+\index{xmega.h@{xmega.h}!XM\_\-USART\_\-send@{XM\_\-USART\_\-send}}
+\index{XM\_\-USART\_\-send@{XM\_\-USART\_\-send}!xmega.h@{xmega.h}}
+\subsubsection[{XM\_\-USART\_\-send}]{\setlength{\rightskip}{0pt plus 5cm}void XM\_\-USART\_\-send (
+\begin{DoxyParamCaption}
+\item[{{\bf USART\_\-data\_\-t} $\ast$const }]{ usart\_\-data, }
+\item[{const {\bf DT\_\-byte} $\ast$const }]{ txData, }
+\item[{{\bf DT\_\-size}}]{ bytes}
+\end{DoxyParamCaption}
+)}\label{xmega_8h_aeb9c1dfb3003d09a31c41aba0d7060a4}
+
+
+USART-\/Sendemethode. 
+
+Diese Methode setzt zunächst das jeweilige Output-\/Enable (!OE) auf Senden und schreibt das zu sendende Paket in den USART-\/Buffer. Anschließend wird der TX-\/Interrupt aktiviert, der ausgelöst wird, wenn das letzte Paket gesendet wurde.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em usart\_\-data}]USART-\/Datenstruktur der zu benutzenden USART \item[{\em txData}]Byte-\/Array mit zu sendendem Paket \item[{\em bytes}]Länge des zu sendenden Pakets \end{DoxyParams}
+
+
+\subsection{Variablen-\/Dokumentation}
+\index{xmega.h@{xmega.h}!XM\_\-com\_\-data1@{XM\_\-com\_\-data1}}
+\index{XM\_\-com\_\-data1@{XM\_\-com\_\-data1}!xmega.h@{xmega.h}}
+\subsubsection[{XM\_\-com\_\-data1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf USART\_\-data\_\-t} {\bf XM\_\-com\_\-data1}}\label{xmega_8h_a4672c4ccb395460c4b53a1ed26be4b0d}
+USART-\/Struktur für Communication (Master -\/$>$ Slave 1). \index{xmega.h@{xmega.h}!XM\_\-com\_\-data3@{XM\_\-com\_\-data3}}
+\index{XM\_\-com\_\-data3@{XM\_\-com\_\-data3}!xmega.h@{xmega.h}}
+\subsubsection[{XM\_\-com\_\-data3}]{\setlength{\rightskip}{0pt plus 5cm}{\bf USART\_\-data\_\-t} {\bf XM\_\-com\_\-data3}}\label{xmega_8h_a07895d723423d93062b1702c7b2e8bcb}
+USART-\/Struktur für Communication (Master -\/$>$ Slave 3). \index{xmega.h@{xmega.h}!XM\_\-debug\_\-data@{XM\_\-debug\_\-data}}
+\index{XM\_\-debug\_\-data@{XM\_\-debug\_\-data}!xmega.h@{xmega.h}}
+\subsubsection[{XM\_\-debug\_\-data}]{\setlength{\rightskip}{0pt plus 5cm}{\bf USART\_\-data\_\-t} {\bf XM\_\-debug\_\-data}}\label{xmega_8h_a9c7eb4b6e67fb70bbd979a051bed0dbf}
+USART-\/Struktur für Debug-\/Ausgaben. \index{xmega.h@{xmega.h}!XM\_\-remote\_\-data@{XM\_\-remote\_\-data}}
+\index{XM\_\-remote\_\-data@{XM\_\-remote\_\-data}!xmega.h@{xmega.h}}
+\subsubsection[{XM\_\-remote\_\-data}]{\setlength{\rightskip}{0pt plus 5cm}{\bf USART\_\-data\_\-t} {\bf XM\_\-remote\_\-data}}\label{xmega_8h_abe1dc522d344bba084424b3e22ff50e0}
+USART-\/Struktur für Remote-\/Controller. \index{xmega.h@{xmega.h}!XM\_\-servo\_\-data\_\-L@{XM\_\-servo\_\-data\_\-L}}
+\index{XM\_\-servo\_\-data\_\-L@{XM\_\-servo\_\-data\_\-L}!xmega.h@{xmega.h}}
+\subsubsection[{XM\_\-servo\_\-data\_\-L}]{\setlength{\rightskip}{0pt plus 5cm}{\bf USART\_\-data\_\-t} {\bf XM\_\-servo\_\-data\_\-L}}\label{xmega_8h_a448f43e4abff317a9da514b54be01296}
+USART-\/Struktur für linke Dynamixel. \index{xmega.h@{xmega.h}!XM\_\-servo\_\-data\_\-R@{XM\_\-servo\_\-data\_\-R}}
+\index{XM\_\-servo\_\-data\_\-R@{XM\_\-servo\_\-data\_\-R}!xmega.h@{xmega.h}}
+\subsubsection[{XM\_\-servo\_\-data\_\-R}]{\setlength{\rightskip}{0pt plus 5cm}{\bf USART\_\-data\_\-t} {\bf XM\_\-servo\_\-data\_\-R}}\label{xmega_8h_ac1fe899fc4d2597e76c41c8def9ba066}
+USART-\/Struktur für rechte Dynamixel. 

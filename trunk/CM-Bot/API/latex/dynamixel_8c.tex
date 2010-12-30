@@ -1,0 +1,408 @@
+\section{dynamixel.c-\/Dateireferenz}
+\label{dynamixel_8c}\index{dynamixel.c@{dynamixel.c}}
+
+
+Methoden zur Steuerung der Dynamixal AX-\/12.  
+
+
+{\ttfamily \#include \char`\"{}include/dynamixel.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}include/utils.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}include/xmega.h\char`\"{}}\par
+{\ttfamily \#include $<$math.h$>$}\par
+\subsection*{Makrodefinitionen}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf START\_\-BYTE}~0xFF
+\item 
+\#define {\bf PING}~0x01
+\item 
+\#define {\bf RD\_\-DATA}~0x02
+\item 
+\#define {\bf WR\_\-DATA}~0x03
+\item 
+\#define {\bf REG\_\-WR}~0x04
+\item 
+\#define {\bf ACT}~0x05
+\item 
+\#define {\bf RESET}~0x06
+\item 
+\#define {\bf SYC\_\-WR}~0x83
+\item 
+\#define {\bf ID}~0x03
+\item 
+\#define {\bf BD}~0x04
+\item 
+\#define {\bf MAX\_\-TMP}~0x0B
+\item 
+\#define {\bf STS\_\-RT\_\-LVL}~0x10
+\item 
+\#define {\bf ALR\_\-SHUTDWN}~0x12
+\item 
+\#define {\bf GL\_\-POS}~0x1E
+\item 
+\#define {\bf LED}~0x19
+\item 
+\#define {\bf MV\_\-SPEED}~0x20
+\item 
+\#define {\bf PRT\_\-POS}~0x24
+\item 
+\#define {\bf PRT\_\-SPEED}~0x26
+\item 
+\#define {\bf PRT\_\-TMP}~0x2B
+\end{DoxyCompactItemize}
+\subsection*{Funktionen}
+\begin{DoxyCompactItemize}
+\item 
+{\bf DT\_\-byte} {\bf DNX\_\-getChecksum} (const {\bf DT\_\-byte} $\ast$const packet, {\bf DT\_\-size} l)
+\begin{DoxyCompactList}\small\item\em Berechnet die Checksum. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-byte} {\bf DNX\_\-receive} ({\bf USART\_\-data\_\-t} $\ast$const usart\_\-data, {\bf DT\_\-byte} $\ast$const dest)
+\begin{DoxyCompactList}\small\item\em USART-\/Empfangsmethode. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-byte} {\bf DNX\_\-send} ({\bf DT\_\-byte} $\ast$const packet, {\bf DT\_\-size} l, {\bf DT\_\-byte} $\ast$const result, {\bf DT\_\-bool} hasResponse)
+\begin{DoxyCompactList}\small\item\em Versenden von Daten an Dynamixel. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-double} {\bf DNX\_\-convertAngle} ({\bf DT\_\-double} value)
+\begin{DoxyCompactList}\small\item\em Konvertiert Winkel in Bezug auf einen neuen Nullpunkt. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-double} {\bf DNX\_\-correctAngles} ({\bf DT\_\-byte} id, {\bf DT\_\-double} value)
+\begin{DoxyCompactList}\small\item\em Korrigiert Winkel für Dynamixel. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-bool} {\bf DNX\_\-setAngle} ({\bf DT\_\-byte} id, {\bf DT\_\-double} value, {\bf DT\_\-bool} regWrite)
+\begin{DoxyCompactList}\small\item\em Sendet einen Winkel an Servo. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-bool} {\bf DNX\_\-setAngleAndSpeed} ({\bf DT\_\-byte} id, {\bf DT\_\-double} angle, {\bf DT\_\-double} speed, {\bf DT\_\-bool} regWrite)
+\begin{DoxyCompactList}\small\item\em Sendet Winkel und Speed an Servo. \item\end{DoxyCompactList}\item 
+void {\bf DNX\_\-setId} ({\bf DT\_\-byte} idOld, {\bf DT\_\-byte} idNew)
+\begin{DoxyCompactList}\small\item\em Vergibt einem Servos eine neue ID (ungetestet). \item\end{DoxyCompactList}\item 
+void {\bf DNX\_\-setSpeed} ({\bf DT\_\-byte} id, {\bf DT\_\-byte} speed)
+\begin{DoxyCompactList}\small\item\em Setzt die Anfahrgeschwindigkeit eines Servos (unvollendet). \item\end{DoxyCompactList}\item 
+{\bf DT\_\-bool} {\bf DNX\_\-setLed} ({\bf DT\_\-byte} id, {\bf DT\_\-byte} value)
+\begin{DoxyCompactList}\small\item\em Schaltet die LED eines Servos an/aus. \item\end{DoxyCompactList}\item 
+void {\bf DNX\_\-sendAction} ({\bf DT\_\-byte} id)
+\begin{DoxyCompactList}\small\item\em Sendet das ACTION-\/Kommando an einen Servo. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-double} {\bf DNX\_\-getAngle} ({\bf DT\_\-byte} id)
+\begin{DoxyCompactList}\small\item\em Liest den aktuellen Winkel eines Servos aus (unfertig). \item\end{DoxyCompactList}\item 
+{\bf DT\_\-byte} {\bf DNX\_\-getSpeed} ({\bf DT\_\-byte} id)
+\begin{DoxyCompactList}\small\item\em Liest die Anfahrgeschwindigkeit eines Servos aus (unfertig). \item\end{DoxyCompactList}\item 
+{\bf DT\_\-byte} {\bf DNX\_\-getLed} ({\bf DT\_\-byte} id)
+\begin{DoxyCompactList}\small\item\em Liest den Status der LED aus (unfertig). \item\end{DoxyCompactList}\item 
+void {\bf DNX\_\-getConnectedIDs} ({\bf DT\_\-leg} $\ast$const {\bf leg\_\-r}, {\bf DT\_\-leg} $\ast$const {\bf leg\_\-l})
+\begin{DoxyCompactList}\small\item\em Ermittlung der angeschlossenen Dynamixel. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Ausführliche Beschreibung}
+Methoden zur Steuerung der Dynamixal AX-\/12. 
+
+\subsection{Makro-\/Dokumentation}
+\index{dynamixel.c@{dynamixel.c}!ACT@{ACT}}
+\index{ACT@{ACT}!dynamixel.c@{dynamixel.c}}
+\subsubsection[{ACT}]{\setlength{\rightskip}{0pt plus 5cm}\#define ACT~0x05}\label{dynamixel_8c_a8b1f9873f78b1d80ab85bdd8168ce794}
+\index{dynamixel.c@{dynamixel.c}!ALR\_\-SHUTDWN@{ALR\_\-SHUTDWN}}
+\index{ALR\_\-SHUTDWN@{ALR\_\-SHUTDWN}!dynamixel.c@{dynamixel.c}}
+\subsubsection[{ALR\_\-SHUTDWN}]{\setlength{\rightskip}{0pt plus 5cm}\#define ALR\_\-SHUTDWN~0x12}\label{dynamixel_8c_a143721b24487712fbe65f1a0f93b6c1d}
+\index{dynamixel.c@{dynamixel.c}!BD@{BD}}
+\index{BD@{BD}!dynamixel.c@{dynamixel.c}}
+\subsubsection[{BD}]{\setlength{\rightskip}{0pt plus 5cm}\#define BD~0x04}\label{dynamixel_8c_a920971eab600c52963635b965ba64898}
+\index{dynamixel.c@{dynamixel.c}!GL\_\-POS@{GL\_\-POS}}
+\index{GL\_\-POS@{GL\_\-POS}!dynamixel.c@{dynamixel.c}}
+\subsubsection[{GL\_\-POS}]{\setlength{\rightskip}{0pt plus 5cm}\#define GL\_\-POS~0x1E}\label{dynamixel_8c_a17ca64abc18b16f4e570fe24b84ecdea}
+\index{dynamixel.c@{dynamixel.c}!ID@{ID}}
+\index{ID@{ID}!dynamixel.c@{dynamixel.c}}
+\subsubsection[{ID}]{\setlength{\rightskip}{0pt plus 5cm}\#define ID~0x03}\label{dynamixel_8c_a77ceac8d6af195fe72f95f6afd87c45e}
+\index{dynamixel.c@{dynamixel.c}!LED@{LED}}
+\index{LED@{LED}!dynamixel.c@{dynamixel.c}}
+\subsubsection[{LED}]{\setlength{\rightskip}{0pt plus 5cm}\#define LED~0x19}\label{dynamixel_8c_aeb7a7ba1ab7e0406f1b5ab36d579f585}
+\index{dynamixel.c@{dynamixel.c}!MAX\_\-TMP@{MAX\_\-TMP}}
+\index{MAX\_\-TMP@{MAX\_\-TMP}!dynamixel.c@{dynamixel.c}}
+\subsubsection[{MAX\_\-TMP}]{\setlength{\rightskip}{0pt plus 5cm}\#define MAX\_\-TMP~0x0B}\label{dynamixel_8c_a409eed5bcd5e6744d9dab0d12ce8f7c0}
+\index{dynamixel.c@{dynamixel.c}!MV\_\-SPEED@{MV\_\-SPEED}}
+\index{MV\_\-SPEED@{MV\_\-SPEED}!dynamixel.c@{dynamixel.c}}
+\subsubsection[{MV\_\-SPEED}]{\setlength{\rightskip}{0pt plus 5cm}\#define MV\_\-SPEED~0x20}\label{dynamixel_8c_a8627da7786e800d283628e55c482b30e}
+\index{dynamixel.c@{dynamixel.c}!PING@{PING}}
+\index{PING@{PING}!dynamixel.c@{dynamixel.c}}
+\subsubsection[{PING}]{\setlength{\rightskip}{0pt plus 5cm}\#define PING~0x01}\label{dynamixel_8c_a4c84003a6e494d221dcb7afbf61e762d}
+\index{dynamixel.c@{dynamixel.c}!PRT\_\-POS@{PRT\_\-POS}}
+\index{PRT\_\-POS@{PRT\_\-POS}!dynamixel.c@{dynamixel.c}}
+\subsubsection[{PRT\_\-POS}]{\setlength{\rightskip}{0pt plus 5cm}\#define PRT\_\-POS~0x24}\label{dynamixel_8c_a41e4475c4e68b6d746a0d6b82efbd728}
+\index{dynamixel.c@{dynamixel.c}!PRT\_\-SPEED@{PRT\_\-SPEED}}
+\index{PRT\_\-SPEED@{PRT\_\-SPEED}!dynamixel.c@{dynamixel.c}}
+\subsubsection[{PRT\_\-SPEED}]{\setlength{\rightskip}{0pt plus 5cm}\#define PRT\_\-SPEED~0x26}\label{dynamixel_8c_aff4b1b2a10295ff9b5778e07177e2c1a}
+\index{dynamixel.c@{dynamixel.c}!PRT\_\-TMP@{PRT\_\-TMP}}
+\index{PRT\_\-TMP@{PRT\_\-TMP}!dynamixel.c@{dynamixel.c}}
+\subsubsection[{PRT\_\-TMP}]{\setlength{\rightskip}{0pt plus 5cm}\#define PRT\_\-TMP~0x2B}\label{dynamixel_8c_a1062be6f28ea91885f6f92610c42f53f}
+\index{dynamixel.c@{dynamixel.c}!RD\_\-DATA@{RD\_\-DATA}}
+\index{RD\_\-DATA@{RD\_\-DATA}!dynamixel.c@{dynamixel.c}}
+\subsubsection[{RD\_\-DATA}]{\setlength{\rightskip}{0pt plus 5cm}\#define RD\_\-DATA~0x02}\label{dynamixel_8c_a20127eefde0ace10bfb0c8f04afdb26e}
+\index{dynamixel.c@{dynamixel.c}!REG\_\-WR@{REG\_\-WR}}
+\index{REG\_\-WR@{REG\_\-WR}!dynamixel.c@{dynamixel.c}}
+\subsubsection[{REG\_\-WR}]{\setlength{\rightskip}{0pt plus 5cm}\#define REG\_\-WR~0x04}\label{dynamixel_8c_a004a2aafe3b8765b2b1ae718b7e76ea7}
+\index{dynamixel.c@{dynamixel.c}!RESET@{RESET}}
+\index{RESET@{RESET}!dynamixel.c@{dynamixel.c}}
+\subsubsection[{RESET}]{\setlength{\rightskip}{0pt plus 5cm}\#define RESET~0x06}\label{dynamixel_8c_ab702106cf3b3e96750b6845ded4e0299}
+\index{dynamixel.c@{dynamixel.c}!START\_\-BYTE@{START\_\-BYTE}}
+\index{START\_\-BYTE@{START\_\-BYTE}!dynamixel.c@{dynamixel.c}}
+\subsubsection[{START\_\-BYTE}]{\setlength{\rightskip}{0pt plus 5cm}\#define START\_\-BYTE~0xFF}\label{dynamixel_8c_a30d2043ca397843e08c43ade3aaee5b2}
+\index{dynamixel.c@{dynamixel.c}!STS\_\-RT\_\-LVL@{STS\_\-RT\_\-LVL}}
+\index{STS\_\-RT\_\-LVL@{STS\_\-RT\_\-LVL}!dynamixel.c@{dynamixel.c}}
+\subsubsection[{STS\_\-RT\_\-LVL}]{\setlength{\rightskip}{0pt plus 5cm}\#define STS\_\-RT\_\-LVL~0x10}\label{dynamixel_8c_aaec640b75187127ef0aca1add744d15a}
+\index{dynamixel.c@{dynamixel.c}!SYC\_\-WR@{SYC\_\-WR}}
+\index{SYC\_\-WR@{SYC\_\-WR}!dynamixel.c@{dynamixel.c}}
+\subsubsection[{SYC\_\-WR}]{\setlength{\rightskip}{0pt plus 5cm}\#define SYC\_\-WR~0x83}\label{dynamixel_8c_acf21d32a3569c6391337420e55b88970}
+\index{dynamixel.c@{dynamixel.c}!WR\_\-DATA@{WR\_\-DATA}}
+\index{WR\_\-DATA@{WR\_\-DATA}!dynamixel.c@{dynamixel.c}}
+\subsubsection[{WR\_\-DATA}]{\setlength{\rightskip}{0pt plus 5cm}\#define WR\_\-DATA~0x03}\label{dynamixel_8c_a36282b7066050c407e0c1571c5ba02a2}
+
+
+\subsection{Dokumentation der Funktionen}
+\index{dynamixel.c@{dynamixel.c}!DNX\_\-convertAngle@{DNX\_\-convertAngle}}
+\index{DNX\_\-convertAngle@{DNX\_\-convertAngle}!dynamixel.c@{dynamixel.c}}
+\subsubsection[{DNX\_\-convertAngle}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-double} DNX\_\-convertAngle (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-double}}]{ value}
+\end{DoxyParamCaption}
+)}\label{dynamixel_8c_a6e81b62cd12aa5a3428ad1ec3a864151}
+
+
+Konvertiert Winkel in Bezug auf einen neuen Nullpunkt. 
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em value}]Winkel in Grad\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+Konvertierter Winkel in Grad 
+\end{DoxyReturn}
+\index{dynamixel.c@{dynamixel.c}!DNX\_\-correctAngles@{DNX\_\-correctAngles}}
+\index{DNX\_\-correctAngles@{DNX\_\-correctAngles}!dynamixel.c@{dynamixel.c}}
+\subsubsection[{DNX\_\-correctAngles}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-double} DNX\_\-correctAngles (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-byte}}]{ id, }
+\item[{{\bf DT\_\-double}}]{ value}
+\end{DoxyParamCaption}
+)}\label{dynamixel_8c_a1021110d4063508a39fad322ce8bc68c}
+
+
+Korrigiert Winkel für Dynamixel. 
+
+Korrigiert Winkel für Dynamixel um hardwareseitige Veränderungen auszuschließen.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em id}]ID des Servos \item[{\em value}]Winkel in Grad\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+Korrigierter Winkel in Grad 
+\end{DoxyReturn}
+\index{dynamixel.c@{dynamixel.c}!DNX\_\-getAngle@{DNX\_\-getAngle}}
+\index{DNX\_\-getAngle@{DNX\_\-getAngle}!dynamixel.c@{dynamixel.c}}
+\subsubsection[{DNX\_\-getAngle}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-double} DNX\_\-getAngle (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-byte}}]{ id}
+\end{DoxyParamCaption}
+)}\label{dynamixel_8c_aa63ddf148332538a6f452c8db95ee279}
+
+
+Liest den aktuellen Winkel eines Servos aus (unfertig). 
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em id}]ID des Servos\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+Winkel in Grad 
+\end{DoxyReturn}
+\index{dynamixel.c@{dynamixel.c}!DNX\_\-getChecksum@{DNX\_\-getChecksum}}
+\index{DNX\_\-getChecksum@{DNX\_\-getChecksum}!dynamixel.c@{dynamixel.c}}
+\subsubsection[{DNX\_\-getChecksum}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-byte} DNX\_\-getChecksum (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-byte} $\ast$const }]{ packet, }
+\item[{{\bf DT\_\-size}}]{ l}
+\end{DoxyParamCaption}
+)}\label{dynamixel_8c_a869dd63589c69049b3ef8aed917ffe46}
+
+
+Berechnet die Checksum. 
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em packet}]Paket \item[{\em l}]Größe des pakets\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+Checksum 
+\end{DoxyReturn}
+\index{dynamixel.c@{dynamixel.c}!DNX\_\-getConnectedIDs@{DNX\_\-getConnectedIDs}}
+\index{DNX\_\-getConnectedIDs@{DNX\_\-getConnectedIDs}!dynamixel.c@{dynamixel.c}}
+\subsubsection[{DNX\_\-getConnectedIDs}]{\setlength{\rightskip}{0pt plus 5cm}void DNX\_\-getConnectedIDs (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-leg} $\ast$const }]{ leg\_\-r, }
+\item[{{\bf DT\_\-leg} $\ast$const }]{ leg\_\-l}
+\end{DoxyParamCaption}
+)}\label{dynamixel_8c_aab59b133b8689f0aadc806ddd11fb8a1}
+
+
+Ermittlung der angeschlossenen Dynamixel. 
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em leg\_\-r}]Bein rechts \item[{\em leg\_\-l}]Bein links \end{DoxyParams}
+\index{dynamixel.c@{dynamixel.c}!DNX\_\-getLed@{DNX\_\-getLed}}
+\index{DNX\_\-getLed@{DNX\_\-getLed}!dynamixel.c@{dynamixel.c}}
+\subsubsection[{DNX\_\-getLed}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-byte} DNX\_\-getLed (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-byte}}]{ id}
+\end{DoxyParamCaption}
+)}\label{dynamixel_8c_a6d996245db89165f8497bdcffa982118}
+
+
+Liest den Status der LED aus (unfertig). 
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em id}]ID des Servos\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+Wert der LED 
+\end{DoxyReturn}
+\index{dynamixel.c@{dynamixel.c}!DNX\_\-getSpeed@{DNX\_\-getSpeed}}
+\index{DNX\_\-getSpeed@{DNX\_\-getSpeed}!dynamixel.c@{dynamixel.c}}
+\subsubsection[{DNX\_\-getSpeed}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-byte} DNX\_\-getSpeed (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-byte}}]{ id}
+\end{DoxyParamCaption}
+)}\label{dynamixel_8c_a6f1b484d8b138b06d468e557abf49e47}
+
+
+Liest die Anfahrgeschwindigkeit eines Servos aus (unfertig). 
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em id}]ID des Servos\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+Geschwindigkeit 
+\end{DoxyReturn}
+\index{dynamixel.c@{dynamixel.c}!DNX\_\-receive@{DNX\_\-receive}}
+\index{DNX\_\-receive@{DNX\_\-receive}!dynamixel.c@{dynamixel.c}}
+\subsubsection[{DNX\_\-receive}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-byte} DNX\_\-receive (
+\begin{DoxyParamCaption}
+\item[{{\bf USART\_\-data\_\-t} $\ast$const }]{ usart\_\-data, }
+\item[{{\bf DT\_\-byte} $\ast$const }]{ dest}
+\end{DoxyParamCaption}
+)}\label{dynamixel_8c_a696092efa343b603ff654a8351435da4}
+
+
+USART-\/Empfangsmethode. 
+
+Diese Methode liest den jeweiligen USART-\/Buffer aus und prüft, ob ein vollständiges Paket gemäß des Dynamixel-\/Protokoll empfangen wurde.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em usart\_\-data}]USART \item[{\em dest}]Byte-\/Array für Antwort-\/Paket\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+Länge des Antwortpakets 
+\end{DoxyReturn}
+\index{dynamixel.c@{dynamixel.c}!DNX\_\-send@{DNX\_\-send}}
+\index{DNX\_\-send@{DNX\_\-send}!dynamixel.c@{dynamixel.c}}
+\subsubsection[{DNX\_\-send}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-byte} DNX\_\-send (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-byte} $\ast$const }]{ packet, }
+\item[{{\bf DT\_\-size}}]{ l, }
+\item[{{\bf DT\_\-byte} $\ast$const }]{ result, }
+\item[{{\bf DT\_\-bool}}]{ hasResponse}
+\end{DoxyParamCaption}
+)}\label{dynamixel_8c_ade268f20d92598a227aa433706c6a84d}
+
+
+Versenden von Daten an Dynamixel. 
+
+Blockierendes Senden mit gleichzeitigem Empfangen der Antwort.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em packet}]Zuversendendes Paket \item[{\em l}]Größe des Pakets \item[{\em result}]Zielfeld für Antowort \item[{\em hasResponse}]Wartet auf eine Antwort, wenn true\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+Größe der empfangenen Antwort 
+\end{DoxyReturn}
+\index{dynamixel.c@{dynamixel.c}!DNX\_\-sendAction@{DNX\_\-sendAction}}
+\index{DNX\_\-sendAction@{DNX\_\-sendAction}!dynamixel.c@{dynamixel.c}}
+\subsubsection[{DNX\_\-sendAction}]{\setlength{\rightskip}{0pt plus 5cm}void DNX\_\-sendAction (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-byte}}]{ id}
+\end{DoxyParamCaption}
+)}\label{dynamixel_8c_afcbf2bc059307d444133a53fa1f5744d}
+
+
+Sendet das ACTION-\/Kommando an einen Servo. 
+
+Sendet das ACTION-\/Kommando an einen Servo.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em id}]ID des Servo \end{DoxyParams}
+\index{dynamixel.c@{dynamixel.c}!DNX\_\-setAngle@{DNX\_\-setAngle}}
+\index{DNX\_\-setAngle@{DNX\_\-setAngle}!dynamixel.c@{dynamixel.c}}
+\subsubsection[{DNX\_\-setAngle}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-bool} DNX\_\-setAngle (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-byte}}]{ id, }
+\item[{{\bf DT\_\-double}}]{ value, }
+\item[{{\bf DT\_\-bool}}]{ regWrite}
+\end{DoxyParamCaption}
+)}\label{dynamixel_8c_a8b05b66ada817912ef2e63ec5581a288}
+
+
+Sendet einen Winkel an Servo. 
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em id}]ID des Servos \item[{\em value}]Winkel in Grad \item[{\em regWrite}]Winkel wird in Puffer des Servos gespeichert und erst bei ACTION angefahren, wenn true \end{DoxyParams}
+\index{dynamixel.c@{dynamixel.c}!DNX\_\-setAngleAndSpeed@{DNX\_\-setAngleAndSpeed}}
+\index{DNX\_\-setAngleAndSpeed@{DNX\_\-setAngleAndSpeed}!dynamixel.c@{dynamixel.c}}
+\subsubsection[{DNX\_\-setAngleAndSpeed}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-bool} DNX\_\-setAngleAndSpeed (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-byte}}]{ id, }
+\item[{{\bf DT\_\-double}}]{ angle, }
+\item[{{\bf DT\_\-double}}]{ speed, }
+\item[{{\bf DT\_\-bool}}]{ regWrite}
+\end{DoxyParamCaption}
+)}\label{dynamixel_8c_af01050594c76389d7a7c0576cff70e2a}
+
+
+Sendet Winkel und Speed an Servo. 
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em id}]ID des Servos \item[{\em angle}]Winkel in Grad \item[{\em speed}]Anfahrgeschwindigkeit \item[{\em regWrite}]Werte werden in Puffer des Servos gespeichert und erst bei ACTION ausgeführt, wenn true \end{DoxyParams}
+\index{dynamixel.c@{dynamixel.c}!DNX\_\-setId@{DNX\_\-setId}}
+\index{DNX\_\-setId@{DNX\_\-setId}!dynamixel.c@{dynamixel.c}}
+\subsubsection[{DNX\_\-setId}]{\setlength{\rightskip}{0pt plus 5cm}void DNX\_\-setId (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-byte}}]{ idOld, }
+\item[{{\bf DT\_\-byte}}]{ idNew}
+\end{DoxyParamCaption}
+)}\label{dynamixel_8c_a98d0fef9ad119fcca590f6c406803566}
+
+
+Vergibt einem Servos eine neue ID (ungetestet). 
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em idOld}]ID des zu verändernden Servos \item[{\em idNew}]Zusetzende ID \end{DoxyParams}
+\index{dynamixel.c@{dynamixel.c}!DNX\_\-setLed@{DNX\_\-setLed}}
+\index{DNX\_\-setLed@{DNX\_\-setLed}!dynamixel.c@{dynamixel.c}}
+\subsubsection[{DNX\_\-setLed}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-bool} DNX\_\-setLed (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-byte}}]{ id, }
+\item[{{\bf DT\_\-byte}}]{ value}
+\end{DoxyParamCaption}
+)}\label{dynamixel_8c_af2092dcf7949470f13c906e0c76a6439}
+
+
+Schaltet die LED eines Servos an/aus. 
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em id}]ID des Servos \item[{\em value}]Wert für LED (0x00 / 0x01) \end{DoxyParams}
+\index{dynamixel.c@{dynamixel.c}!DNX\_\-setSpeed@{DNX\_\-setSpeed}}
+\index{DNX\_\-setSpeed@{DNX\_\-setSpeed}!dynamixel.c@{dynamixel.c}}
+\subsubsection[{DNX\_\-setSpeed}]{\setlength{\rightskip}{0pt plus 5cm}void DNX\_\-setSpeed (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-byte}}]{ id, }
+\item[{{\bf DT\_\-byte}}]{ speed}
+\end{DoxyParamCaption}
+)}\label{dynamixel_8c_ab40e5e20f2f8e66efcf5d5a49ad2c58b}
+
+
+Setzt die Anfahrgeschwindigkeit eines Servos (unvollendet). 
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em id}]ID des Servos \item[{\em speed}]Geschwindigkeit \end{DoxyParams}

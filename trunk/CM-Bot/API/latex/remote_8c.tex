@@ -1,0 +1,346 @@
+\section{remote.c-\/Dateireferenz}
+\label{remote_8c}\index{remote.c@{remote.c}}
+
+
+Methoden zur Steuerung durch den RC-\/100 Remote Controller.  
+
+
+{\ttfamily \#include \char`\"{}include/remote.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}include/xmega.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}include/utils.h\char`\"{}}\par
+\subsection*{Makrodefinitionen}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf B\_\-NON\_\-PRESSED}~0x0000
+\item 
+\#define {\bf B\_\-U}~0x0001
+\item 
+\#define {\bf B\_\-D}~0x0002
+\item 
+\#define {\bf B\_\-L}~0x0004
+\item 
+\#define {\bf B\_\-R}~0x0008
+\item 
+\#define {\bf B\_\-1}~0x0010
+\item 
+\#define {\bf B\_\-2}~0x0020
+\item 
+\#define {\bf B\_\-3}~0x0040
+\item 
+\#define {\bf B\_\-4}~0x0080
+\item 
+\#define {\bf B\_\-5}~0x0100
+\item 
+\#define {\bf B\_\-6}~0x0200
+\end{DoxyCompactItemize}
+\subsection*{Funktionen}
+\begin{DoxyCompactItemize}
+\item 
+{\bf DT\_\-cmd} {\bf RMT\_\-getCommand} ()
+\begin{DoxyCompactList}\small\item\em Liest empfangene Befehle vom Remote-\/Controller aus. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-byte} {\bf RMT\_\-receive} ({\bf USART\_\-data\_\-t} $\ast$const usart\_\-data, {\bf DT\_\-byte} $\ast$const dest)
+\begin{DoxyCompactList}\small\item\em USART-\/Empfangsmethode für Remote-\/Controller. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-bool} {\bf RMT\_\-NonPressed} ({\bf DT\_\-cmd} cmd)
+\begin{DoxyCompactList}\small\item\em Kein Taster gedrückt. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-bool} {\bf RMT\_\-isUpPressed} ({\bf DT\_\-cmd} cmd)
+\begin{DoxyCompactList}\small\item\em Ist Taster Up gedrückt. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-bool} {\bf RMT\_\-isDownPressed} ({\bf DT\_\-cmd} cmd)
+\begin{DoxyCompactList}\small\item\em Ist Taster Down gedrückt. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-bool} {\bf RMT\_\-isLeftPressed} ({\bf DT\_\-cmd} cmd)
+\begin{DoxyCompactList}\small\item\em Ist Taster Left gedrückt. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-bool} {\bf RMT\_\-isRightPressed} ({\bf DT\_\-cmd} cmd)
+\begin{DoxyCompactList}\small\item\em Ist Taster Right gedrückt. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-bool} {\bf RMT\_\-isButton1Pressed} ({\bf DT\_\-cmd} cmd)
+\begin{DoxyCompactList}\small\item\em Ist Taster 1 gedrückt. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-bool} {\bf RMT\_\-isButton2Pressed} ({\bf DT\_\-cmd} cmd)
+\begin{DoxyCompactList}\small\item\em Ist Taster 2 gedrückt. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-bool} {\bf RMT\_\-isButton3Pressed} ({\bf DT\_\-cmd} cmd)
+\begin{DoxyCompactList}\small\item\em Ist Taster 3 gedrückt. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-bool} {\bf RMT\_\-isButton4Pressed} ({\bf DT\_\-cmd} cmd)
+\begin{DoxyCompactList}\small\item\em Ist Taster 4 gedrückt. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-bool} {\bf RMT\_\-isButton5Pressed} ({\bf DT\_\-cmd} cmd)
+\begin{DoxyCompactList}\small\item\em Ist Taster 5 gedrückt. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-bool} {\bf RMT\_\-isButton6Pressed} ({\bf DT\_\-cmd} cmd)
+\begin{DoxyCompactList}\small\item\em Ist Taster 6 gedrückt. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Ausführliche Beschreibung}
+Methoden zur Steuerung durch den RC-\/100 Remote Controller. 
+
+\subsection{Makro-\/Dokumentation}
+\index{remote.c@{remote.c}!B\_\-1@{B\_\-1}}
+\index{B\_\-1@{B\_\-1}!remote.c@{remote.c}}
+\subsubsection[{B\_\-1}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\_\-1~0x0010}\label{remote_8c_a463f798baeb150f22f55d67ed19b382c}
+\index{remote.c@{remote.c}!B\_\-2@{B\_\-2}}
+\index{B\_\-2@{B\_\-2}!remote.c@{remote.c}}
+\subsubsection[{B\_\-2}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\_\-2~0x0020}\label{remote_8c_a49ca5808c60d484da75d3c8fb65881c4}
+\index{remote.c@{remote.c}!B\_\-3@{B\_\-3}}
+\index{B\_\-3@{B\_\-3}!remote.c@{remote.c}}
+\subsubsection[{B\_\-3}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\_\-3~0x0040}\label{remote_8c_aadb600dad99889cd1ac4019648c23b4c}
+\index{remote.c@{remote.c}!B\_\-4@{B\_\-4}}
+\index{B\_\-4@{B\_\-4}!remote.c@{remote.c}}
+\subsubsection[{B\_\-4}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\_\-4~0x0080}\label{remote_8c_aa39f42c3e6fe99764c21a0cb0cf49ba0}
+\index{remote.c@{remote.c}!B\_\-5@{B\_\-5}}
+\index{B\_\-5@{B\_\-5}!remote.c@{remote.c}}
+\subsubsection[{B\_\-5}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\_\-5~0x0100}\label{remote_8c_aaa74cfe6d9adf3e13ec3d00f4d29ec6b}
+\index{remote.c@{remote.c}!B\_\-6@{B\_\-6}}
+\index{B\_\-6@{B\_\-6}!remote.c@{remote.c}}
+\subsubsection[{B\_\-6}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\_\-6~0x0200}\label{remote_8c_a8e1678e365084c503a0ef22257cc70e4}
+\index{remote.c@{remote.c}!B\_\-D@{B\_\-D}}
+\index{B\_\-D@{B\_\-D}!remote.c@{remote.c}}
+\subsubsection[{B\_\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\_\-D~0x0002}\label{remote_8c_a40c921fadaa63d762051d905a3f9ca2a}
+\index{remote.c@{remote.c}!B\_\-L@{B\_\-L}}
+\index{B\_\-L@{B\_\-L}!remote.c@{remote.c}}
+\subsubsection[{B\_\-L}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\_\-L~0x0004}\label{remote_8c_a7eb691a4cfc9cc907faf2f4f57569795}
+\index{remote.c@{remote.c}!B\_\-NON\_\-PRESSED@{B\_\-NON\_\-PRESSED}}
+\index{B\_\-NON\_\-PRESSED@{B\_\-NON\_\-PRESSED}!remote.c@{remote.c}}
+\subsubsection[{B\_\-NON\_\-PRESSED}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\_\-NON\_\-PRESSED~0x0000}\label{remote_8c_a3ead65a7e8f33a5561f4e016b998ec1b}
+\index{remote.c@{remote.c}!B\_\-R@{B\_\-R}}
+\index{B\_\-R@{B\_\-R}!remote.c@{remote.c}}
+\subsubsection[{B\_\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\_\-R~0x0008}\label{remote_8c_a4c015ba7f2d664fc2f0e3c848bd71157}
+\index{remote.c@{remote.c}!B\_\-U@{B\_\-U}}
+\index{B\_\-U@{B\_\-U}!remote.c@{remote.c}}
+\subsubsection[{B\_\-U}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\_\-U~0x0001}\label{remote_8c_a8254ace9f332205c94ceb4e7d0362ded}
+
+
+\subsection{Dokumentation der Funktionen}
+\index{remote.c@{remote.c}!RMT\_\-getCommand@{RMT\_\-getCommand}}
+\index{RMT\_\-getCommand@{RMT\_\-getCommand}!remote.c@{remote.c}}
+\subsubsection[{RMT\_\-getCommand}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-cmd} RMT\_\-getCommand (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{remote_8c_afb359d34a5fa44cfa64eca00540e2251}
+
+
+Liest empfangene Befehle vom Remote-\/Controller aus. 
+
+Instruction aus dem High-\/ und Low-\/Teil zusammensetzen Bsp: Paket für B\_\-2: 0 1 2 3 4 5 ... FF;55;20;DF;00;FF;FF;55;00;FF;00;FF; LL HH Eigentliche Information: 0x0020 d.h. H = Paket[4] L = Paket[2] \index{remote.c@{remote.c}!RMT\_\-isButton1Pressed@{RMT\_\-isButton1Pressed}}
+\index{RMT\_\-isButton1Pressed@{RMT\_\-isButton1Pressed}!remote.c@{remote.c}}
+\subsubsection[{RMT\_\-isButton1Pressed}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-bool} RMT\_\-isButton1Pressed (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-cmd}}]{ cmd}
+\end{DoxyParamCaption}
+)}\label{remote_8c_a1546375b505418b63ac8a78c66028ac6}
+
+
+Ist Taster 1 gedrückt. 
+
+Achtung: cmd muss zunächst durch getCommand abgerufen werden.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em cmd}]16-\/Bit Command-\/Wert\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+Bool 
+\end{DoxyReturn}
+\index{remote.c@{remote.c}!RMT\_\-isButton2Pressed@{RMT\_\-isButton2Pressed}}
+\index{RMT\_\-isButton2Pressed@{RMT\_\-isButton2Pressed}!remote.c@{remote.c}}
+\subsubsection[{RMT\_\-isButton2Pressed}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-bool} RMT\_\-isButton2Pressed (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-cmd}}]{ cmd}
+\end{DoxyParamCaption}
+)}\label{remote_8c_ac0e28f928b073eafbd53ca019d7298a7}
+
+
+Ist Taster 2 gedrückt. 
+
+Achtung: cmd muss zunächst durch getCommand abgerufen werden.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em cmd}]16-\/Bit Command-\/Wert\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+Bool 
+\end{DoxyReturn}
+\index{remote.c@{remote.c}!RMT\_\-isButton3Pressed@{RMT\_\-isButton3Pressed}}
+\index{RMT\_\-isButton3Pressed@{RMT\_\-isButton3Pressed}!remote.c@{remote.c}}
+\subsubsection[{RMT\_\-isButton3Pressed}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-bool} RMT\_\-isButton3Pressed (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-cmd}}]{ cmd}
+\end{DoxyParamCaption}
+)}\label{remote_8c_ad3b3e68e1c25a30c57874b23abdfec95}
+
+
+Ist Taster 3 gedrückt. 
+
+Achtung: cmd muss zunächst durch getCommand abgerufen werden.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em cmd}]16-\/Bit Command-\/Wert\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+Bool 
+\end{DoxyReturn}
+\index{remote.c@{remote.c}!RMT\_\-isButton4Pressed@{RMT\_\-isButton4Pressed}}
+\index{RMT\_\-isButton4Pressed@{RMT\_\-isButton4Pressed}!remote.c@{remote.c}}
+\subsubsection[{RMT\_\-isButton4Pressed}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-bool} RMT\_\-isButton4Pressed (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-cmd}}]{ cmd}
+\end{DoxyParamCaption}
+)}\label{remote_8c_afef6772cc64c01f11533941ffeda3588}
+
+
+Ist Taster 4 gedrückt. 
+
+Achtung: cmd muss zunächst durch getCommand abgerufen werden.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em cmd}]16-\/Bit Command-\/Wert\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+Bool 
+\end{DoxyReturn}
+\index{remote.c@{remote.c}!RMT\_\-isButton5Pressed@{RMT\_\-isButton5Pressed}}
+\index{RMT\_\-isButton5Pressed@{RMT\_\-isButton5Pressed}!remote.c@{remote.c}}
+\subsubsection[{RMT\_\-isButton5Pressed}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-bool} RMT\_\-isButton5Pressed (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-cmd}}]{ cmd}
+\end{DoxyParamCaption}
+)}\label{remote_8c_a3d98b4e7007b0dfd28e629e5c747dab3}
+
+
+Ist Taster 5 gedrückt. 
+
+Achtung: cmd muss zunächst durch getCommand abgerufen werden.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em cmd}]16-\/Bit Command-\/Wert\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+Bool 
+\end{DoxyReturn}
+\index{remote.c@{remote.c}!RMT\_\-isButton6Pressed@{RMT\_\-isButton6Pressed}}
+\index{RMT\_\-isButton6Pressed@{RMT\_\-isButton6Pressed}!remote.c@{remote.c}}
+\subsubsection[{RMT\_\-isButton6Pressed}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-bool} RMT\_\-isButton6Pressed (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-cmd}}]{ cmd}
+\end{DoxyParamCaption}
+)}\label{remote_8c_a42a375adc3f24a17910a969d2c383202}
+
+
+Ist Taster 6 gedrückt. 
+
+Achtung: cmd muss zunächst durch getCommand abgerufen werden.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em cmd}]16-\/Bit Command-\/Wert\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+Bool 
+\end{DoxyReturn}
+\index{remote.c@{remote.c}!RMT\_\-isDownPressed@{RMT\_\-isDownPressed}}
+\index{RMT\_\-isDownPressed@{RMT\_\-isDownPressed}!remote.c@{remote.c}}
+\subsubsection[{RMT\_\-isDownPressed}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-bool} RMT\_\-isDownPressed (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-cmd}}]{ cmd}
+\end{DoxyParamCaption}
+)}\label{remote_8c_aba45b5af1fe49fc418d5589a1b0e6f76}
+
+
+Ist Taster Down gedrückt. 
+
+Achtung: cmd muss zunächst durch getCommand abgerufen werden.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em cmd}]16-\/Bit Command-\/Wert\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+Bool 
+\end{DoxyReturn}
+\index{remote.c@{remote.c}!RMT\_\-isLeftPressed@{RMT\_\-isLeftPressed}}
+\index{RMT\_\-isLeftPressed@{RMT\_\-isLeftPressed}!remote.c@{remote.c}}
+\subsubsection[{RMT\_\-isLeftPressed}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-bool} RMT\_\-isLeftPressed (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-cmd}}]{ cmd}
+\end{DoxyParamCaption}
+)}\label{remote_8c_a3dda54804b459fab4c6a85e0f0a4d731}
+
+
+Ist Taster Left gedrückt. 
+
+Achtung: cmd muss zunächst durch getCommand abgerufen werden.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em cmd}]16-\/Bit Command-\/Wert\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+Bool 
+\end{DoxyReturn}
+\index{remote.c@{remote.c}!RMT\_\-isRightPressed@{RMT\_\-isRightPressed}}
+\index{RMT\_\-isRightPressed@{RMT\_\-isRightPressed}!remote.c@{remote.c}}
+\subsubsection[{RMT\_\-isRightPressed}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-bool} RMT\_\-isRightPressed (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-cmd}}]{ cmd}
+\end{DoxyParamCaption}
+)}\label{remote_8c_a9f6c35dda43d0d08c47866197b9afd6d}
+
+
+Ist Taster Right gedrückt. 
+
+Achtung: cmd muss zunächst durch getCommand abgerufen werden.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em cmd}]16-\/Bit Command-\/Wert\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+Bool 
+\end{DoxyReturn}
+\index{remote.c@{remote.c}!RMT\_\-isUpPressed@{RMT\_\-isUpPressed}}
+\index{RMT\_\-isUpPressed@{RMT\_\-isUpPressed}!remote.c@{remote.c}}
+\subsubsection[{RMT\_\-isUpPressed}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-bool} RMT\_\-isUpPressed (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-cmd}}]{ cmd}
+\end{DoxyParamCaption}
+)}\label{remote_8c_a029174f04f2caddadff80cfe6f25688c}
+
+
+Ist Taster Up gedrückt. 
+
+Achtung: cmd muss zunächst durch getCommand abgerufen werden.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em cmd}]16-\/Bit Command-\/Wert\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+Bool 
+\end{DoxyReturn}
+\index{remote.c@{remote.c}!RMT\_\-NonPressed@{RMT\_\-NonPressed}}
+\index{RMT\_\-NonPressed@{RMT\_\-NonPressed}!remote.c@{remote.c}}
+\subsubsection[{RMT\_\-NonPressed}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-bool} RMT\_\-NonPressed (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-cmd}}]{ cmd}
+\end{DoxyParamCaption}
+)}\label{remote_8c_acb84d9f444171bd00e5687db2303a9cb}
+
+
+Kein Taster gedrückt. 
+
+Achtung: cmd muss zunächst durch getCommand abgerufen werden.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em cmd}]16-\/Bit Command-\/Wert\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+Bool 
+\end{DoxyReturn}
+\index{remote.c@{remote.c}!RMT\_\-receive@{RMT\_\-receive}}
+\index{RMT\_\-receive@{RMT\_\-receive}!remote.c@{remote.c}}
+\subsubsection[{RMT\_\-receive}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-byte} RMT\_\-receive (
+\begin{DoxyParamCaption}
+\item[{{\bf USART\_\-data\_\-t} $\ast$const }]{ usart\_\-data, }
+\item[{{\bf DT\_\-byte} $\ast$const }]{ dest}
+\end{DoxyParamCaption}
+)}\label{remote_8c_a69eb1d1372e55a9fdfa2a3711638a85e}
+
+
+USART-\/Empfangsmethode für Remote-\/Controller. 
+
+Diese Methode liest den Remote-\/USART-\/Buffer aus und prüft, ob ein vollständiges Paket empfangen wurde.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em usart\_\-data}]USART \item[{\em dest}]Byte-\/Array für Antwort-\/Paket\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+Länge des Antwortpakets 
+\end{DoxyReturn}

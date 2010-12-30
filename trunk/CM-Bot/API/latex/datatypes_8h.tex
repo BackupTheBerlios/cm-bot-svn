@@ -1,0 +1,89 @@
+\section{include/datatypes.h-\/Dateireferenz}
+\label{datatypes_8h}\index{include/datatypes.h@{include/datatypes.h}}
+
+
+Abstrahiert Datentypen.  
+
+
+{\ttfamily \#include $<$stdint.h$>$}\par
+{\ttfamily \#include $<$stdlib.h$>$}\par
+{\ttfamily \#include $<$stdbool.h$>$}\par
+\subsection*{Datenstrukturen}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf DT\_\-servo}
+\begin{DoxyCompactList}\small\item\em Datenstruktur zur Speicherung von ID, Soll-\/ und Ist-\/Wert eines Servos. \item\end{DoxyCompactList}\item 
+struct {\bf DT\_\-transformation}
+\begin{DoxyCompactList}\small\item\em Struktur zur vereinfachten Koordinatentransformation. \item\end{DoxyCompactList}\item 
+struct {\bf DT\_\-leg}
+\begin{DoxyCompactList}\small\item\em Datenstruktur zur Speicherung von Servodaten bezüglich eines kompletten Beines. \item\end{DoxyCompactList}\item 
+struct {\bf DT\_\-point}
+\begin{DoxyCompactList}\small\item\em Datenstruktur zur Speicherung karthesischer Koordinaten. \item\end{DoxyCompactList}\item 
+struct {\bf DT\_\-vector}
+\begin{DoxyCompactList}\small\item\em Datenstruktur zur Speicherung eines Vektors. \item\end{DoxyCompactList}\item 
+struct {\bf DT\_\-lin\_\-func}
+\begin{DoxyCompactList}\small\item\em Datenstruktur zur Speicherung einer linearen Funktion: y = mx + n. \item\end{DoxyCompactList}\item 
+struct {\bf DT\_\-half\_\-circle}
+\begin{DoxyCompactList}\small\item\em Datenstruktur zur Speicherung einer Kreisfunktion: y = sqrt(r² -\/ x²). \item\end{DoxyCompactList}\item 
+struct {\bf DT\_\-individuum}
+\begin{DoxyCompactList}\small\item\em Datenstruktur für ein Individuum des Evolutionären Algorithmus zur Startpunktfindung. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Makrodefinitionen}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf DT\_\-RESULT\_\-BUFFER\_\-SIZE}~128
+\end{DoxyCompactItemize}
+\subsection*{Typdefinitionen}
+\begin{DoxyCompactItemize}
+\item 
+typedef bool {\bf DT\_\-bool}
+\item 
+typedef int {\bf DT\_\-int}
+\item 
+typedef double {\bf DT\_\-double}
+\item 
+typedef uint8\_\-t {\bf DT\_\-byte}
+\item 
+typedef uint16\_\-t {\bf DT\_\-size}
+\item 
+typedef uint8\_\-t {\bf DT\_\-type}
+\item 
+typedef char {\bf DT\_\-char}
+\item 
+typedef uint16\_\-t {\bf DT\_\-cmd}
+\end{DoxyCompactItemize}
+
+
+\subsection{Ausführliche Beschreibung}
+Abstrahiert Datentypen. 
+
+\subsection{Makro-\/Dokumentation}
+\index{datatypes.h@{datatypes.h}!DT\_\-RESULT\_\-BUFFER\_\-SIZE@{DT\_\-RESULT\_\-BUFFER\_\-SIZE}}
+\index{DT\_\-RESULT\_\-BUFFER\_\-SIZE@{DT\_\-RESULT\_\-BUFFER\_\-SIZE}!datatypes.h@{datatypes.h}}
+\subsubsection[{DT\_\-RESULT\_\-BUFFER\_\-SIZE}]{\setlength{\rightskip}{0pt plus 5cm}\#define DT\_\-RESULT\_\-BUFFER\_\-SIZE~128}\label{datatypes_8h_ab8a592747b2696014a7149a8a7e0c954}
+Größe des Buffers für ein empfangenes Paket. 
+
+\subsection{Dokumentation der benutzerdefinierten Typen}
+\index{datatypes.h@{datatypes.h}!DT\_\-bool@{DT\_\-bool}}
+\index{DT\_\-bool@{DT\_\-bool}!datatypes.h@{datatypes.h}}
+\subsubsection[{DT\_\-bool}]{\setlength{\rightskip}{0pt plus 5cm}typedef bool {\bf DT\_\-bool}}\label{datatypes_8h_a3bdfaa5201ac30cf6908f74e3f8e1e9f}
+\index{datatypes.h@{datatypes.h}!DT\_\-byte@{DT\_\-byte}}
+\index{DT\_\-byte@{DT\_\-byte}!datatypes.h@{datatypes.h}}
+\subsubsection[{DT\_\-byte}]{\setlength{\rightskip}{0pt plus 5cm}typedef uint8\_\-t {\bf DT\_\-byte}}\label{datatypes_8h_aac5992f3490dd6e0f54ae15c36ae86ef}
+\index{datatypes.h@{datatypes.h}!DT\_\-char@{DT\_\-char}}
+\index{DT\_\-char@{DT\_\-char}!datatypes.h@{datatypes.h}}
+\subsubsection[{DT\_\-char}]{\setlength{\rightskip}{0pt plus 5cm}typedef char {\bf DT\_\-char}}\label{datatypes_8h_a5a830cc34c2cc21426088ccdb4d3c27c}
+\index{datatypes.h@{datatypes.h}!DT\_\-cmd@{DT\_\-cmd}}
+\index{DT\_\-cmd@{DT\_\-cmd}!datatypes.h@{datatypes.h}}
+\subsubsection[{DT\_\-cmd}]{\setlength{\rightskip}{0pt plus 5cm}typedef uint16\_\-t {\bf DT\_\-cmd}}\label{datatypes_8h_a7b6b0ea139ca918503ec8a24788a9742}
+\index{datatypes.h@{datatypes.h}!DT\_\-double@{DT\_\-double}}
+\index{DT\_\-double@{DT\_\-double}!datatypes.h@{datatypes.h}}
+\subsubsection[{DT\_\-double}]{\setlength{\rightskip}{0pt plus 5cm}typedef double {\bf DT\_\-double}}\label{datatypes_8h_a2e543411955afdb31c0d9feefd1cefed}
+\index{datatypes.h@{datatypes.h}!DT\_\-int@{DT\_\-int}}
+\index{DT\_\-int@{DT\_\-int}!datatypes.h@{datatypes.h}}
+\subsubsection[{DT\_\-int}]{\setlength{\rightskip}{0pt plus 5cm}typedef int {\bf DT\_\-int}}\label{datatypes_8h_a6ae9a32229cf3ddd0996e852782f7ca4}
+\index{datatypes.h@{datatypes.h}!DT\_\-size@{DT\_\-size}}
+\index{DT\_\-size@{DT\_\-size}!datatypes.h@{datatypes.h}}
+\subsubsection[{DT\_\-size}]{\setlength{\rightskip}{0pt plus 5cm}typedef uint16\_\-t {\bf DT\_\-size}}\label{datatypes_8h_a690ffbb6ad43eab1176f91d2097fc967}
+\index{datatypes.h@{datatypes.h}!DT\_\-type@{DT\_\-type}}
+\index{DT\_\-type@{DT\_\-type}!datatypes.h@{datatypes.h}}
+\subsubsection[{DT\_\-type}]{\setlength{\rightskip}{0pt plus 5cm}typedef uint8\_\-t {\bf DT\_\-type}}\label{datatypes_8h_a3f264c95c6daf779bd706d321c7f0791}

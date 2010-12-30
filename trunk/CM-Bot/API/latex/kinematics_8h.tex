@@ -1,0 +1,124 @@
+\section{include/kinematics.h-\/Dateireferenz}
+\label{kinematics_8h}\index{include/kinematics.h@{include/kinematics.h}}
+
+
+Lösungsmethoden der Kinematik.  
+
+
+{\ttfamily \#include \char`\"{}datatypes.h\char`\"{}}\par
+\subsection*{Makrodefinitionen}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf KIN\_\-ROWS}~4
+\item 
+\#define {\bf KIN\_\-COLUMNS}~4
+\end{DoxyCompactItemize}
+\subsection*{Funktionen}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf KIN\_\-setTransMat} ({\bf DT\_\-leg} $\ast$const)
+\begin{DoxyCompactList}\small\item\em Liefert fuer ein Bein die Struktur zur Koordinatentransformation. \item\end{DoxyCompactList}\item 
+void {\bf KIN\_\-calcDH} (const {\bf DT\_\-leg} $\ast$const, {\bf DT\_\-double} $\ast$$\ast$)
+\begin{DoxyCompactList}\small\item\em Lösung des kinematischen Problems. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-bool} {\bf KIN\_\-calcServos} (const {\bf DT\_\-point} $\ast$const, {\bf DT\_\-leg} $\ast$const)
+\begin{DoxyCompactList}\small\item\em Lösung des inversen kinematischen Problems. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-point} {\bf KIN\_\-calcLocalPoint} (const {\bf DT\_\-point} $\ast$const, const {\bf DT\_\-transformation} $\ast$const)
+\begin{DoxyCompactList}\small\item\em Transformiert einen Punkt in das Roboterkoordinatensystem. \item\end{DoxyCompactList}\item 
+{\bf DT\_\-bool} {\bf KIN\_\-makeMovement} ({\bf DT\_\-leg} $\ast${\bf leg\_\-l}, {\bf DT\_\-leg} $\ast${\bf leg\_\-r})
+\end{DoxyCompactItemize}
+
+
+\subsection{Ausführliche Beschreibung}
+Lösungsmethoden der Kinematik. Lösungsmethoden der Kinematik speziell für den CM-\/Bot. 
+
+\subsection{Makro-\/Dokumentation}
+\index{kinematics.h@{kinematics.h}!KIN\_\-COLUMNS@{KIN\_\-COLUMNS}}
+\index{KIN\_\-COLUMNS@{KIN\_\-COLUMNS}!kinematics.h@{kinematics.h}}
+\subsubsection[{KIN\_\-COLUMNS}]{\setlength{\rightskip}{0pt plus 5cm}\#define KIN\_\-COLUMNS~4}\label{kinematics_8h_a8275a476f1e30bf0d6152324159c5c7b}
+\index{kinematics.h@{kinematics.h}!KIN\_\-ROWS@{KIN\_\-ROWS}}
+\index{KIN\_\-ROWS@{KIN\_\-ROWS}!kinematics.h@{kinematics.h}}
+\subsubsection[{KIN\_\-ROWS}]{\setlength{\rightskip}{0pt plus 5cm}\#define KIN\_\-ROWS~4}\label{kinematics_8h_a7ba768d2188a1ed26ab6e08245a70022}
+
+
+\subsection{Dokumentation der Funktionen}
+\index{kinematics.h@{kinematics.h}!KIN\_\-calcDH@{KIN\_\-calcDH}}
+\index{KIN\_\-calcDH@{KIN\_\-calcDH}!kinematics.h@{kinematics.h}}
+\subsubsection[{KIN\_\-calcDH}]{\setlength{\rightskip}{0pt plus 5cm}void KIN\_\-calcDH (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-leg} $\ast$const }]{ leg, }
+\item[{{\bf DT\_\-double} $\ast$$\ast$}]{ dh03}
+\end{DoxyParamCaption}
+)}\label{kinematics_8h_a7725b396b15fcdaf189e11688bd94701}
+
+
+Lösung des kinematischen Problems. 
+
+Lösung der Denavit-\/Hartenberg-\/Transformation.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em leg}]Bein mit den Soll-\/Winkel der Gelenke \item[{\em dh03}]Zielmatrix für die Lösung \end{DoxyParams}
+\index{kinematics.h@{kinematics.h}!KIN\_\-calcLocalPoint@{KIN\_\-calcLocalPoint}}
+\index{KIN\_\-calcLocalPoint@{KIN\_\-calcLocalPoint}!kinematics.h@{kinematics.h}}
+\subsubsection[{KIN\_\-calcLocalPoint}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-point} KIN\_\-calcLocalPoint (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-point} $\ast$const }]{ p, }
+\item[{const {\bf DT\_\-transformation} $\ast$const }]{ trans}
+\end{DoxyParamCaption}
+)}\label{kinematics_8h_afd7f2715c0a9c785fcc59327043f5c47}
+
+
+Transformiert einen Punkt in das Roboterkoordinatensystem. 
+
+Transformiert einen Punkt des Weltkoordinatensystems in das Roboterkoordinatensystem eines Beines. Berechnet nur eine x-\/y-\/Verschiebung und eine Rotation von 0/180 Grad um die z-\/Achse.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em p}]Punkt im Weltkooridnatensystem \item[{\em trans}]Struktur mit Informationen fuer die Koordinatentransformation\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+Punkt im Roboterkoordinatensystem eines Beines 
+\end{DoxyReturn}
+\index{kinematics.h@{kinematics.h}!KIN\_\-calcServos@{KIN\_\-calcServos}}
+\index{KIN\_\-calcServos@{KIN\_\-calcServos}!kinematics.h@{kinematics.h}}
+\subsubsection[{KIN\_\-calcServos}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-bool} KIN\_\-calcServos (
+\begin{DoxyParamCaption}
+\item[{const {\bf DT\_\-point} $\ast$const }]{ p, }
+\item[{{\bf DT\_\-leg} $\ast$const }]{ leg}
+\end{DoxyParamCaption}
+)}\label{kinematics_8h_a1e4f9f1866b480d728c3b41dd31ac55e}
+
+
+Lösung des inversen kinematischen Problems. 
+
+Lösung des inversen kinematischen Problems mit Hilfe eines geometrischen Verfahrens mit leichten Einschränkungen.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em p}]Punkt (Roboterkoorinate) \item[{\em leg}]Bein für die zusetzenden Winkel\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+true, wenn Berechnung erfolgreich 
+\end{DoxyReturn}
+\index{kinematics.h@{kinematics.h}!KIN\_\-makeMovement@{KIN\_\-makeMovement}}
+\index{KIN\_\-makeMovement@{KIN\_\-makeMovement}!kinematics.h@{kinematics.h}}
+\subsubsection[{KIN\_\-makeMovement}]{\setlength{\rightskip}{0pt plus 5cm}{\bf DT\_\-bool} KIN\_\-makeMovement (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-leg} $\ast$}]{ leg\_\-l, }
+\item[{{\bf DT\_\-leg} $\ast$}]{ leg\_\-r}
+\end{DoxyParamCaption}
+)}\label{kinematics_8h_af1e0ee751fcf10f72844181fc76408d0}
+\index{kinematics.h@{kinematics.h}!KIN\_\-setTransMat@{KIN\_\-setTransMat}}
+\index{KIN\_\-setTransMat@{KIN\_\-setTransMat}!kinematics.h@{kinematics.h}}
+\subsubsection[{KIN\_\-setTransMat}]{\setlength{\rightskip}{0pt plus 5cm}void KIN\_\-setTransMat (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-leg} $\ast$const }]{ leg}
+\end{DoxyParamCaption}
+)}\label{kinematics_8h_a798f9181ad486f6ae7dd9e46457a7575}
+
+
+Liefert fuer ein Bein die Struktur zur Koordinatentransformation. 
+
+Liefert fuer ein Bein die Struktur zur Koordinatentransformation.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em leg}]Bein \end{DoxyParams}

@@ -1,0 +1,270 @@
+\section{xmega.c-\/Dateireferenz}
+\label{xmega_8c}\index{xmega.c@{xmega.c}}
+
+
+Spezifische Funktionen für den Mikrocontroller ATXmega128A1.  
+
+
+{\ttfamily \#include \char`\"{}include/xmega.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}include/dynamixel.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}include/utils.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}include/clksys\_\-driver.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}include/avr\_\-compiler.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}include/communication.h\char`\"{}}\par
+{\ttfamily \#include $<$avr/io.h$>$}\par
+{\ttfamily \#include $<$stdlib.h$>$}\par
+\subsection*{Funktionen}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf XM\_\-init\_\-cpu} ()
+\begin{DoxyCompactList}\small\item\em Initialisierung der CPU. \item\end{DoxyCompactList}\item 
+void {\bf XM\_\-init\_\-remote} ()
+\begin{DoxyCompactList}\small\item\em Initialisiert den Zigbee-\/Fernsteuerung. \item\end{DoxyCompactList}\item 
+void {\bf XM\_\-init\_\-dnx} ()
+\begin{DoxyCompactList}\small\item\em Initialisiert die Servo-\/USARTs. \item\end{DoxyCompactList}\item 
+void {\bf XM\_\-init\_\-com} ({\bf DT\_\-byte} {\bf cpuID})
+\begin{DoxyCompactList}\small\item\em Initialisiert USARTs für die CPU-\/Kommunikation. \item\end{DoxyCompactList}\item 
+void {\bf XM\_\-USART\_\-send} ({\bf USART\_\-data\_\-t} $\ast$const usart\_\-data, const {\bf DT\_\-byte} $\ast$const txData, {\bf DT\_\-size} bytes)
+\begin{DoxyCompactList}\small\item\em USART-\/Sendemethode. \item\end{DoxyCompactList}\item 
+{\bf ISR} (USARTC0\_\-TXC\_\-vect)
+\begin{DoxyCompactList}\small\item\em ISR für abgeschlossenen Sendevorgang der USARTC0 (SERVO L). \item\end{DoxyCompactList}\item 
+{\bf ISR} (USARTC0\_\-DRE\_\-vect)
+\begin{DoxyCompactList}\small\item\em ISR für Sendebereitschaft der USARTC0 (SERVO L). \item\end{DoxyCompactList}\item 
+{\bf ISR} (USARTC0\_\-RXC\_\-vect)
+\begin{DoxyCompactList}\small\item\em ISR für Empfangsvorgang der USARTC0 (SERVO L). \item\end{DoxyCompactList}\item 
+{\bf ISR} (USARTD0\_\-TXC\_\-vect)
+\begin{DoxyCompactList}\small\item\em ISR für abgeschlossenen Sendevorgang der USARTD0 (SERVO R). \item\end{DoxyCompactList}\item 
+{\bf ISR} (USARTD0\_\-DRE\_\-vect)
+\begin{DoxyCompactList}\small\item\em ISR für Sendebereitschaft der USARTD0 (SERVO R). \item\end{DoxyCompactList}\item 
+{\bf ISR} (USARTD0\_\-RXC\_\-vect)
+\begin{DoxyCompactList}\small\item\em ISR für Empfangsvorgang der USARTD0 (SERVO R). \item\end{DoxyCompactList}\item 
+{\bf ISR} (USARTD1\_\-TXC\_\-vect)
+\begin{DoxyCompactList}\small\item\em ISR für abgeschlossenen Sendevorgang der USARTD0 (SERVO R). \item\end{DoxyCompactList}\item 
+{\bf ISR} (USARTD1\_\-DRE\_\-vect)
+\begin{DoxyCompactList}\small\item\em ISR für Sendebereitschaft der USARTD0 (SERVO R). \item\end{DoxyCompactList}\item 
+{\bf ISR} (USARTD1\_\-RXC\_\-vect)
+\begin{DoxyCompactList}\small\item\em ISR für Empfangsvorgang der USARTD0 (SERVO R). \item\end{DoxyCompactList}\item 
+{\bf ISR} (USARTE0\_\-TXC\_\-vect)
+\begin{DoxyCompactList}\small\item\em ISR für abgeschlossenen Sendevorgang der USARTD0 (SERVO R). \item\end{DoxyCompactList}\item 
+{\bf ISR} (USARTE0\_\-DRE\_\-vect)
+\begin{DoxyCompactList}\small\item\em ISR für Sendebereitschaft der USARTD0 (SERVO R). \item\end{DoxyCompactList}\item 
+{\bf ISR} (USARTE0\_\-RXC\_\-vect)
+\begin{DoxyCompactList}\small\item\em ISR für Empfangsvorgang der USARTD0 (SERVO R). \item\end{DoxyCompactList}\item 
+{\bf ISR} (USARTE1\_\-RXC\_\-vect)
+\begin{DoxyCompactList}\small\item\em ISR für Empfangsvorgang der USARTE1 (REMOTE). \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Ausführliche Beschreibung}
+Spezifische Funktionen für den Mikrocontroller ATXmega128A1. 
+
+\subsection{Dokumentation der Funktionen}
+\index{xmega.c@{xmega.c}!ISR@{ISR}}
+\index{ISR@{ISR}!xmega.c@{xmega.c}}
+\subsubsection[{ISR}]{\setlength{\rightskip}{0pt plus 5cm}ISR (
+\begin{DoxyParamCaption}
+\item[{USARTC0\_\-TXC\_\-vect}]{}
+\end{DoxyParamCaption}
+)}\label{xmega_8c_ab78da53f3a29e182d4b93755adc8d195}
+
+
+ISR für abgeschlossenen Sendevorgang der USARTC0 (SERVO L). 
+
+\index{xmega.c@{xmega.c}!ISR@{ISR}}
+\index{ISR@{ISR}!xmega.c@{xmega.c}}
+\subsubsection[{ISR}]{\setlength{\rightskip}{0pt plus 5cm}ISR (
+\begin{DoxyParamCaption}
+\item[{USARTC0\_\-RXC\_\-vect}]{}
+\end{DoxyParamCaption}
+)}\label{xmega_8c_aace195abde7bc36b7b50772ff2277dd4}
+
+
+ISR für Empfangsvorgang der USARTC0 (SERVO L). 
+
+\index{xmega.c@{xmega.c}!ISR@{ISR}}
+\index{ISR@{ISR}!xmega.c@{xmega.c}}
+\subsubsection[{ISR}]{\setlength{\rightskip}{0pt plus 5cm}ISR (
+\begin{DoxyParamCaption}
+\item[{USARTD0\_\-TXC\_\-vect}]{}
+\end{DoxyParamCaption}
+)}\label{xmega_8c_a05bec31cf4f6589c0342afa0310d3d59}
+
+
+ISR für abgeschlossenen Sendevorgang der USARTD0 (SERVO R). 
+
+\index{xmega.c@{xmega.c}!ISR@{ISR}}
+\index{ISR@{ISR}!xmega.c@{xmega.c}}
+\subsubsection[{ISR}]{\setlength{\rightskip}{0pt plus 5cm}ISR (
+\begin{DoxyParamCaption}
+\item[{USARTE0\_\-DRE\_\-vect}]{}
+\end{DoxyParamCaption}
+)}\label{xmega_8c_a463798ee072ce20c068d98d47242fe00}
+
+
+ISR für Sendebereitschaft der USARTD0 (SERVO R). 
+
+\index{xmega.c@{xmega.c}!ISR@{ISR}}
+\index{ISR@{ISR}!xmega.c@{xmega.c}}
+\subsubsection[{ISR}]{\setlength{\rightskip}{0pt plus 5cm}ISR (
+\begin{DoxyParamCaption}
+\item[{USARTE0\_\-TXC\_\-vect}]{}
+\end{DoxyParamCaption}
+)}\label{xmega_8c_a11c0f4fa189c5bfad0b94b78a0094f11}
+
+
+ISR für abgeschlossenen Sendevorgang der USARTD0 (SERVO R). 
+
+\index{xmega.c@{xmega.c}!ISR@{ISR}}
+\index{ISR@{ISR}!xmega.c@{xmega.c}}
+\subsubsection[{ISR}]{\setlength{\rightskip}{0pt plus 5cm}ISR (
+\begin{DoxyParamCaption}
+\item[{USARTE0\_\-RXC\_\-vect}]{}
+\end{DoxyParamCaption}
+)}\label{xmega_8c_a5415e7b3fc687af7b4555f5e0e0296f8}
+
+
+ISR für Empfangsvorgang der USARTD0 (SERVO R). 
+
+\index{xmega.c@{xmega.c}!ISR@{ISR}}
+\index{ISR@{ISR}!xmega.c@{xmega.c}}
+\subsubsection[{ISR}]{\setlength{\rightskip}{0pt plus 5cm}ISR (
+\begin{DoxyParamCaption}
+\item[{USARTD1\_\-DRE\_\-vect}]{}
+\end{DoxyParamCaption}
+)}\label{xmega_8c_aaf64f6ba10f63391117618a4487cbc9f}
+
+
+ISR für Sendebereitschaft der USARTD0 (SERVO R). 
+
+\index{xmega.c@{xmega.c}!ISR@{ISR}}
+\index{ISR@{ISR}!xmega.c@{xmega.c}}
+\subsubsection[{ISR}]{\setlength{\rightskip}{0pt plus 5cm}ISR (
+\begin{DoxyParamCaption}
+\item[{USARTE1\_\-RXC\_\-vect}]{}
+\end{DoxyParamCaption}
+)}\label{xmega_8c_a01f77056e7540820c578e6612712bc0a}
+
+
+ISR für Empfangsvorgang der USARTE1 (REMOTE). 
+
+\index{xmega.c@{xmega.c}!ISR@{ISR}}
+\index{ISR@{ISR}!xmega.c@{xmega.c}}
+\subsubsection[{ISR}]{\setlength{\rightskip}{0pt plus 5cm}ISR (
+\begin{DoxyParamCaption}
+\item[{USARTD0\_\-DRE\_\-vect}]{}
+\end{DoxyParamCaption}
+)}\label{xmega_8c_a1e14eda1a1806a5dd85a7966b97639de}
+
+
+ISR für Sendebereitschaft der USARTD0 (SERVO R). 
+
+\index{xmega.c@{xmega.c}!ISR@{ISR}}
+\index{ISR@{ISR}!xmega.c@{xmega.c}}
+\subsubsection[{ISR}]{\setlength{\rightskip}{0pt plus 5cm}ISR (
+\begin{DoxyParamCaption}
+\item[{USARTD0\_\-RXC\_\-vect}]{}
+\end{DoxyParamCaption}
+)}\label{xmega_8c_a8a99406851af348f1cf4769386b091c0}
+
+
+ISR für Empfangsvorgang der USARTD0 (SERVO R). 
+
+\index{xmega.c@{xmega.c}!ISR@{ISR}}
+\index{ISR@{ISR}!xmega.c@{xmega.c}}
+\subsubsection[{ISR}]{\setlength{\rightskip}{0pt plus 5cm}ISR (
+\begin{DoxyParamCaption}
+\item[{USARTC0\_\-DRE\_\-vect}]{}
+\end{DoxyParamCaption}
+)}\label{xmega_8c_abbfd0611f43db59ea4fdb1ea434cf017}
+
+
+ISR für Sendebereitschaft der USARTC0 (SERVO L). 
+
+\index{xmega.c@{xmega.c}!ISR@{ISR}}
+\index{ISR@{ISR}!xmega.c@{xmega.c}}
+\subsubsection[{ISR}]{\setlength{\rightskip}{0pt plus 5cm}ISR (
+\begin{DoxyParamCaption}
+\item[{USARTD1\_\-TXC\_\-vect}]{}
+\end{DoxyParamCaption}
+)}\label{xmega_8c_a038806baf0a086216a2d5ab768642222}
+
+
+ISR für abgeschlossenen Sendevorgang der USARTD0 (SERVO R). 
+
+\index{xmega.c@{xmega.c}!ISR@{ISR}}
+\index{ISR@{ISR}!xmega.c@{xmega.c}}
+\subsubsection[{ISR}]{\setlength{\rightskip}{0pt plus 5cm}ISR (
+\begin{DoxyParamCaption}
+\item[{USARTD1\_\-RXC\_\-vect}]{}
+\end{DoxyParamCaption}
+)}\label{xmega_8c_a3c3a850efd37e72ad690811c35072132}
+
+
+ISR für Empfangsvorgang der USARTD0 (SERVO R). 
+
+\index{xmega.c@{xmega.c}!XM\_\-init\_\-com@{XM\_\-init\_\-com}}
+\index{XM\_\-init\_\-com@{XM\_\-init\_\-com}!xmega.c@{xmega.c}}
+\subsubsection[{XM\_\-init\_\-com}]{\setlength{\rightskip}{0pt plus 5cm}void XM\_\-init\_\-com (
+\begin{DoxyParamCaption}
+\item[{{\bf DT\_\-byte}}]{ cpuID}
+\end{DoxyParamCaption}
+)}\label{xmega_8c_adabffb80349ab649e419832f03c062ef}
+
+
+Initialisiert USARTs für die CPU-\/Kommunikation. 
+
+ID des Controllers wird aufgrund des Hardwaredefekts für die Master-\/Slave-\/Kommunikation benötigt.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em cpuID}]ID des Controllers \end{DoxyParams}
+\index{xmega.c@{xmega.c}!XM\_\-init\_\-cpu@{XM\_\-init\_\-cpu}}
+\index{XM\_\-init\_\-cpu@{XM\_\-init\_\-cpu}!xmega.c@{xmega.c}}
+\subsubsection[{XM\_\-init\_\-cpu}]{\setlength{\rightskip}{0pt plus 5cm}void XM\_\-init\_\-cpu (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{xmega_8c_a98a15c8d66c596f3a8b68a4a51993303}
+
+
+Initialisierung der CPU. 
+
+\index{xmega.c@{xmega.c}!XM\_\-init\_\-dnx@{XM\_\-init\_\-dnx}}
+\index{XM\_\-init\_\-dnx@{XM\_\-init\_\-dnx}!xmega.c@{xmega.c}}
+\subsubsection[{XM\_\-init\_\-dnx}]{\setlength{\rightskip}{0pt plus 5cm}void XM\_\-init\_\-dnx (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{xmega_8c_a1fe0df275acdbec5eec5b8db8d79f8c8}
+
+
+Initialisiert die Servo-\/USARTs. 
+
+\index{xmega.c@{xmega.c}!XM\_\-init\_\-remote@{XM\_\-init\_\-remote}}
+\index{XM\_\-init\_\-remote@{XM\_\-init\_\-remote}!xmega.c@{xmega.c}}
+\subsubsection[{XM\_\-init\_\-remote}]{\setlength{\rightskip}{0pt plus 5cm}void XM\_\-init\_\-remote (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{xmega_8c_aad8f6f8cebefbede86e0d036daf28045}
+
+
+Initialisiert den Zigbee-\/Fernsteuerung. 
+
+\index{xmega.c@{xmega.c}!XM\_\-USART\_\-send@{XM\_\-USART\_\-send}}
+\index{XM\_\-USART\_\-send@{XM\_\-USART\_\-send}!xmega.c@{xmega.c}}
+\subsubsection[{XM\_\-USART\_\-send}]{\setlength{\rightskip}{0pt plus 5cm}void XM\_\-USART\_\-send (
+\begin{DoxyParamCaption}
+\item[{{\bf USART\_\-data\_\-t} $\ast$const }]{ usart\_\-data, }
+\item[{const {\bf DT\_\-byte} $\ast$const }]{ txData, }
+\item[{{\bf DT\_\-size}}]{ bytes}
+\end{DoxyParamCaption}
+)}\label{xmega_8c_a16a0304428b8329a1c5326c54e199c03}
+
+
+USART-\/Sendemethode. 
+
+Diese Methode setzt zunächst das jeweilige Output-\/Enable (!OE) auf Senden und schreibt das zu sendende Paket in den USART-\/Buffer. Anschließend wird der TX-\/Interrupt aktiviert, der ausgelöst wird, wenn das letzte Paket gesendet wurde.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em usart\_\-data}]USART-\/Datenstruktur der zu benutzenden USART \item[{\em txData}]Byte-\/Array mit zu sendendem Paket \item[{\em bytes}]Länge des zu sendenden Pakets \end{DoxyParams}

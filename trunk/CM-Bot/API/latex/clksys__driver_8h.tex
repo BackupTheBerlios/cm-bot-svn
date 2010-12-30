@@ -1,0 +1,314 @@
+\section{include/clksys\_\-driver.h-\/Dateireferenz}
+\label{clksys__driver_8h}\index{include/clksys\_\-driver.h@{include/clksys\_\-driver.h}}
+
+
+XMEGA Clock System driver header file.  
+
+
+{\ttfamily \#include \char`\"{}avr\_\-compiler.h\char`\"{}}\par
+\subsection*{Makrodefinitionen}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf CLKSYS\_\-Enable}(\_\-oscSel)~( OSC.CTRL $|$= (\_\-oscSel) )
+\begin{DoxyCompactList}\small\item\em This macro enables the selected oscillator. \item\end{DoxyCompactList}\item 
+\#define {\bf CLKSYS\_\-IsReady}(\_\-oscSel)~( OSC.STATUS \& (\_\-oscSel) )
+\begin{DoxyCompactList}\small\item\em This macro check if selected oscillator is ready. \item\end{DoxyCompactList}\item 
+\#define {\bf CLKSYS\_\-RTC\_\-ClockSource\_\-Disable}()~( CLK.RTCCTRL \&= $\sim$CLK\_\-RTCEN\_\-bm )
+\begin{DoxyCompactList}\small\item\em This macro disables routing of clock signals to the Real-\/Time Counter (RTC). \item\end{DoxyCompactList}\item 
+\#define {\bf CLKSYS\_\-AutoCalibration\_\-Disable}(\_\-clk)~( (\_\-clk).CTRL \&= $\sim$DFLL\_\-ENABLE\_\-bm )
+\begin{DoxyCompactList}\small\item\em This macro disables the automatic calibration of the selected internal oscillator. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Funktionen}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf CCPWrite} (volatile uint8\_\-t $\ast$address, uint8\_\-t value)
+\begin{DoxyCompactList}\small\item\em CCP write helper function written in assembly. \item\end{DoxyCompactList}\item 
+void {\bf CLKSYS\_\-XOSC\_\-Config} (OSC\_\-FRQRANGE\_\-t freqRange, bool lowPower32kHz, OSC\_\-XOSCSEL\_\-t xoscModeSelection)
+\begin{DoxyCompactList}\small\item\em This function configures the external oscillator. \item\end{DoxyCompactList}\item 
+void {\bf CLKSYS\_\-PLL\_\-Config} (OSC\_\-PLLSRC\_\-t clockSource, uint8\_\-t factor)
+\begin{DoxyCompactList}\small\item\em This function configures the internal high-\/frequency PLL. \item\end{DoxyCompactList}\item 
+uint8\_\-t {\bf CLKSYS\_\-Disable} (uint8\_\-t oscSel)
+\begin{DoxyCompactList}\small\item\em This function disables the selected oscillator. \item\end{DoxyCompactList}\item 
+void {\bf CLKSYS\_\-Prescalers\_\-Config} (CLK\_\-PSADIV\_\-t PSAfactor, CLK\_\-PSBCDIV\_\-t PSBCfactor)
+\begin{DoxyCompactList}\small\item\em This function changes the prescaler configuration. \item\end{DoxyCompactList}\item 
+uint8\_\-t {\bf CLKSYS\_\-Main\_\-ClockSource\_\-Select} (CLK\_\-SCLKSEL\_\-t clockSource)
+\begin{DoxyCompactList}\small\item\em This function selects the main system clock source. \item\end{DoxyCompactList}\item 
+void {\bf CLKSYS\_\-RTC\_\-ClockSource\_\-Enable} (CLK\_\-RTCSRC\_\-t clockSource)
+\begin{DoxyCompactList}\small\item\em This function selects a Real-\/Time Counter clock source. \item\end{DoxyCompactList}\item 
+void {\bf CLKSYS\_\-AutoCalibration\_\-Enable} (uint8\_\-t clkSource, bool extReference)
+\begin{DoxyCompactList}\small\item\em This function enables automatic calibration of the selected internal oscillator. \item\end{DoxyCompactList}\item 
+void {\bf CLKSYS\_\-XOSC\_\-FailureDetection\_\-Enable} (void)
+\begin{DoxyCompactList}\small\item\em This function enables the External Oscillator Failure Detection (XOSCFD) feature. \item\end{DoxyCompactList}\item 
+void {\bf CLKSYS\_\-Configuration\_\-Lock} (void)
+\begin{DoxyCompactList}\small\item\em This function lock the entire clock system configuration. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Ausführliche Beschreibung}
+XMEGA Clock System driver header file. This file contains the function prototypes and enumerator definitions for various configuration parameters for the XMEGA Clock System driver.
+
+The driver is not intended for size and/or speed critical code, since most functions are just a few lines of code, and the function call overhead would decrease code performance. The driver is intended for rapid prototyping and documentation purposes for getting started with the XMEGA Clock System.
+
+For size and/or speed critical code, it is recommended to copy the function contents directly into your application instead of making a function call.
+
+\begin{DoxyParagraph}{Application note:}
+AVR1003: Using the XMEGA Clock System
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Documentation}
+For comprehensive code documentation, supported compilers, compiler settings and supported devices see readme.html
+\end{DoxyParagraph}
+\begin{DoxyAuthor}{Autor}
+Atmel Corporation: {\tt http://www.atmel.com} \par
+ Support email: {\tt avr@atmel.com}
+\end{DoxyAuthor}
+\begin{DoxyParagraph}{Revision:}
+1665 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Date:}
+2008-\/06-\/05 09:21:50 +0200 (to, 05 jun 2008) 
+\end{DoxyParagraph}
+\par
+
+
+Copyright (c) 2008, Atmel Corporation All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+3. The name of ATMEL may not be used to endorse or promote products derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY ATMEL \char`\"{}AS IS\char`\"{} AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE EXPRESSLY AND SPECIFICALLY DISCLAIMED. IN NO EVENT SHALL ATMEL BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+
+\subsection{Makro-\/Dokumentation}
+\index{clksys\_\-driver.h@{clksys\_\-driver.h}!CLKSYS\_\-AutoCalibration\_\-Disable@{CLKSYS\_\-AutoCalibration\_\-Disable}}
+\index{CLKSYS\_\-AutoCalibration\_\-Disable@{CLKSYS\_\-AutoCalibration\_\-Disable}!clksys_driver.h@{clksys\_\-driver.h}}
+\subsubsection[{CLKSYS\_\-AutoCalibration\_\-Disable}]{\setlength{\rightskip}{0pt plus 5cm}\#define CLKSYS\_\-AutoCalibration\_\-Disable(
+\begin{DoxyParamCaption}
+\item[{}]{\_\-clk}
+\end{DoxyParamCaption}
+)~( (\_\-clk).CTRL \&= $\sim$DFLL\_\-ENABLE\_\-bm )}\label{clksys__driver_8h_ab06829d3775b72351cbb2cb65dbc4dc7}
+
+
+This macro disables the automatic calibration of the selected internal oscillator. 
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em \_\-clk}]Clock source calibration to disable, either DFLLRC2M or DFLLRC32M. \end{DoxyParams}
+\index{clksys\_\-driver.h@{clksys\_\-driver.h}!CLKSYS\_\-Enable@{CLKSYS\_\-Enable}}
+\index{CLKSYS\_\-Enable@{CLKSYS\_\-Enable}!clksys_driver.h@{clksys\_\-driver.h}}
+\subsubsection[{CLKSYS\_\-Enable}]{\setlength{\rightskip}{0pt plus 5cm}\#define CLKSYS\_\-Enable(
+\begin{DoxyParamCaption}
+\item[{}]{\_\-oscSel}
+\end{DoxyParamCaption}
+)~( OSC.CTRL $|$= (\_\-oscSel) )}\label{clksys__driver_8h_a0894c64562c3b1c309bab97a83382267}
+
+
+This macro enables the selected oscillator. 
+
+\begin{DoxyNote}{Zu beachten}
+Note that the oscillator cannot be used as a main system clock source without being enabled and stable first. Check the ready flag before using the clock. The function \doxyref{CLKSYS\_\-IsReady( \_\-oscSel )}{S.}{clksys__driver_8h_a2cd92dbb89e4051b9385a61273d19dc6} can be used to check this.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameter}
+\item[{\em \_\-oscSel}]Bitmask of selected clock. Can be one of the following OSC\_\-RC2MEN\_\-bm, OSC\_\-RC32MEN\_\-bm, OSC\_\-RC32KEN\_\-bm, OSC\_\-XOSCEN\_\-bm, OSC\_\-PLLEN\_\-bm. \end{DoxyParams}
+\index{clksys\_\-driver.h@{clksys\_\-driver.h}!CLKSYS\_\-IsReady@{CLKSYS\_\-IsReady}}
+\index{CLKSYS\_\-IsReady@{CLKSYS\_\-IsReady}!clksys_driver.h@{clksys\_\-driver.h}}
+\subsubsection[{CLKSYS\_\-IsReady}]{\setlength{\rightskip}{0pt plus 5cm}\#define CLKSYS\_\-IsReady(
+\begin{DoxyParamCaption}
+\item[{}]{\_\-oscSel}
+\end{DoxyParamCaption}
+)~( OSC.STATUS \& (\_\-oscSel) )}\label{clksys__driver_8h_a2cd92dbb89e4051b9385a61273d19dc6}
+
+
+This macro check if selected oscillator is ready. 
+
+This macro will return non-\/zero if is is running, regardless if it is used as a main clock source or not.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em \_\-oscSel}]Bitmask of selected clock. Can be one of the following OSC\_\-RC2MEN\_\-bm, OSC\_\-RC32MEN\_\-bm, OSC\_\-RC32KEN\_\-bm, OSC\_\-XOSCEN\_\-bm, OSC\_\-PLLEN\_\-bm.\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+Non-\/zero if oscillator is ready and running. 
+\end{DoxyReturn}
+\index{clksys\_\-driver.h@{clksys\_\-driver.h}!CLKSYS\_\-RTC\_\-ClockSource\_\-Disable@{CLKSYS\_\-RTC\_\-ClockSource\_\-Disable}}
+\index{CLKSYS\_\-RTC\_\-ClockSource\_\-Disable@{CLKSYS\_\-RTC\_\-ClockSource\_\-Disable}!clksys_driver.h@{clksys\_\-driver.h}}
+\subsubsection[{CLKSYS\_\-RTC\_\-ClockSource\_\-Disable}]{\setlength{\rightskip}{0pt plus 5cm}\#define CLKSYS\_\-RTC\_\-ClockSource\_\-Disable(
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)~( CLK.RTCCTRL \&= $\sim$CLK\_\-RTCEN\_\-bm )}\label{clksys__driver_8h_a2ace04e605910a306c6f65102e76c046}
+
+
+This macro disables routing of clock signals to the Real-\/Time Counter (RTC). 
+
+Disabling the RTC saves power if the RTC is not in use. 
+
+\subsection{Dokumentation der Funktionen}
+\index{clksys\_\-driver.h@{clksys\_\-driver.h}!CCPWrite@{CCPWrite}}
+\index{CCPWrite@{CCPWrite}!clksys_driver.h@{clksys\_\-driver.h}}
+\subsubsection[{CCPWrite}]{\setlength{\rightskip}{0pt plus 5cm}void CCPWrite (
+\begin{DoxyParamCaption}
+\item[{volatile uint8\_\-t $\ast$}]{ address, }
+\item[{uint8\_\-t}]{ value}
+\end{DoxyParamCaption}
+)}\label{clksys__driver_8h_aad4e162434c2cc7e0087bbc0ddfe266c}
+
+
+CCP write helper function written in assembly. 
+
+This function is written in assembly because of the timecritial operation of writing to the registers.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em address}]A pointer to the address to write to. \item[{\em value}]The value to put in to the register. \end{DoxyParams}
+\index{clksys\_\-driver.h@{clksys\_\-driver.h}!CLKSYS\_\-AutoCalibration\_\-Enable@{CLKSYS\_\-AutoCalibration\_\-Enable}}
+\index{CLKSYS\_\-AutoCalibration\_\-Enable@{CLKSYS\_\-AutoCalibration\_\-Enable}!clksys_driver.h@{clksys\_\-driver.h}}
+\subsubsection[{CLKSYS\_\-AutoCalibration\_\-Enable}]{\setlength{\rightskip}{0pt plus 5cm}void CLKSYS\_\-AutoCalibration\_\-Enable (
+\begin{DoxyParamCaption}
+\item[{uint8\_\-t}]{ clkSource, }
+\item[{bool}]{ extReference}
+\end{DoxyParamCaption}
+)}\label{clksys__driver_8h_a581c15c6c0b2eaa0c81f0b5cafc3b82d}
+
+
+This function enables automatic calibration of the selected internal oscillator. 
+
+Either the internal 32kHz RC oscillator or an external 32kHz crystal can be used as a calibration reference. The user must make sure that the selected reference is ready and running.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em clkSource}]Clock source to calibrate, either OSC\_\-RC2MCREF\_\-bm or OSC\_\-RC32MCREF\_\-bm. \item[{\em extReference}]True if external crystal should be used as reference. \end{DoxyParams}
+\index{clksys\_\-driver.h@{clksys\_\-driver.h}!CLKSYS\_\-Configuration\_\-Lock@{CLKSYS\_\-Configuration\_\-Lock}}
+\index{CLKSYS\_\-Configuration\_\-Lock@{CLKSYS\_\-Configuration\_\-Lock}!clksys_driver.h@{clksys\_\-driver.h}}
+\subsubsection[{CLKSYS\_\-Configuration\_\-Lock}]{\setlength{\rightskip}{0pt plus 5cm}void CLKSYS\_\-Configuration\_\-Lock (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{clksys__driver_8h_a6225fea8fc405c6d1dab88d0ad537173}
+
+
+This function lock the entire clock system configuration. 
+
+This will lock the configuration until the next reset, or until the External Oscillator Failure Detections (XOSCFD) feature detects a failure and switches to internal 2MHz RC oscillator. \index{clksys\_\-driver.h@{clksys\_\-driver.h}!CLKSYS\_\-Disable@{CLKSYS\_\-Disable}}
+\index{CLKSYS\_\-Disable@{CLKSYS\_\-Disable}!clksys_driver.h@{clksys\_\-driver.h}}
+\subsubsection[{CLKSYS\_\-Disable}]{\setlength{\rightskip}{0pt plus 5cm}uint8\_\-t CLKSYS\_\-Disable (
+\begin{DoxyParamCaption}
+\item[{uint8\_\-t}]{ oscSel}
+\end{DoxyParamCaption}
+)}\label{clksys__driver_8h_a31b1ca1994b6a687974a119d1ad8008c}
+
+
+This function disables the selected oscillator. 
+
+This function will disable the selected oscillator if possible. If it is currently used as a main system clock source, hardware will disregard the disable attempt, and this function will return zero. If it fails, change to another main system clock source and try again.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em oscSel}]Bitmask of selected clock. Can be one of the following OSC\_\-RC2MEN\_\-bm, OSC\_\-RC32MEN\_\-bm, OSC\_\-RC32KEN\_\-bm, OSC\_\-XOSCEN\_\-bm, OSC\_\-PLLEN\_\-bm.\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+Non-\/zero if oscillator was disabled successfully. 
+\end{DoxyReturn}
+\index{clksys\_\-driver.h@{clksys\_\-driver.h}!CLKSYS\_\-Main\_\-ClockSource\_\-Select@{CLKSYS\_\-Main\_\-ClockSource\_\-Select}}
+\index{CLKSYS\_\-Main\_\-ClockSource\_\-Select@{CLKSYS\_\-Main\_\-ClockSource\_\-Select}!clksys_driver.h@{clksys\_\-driver.h}}
+\subsubsection[{CLKSYS\_\-Main\_\-ClockSource\_\-Select}]{\setlength{\rightskip}{0pt plus 5cm}uint8\_\-t CLKSYS\_\-Main\_\-ClockSource\_\-Select (
+\begin{DoxyParamCaption}
+\item[{CLK\_\-SCLKSEL\_\-t}]{ clockSource}
+\end{DoxyParamCaption}
+)}\label{clksys__driver_8h_a1e46c4a8f01a83d4e4747d32d113e7e2}
+
+
+This function selects the main system clock source. 
+
+Hardware will disregard any attempts to select a clock source that is not enabled or not stable. If the change fails, make sure the source is ready and running and try again.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em clockSource}]Clock source to use as input for the system clock prescaler block.\end{DoxyParams}
+\begin{DoxyReturn}{Rückgabe}
+Non-\/zero if change was successful. 
+\end{DoxyReturn}
+\index{clksys\_\-driver.h@{clksys\_\-driver.h}!CLKSYS\_\-PLL\_\-Config@{CLKSYS\_\-PLL\_\-Config}}
+\index{CLKSYS\_\-PLL\_\-Config@{CLKSYS\_\-PLL\_\-Config}!clksys_driver.h@{clksys\_\-driver.h}}
+\subsubsection[{CLKSYS\_\-PLL\_\-Config}]{\setlength{\rightskip}{0pt plus 5cm}void CLKSYS\_\-PLL\_\-Config (
+\begin{DoxyParamCaption}
+\item[{OSC\_\-PLLSRC\_\-t}]{ clockSource, }
+\item[{uint8\_\-t}]{ factor}
+\end{DoxyParamCaption}
+)}\label{clksys__driver_8h_acb82744003806825da7fb6a7bb973941}
+
+
+This function configures the internal high-\/frequency PLL. 
+
+Configuration of the internal high-\/frequency PLL to the correct values. It is used to define the input of the PLL and the factor of multiplication of the input clock source.
+
+\begin{DoxyNote}{Zu beachten}
+Note that the oscillator cannot be used as a main system clock source without being enabled and stable first. Check the ready flag before using the clock. The macro \doxyref{CLKSYS\_\-IsReady( \_\-oscSel )}{S.}{clksys__driver_8h_a2cd92dbb89e4051b9385a61273d19dc6} can be used to check this.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameter}
+\item[{\em clockSource}]Reference clock source for the PLL, must be above 0.4MHz. \item[{\em factor}]PLL multiplication factor, must be from 1 to 31, inclusive. \end{DoxyParams}
+\index{clksys\_\-driver.h@{clksys\_\-driver.h}!CLKSYS\_\-Prescalers\_\-Config@{CLKSYS\_\-Prescalers\_\-Config}}
+\index{CLKSYS\_\-Prescalers\_\-Config@{CLKSYS\_\-Prescalers\_\-Config}!clksys_driver.h@{clksys\_\-driver.h}}
+\subsubsection[{CLKSYS\_\-Prescalers\_\-Config}]{\setlength{\rightskip}{0pt plus 5cm}void CLKSYS\_\-Prescalers\_\-Config (
+\begin{DoxyParamCaption}
+\item[{CLK\_\-PSADIV\_\-t}]{ PSAfactor, }
+\item[{CLK\_\-PSBCDIV\_\-t}]{ PSBCfactor}
+\end{DoxyParamCaption}
+)}\label{clksys__driver_8h_a8e350b689dc409a4c9b902a192d1e8a3}
+
+
+This function changes the prescaler configuration. 
+
+Change the configuration of the three system clock prescaler is one single operation. The user must make sure that the main CPU clock does not exceed recommended limits.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em PSAfactor}]Prescaler A division factor, OFF or 2 to 512 in powers of two. \item[{\em PSBCfactor}]Prescaler B and C division factor, in the combination of (1,1), (1,2), (4,1) or (2,2). \end{DoxyParams}
+\index{clksys\_\-driver.h@{clksys\_\-driver.h}!CLKSYS\_\-RTC\_\-ClockSource\_\-Enable@{CLKSYS\_\-RTC\_\-ClockSource\_\-Enable}}
+\index{CLKSYS\_\-RTC\_\-ClockSource\_\-Enable@{CLKSYS\_\-RTC\_\-ClockSource\_\-Enable}!clksys_driver.h@{clksys\_\-driver.h}}
+\subsubsection[{CLKSYS\_\-RTC\_\-ClockSource\_\-Enable}]{\setlength{\rightskip}{0pt plus 5cm}void CLKSYS\_\-RTC\_\-ClockSource\_\-Enable (
+\begin{DoxyParamCaption}
+\item[{CLK\_\-RTCSRC\_\-t}]{ clockSource}
+\end{DoxyParamCaption}
+)}\label{clksys__driver_8h_ae622e3056cd713fdca464b9fd6e5a7ab}
+
+
+This function selects a Real-\/Time Counter clock source. 
+
+Selects the clock source for use by the Real-\/Time Counter (RTC) and enables clock signal routing to the RTC module.
+
+
+\begin{DoxyParams}{Parameter}
+\item[{\em clockSource}]Clock source to use for the RTC. \end{DoxyParams}
+\index{clksys\_\-driver.h@{clksys\_\-driver.h}!CLKSYS\_\-XOSC\_\-Config@{CLKSYS\_\-XOSC\_\-Config}}
+\index{CLKSYS\_\-XOSC\_\-Config@{CLKSYS\_\-XOSC\_\-Config}!clksys_driver.h@{clksys\_\-driver.h}}
+\subsubsection[{CLKSYS\_\-XOSC\_\-Config}]{\setlength{\rightskip}{0pt plus 5cm}void CLKSYS\_\-XOSC\_\-Config (
+\begin{DoxyParamCaption}
+\item[{OSC\_\-FRQRANGE\_\-t}]{ freqRange, }
+\item[{bool}]{ lowPower32kHz, }
+\item[{OSC\_\-XOSCSEL\_\-t}]{ xoscModeSelection}
+\end{DoxyParamCaption}
+)}\label{clksys__driver_8h_ace371b352e90117520436eb125aeeec0}
+
+
+This function configures the external oscillator. 
+
+\begin{DoxyNote}{Zu beachten}
+Note that the oscillator cannot be used as a main system clock source without being enabled and stable first. Check the ready flag before using the clock. The macro \doxyref{CLKSYS\_\-IsReady( \_\-oscSel )}{S.}{clksys__driver_8h_a2cd92dbb89e4051b9385a61273d19dc6} can be used to check this.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameter}
+\item[{\em freqRange}]Frequency range for high-\/frequency crystal, does not apply for external clock or 32kHz crystals. \item[{\em lowPower32kHz}]True of high-\/quality watch crystals are used and low-\/power oscillator is desired. \item[{\em xoscModeSelection}]Combined selection of oscillator type (or external clock) and startup times. \end{DoxyParams}
+\index{clksys\_\-driver.h@{clksys\_\-driver.h}!CLKSYS\_\-XOSC\_\-FailureDetection\_\-Enable@{CLKSYS\_\-XOSC\_\-FailureDetection\_\-Enable}}
+\index{CLKSYS\_\-XOSC\_\-FailureDetection\_\-Enable@{CLKSYS\_\-XOSC\_\-FailureDetection\_\-Enable}!clksys_driver.h@{clksys\_\-driver.h}}
+\subsubsection[{CLKSYS\_\-XOSC\_\-FailureDetection\_\-Enable}]{\setlength{\rightskip}{0pt plus 5cm}void CLKSYS\_\-XOSC\_\-FailureDetection\_\-Enable (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{clksys__driver_8h_abfb0da2d81736412af825d46e7e0cedb}
+
+
+This function enables the External Oscillator Failure Detection (XOSCFD) feature. 
+
+The feature will stay enabled until next reset. Note that the XOSCFD \_\-will\_\- issue the XOSCF Non-\/maskable Interrupt (NMI) regardless of any interrupt priorities and settings. Therefore, make sure that a handler is implemented for the XOSCF NMI when you enable it. 

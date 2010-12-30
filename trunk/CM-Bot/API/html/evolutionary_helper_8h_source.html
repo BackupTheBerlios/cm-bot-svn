@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>CM-Bot_API: include/evolutionaryHelper.h Quellcode</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javaScript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body onload='searchBox.OnSelectItem(0);'>
+<!-- Erzeugt von Doxygen 1.7.1 -->
+<script type="text/javascript"><!--
+var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
+--></script>
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+      <li id="searchli">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Suchen" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Auflistung&nbsp;der&nbsp;Dateien</span></a></li>
+      <li><a href="globals.html"><span>Datei-Elemente</span></a></li>
+    </ul>
+  </div>
+<div class="header">
+  <div class="headertitle">
+<h1>include/evolutionaryHelper.h</h1>  </div>
+</div>
+<div class="contents">
+<a href="evolutionary_helper_8h.html">gehe zur Dokumentation dieser Datei</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
+<a name="l00009"></a>00009 <span class="preprocessor">#include &quot;<a class="code" href="datatypes_8h.html" title="Abstrahiert Datentypen.">datatypes.h</a>&quot;</span>
+<a name="l00010"></a>00010 
+<a name="l00011"></a><a class="code" href="evolutionary_helper_8h.html#a51591cf51bdd6c1f6015532422e7770e">00011</a> <span class="preprocessor">#define Z  -129.1041</span>
+<a name="l00012"></a>00012 <span class="preprocessor"></span>
+<a name="l00013"></a>00013 <a class="code" href="datatypes_8h.html#a3bdfaa5201ac30cf6908f74e3f8e1e9f">DT_bool</a> <a class="code" href="evolutionary_helper_8c.html#a70facd733eb6c39b6c5e8d56f2b64900">isInArea</a>(<span class="keyword">const</span> <a class="code" href="struct_d_t__point.html" title="Datenstruktur zur Speicherung karthesischer Koordinaten.">DT_point</a>*);
+<a name="l00014"></a>00014 <a class="code" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a> <a class="code" href="evolutionary_helper_8c.html#a587768a4d2c5ad4eb410c2506e89d9f7">scorePoint</a>(<a class="code" href="struct_d_t__vector.html" title="Datenstruktur zur Speicherung eines Vektors.">DT_vector</a>* <span class="keyword">const</span> , <span class="keyword">const</span> <a class="code" href="struct_d_t__point.html" title="Datenstruktur zur Speicherung karthesischer Koordinaten.">DT_point</a>* <span class="keyword">const</span> , <a class="code" href="struct_d_t__point.html" title="Datenstruktur zur Speicherung karthesischer Koordinaten.">DT_point</a> *);
+<a name="l00015"></a>00015 <span class="keywordtype">void</span> <a class="code" href="evolutionary_helper_8c.html#aa8cc923e87acf979cf8e48347c4441a2">bubblesort</a>(<a class="code" href="struct_d_t__individuum.html" title="Datenstruktur für ein Individuum des Evolutionären Algorithmus zur Startpunktfindung.">DT_individuum</a>*, <span class="keyword">const</span> <a class="code" href="datatypes_8h.html#a6ae9a32229cf3ddd0996e852782f7ca4">DT_int</a>);
+<a name="l00016"></a>00016 <span class="keywordtype">void</span> <a class="code" href="evolutionary_helper_8c.html#ad01b7e05a3aa4d580bc95b5836ad83fd">initEvoAlg</a>();
+<a name="l00017"></a>00017 <a class="code" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a> <a class="code" href="evolutionary_helper_8c.html#ad1f25aeef359fa58b02b492c402ff726">max</a>(<a class="code" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a>, <a class="code" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a>);
+<a name="l00018"></a>00018 <a class="code" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a> <a class="code" href="evolutionary_helper_8c.html#a7c3f0c2034f0d0983eba4ae4a759f7a0">min</a>(<a class="code" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a>, <a class="code" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a>);
+<a name="l00019"></a>00019 <a class="code" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a> <a class="code" href="evolutionary_helper_8c.html#aa9118614852834655a3606ad124d70ac">getDistance</a>(<span class="keyword">const</span> <a class="code" href="struct_d_t__point.html" title="Datenstruktur zur Speicherung karthesischer Koordinaten.">DT_point</a>* <span class="keyword">const</span> , <span class="keyword">const</span> <a class="code" href="struct_d_t__point.html" title="Datenstruktur zur Speicherung karthesischer Koordinaten.">DT_point</a>* <span class="keyword">const</span> );
+<a name="l00020"></a>00020 <span class="keywordtype">void</span> <a class="code" href="evolutionary_helper_8c.html#af3e3931062d892e3df329b2cfe180746">getFunctionOfPoints</a>(<a class="code" href="struct_d_t__lin__func.html" title="Datenstruktur zur Speicherung einer linearen Funktion: y = mx + n.">DT_lin_func</a> *, <span class="keyword">const</span> <a class="code" href="struct_d_t__point.html" title="Datenstruktur zur Speicherung karthesischer Koordinaten.">DT_point</a>* <span class="keyword">const</span> ,
+<a name="l00021"></a>00021                 <span class="keyword">const</span> <a class="code" href="struct_d_t__point.html" title="Datenstruktur zur Speicherung karthesischer Koordinaten.">DT_point</a> * <span class="keyword">const</span> );
+</pre></div></div>
+</div>
+<!--- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&nbsp;</span>Alle</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&nbsp;</span>Datenstrukturen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&nbsp;</span>Dateien</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&nbsp;</span>Funktionen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&nbsp;</span>Variablen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&nbsp;</span>Typdefinitionen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&nbsp;</span>Makrodefinitionen</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<hr class="footer"/><address class="footer"><small>Erzeugt am Thu Dec 30 2010 16:08:55 für CM-Bot_API von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
+</body>
+</html>

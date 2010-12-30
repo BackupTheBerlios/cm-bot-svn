@@ -1,0 +1,657 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>CM-Bot_API: movement.c-Dateireferenz</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javaScript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body onload='searchBox.OnSelectItem(0);'>
+<!-- Erzeugt von Doxygen 1.7.1 -->
+<script type="text/javascript"><!--
+var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
+--></script>
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="annotated.html"><span>Datenstrukturen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+      <li id="searchli">
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Suchen" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Auflistung&nbsp;der&nbsp;Dateien</span></a></li>
+      <li><a href="globals.html"><span>Datei-Elemente</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="header">
+  <div class="summary">
+<a href="#define-members">Makrodefinitionen</a> &#124;
+<a href="#func-members">Funktionen</a>  </div>
+  <div class="headertitle">
+<h1>movement.c-Dateireferenz</h1>  </div>
+</div>
+<div class="contents">
+
+<p>Stellt Grundfunktionen für einen Laufalgorithmus bereit.  
+<a href="#_details">Mehr ...</a></p>
+<code>#include &quot;<a class="el" href="movement_8h_source.html">include/movement.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="xmega_8h_source.html">include/xmega.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="utils_8h_source.html">include/utils.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="communication_8h_source.html">include/communication.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="dynamixel_8h_source.html">include/dynamixel.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="kinematics_8h_source.html">include/kinematics.h</a>&quot;</code><br/>
+<table class="memberdecls">
+<tr><td colspan="2"><h2><a name="define-members"></a>
+Makrodefinitionen</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="movement_8c.html#a1385761268ac5edf5c21bc47a6a5f35a">MV_DST_X</a>&nbsp;&nbsp;&nbsp;168.5</td></tr>
+<tr><td colspan="2"><h2><a name="func-members"></a>
+Funktionen</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="movement_8c.html#a1b38069c154cd31a3dfa8b7dd49380e2">MV_action</a> (<a class="el" href="struct_d_t__leg.html">DT_leg</a> *const <a class="el" href="evolutionary_walking_8c.html#a1e4e90b9a2913586633a9ee6c6c7c3c9">leg_r</a>, <a class="el" href="struct_d_t__leg.html">DT_leg</a> *const <a class="el" href="evolutionary_walking_8c.html#a2972348a729a91bbe96bd6cf6d42770e">leg_l</a>)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Sendet das ACTION-Kommando an ein Bein.  <a href="#a1b38069c154cd31a3dfa8b7dd49380e2"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="movement_8c.html#ae2164dd2b34eff77d64b14178eebc2f6">MV_slave</a> (<a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> <a class="el" href="evolutionary_walking_8c.html#a99abda8761e0e5ba1d6f57d64d9a638a">cpuID</a>, <a class="el" href="struct_d_t__leg.html">DT_leg</a> *const <a class="el" href="evolutionary_walking_8c.html#a1e4e90b9a2913586633a9ee6c6c7c3c9">leg_r</a>, <a class="el" href="struct_d_t__leg.html">DT_leg</a> *const <a class="el" href="evolutionary_walking_8c.html#a2972348a729a91bbe96bd6cf6d42770e">leg_l</a>)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Standard-Methode für einen Slave-Controller.  <a href="#ae2164dd2b34eff77d64b14178eebc2f6"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="movement_8c.html#acc35a2518c5ae26a34408e28c98fd670">MV_masterCheckAlive</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Prüft ob die Slaves alive sind. (Master).  <a href="#acc35a2518c5ae26a34408e28c98fd670"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="movement_8c.html#a056ba0366d2c43ca2055804c23a745e4">MV_slaveStatus</a> (const <a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> *const result, const <a class="el" href="datatypes_8h.html#a690ffbb6ad43eab1176f91d2097fc967">DT_size</a> len)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Antwortet auf eine Status-Anfrage eines Masters. (Slave).  <a href="#a056ba0366d2c43ca2055804c23a745e4"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="movement_8c.html#ad38c5c02567432ab7f1d94d1c52068b1">MV_slavePoint</a> (<a class="el" href="struct_d_t__leg.html">DT_leg</a> *const <a class="el" href="evolutionary_walking_8c.html#a1e4e90b9a2913586633a9ee6c6c7c3c9">leg_r</a>, <a class="el" href="struct_d_t__leg.html">DT_leg</a> *const <a class="el" href="evolutionary_walking_8c.html#a2972348a729a91bbe96bd6cf6d42770e">leg_l</a>, const <a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> *const result, <a class="el" href="datatypes_8h.html#a690ffbb6ad43eab1176f91d2097fc967">DT_size</a> len)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Führt die benötigten Aktionen für einen empfangenen Punkt aus. (Slave).  <a href="#ad38c5c02567432ab7f1d94d1c52068b1"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="movement_8c.html#a20bf45b25a23250213575026f6243427">MV_slavePointAndSpeed</a> (<a class="el" href="struct_d_t__leg.html">DT_leg</a> *const <a class="el" href="evolutionary_walking_8c.html#a1e4e90b9a2913586633a9ee6c6c7c3c9">leg_r</a>, <a class="el" href="struct_d_t__leg.html">DT_leg</a> *const <a class="el" href="evolutionary_walking_8c.html#a2972348a729a91bbe96bd6cf6d42770e">leg_l</a>, const <a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> *const result, <a class="el" href="datatypes_8h.html#a690ffbb6ad43eab1176f91d2097fc967">DT_size</a> len)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Führt die benötigten Aktionen für einen empfangenen Punkt und Anfahrgeschwindigkeit aus. (Slave).  <a href="#a20bf45b25a23250213575026f6243427"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="movement_8c.html#abaa62232ac703822960fcc5aa9f82bbd">MV_slaveAngle</a> (<a class="el" href="struct_d_t__leg.html">DT_leg</a> *const <a class="el" href="evolutionary_walking_8c.html#a1e4e90b9a2913586633a9ee6c6c7c3c9">leg_r</a>, <a class="el" href="struct_d_t__leg.html">DT_leg</a> *const <a class="el" href="evolutionary_walking_8c.html#a2972348a729a91bbe96bd6cf6d42770e">leg_l</a>, const <a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> *const result, <a class="el" href="datatypes_8h.html#a690ffbb6ad43eab1176f91d2097fc967">DT_size</a> len)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Führt die benötigten Aktionen für einen empfangenen Winkel aus. (Slave).  <a href="#abaa62232ac703822960fcc5aa9f82bbd"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="datatypes_8h.html#a3bdfaa5201ac30cf6908f74e3f8e1e9f">DT_bool</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="movement_8c.html#a57ee8dae35666a4aa50f78f55b613b97">MV_point</a> (<a class="el" href="struct_d_t__leg.html">DT_leg</a> *const leg, const <a class="el" href="struct_d_t__point.html">DT_point</a> *const point, <a class="el" href="datatypes_8h.html#a3bdfaa5201ac30cf6908f74e3f8e1e9f">DT_bool</a> isGlobal)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Berechnet Winkel anhand des Punktes für die Servos und versendet diese.  <a href="#a57ee8dae35666a4aa50f78f55b613b97"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="datatypes_8h.html#a3bdfaa5201ac30cf6908f74e3f8e1e9f">DT_bool</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="movement_8c.html#a3ffa7d8edc15e31d02263cb68da457e9">MV_pointAndSpeed</a> (<a class="el" href="struct_d_t__leg.html">DT_leg</a> *const leg, const <a class="el" href="struct_d_t__point.html">DT_point</a> *const point, const <a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a> speed, <a class="el" href="datatypes_8h.html#a3bdfaa5201ac30cf6908f74e3f8e1e9f">DT_bool</a> isGlobal)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Berechnet Winkel anhand des Punktes für die Servos und versendet diese zusammen mit der Anfahrgeschwindigkeit.  <a href="#a3ffa7d8edc15e31d02263cb68da457e9"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="movement_8c.html#a6dee2bc93cf85fe4653480cc41c9a4c3">MV_doInitPosition</a> (<a class="el" href="struct_d_t__leg.html">DT_leg</a> *const <a class="el" href="evolutionary_walking_8c.html#a1e4e90b9a2913586633a9ee6c6c7c3c9">leg_r</a>, <a class="el" href="struct_d_t__leg.html">DT_leg</a> *const <a class="el" href="evolutionary_walking_8c.html#a2972348a729a91bbe96bd6cf6d42770e">leg_l</a>)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Fährt das rechte und linke Bein in eine Startposition.  <a href="#a6dee2bc93cf85fe4653480cc41c9a4c3"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="movement_8c.html#a21ae562a40daabedac78e90cea07b31e">MV_switchLegs</a> (<a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> *side, <a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> *master_dwn, <a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> *master_up, <a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> *slave_dwn, <a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> *slave_up)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Wechselt die aktiven und passiven Beine.  <a href="#a21ae562a40daabedac78e90cea07b31e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_d_t__point.html">DT_point</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="movement_8c.html#a85b39689305634f251be25b97c82d9a6">MV_getPntForCpuSide</a> (const <a class="el" href="struct_d_t__point.html">DT_point</a> *const p, const <a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> cpuId, const <a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> side)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Rechnet einen lokalen Punkt mit Bezug auf das mittlere Bein in einen globalen Punkt für einen Controller um.  <a href="#a85b39689305634f251be25b97c82d9a6"></a><br/></td></tr>
+</table>
+<hr/><a name="_details"></a><h2>Ausführliche Beschreibung</h2>
+<p>Stellt Grundfunktionen für einen Laufalgorithmus bereit. </p>
+<hr/><h2>Makro-Dokumentation</h2>
+<a class="anchor" id="a1385761268ac5edf5c21bc47a6a5f35a"></a><!-- doxytag: member="movement.c::MV_DST_X" ref="a1385761268ac5edf5c21bc47a6a5f35a" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MV_DST_X&nbsp;&nbsp;&nbsp;168.5</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<hr/><h2>Dokumentation der Funktionen</h2>
+<a class="anchor" id="a1b38069c154cd31a3dfa8b7dd49380e2"></a><!-- doxytag: member="movement.c::MV_action" ref="a1b38069c154cd31a3dfa8b7dd49380e2" args="(DT_leg *const leg_r, DT_leg *const leg_l)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MV_action </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_d_t__leg.html">DT_leg</a> *const &nbsp;</td>
+          <td class="paramname"> <em>leg_r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_d_t__leg.html">DT_leg</a> *const &nbsp;</td>
+          <td class="paramname"> <em>leg_l</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Sendet das ACTION-Kommando an ein Bein. </p>
+<p>Sendet das ACTION-Kommando an alle Servos eines Beines.</p>
+<dl><dt><b>Parameter:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>leg_r</em>&nbsp;</td><td>rechtes Bein </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>leg_l</em>&nbsp;</td><td>linkes Bein </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a6dee2bc93cf85fe4653480cc41c9a4c3"></a><!-- doxytag: member="movement.c::MV_doInitPosition" ref="a6dee2bc93cf85fe4653480cc41c9a4c3" args="(DT_leg *const leg_r, DT_leg *const leg_l)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MV_doInitPosition </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_d_t__leg.html">DT_leg</a> *const &nbsp;</td>
+          <td class="paramname"> <em>leg_r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_d_t__leg.html">DT_leg</a> *const &nbsp;</td>
+          <td class="paramname"> <em>leg_l</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Fährt das rechte und linke Bein in eine Startposition. </p>
+<p>Fährt das rechte und linke Bein in eine Startposition.</p>
+<dl><dt><b>Parameter:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>leg_r</em>&nbsp;</td><td>rechtes Bein </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>leg_l</em>&nbsp;</td><td>linkes Bein </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a85b39689305634f251be25b97c82d9a6"></a><!-- doxytag: member="movement.c::MV_getPntForCpuSide" ref="a85b39689305634f251be25b97c82d9a6" args="(const DT_point *const p, const DT_byte cpuId, const DT_byte side)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_d_t__point.html">DT_point</a> MV_getPntForCpuSide </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_d_t__point.html">DT_point</a> *const &nbsp;</td>
+          <td class="paramname"> <em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a>&nbsp;</td>
+          <td class="paramname"> <em>cpuId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a>&nbsp;</td>
+          <td class="paramname"> <em>side</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Rechnet einen lokalen Punkt mit Bezug auf das mittlere Bein in einen globalen Punkt für einen Controller um. </p>
+<p>Rechnet einen lokalen Punkt mit Bezug auf das mittlere Bein in einen globalen Punkt für einen Controller um.</p>
+<dl><dt><b>Parameter:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>p</em>&nbsp;</td><td>lokaler Punkt </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>cpuId</em>&nbsp;</td><td>ID des Controllers </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>side</em>&nbsp;</td><td>Seite (Links/Rechts)</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Rückgabe:</b></dt><dd>Globaler Punkt </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="acc35a2518c5ae26a34408e28c98fd670"></a><!-- doxytag: member="movement.c::MV_masterCheckAlive" ref="acc35a2518c5ae26a34408e28c98fd670" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MV_masterCheckAlive </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Prüft ob die Slaves alive sind. (Master). </p>
+<p>Prüft blockierend ob die Slaves alive sind. </p>
+
+</div>
+</div>
+<a class="anchor" id="a57ee8dae35666a4aa50f78f55b613b97"></a><!-- doxytag: member="movement.c::MV_point" ref="a57ee8dae35666a4aa50f78f55b613b97" args="(DT_leg *const leg, const DT_point *const point, DT_bool isGlobal)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="datatypes_8h.html#a3bdfaa5201ac30cf6908f74e3f8e1e9f">DT_bool</a> MV_point </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_d_t__leg.html">DT_leg</a> *const &nbsp;</td>
+          <td class="paramname"> <em>leg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_d_t__point.html">DT_point</a> *const &nbsp;</td>
+          <td class="paramname"> <em>point</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#a3bdfaa5201ac30cf6908f74e3f8e1e9f">DT_bool</a>&nbsp;</td>
+          <td class="paramname"> <em>isGlobal</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Berechnet Winkel anhand des Punktes für die Servos und versendet diese. </p>
+<p>Berechnet Winkel anhand des Punktes für die Servos und versendet diese.</p>
+<dl><dt><b>Parameter:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>leg</em>&nbsp;</td><td>Bein </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>point</em>&nbsp;</td><td>Punkt </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>isGlobal</em>&nbsp;</td><td>Weltkoordinate, wenn true </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a3ffa7d8edc15e31d02263cb68da457e9"></a><!-- doxytag: member="movement.c::MV_pointAndSpeed" ref="a3ffa7d8edc15e31d02263cb68da457e9" args="(DT_leg *const leg, const DT_point *const point, const DT_double speed, DT_bool isGlobal)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="datatypes_8h.html#a3bdfaa5201ac30cf6908f74e3f8e1e9f">DT_bool</a> MV_pointAndSpeed </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_d_t__leg.html">DT_leg</a> *const &nbsp;</td>
+          <td class="paramname"> <em>leg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_d_t__point.html">DT_point</a> *const &nbsp;</td>
+          <td class="paramname"> <em>point</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="datatypes_8h.html#a2e543411955afdb31c0d9feefd1cefed">DT_double</a>&nbsp;</td>
+          <td class="paramname"> <em>speed</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#a3bdfaa5201ac30cf6908f74e3f8e1e9f">DT_bool</a>&nbsp;</td>
+          <td class="paramname"> <em>isGlobal</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Berechnet Winkel anhand des Punktes für die Servos und versendet diese zusammen mit der Anfahrgeschwindigkeit. </p>
+<p>Berechnet Winkel anhand des Punktes für die Servos und versendet diese zusammen mit der Anfahrgeschwindigkeit.</p>
+<dl><dt><b>Parameter:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>leg</em>&nbsp;</td><td>Bein </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>point</em>&nbsp;</td><td>Punkt </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>speed</em>&nbsp;</td><td>Anfahrgeschwindigkeit </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>isGlobal</em>&nbsp;</td><td>Weltkoordinate, wenn true </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ae2164dd2b34eff77d64b14178eebc2f6"></a><!-- doxytag: member="movement.c::MV_slave" ref="ae2164dd2b34eff77d64b14178eebc2f6" args="(DT_byte cpuID, DT_leg *const leg_r, DT_leg *const leg_l)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MV_slave </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a>&nbsp;</td>
+          <td class="paramname"> <em>cpuID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_d_t__leg.html">DT_leg</a> *const &nbsp;</td>
+          <td class="paramname"> <em>leg_r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_d_t__leg.html">DT_leg</a> *const &nbsp;</td>
+          <td class="paramname"> <em>leg_l</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Standard-Methode für einen Slave-Controller. </p>
+<p>Standard-Methode für einen Slave-Controller. Nimmt Befehle eines Masters entgegen und führt die entsprechenden Aktionen aus.</p>
+<dl><dt><b>Parameter:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>cpuID</em>&nbsp;</td><td>ID des Controllers auf dem die Methode ausgeführt wird </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>leg_r</em>&nbsp;</td><td>rechtes Bein </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>leg_l</em>&nbsp;</td><td>linkes Bein </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="abaa62232ac703822960fcc5aa9f82bbd"></a><!-- doxytag: member="movement.c::MV_slaveAngle" ref="abaa62232ac703822960fcc5aa9f82bbd" args="(DT_leg *const leg_r, DT_leg *const leg_l, const DT_byte *const result, DT_size len)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MV_slaveAngle </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_d_t__leg.html">DT_leg</a> *const &nbsp;</td>
+          <td class="paramname"> <em>leg_r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_d_t__leg.html">DT_leg</a> *const &nbsp;</td>
+          <td class="paramname"> <em>leg_l</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> *const &nbsp;</td>
+          <td class="paramname"> <em>result</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#a690ffbb6ad43eab1176f91d2097fc967">DT_size</a>&nbsp;</td>
+          <td class="paramname"> <em>len</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Führt die benötigten Aktionen für einen empfangenen Winkel aus. (Slave). </p>
+<p>Führt die benötigten Aktionen für einen empfangenen Winkel aus. (Slave)</p>
+<dl><dt><b>Parameter:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>leg_r</em>&nbsp;</td><td>rechtes Bein </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>leg_l</em>&nbsp;</td><td>linkes Bein </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>result</em>&nbsp;</td><td>Anfrage-Paket zum Auswerten </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>len</em>&nbsp;</td><td>Länge des Pakets </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ad38c5c02567432ab7f1d94d1c52068b1"></a><!-- doxytag: member="movement.c::MV_slavePoint" ref="ad38c5c02567432ab7f1d94d1c52068b1" args="(DT_leg *const leg_r, DT_leg *const leg_l, const DT_byte *const result, DT_size len)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MV_slavePoint </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_d_t__leg.html">DT_leg</a> *const &nbsp;</td>
+          <td class="paramname"> <em>leg_r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_d_t__leg.html">DT_leg</a> *const &nbsp;</td>
+          <td class="paramname"> <em>leg_l</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> *const &nbsp;</td>
+          <td class="paramname"> <em>result</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#a690ffbb6ad43eab1176f91d2097fc967">DT_size</a>&nbsp;</td>
+          <td class="paramname"> <em>len</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Führt die benötigten Aktionen für einen empfangenen Punkt aus. (Slave). </p>
+<p>Führt die benötigten Aktionen für einen empfangenen Punkt aus. (Slave)</p>
+<dl><dt><b>Parameter:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>leg_r</em>&nbsp;</td><td>rechtes Bein </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>leg_l</em>&nbsp;</td><td>linkes Bein </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>result</em>&nbsp;</td><td>Anfrage-Paket zum Auswerten </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>len</em>&nbsp;</td><td>Länge des Pakets </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a20bf45b25a23250213575026f6243427"></a><!-- doxytag: member="movement.c::MV_slavePointAndSpeed" ref="a20bf45b25a23250213575026f6243427" args="(DT_leg *const leg_r, DT_leg *const leg_l, const DT_byte *const result, DT_size len)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MV_slavePointAndSpeed </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_d_t__leg.html">DT_leg</a> *const &nbsp;</td>
+          <td class="paramname"> <em>leg_r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_d_t__leg.html">DT_leg</a> *const &nbsp;</td>
+          <td class="paramname"> <em>leg_l</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> *const &nbsp;</td>
+          <td class="paramname"> <em>result</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#a690ffbb6ad43eab1176f91d2097fc967">DT_size</a>&nbsp;</td>
+          <td class="paramname"> <em>len</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Führt die benötigten Aktionen für einen empfangenen Punkt und Anfahrgeschwindigkeit aus. (Slave). </p>
+<p>Führt die benötigten Aktionen für einen empfangenen Punkt und Anfahrgeschwindigkeit aus. (Slave)</p>
+<dl><dt><b>Parameter:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>leg_r</em>&nbsp;</td><td>rechtes Bein </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>leg_l</em>&nbsp;</td><td>linkes Bein </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>result</em>&nbsp;</td><td>Anfrage-Paket zum Auswerten </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>len</em>&nbsp;</td><td>Länge des Pakets </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a056ba0366d2c43ca2055804c23a745e4"></a><!-- doxytag: member="movement.c::MV_slaveStatus" ref="a056ba0366d2c43ca2055804c23a745e4" args="(const DT_byte *const result, const DT_size len)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MV_slaveStatus </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> *const &nbsp;</td>
+          <td class="paramname"> <em>result</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="datatypes_8h.html#a690ffbb6ad43eab1176f91d2097fc967">DT_size</a>&nbsp;</td>
+          <td class="paramname"> <em>len</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Antwortet auf eine Status-Anfrage eines Masters. (Slave). </p>
+<p>Antwortet auf eine Status-Anfrage eines Masters. (Slave)</p>
+<dl><dt><b>Parameter:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>result</em>&nbsp;</td><td>Anfrage-Paket zum Auswerten </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>len</em>&nbsp;</td><td>Länge des Pakets </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a21ae562a40daabedac78e90cea07b31e"></a><!-- doxytag: member="movement.c::MV_switchLegs" ref="a21ae562a40daabedac78e90cea07b31e" args="(DT_byte *side, DT_byte *master_dwn, DT_byte *master_up, DT_byte *slave_dwn, DT_byte *slave_up)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MV_switchLegs </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> *&nbsp;</td>
+          <td class="paramname"> <em>side</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> *&nbsp;</td>
+          <td class="paramname"> <em>master_dwn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> *&nbsp;</td>
+          <td class="paramname"> <em>master_up</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> *&nbsp;</td>
+          <td class="paramname"> <em>slave_dwn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="datatypes_8h.html#aac5992f3490dd6e0f54ae15c36ae86ef">DT_byte</a> *&nbsp;</td>
+          <td class="paramname"> <em>slave_up</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Wechselt die aktiven und passiven Beine. </p>
+<p>Wechselt die aktiven und passiven Beine (Oben/Unten). Übergebene Variablen können in den jeweiligen Laufalgorithmus ausgewertet werden.</p>
+<dl><dt><b>Parameter:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>side</em>&nbsp;</td><td>Aktive Seite (Seite mit Bodenkontakt), mittleres Beinpaar als Referenz </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>master_dwn</em>&nbsp;</td><td>Seite (Links/Rechts) für den Master mit Bodenkontakt </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>master_up</em>&nbsp;</td><td>Seite (Links/Rechts) für den Master ohne Bodenkontakt </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>slave_dwn</em>&nbsp;</td><td>Seite (Links/Rechts) für den Slave mit Bodenkontakt </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>slave_up</em>&nbsp;</td><td>Seite (Links/Rechts) für den Master ohne Bodenkontakt </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div>
+<!--- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&nbsp;</span>Alle</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&nbsp;</span>Datenstrukturen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&nbsp;</span>Dateien</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&nbsp;</span>Funktionen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&nbsp;</span>Variablen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&nbsp;</span>Typdefinitionen</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&nbsp;</span>Makrodefinitionen</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<hr class="footer"/><address class="footer"><small>Erzeugt am Thu Dec 30 2010 16:08:55 für CM-Bot_API von&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
+</body>
+</html>
