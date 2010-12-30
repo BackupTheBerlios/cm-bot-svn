@@ -126,6 +126,7 @@ DT_byte COM_receive(USART_data_t* const usart_data, DT_byte* const dest) {
  * \param	packet	Zuversendendes Paket
  * \param	l	Größe des Pakets
  * \param	result	Zielfeld für Antowort
+ * \param	hasResponse	Wartet auf eine Antwort, wenn true
  *
  * \return Größe der empfangenen Antwort
  */
@@ -163,6 +164,17 @@ DT_byte COM_send(DT_byte* const packet, DT_size l, DT_byte* const result,
 	return len;
 }
 
+/**
+ * \brief	Ruft den Status eines Controllers ab.
+ *
+ * 			Ruft den Status eines Controllers ab. Broadcast nicht möglich!
+ *
+ * \param	cpuID	ID des Controllers
+ * \param	param	Parameter
+ * \param	result	Zielfeld für Antowort
+ *
+ * \return Größe der empfangenen Antwort
+ */
 DT_size COM_requestStatus(DT_byte cpuID, DT_byte param, DT_byte* const result) {
 	// Broadcast bei requestStatus nicht möglich
 	if (cpuID == COM_BRDCAST_ID)
@@ -180,12 +192,29 @@ DT_size COM_requestStatus(DT_byte cpuID, DT_byte param, DT_byte* const result) {
 
 }
 
+/**
+ * \brief	Konvertiert einen Double-Wert in ein Byte-Array.
+ *
+ * 			Konvertiert einen Double-Wert in ein Byte-Array.
+ *
+ * \param	value	Double-Wert
+ * \param	array	Zielfeld
+ */
 void COM_doubleToByteArray(const DT_double value, DT_byte* const array) {
 	DT_byte* ptr = (DT_byte*) &value;
 	for (DT_size i = 0; i < sizeof(DT_double); i++)
 		array[i] = ptr[i];
 }
 
+/**
+ * \brief	Konvertiert ein Byte-Array zu einem Double-Wert.
+ *
+ * 			Konvertiert ein Byte-Array zu einem Double-Wert.
+ *
+ * \param	array	Byte-Array mit Double-Wert
+ *
+ * \return	Double-Wert
+ */
 DT_double COM_byteArrayToDouble(const DT_byte* const array) {
 	DT_double value;
 	DT_byte* ptr = (DT_byte*) &value;
@@ -194,30 +223,95 @@ DT_double COM_byteArrayToDouble(const DT_byte* const array) {
 	return value;
 }
 
+/**
+ * \brief	Prüft ob Flag für rechtes Bein gesetzt ist.
+ *
+ * 			Prüft ob Flag für rechtes Bein gesetzt ist.
+ *
+ * \param	result	Zu prüfendes Packet
+ *
+ * \return	true, wenn Flag gesetzt
+ */
 DT_bool COM_isRightLeg(const DT_byte* const result) {
 	return COM_CONF_RIGHT == (result[5] & COM_CONF_RIGHT);
 }
 
+/**
+ * \brief	Prüft ob Flag für linkes Bein gesetzt ist.
+ *
+ * 			Prüft ob Flag für linkes Bein gesetzt ist.
+ *
+ * \param	result	Zu prüfendes Packet
+ *
+ * \return	true, wenn Flag gesetzt
+ */
 DT_bool COM_isLeftLeg(const DT_byte* const result) {
 	return (COM_CONF_LEFT == (result[5] & COM_CONF_LEFT));
 }
 
+/**
+ * \brief	Prüft ob Flag für globalen Punkt gesetzt ist.
+ *
+ * 			Prüft ob Flag für globalen Punkt gesetzt ist.
+ *
+ * \param	result	Zu prüfendes Packet
+ *
+ * \return	true, wenn Flag gesetzt
+ */
 DT_bool COM_isGlobal(const DT_byte* const result) {
 	return (COM_CONF_GLOB == (result[5] & COM_CONF_GLOB));
 }
 
+/**
+ * \brief	Prüft ob Flag für Hüftgelenk gesetzt ist.
+ *
+ * 			Prüft ob Flag für Hüftgelenk gesetzt ist.
+ *
+ * \param	result	Zu prüfendes Packet
+ *
+ * \return	true, wenn Flag gesetzt
+ */
 DT_bool COM_isHip(const DT_byte* const result) {
 	return (COM_CONF_HIP == (result[5] & COM_CONF_HIP));
 }
 
+/**
+ * \brief	Prüft ob Flag für Kniegelenk gesetzt ist.
+ *
+ * 			Prüft ob Flag für Kniegelenk gesetzt ist.
+ *
+ * \param	result	Zu prüfendes Packet
+ *
+ * \return	true, wenn Flag gesetzt
+ */
 DT_bool COM_isKnee(const DT_byte* const result) {
 	return (COM_CONF_KNEE == (result[5] & COM_CONF_KNEE));
 }
 
+/**
+ * \brief	Prüft ob Flag für Fußgelenk gesetzt ist.
+ *
+ * 			Prüft ob Flag für Fußgelenk gesetzt ist.
+ *
+ * \param	result	Zu prüfendes Packet
+ *
+ * \return	true, wenn Flag gesetzt
+ */
 DT_bool COM_isFoot(const DT_byte* const result) {
 	return (COM_CONF_FOOT == (result[5] & COM_CONF_FOOT));
 }
 
+/**
+ * \brief	Sendet einen Punkt an einen Controller.
+ *
+ * 			Sendet einen Punkt an einen Controller.
+ *
+ * \param	cpuID	ID des Controllers
+ * \param	point	Zuversendender Punkt
+ * \param	config	Parameter, z.B. global, left, right ...
+ *
+ * \return false, wenn Fehler
+ */
 DT_bool COM_sendPoint(DT_byte cpuID, const DT_point* const point,
 		const DT_byte config) {
 	DEBUG(("pre_snd_pnt",sizeof("pre_snd_pnt")))
@@ -249,6 +343,18 @@ DT_bool COM_sendPoint(DT_byte cpuID, const DT_point* const point,
 		return false;
 }
 
+/**
+ * \brief	Sendet einen Punkt und Anfahrgeschwindigkeit an einen Controller.
+ *
+ * 			Sendet einen Punkt und Anfahrgeschwindigkeit zusammen in einem Packet an einen Controller.
+ *
+ * \param	cpuID	ID des Controllers
+ * \param	point	Zuversendender Punkt
+ * \param	speed	Anfahrgeschwindigkeit
+ * \param	config	Parameter, z.B. global, left, right ...
+ *
+ * \return false, wenn Fehler
+ */
 DT_bool COM_sendPointAndSpeed(DT_byte cpuID, const DT_point* const point,
 		const DT_double speed, const DT_byte config) {
 	DEBUG(("pre_snd_pnt",sizeof("pre_snd_pnt")))
@@ -283,6 +389,15 @@ DT_bool COM_sendPointAndSpeed(DT_byte cpuID, const DT_point* const point,
 		return false;
 }
 
+/**
+ * \brief	Ermittelt aus einem Packet den Punkt.
+ *
+ * 			Ermittelt aus einem Packet den Punkt.
+ *
+ * \param	result	Zu prüfendes Packet
+ *
+ * \return Point
+ */
 DT_point COM_getPointFromPacket(const DT_byte* const result) {
 	DT_point p;
 
@@ -293,12 +408,32 @@ DT_point COM_getPointFromPacket(const DT_byte* const result) {
 	return p;
 }
 
+/**
+ * \brief	Ermittelt aus einem Packet die Anfahrgeschwindigkeit.
+ *
+ * 			Ermittelt aus einem Packet die Anfahrgeschwindigkeit.
+ *
+ * \param	result	Zu prüfendes Packet
+ *
+ * \return Anfahrgeschwindigkeit
+ */
 DT_double COM_getSpeedFromPacket(const DT_byte* const result) {
 	DT_double speed;
 	speed = COM_byteArrayToDouble(&result[19]);
 	return speed;
 }
 
+/**
+ * \brief	Sendet einen Winkel an einen Controller.
+ *
+ * 			Sendet einen Winkel an einen Controller.
+ *
+ * \param	cpuID	ID des Controllers
+ * \param	angle	Zuversendender Winkel
+ * \param	config	Parameter, z.B. global, left, right ...
+ *
+ * \return false, wenn Fehler
+ */
 DT_bool COM_sendAngle(DT_byte cpuID, const DT_double angle,
 		const DT_byte config) {
 	DEBUG(("pre_snd_pnt",sizeof("pre_snd_pnt")))
@@ -327,12 +462,28 @@ DT_bool COM_sendAngle(DT_byte cpuID, const DT_double angle,
 		return false;
 }
 
+/**
+ * \brief	Ermittelt aus einem Packet den Winkel.
+ *
+ * 			Ermittelt aus einem Packet den Winkel.
+ *
+ * \param	result	Zu prüfendes Packet
+ *
+ * \return Winkel
+ */
 DT_double COM_getAngleFromPacket(const DT_byte* const result) {
 	DT_double angle;
 	angle = COM_byteArrayToDouble(&result[6]);
 	return angle;
 }
 
+/**
+ * \brief	Sendet das ACTION-Kommando an einen Controller.
+ *
+ * 			Sendet das ACTION-Kommando an einen Controller.
+ *
+ * \param	cpuID	ID des Controllers
+ */
 void COM_sendAction(DT_byte cpuID) {
 	DEBUG(("snd_act",sizeof("snd_act")))
 	DT_byte result[DT_RESULT_BUFFER_SIZE];
@@ -347,6 +498,15 @@ void COM_sendAction(DT_byte cpuID) {
 	COM_send(packet, len, result, false);
 }
 
+/**
+ * \brief	Sendet eine isAlive-Anfrage an einen Controller.
+ *
+ * 			Sendet eine isAlive-Anfrage an einen Controller.
+ *
+ * \param	cpuID	ID des Controllers
+ *
+ * \return	true, wenn Alive
+ */
 DT_bool COM_isAlive(DT_byte cpuID) {
 	DT_byte result[DT_RESULT_BUFFER_SIZE];
 	DT_size len;
@@ -357,6 +517,13 @@ DT_bool COM_isAlive(DT_byte cpuID) {
 		return false;
 }
 
+/**
+ * \brief	Sendet ein ACK an einen Controller.
+ *
+ * 			Sendet ein ACK an einen Controller.
+ *
+ * \param	cpuID	ID des Controllers
+ */
 void COM_sendACK(DT_byte cpuID) {
 	DT_byte result[DT_RESULT_BUFFER_SIZE];
 	const DT_size len = 6;
@@ -370,6 +537,14 @@ void COM_sendACK(DT_byte cpuID) {
 	COM_send(packet, len, result, false);
 }
 
+/**
+ * \brief	Sendet ein NAK an einen Controller.
+ *
+ * 			Sendet ein NAK an einen Controller.
+ *
+ * \param	cpuID	ID des Controllers
+ * \param	errCode	Fehlercode
+ */
 void COM_sendNAK(DT_byte cpuID, DT_byte errCode) {
 	DT_byte result[DT_RESULT_BUFFER_SIZE];
 	const DT_size len = 7;

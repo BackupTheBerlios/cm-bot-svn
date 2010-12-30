@@ -1,6 +1,9 @@
 /**
  * \file	utils.h
+ *
  * \brief	Verschiedene Hilfsmethoden.
+ *
+ * 			Stellt verschiedene Hilfsmethoden für allgemeinen Gebrauch zur Verfügung.
  */
 
 #ifndef UTILS_H_

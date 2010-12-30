@@ -23,7 +23,10 @@
 #define B_5 0x0100
 #define B_6 0x0200
 
-/* Instruction aus dem High- und Low-Teil zusammensetzen
+/**
+ * \brief	Liest empfangene Befehle vom Remote-Controller aus.
+ *
+ * Instruction aus dem High- und Low-Teil zusammensetzen
  * Bsp:
  * 	Paket für B_2:
  *      0  1  2  3  4  5  ...
@@ -40,7 +43,7 @@ DT_cmd RMT_getCommand() {
 	DT_cmd cmd = 0x0000;
 	DT_cmd tmp_cmd = 0xFFFF;
 	DT_bool button_release = false;
-	DT_size timeout = 65000;
+	// DT_size timeout = 65000;
 	for (i = 0; i < DT_RESULT_BUFFER_SIZE; i++)
 		result[i] = 0x00;
 	if (RMT_receive(&XM_remote_data, result) > 0) {
@@ -60,13 +63,13 @@ DT_cmd RMT_getCommand() {
 	return cmd;
 }
 
-/*
+/**
  * \brief 	USART-Empfangsmethode für Remote-Controller.
  *
  * 			Diese Methode liest den Remote-USART-Buffer aus und prüft,
  * 			ob ein vollständiges Paket empfangen wurde.
  *
- * \param	rxBuffer	Empfangs-Buffer der jeweiligen USART
+ * \param	usart_data	USART
  * \param	dest		Byte-Array für Antwort-Paket
  *
  * \return	Länge des Antwortpakets
@@ -98,7 +101,7 @@ DT_byte RMT_receive(USART_data_t* const usart_data, DT_byte* const dest) {
 	}
 }
 
-/*
+/**
  * \brief 	Kein Taster gedrückt.
  *
  * 			Achtung: cmd muss zunächst durch getCommand abgerufen werden.
@@ -114,7 +117,7 @@ DT_bool RMT_NonPressed(DT_cmd cmd) {
 		return false;
 }
 
-/*
+/**
  * \brief 	Ist Taster Up gedrückt.
  *
  * 			Achtung: cmd muss zunächst durch getCommand abgerufen werden.
@@ -130,7 +133,7 @@ DT_bool RMT_isUpPressed(DT_cmd cmd) {
 		return false;
 }
 
-/*
+/**
  * \brief 	Ist Taster Down gedrückt.
  *
  * 			Achtung: cmd muss zunächst durch getCommand abgerufen werden.
@@ -146,7 +149,7 @@ DT_bool RMT_isDownPressed(DT_cmd cmd) {
 		return false;
 }
 
-/*
+/**
  * \brief 	Ist Taster Left gedrückt.
  *
  * 			Achtung: cmd muss zunächst durch getCommand abgerufen werden.
@@ -162,7 +165,7 @@ DT_bool RMT_isLeftPressed(DT_cmd cmd) {
 		return false;
 }
 
-/*
+/**
  * \brief 	Ist Taster Right gedrückt.
  *
  * 			Achtung: cmd muss zunächst durch getCommand abgerufen werden.
@@ -178,7 +181,7 @@ DT_bool RMT_isRightPressed(DT_cmd cmd) {
 		return false;
 }
 
-/*
+/**
  * \brief 	Ist Taster 1 gedrückt.
  *
  * 			Achtung: cmd muss zunächst durch getCommand abgerufen werden.
@@ -194,7 +197,7 @@ DT_bool RMT_isButton1Pressed(DT_cmd cmd) {
 		return false;
 }
 
-/*
+/**
  * \brief 	Ist Taster 2 gedrückt.
  *
  * 			Achtung: cmd muss zunächst durch getCommand abgerufen werden.
@@ -210,7 +213,7 @@ DT_bool RMT_isButton2Pressed(DT_cmd cmd) {
 		return false;
 }
 
-/*
+/**
  * \brief 	Ist Taster 3 gedrückt.
  *
  * 			Achtung: cmd muss zunächst durch getCommand abgerufen werden.
@@ -226,7 +229,7 @@ DT_bool RMT_isButton3Pressed(DT_cmd cmd) {
 		return false;
 }
 
-/*
+/**
  * \brief 	Ist Taster 4 gedrückt.
  *
  * 			Achtung: cmd muss zunächst durch getCommand abgerufen werden.
@@ -242,7 +245,7 @@ DT_bool RMT_isButton4Pressed(DT_cmd cmd) {
 		return false;
 }
 
-/*
+/**
  * \brief 	Ist Taster 5 gedrückt.
  *
  * 			Achtung: cmd muss zunächst durch getCommand abgerufen werden.
@@ -258,7 +261,7 @@ DT_bool RMT_isButton5Pressed(DT_cmd cmd) {
 		return false;
 }
 
-/*
+/**
  * \brief 	Ist Taster 6 gedrückt.
  *
  * 			Achtung: cmd muss zunächst durch getCommand abgerufen werden.

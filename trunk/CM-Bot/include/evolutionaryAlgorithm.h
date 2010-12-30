@@ -1,6 +1,9 @@
 /**
- *	\file evolutionaryAlgorithms.h
+ * \file	evolutionaryAlgorithm.h
  *
+ * \brief	Evolutionärer Algorithmus zur Startpunktfindung.
+ *
+ * 			Startpunkfindung auf Basis eines Evolutionären Algorithmus.
  */
 
 

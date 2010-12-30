@@ -1,7 +1,7 @@
 /**
  * \file	dynamixel.h
  *
- * \brief	TODO
+ * \brief	Methoden zur Steuerung der Dynamixal AX-12.
  */
 
 #ifndef DYNAMIXEL_H_

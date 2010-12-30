@@ -1,8 +1,7 @@
-/*
- * remote.h
+/**
+ * \file	remote.h
  *
- *  Created on: 29.10.2010
- *      Author: ricky
+ * \brief	Methoden zur Steuerung durch den RC-100 Remote Controller.
  */
 
 #ifndef REMOTE_H_

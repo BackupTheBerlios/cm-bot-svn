@@ -1,8 +1,7 @@
-/*
- * movement.c
+/**
+ * \file	movement.c
  *
- *  Created on: 23.11.2010
- *      Author: christof
+ * \brief	Stellt Grundfunktionen für einen Laufalgorithmus bereit.
  */
 
 #include "include/movement.h"
@@ -14,6 +13,14 @@
 
 #define MV_DST_X	168.5
 
+/**
+ * \brief	Sendet das ACTION-Kommando an ein Bein.
+ *
+ * 			Sendet das ACTION-Kommando an alle Servos eines Beines.
+ *
+ * \param	leg_r	rechtes Bein
+ * \param	leg_l	linkes Bein
+ */
 void MV_action(DT_leg* const leg_r, DT_leg* const leg_l) {
 	DNX_sendAction(leg_r->hip.id);
 	DNX_sendAction(leg_r->knee.id);
@@ -24,6 +31,15 @@ void MV_action(DT_leg* const leg_r, DT_leg* const leg_l) {
 	DNX_sendAction(leg_l->foot.id);
 }
 
+/**
+ * \brief	Standard-Methode für einen Slave-Controller.
+ *
+ * 			Standard-Methode für einen Slave-Controller. Nimmt Befehle eines Masters entgegen und führt die entsprechenden Aktionen aus.
+ *
+ * \param	cpuID	ID des Controllers auf dem die Methode ausgeführt wird
+ * \param	leg_r	rechtes Bein
+ * \param	leg_l	linkes Bein
+ */
 void MV_slave(DT_byte cpuID, DT_leg* const leg_r, DT_leg* const leg_l) {
 	DT_size len;
 	DT_byte result[DT_RESULT_BUFFER_SIZE];
@@ -69,6 +85,11 @@ void MV_slave(DT_byte cpuID, DT_leg* const leg_r, DT_leg* const leg_l) {
 	}
 }
 
+/**
+ * \brief	Prüft ob die Slaves alive sind. (Master)
+ *
+ * 			Prüft blockierend ob die Slaves alive sind.
+ */
 void MV_masterCheckAlive() {
 	// CHECK CPUs
 	DT_bool isAlive = false;
@@ -83,6 +104,14 @@ void MV_masterCheckAlive() {
 	XM_LED_ON
 }
 
+/**
+ * \brief	Antwortet auf eine Status-Anfrage eines Masters. (Slave)
+ *
+ * 			Antwortet auf eine Status-Anfrage eines Masters. (Slave)
+ *
+ * \param	result	Anfrage-Paket zum Auswerten
+ * \param	len	Länge des Pakets
+ */
 void MV_slaveStatus(const DT_byte* const result, const DT_size len) {
 	switch (result[5]) {
 	case COM_IS_ALIVE:
@@ -94,6 +123,16 @@ void MV_slaveStatus(const DT_byte* const result, const DT_size len) {
 	}
 }
 
+/**
+ * \brief	Führt die benötigten Aktionen für einen empfangenen Punkt aus. (Slave)
+ *
+ * 			Führt die benötigten Aktionen für einen empfangenen Punkt aus. (Slave)
+ *
+ * \param	leg_r	rechtes Bein
+ * \param	leg_l	linkes Bein
+ * \param	result	Anfrage-Paket zum Auswerten
+ * \param	len	Länge des Pakets
+ */
 void MV_slavePoint(DT_leg* const leg_r, DT_leg* const leg_l,
 		const DT_byte* const result, DT_size len) {
 	DT_point p = COM_getPointFromPacket(result);
@@ -113,6 +152,16 @@ void MV_slavePoint(DT_leg* const leg_r, DT_leg* const leg_l,
 	}
 }
 
+/**
+ * \brief	Führt die benötigten Aktionen für einen empfangenen Punkt und Anfahrgeschwindigkeit aus. (Slave)
+ *
+ * 			Führt die benötigten Aktionen für einen empfangenen Punkt und Anfahrgeschwindigkeit aus. (Slave)
+ *
+ * \param	leg_r	rechtes Bein
+ * \param	leg_l	linkes Bein
+ * \param	result	Anfrage-Paket zum Auswerten
+ * \param	len	Länge des Pakets
+ */
 void MV_slavePointAndSpeed(DT_leg* const leg_r, DT_leg* const leg_l,
 		const DT_byte* const result, DT_size len) {
 	DEBUG(("SPEED", sizeof("SPEED")))
@@ -133,6 +182,16 @@ void MV_slavePointAndSpeed(DT_leg* const leg_r, DT_leg* const leg_l,
 	}
 }
 
+/**
+ * \brief	Führt die benötigten Aktionen für einen empfangenen Winkel aus. (Slave)
+ *
+ * 			Führt die benötigten Aktionen für einen empfangenen Winkel aus. (Slave)
+ *
+ * \param	leg_r	rechtes Bein
+ * \param	leg_l	linkes Bein
+ * \param	result	Anfrage-Paket zum Auswerten
+ * \param	len	Länge des Pakets
+ */
 void MV_slaveAngle(DT_leg* const leg_r, DT_leg* const leg_l,
 		const DT_byte* const result, DT_size len) {
 	DT_double angle = COM_getAngleFromPacket(result);
@@ -157,6 +216,15 @@ void MV_slaveAngle(DT_leg* const leg_r, DT_leg* const leg_l,
 	// TODO COM_sendNAK(COM_MASTER, COM_ERR_POINT_OUT_OF_BOUNDS);
 }
 
+/**
+ * \brief	Berechnet Winkel anhand des Punktes für die Servos und versendet diese.
+ *
+ * 			Berechnet Winkel anhand des Punktes für die Servos und versendet diese.
+ *
+ * \param	leg	Bein
+ * \param	point	Punkt
+ * \param	isGlobal	Weltkoordinate, wenn true
+ */
 DT_bool MV_point(DT_leg* const leg, const DT_point* const point,
 		DT_bool isGlobal) {
 	DT_bool ret;
@@ -180,6 +248,16 @@ DT_bool MV_point(DT_leg* const leg, const DT_point* const point,
 	}
 }
 
+/**
+ * \brief	Berechnet Winkel anhand des Punktes für die Servos und versendet diese zusammen mit der Anfahrgeschwindigkeit.
+ *
+ * 			Berechnet Winkel anhand des Punktes für die Servos und versendet diese zusammen mit der Anfahrgeschwindigkeit.
+ *
+ * \param	leg	Bein
+ * \param	point	Punkt
+ * \param	speed	Anfahrgeschwindigkeit
+ * \param	isGlobal	Weltkoordinate, wenn true
+ */
 DT_bool MV_pointAndSpeed(DT_leg* const leg, const DT_point* const point, const DT_double speed,
 		DT_bool isGlobal) {
 	DT_bool ret;
@@ -203,6 +281,14 @@ DT_bool MV_pointAndSpeed(DT_leg* const leg, const DT_point* const point, const D
 	}
 }
 
+/**
+ * \brief	Fährt das rechte und linke Bein in eine Startposition.
+ *
+ * 			Fährt das rechte und linke Bein in eine Startposition.
+ *
+ * \param	leg_r	rechtes Bein
+ * \param	leg_l	linkes Bein
+ */
 void MV_doInitPosition(DT_leg* const leg_r, DT_leg* const leg_l) {
 	XM_LED_OFF
 	DT_byte config;
@@ -257,6 +343,17 @@ void MV_doInitPosition(DT_leg* const leg_r, DT_leg* const leg_l) {
 	XM_LED_ON
 }
 
+/**
+ * \brief	Wechselt die aktiven und passiven Beine.
+ *
+ * 			Wechselt die aktiven und passiven Beine (Oben/Unten). Übergebene Variablen können in den jeweiligen Laufalgorithmus ausgewertet werden.
+ *
+ * \param	side	Aktive Seite (Seite mit Bodenkontakt), mittleres Beinpaar als Referenz
+ * \param	master_dwn	Seite (Links/Rechts) für den Master mit Bodenkontakt
+ * \param	master_up	Seite (Links/Rechts) für den Master ohne Bodenkontakt
+ * \param	slave_dwn	Seite (Links/Rechts) für den Slave mit Bodenkontakt
+ * \param	slave_up	Seite (Links/Rechts) für den Master ohne Bodenkontakt
+ */
 void MV_switchLegs(DT_byte* side, DT_byte* master_dwn, DT_byte* master_up,
 		DT_byte* slave_dwn, DT_byte* slave_up) {
 	if (*side == COM_CONF_LEFT) {
@@ -278,6 +375,17 @@ void MV_switchLegs(DT_byte* side, DT_byte* master_dwn, DT_byte* master_up,
 	}
 }
 
+/**
+ * \brief	Rechnet einen lokalen Punkt mit Bezug auf das mittlere Bein in einen globalen Punkt für einen Controller um.
+ *
+ * 			Rechnet einen lokalen Punkt mit Bezug auf das mittlere Bein in einen globalen Punkt für einen Controller um.
+ *
+ * \param	p	lokaler Punkt
+ * \param	cpuId	ID des Controllers
+ * \param	side	Seite (Links/Rechts)
+ *
+ * \return	Globaler Punkt
+ */
 DT_point MV_getPntForCpuSide(const DT_point* const p, const DT_byte cpuId,
 		const DT_byte side) {
 	DT_point pTmp = *p;

@@ -1,5 +1,6 @@
 /**
  * \file 	xmega.c
+ *
  * \brief 	Spezifische Funktionen für den Mikrocontroller ATXmega128A1.
  */
 
@@ -217,6 +218,10 @@ void XM_init_dnx() {
 
 /**
  * \brief 	Initialisiert USARTs für die CPU-Kommunikation.
+ *
+ * 			ID des Controllers wird aufgrund des Hardwaredefekts für die Master-Slave-Kommunikation benötigt.
+ *
+ * \param	cpuID	ID des Controllers
  */
 void XM_init_com(DT_byte cpuID) {
 	cli();

@@ -1,7 +1,7 @@
 /**
  * \file	communication.h
  *
- * \brief	TODO
+ * \brief	Methoden zur Kommunikation der CPUs.
  */
 
 #ifndef COMMUNICATION_H_

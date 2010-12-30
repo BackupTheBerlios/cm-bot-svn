@@ -1,6 +1,9 @@
 /**
- *	\file evolutionaryHelper.h
+ * \file	evolutionaryHelper.h
  *
+ * \brief	Hilfsfunktion für Evolutionären Algorithmus.
+ *
+ * 			Mathematische Funktionen.
  */
 
 #include "datatypes.h"

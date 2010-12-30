@@ -1,7 +1,9 @@
 /**
  * \file	kinematics.h
  *
- * \brief	TODO
+ * \brief	Lösungsmethoden der Kinematik.
+ *
+ * 			Lösungsmethoden der Kinematik speziell für den CM-Bot.
  */
 
 #ifndef KINEMATICS_H_

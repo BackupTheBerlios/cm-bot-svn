@@ -216,9 +216,11 @@ uint8_t USART_RXBuffer_GetByte(USART_data_t * usart_data)
 }
 
 /*! \brief 	Überprüft Differenzen der Empfangs-Pointer.
+ *
  *  \param  tail Tail-Pointer
  *  \param  head Head-Pointer
  *  \param  diff Differenz
+ *
  * \return Bool
  */
 DT_bool USART_RXBuffer_checkPointerDiff(DT_byte tail, DT_byte head, DT_byte diff) {
@@ -228,6 +230,8 @@ DT_bool USART_RXBuffer_checkPointerDiff(DT_byte tail, DT_byte head, DT_byte diff
 	if (tail > head) {
 		return (USART_RX_BUFFER_SIZE - tail + head) < diff;
 	}
+	// FIXME return hinzugefügt
+	return false;
 }
 
 

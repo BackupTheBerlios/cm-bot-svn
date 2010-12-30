@@ -1,8 +1,7 @@
-/*
- * movement.h
+/**
+ * \file	movement.h
  *
- *  Created on: 23.11.2010
- *      Author: christof
+ * \brief	Stellt Grundfunktionen für einen Laufalgorithmus bereit.
  */
 
 #ifndef MOVEMENT_H_

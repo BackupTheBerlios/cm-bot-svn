@@ -135,8 +135,9 @@ void KIN_calcDH(const DT_leg* const leg, DT_double** dh03) {
  * 			Lösung des inversen kinematischen Problems mit Hilfe eines geometrischen Verfahrens mit leichten Einschränkungen.
  *
  * \param	p	Punkt (Roboterkoorinate)
+ * \param	leg	Bein für die zusetzenden Winkel
  *
- * \return	Bein mit den errechneten Soll-Winkel für hip, knee und foot
+ * \return	true, wenn Berechnung erfolgreich
  */
 DT_bool KIN_calcServos(const DT_point* const p, DT_leg* const leg) {
 	DT_double z = p->z - DIST_DZ;

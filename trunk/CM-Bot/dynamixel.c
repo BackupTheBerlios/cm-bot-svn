@@ -55,7 +55,7 @@ DT_byte DNX_getChecksum(const DT_byte* const packet, DT_size l) {
  * 			Diese Methode liest den jeweiligen USART-Buffer aus und prüft,
  * 			ob ein vollständiges Paket gemäß des Dynamixel-Protokoll empfangen wurde.
  *
- * \param	rxBuffer	Empfangs-Buffer der jeweiligen USART
+ * \param	usart_data	USART
  * \param	dest		Byte-Array für Antwort-Paket
  *
  * \return	Länge des Antwortpakets
@@ -128,6 +128,7 @@ DT_byte DNX_receive(USART_data_t* const usart_data, DT_byte* const dest) {
  * \param	packet	Zuversendendes Paket
  * \param	l	Größe des Pakets
  * \param	result	Zielfeld für Antowort
+ * \param	hasResponse	Wartet auf eine Antwort, wenn true
  *
  * \return Größe der empfangenen Antwort
  */
@@ -211,6 +212,7 @@ DT_double DNX_correctAngles(DT_byte id, DT_double value) {
  *
  * \param	id	ID des Servos
  * \param	value	Winkel in Grad
+ * \param	regWrite	Winkel wird in Puffer des Servos gespeichert und erst bei ACTION angefahren, wenn true
  */
 DT_bool DNX_setAngle(DT_byte id, DT_double value, DT_bool regWrite) {
 	DT_byte result[DT_RESULT_BUFFER_SIZE];
@@ -246,7 +248,9 @@ DT_bool DNX_setAngle(DT_byte id, DT_double value, DT_bool regWrite) {
  * \brief	Sendet Winkel und Speed an Servo.
  *
  * \param	id	ID des Servos
- * \param	value	Winkel in Grad
+ * \param	angle	Winkel in Grad
+ * \param	speed	Anfahrgeschwindigkeit
+ * \param	regWrite	Werte werden in Puffer des Servos gespeichert und erst bei ACTION ausgeführt, wenn true
  */
 DT_bool DNX_setAngleAndSpeed(DT_byte id, DT_double angle, DT_double speed,
 		DT_bool regWrite) {
@@ -355,10 +359,11 @@ DT_bool DNX_setLed(DT_byte id, DT_byte value) {
 }
 
 /**
- * \brief	Todo.
+ * \brief	Sendet das ACTION-Kommando an einen Servo.
  *
- * \param	id	ID des Servos
- * \param	value	Wert für LED (0x00 / 0x01)
+ * 			Sendet das ACTION-Kommando an einen Servo.
+ *
+ * \param	id	ID des Servo
  */
 void DNX_sendAction(DT_byte id) {
 	DT_size len = 6;
