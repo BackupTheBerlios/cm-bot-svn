@@ -1,4 +1,4 @@
-#LyX 1.6.5 created this file. For more info see http://www.lyx.org/
+#LyX 1.6.7 created this file. For more info see http://www.lyx.org/
 \lyxformat 345
 \begin_document
 \begin_header
@@ -216,7 +216,19 @@ Für jedes Beinpaar dieses sechsbeinigen Roboters ist ein eigener Controller
  zu verwenden.
  Die Controller sollen über eine geeignete Kommunikationsstruktur Daten
  austauschen können.
- Außerdem ist die direkte und inverse Kinematik zu lösen.
+ Außerdem ist die 
+\shape italic
+Direkte
+\shape default
+ 
+\shape italic
+Kinematik 
+\shape default
+und 
+\shape italic
+die Inverse Kinematik
+\shape default
+ für den Roboter zu lösen.
  Unter Nutzung der zuvor erarbeiteten Erkenntnisse ist abschließend ein
  Laufalgorithmus zu implementieren.
 \end_layout
@@ -232,7 +244,7 @@ Bioloid Premium Robot Kit
 \begin_layout Standard
 Ausgangspunkt für das Praxisprojekt des Moduls Robotik ist das Premium Robot
  Kit von Bioloid.
- Dieser beinhaltet 18 AX-12 Servomotoren der Marke Dynamixel, ein Controllermodu
+ Dieses beinhaltet 18 AX-12 Servomotoren der Marke Dynamixel, ein Controllermodu
 l, ein Zigbee-Fernsteuermodul und noch einige andere Peripherie.
  Gedacht ist dieses Robot Kit für humanoide Roboter, die mittels der mitgeliefer
 ten Software programmiert werden können.
@@ -270,8 +282,8 @@ struktur aufbauen zu können.
 \begin_layout Standard
 Atmel bietet mit der AVR XMEGA Serie günstige und leistungsstarke 8/16-bit
  Controller an.
- Mit vier SPI-, vier TWI- und acht USART-Schnittstellen sind die zuvor genannten
- Anforderungen erfüllt.
+ Mit vier SPI-, vier TWI-, acht USART-Schnittstellen und einer Taktfrequenz
+ von 32 MHz sind die zuvor genannten Anforderungen erfüllt.
  Außerdem stellt Atmel eine umfangreiche Dokumentation, Beispielcode und
  Software zur Verfügung.
 \end_layout
@@ -329,7 +341,7 @@ Wiki
 \end_layout
 
 \begin_layout Itemize
-u.m.
+u.v.m.
 \end_layout
 
 \begin_layout Standard
@@ -354,10 +366,18 @@ http://developer.berlios.de/projects/cm-bot/
 
  erreichbar ist.
  Der Projektname leitet sich aus den Anfangsbuchstaben der beiden Entwickler
- Christof Pieloth und Matthias Rick her.
+ 
+\series bold
+C
+\series default
+hristof Pieloth und 
+\series bold
+M
+\series default
+atthias Rick her.
  Auf BerliOS ist der gesamte Quellcode in der Versionsverwaltung SVN verfügbar.
- Des Weiteren ist eine Wiki eingerichtet, in dem Spezifikationen der verwendeten
- Hardware, Handbücher, Dokumentationen sowie die zur Entwicklung benötigten
+ Des Weiteren ist ein Wiki eingerichtet, in dem Spezifikationen der verwendeten
+ Hardware, Handbücher, Dokumentationen, sowie die zur Entwicklung benötigten
  Programme aufgelistet sind.
 \end_layout
 
@@ -367,6 +387,10 @@ Hardware & Mechanik
 
 \begin_layout Section
 Chassis
+\end_layout
+
+\begin_layout Standard
+Folgend sind die wichtigsten Maße des CM-Bot-Chassis gelistet:
 \end_layout
 
 \begin_layout Itemize
@@ -395,7 +419,7 @@ Netzteil
 
 \begin_layout Standard
 Es werden für die verschiedene Komponenten drei unterschiedliche Versorgungsspan
-nungen benötigt:
+nungen wie folgt benötigt:
 \end_layout
 
 \begin_layout Itemize
@@ -448,7 +472,7 @@ Tri-State-ICs für Kommunikation
 \end_layout
 
 \begin_layout Section
-Eagle-Schaltungen
+Schaltpläne
 \end_layout
 
 \begin_layout Subsection
@@ -463,8 +487,11 @@ reference "fig:Dynamixel-Anbindung"
 
 \end_inset
 
- zeigt die Anbindung der Dynamixel, inklusive der Spannungsversorung und
- dem Levelshifting.
+ zeigt die Anbindung der Dynamixel, inklusive der Anbindung der Versorgungsspann
+ung und dem Levelshifting.
+ Letzteres wird benötigt, da die Mikrocontroller der ATXmega-Serie mit 3,3
+ V arbeiten, die Dynamixel-Datenleitungen hingegen aber mit 5 V angesteuert
+ werden müssen.
 \end_layout
 
 \begin_layout Standard
@@ -524,8 +551,8 @@ reference "fig:Kommunikation---Bus"
 
 \end_inset
 
- zeigt die angedachte Schaltung, die als Master-Slave-Bussystem angedacht
- war.
+ zeigt die ursprünglich angedachte Kommunikationsschaltung, welche auf einem
+ Master-Slave-Bussystem basiert.
  Aufgrund eines Hardwaredefekts des Tristate-Treibers wurde aber zunächst
  die Schaltung wie unter 
 \begin_inset CommandInset ref
@@ -1112,7 +1139,7 @@ Einzelne Terme der Matrix
 \end_layout
 
 \begin_layout Standard
-Aus den einzelnen Terme der 
+Aus den einzelnen Termen der 
 \begin_inset Formula $D_{03}$
 \end_inset
 
@@ -1244,10 +1271,16 @@ reference "sub:Einzelne-Terme-der"
 \end_inset
 
  notierte Gleichungssystem verwenden.
- Da es sich dabei um ein Nichtlineares Gleichungssystem mit drei Unbekannten
- handelt wird im vorliegenden Projekt die Lösung durch ein geometrisches
- Verfahren berechnet.
- 
+ Dabei handelt es sich um ein nichtlineares Gleichungssystem, bestehend
+ aus 12 Gleichungen mit drei Unbekannten.
+ Dieses wäre zwar numerisch lösbar, aber zum einen wäre es sehr rechenaufwendig
+ und zum anderen kann es sein, dass keine oder mehrere Lösungen gefunden
+ werden.
+ Deswegen wird im vorliegenden Projekt die 
+\shape italic
+Inverse Kinematik
+\shape default
+ durch ein geometrisches Verfahren wie folgt gelöst.
 \end_layout
 
 \begin_layout Standard
@@ -1516,7 +1549,11 @@ Entfernung
 \begin_inset Quotes prd
 \end_inset
 
- auf der h'-Achse, sowie die 
+ auf der 
+\begin_inset Formula $h'$
+\end_inset
+
+-Achse, sowie die 
 \begin_inset Quotes pld
 \end_inset
 
@@ -1555,7 +1592,11 @@ Entfernung
 \begin_inset Quotes prd
 \end_inset
 
- auf der h'-Achse anfahren zu können, muss zunächst 
+ auf der 
+\begin_inset Formula $h'$
+\end_inset
+
+-Achse anfahren zu können, muss zunächst 
 \begin_inset Formula $h_{2}$
 \end_inset
 
@@ -1637,7 +1678,7 @@ API
 \end_layout
 
 \begin_layout Standard
-Eine genaue Beschreibung der Dateien und deren Funktionen kann aus den Sourcecod
+Eine genaue Beschreibung der Dateien und deren Funktionen kann aus dem Sourcecod
 e mit Hilfe des Tools Doxygen
 \begin_inset Foot
 status open
@@ -1668,8 +1709,7 @@ communication.h Methoden zur Kommunikation der CPUs
 \end_layout
 
 \begin_layout Description
-datatypes.h Abstraktion der elementaren Datentypen und Definition von benötigten
- Strukturen
+datatypes.h Abstraktion der elementaren Datentypen und Definition von Strukturen
 \end_layout
 
 \begin_layout Description
@@ -1685,7 +1725,7 @@ movement.h Allgemeine Methoden für den Ablauf eines Laufalgorithmus
 \end_layout
 
 \begin_layout Description
-remote.h Methoden für die Nutzung des Gamepads
+remote.h Methoden für die Nutzung des Remote-Controllers
 \end_layout
 
 \begin_layout Description
@@ -1792,12 +1832,12 @@ movement4Points.c
  ein Punkt dieses Systems wird im folgendem als globaler Punkt bezeichnet.
  Jedes Bein besitzt sein eigenes Roboterkoordinatensystem, dessen Punkte
  als lokale Punkte bezeichnet werden.
- Aus diesen lokale Punkten können die Roboterkoordinaten, dass heisst die
+ Aus diesen lokalen Punkten können die Roboterkoordinaten, dass heisst die
  anzufahrenden Gelenkwinkel für dieses Bein, errechnet werden.
 \end_layout
 
 \begin_layout Standard
-Theoretisch könnte nur mit vier Roboterkoordianten geareitet werden, da
+Theoretisch könnte nur mit vier Roboterkoordianten gearbeitet werden, da
  für jedes Bein die selben Roboterkooridnaten genutzt werden könnten.
  In der praktischen Umsetzung werden jedoch globale Punkte genutzt, um die
  Transformation dieser in lokale Punkte und die nötige Berechnung der Roboterkoo
@@ -1808,9 +1848,9 @@ rdinaten zu demonstrieren.
 Damit nicht für jedes Bein vier Weltkoordinaten ermittelt werden müssen,
  wird das rechte mittlere Bein als Basis genutzt.
  Aus den globalen Punkten für dieses Bein können durch Addition bzw.
- Subtraktion der bekannten Abstände in der x-y-Ebene der Beine zueinander
+ Subtraktion der bekannten Abstände in der x-y-Ebene der Beine zueinander,
  die globalen Punkte für jedes weitere Bein errechnet werden.
- Diese globalen Punkte werden durch einen CPU, den Master, in einer bestimmten
+ Diese globalen Punkte werden durch eine CPU, den Master, in einer bestimmten
  Reihenfolge an die anderen CPUs, die Slaves, gesendet.
  Diese Punkte müssen nun zuerst von allen CPUs in lokale Punkte für das
  bestimmte Bein transformiert werden, um anschließend aus diesen die Roboterkoor
@@ -1839,13 +1879,12 @@ Evolutionäres Laufen
 
 \begin_layout Standard
 Im Rahmen des Wahlpflichtmoduls Evolutionäre Algorithmen entstand noch ein
- weiterer Algorithmus.
- Dieser bekam die Bezeichnung Evolutionäres Laufen.
- Dieser basiert im wesentlichen auf einer Startpunktsuche für Bewegungen
- bei vorgegebenem Vektor im Raum.
+ weiterer Laufalgorithmus.
+ Dieser bekam die Bezeichnung Evolutionäres Laufen und basiert im wesentlichen
+ auf einer Startpunktsuche für Bewegungen mit vorgegebenem Vektor im Raum.
  Der Startpunkt ist dabei der Punkt, wo ein Bein des Roboters auf den Boden
  aufsetzt und die Bewegung beginnt.
- Diese Bewegung soll in Richtung des Vektors liegen, innerhalb des Arbeitsraumes
+ Diese Bewegung soll in Richtung des Vektors und innerhalb des Arbeitsraumes
  liegen und eine maximale Länge haben.
  Als Laufmuster wird dabei der Tripod-Gait zugrunde gelegt, der vom Prinzip
  her, wie auch der 4-Punkt-Laufalgorithmus (siehe 
